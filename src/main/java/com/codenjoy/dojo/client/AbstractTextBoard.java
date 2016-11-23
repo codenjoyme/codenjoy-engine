@@ -23,16 +23,23 @@ package com.codenjoy.dojo.client;
  */
 
 
-/**
- * Любая реализация AI должна реализовать этот интерфейс.
- * @param <B> реализация {@see AbstractBoard} для текущей игры
- */
-public interface Solver<B extends ClientBoard> {
+import org.apache.commons.lang.StringUtils;
 
-    /**
-     * Каждую секунду сервер будет приганять сюда актуальное состояние доски.
-     * @param board объект инкапсулирующий доску
-     * @return команда, что делать серверу
-     */
-    String get(B board);
+public abstract class AbstractTextBoard implements ClientBoard {
+
+    protected String data;
+
+    @Override
+    public ClientBoard forString(String data) {
+        this.data = data;
+        return this;
+    }
+
+    public boolean isGameOver() {
+        return StringUtils.isEmpty(data);
+    }
+
+    public String getData() {
+        return data;
+    }
 }

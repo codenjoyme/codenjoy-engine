@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.client;
+package com.codenjoy.dojo.services.joystick;
 
 /*-
  * #%L
@@ -23,16 +23,35 @@ package com.codenjoy.dojo.client;
  */
 
 
-/**
- * Любая реализация AI должна реализовать этот интерфейс.
- * @param <B> реализация {@see AbstractBoard} для текущей игры
- */
-public interface Solver<B extends ClientBoard> {
+import com.codenjoy.dojo.services.Joystick;
 
-    /**
-     * Каждую секунду сервер будет приганять сюда актуальное состояние доски.
-     * @param board объект инкапсулирующий доску
-     * @return команда, что делать серверу
-     */
-    String get(B board);
+/**
+ * Created by indigo on 2016-11-23.
+ */
+public abstract class ActJoystick implements Joystick {
+
+    @Override
+    public void message(String command) {
+        // do nothing
+    }
+
+    @Override
+    public void down() {
+        // do nothing
+    }
+
+    @Override
+    public void up() {
+        // do nothing
+    }
+
+    @Override
+    public void left() {
+        // do nothing
+    }
+
+    @Override
+    public void right() {
+        // do nothing
+    }
 }
