@@ -22,12 +22,33 @@ package com.codenjoy.dojo.services;
  * #L%
  */
 
+public abstract class MovingObject extends PointImpl {
+    protected Direction direction;
+    protected int speed;
+    protected boolean moving;
 
-/**
- * Реализация этого класса овтечает за представление борды в виде строки,
- * которая потом передастся играющему клиенту.
- */
-@FunctionalInterface
-public interface Printer<T> {
-    T print(Object... parameters);
+    public MovingObject(int x, int y, Direction direction) {
+        super(x, y);
+        this.direction = direction;
+        moving = false;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void move() {
+        for (int i = 0; i < speed; i++) {
+            if (!moving) {
+                return;
+            }
+
+            int newX = direction.changeX(x);
+            int newY = direction.changeY(y);
+            moving(newX, newY);
+        }
+    }
+
+    protected abstract void moving(int newX, int newY);
+
 }
