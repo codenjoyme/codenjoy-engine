@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.services.multiplayer;
+package com.codenjoy.dojo.services.printer;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2016 - 2018 Codenjoy
+ * Copyright (C) 2016 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -23,18 +23,14 @@ package com.codenjoy.dojo.services.multiplayer;
  */
 
 
-import com.codenjoy.dojo.services.printer.BoardReader;
-import com.codenjoy.dojo.services.Tickable;
+import com.codenjoy.dojo.services.Point;
 
 /**
- * Любая игра должна реализовать этот интерфейс чтобы с ней мог работать фреймворк
- * @param <P> Объъект-игрок, который предоставляет героя в игре
+ * Этот абстракция над доской для Printer
  */
-public interface GameField<P extends GamePlayer> extends Tickable {
+public interface BoardReader {
 
-    BoardReader reader();
+    int size();
 
-    void newGame(P player);
-
-    void remove(P player);
+    Iterable<? extends Point> elements();
 }
