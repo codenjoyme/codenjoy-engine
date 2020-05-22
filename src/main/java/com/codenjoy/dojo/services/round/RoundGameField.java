@@ -22,14 +22,21 @@ package com.codenjoy.dojo.services.round;
  * #L%
  */
 
-public interface Round {
-    void init(RoundGameField field, Object winEvent);
+import com.codenjoy.dojo.services.multiplayer.GameField;
 
-    boolean tick();
+import java.util.List;
 
-    void rewardTheWinner();
+public interface RoundGameField<P extends RoundGamePlayer> extends GameField<P> {
 
-    boolean isMatchOver();
+    List<P> aliveActive();
 
-    void clear();
+    void reset(P player);
+
+    void start(int round);
+
+    void print(String message);
+
+    int score(P player);
+
+    void oneMoreDead(P player);
 }

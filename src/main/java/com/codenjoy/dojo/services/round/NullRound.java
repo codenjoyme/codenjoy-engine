@@ -22,14 +22,30 @@ package com.codenjoy.dojo.services.round;
  * #L%
  */
 
-public interface Round {
-    void init(RoundGameField field, Object winEvent);
+public class NullRound implements Round {
 
-    boolean tick();
+    @Override
+    public void init(RoundGameField field, Object winEvent) {
+        // do nothing
+    }
 
-    void rewardTheWinner();
+    @Override
+    public boolean tick() {
+        return false;
+    }
 
-    boolean isMatchOver();
+    @Override
+    public boolean isMatchOver() {
+        return false;
+    }
 
-    void clear();
+    @Override
+    public void clear() {
+        // do nothing
+    }
+
+    @Override
+    public void rewardTheWinner() {
+        // do nothing
+    }
 }

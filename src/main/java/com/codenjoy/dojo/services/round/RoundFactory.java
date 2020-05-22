@@ -22,14 +22,18 @@ package com.codenjoy.dojo.services.round;
  * #L%
  */
 
-public interface Round {
-    void init(RoundGameField field, Object winEvent);
+public class RoundFactory {
 
-    boolean tick();
-
-    void rewardTheWinner();
-
-    boolean isMatchOver();
-
-    void clear();
+    public static Round get(RoundSettingsWrapper settings) {
+        if (settings.roundsEnabled().getValue()) {
+            return new RoundImpl(
+                    settings.roundsPerMatch(),
+                    settings.minTicksForWin(),
+                    settings.timeBeforeStart(),
+                    settings.timePerRound(),
+                    settings.timeForWinner());
+        } else {
+            return new NullRound();
+        }
+    }
 }
