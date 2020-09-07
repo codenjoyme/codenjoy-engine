@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.services.printer.layeredview;
+package com.codenjoy.dojo.services.round;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2020 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,21 +22,21 @@ package com.codenjoy.dojo.services.printer.layeredview;
  * #L%
  */
 
+import com.codenjoy.dojo.services.multiplayer.GameField;
 
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.State;
+import java.util.List;
 
-import java.util.function.BiFunction;
+public interface RoundGameField<P extends RoundGamePlayer> extends GameField<P> {
 
-public interface LayeredBoardReader {
+    List<P> aliveActive();
 
-    int size();
+    void reset(P player);
 
-    int viewSize();
+    void start(int round);
 
-    BiFunction<Integer, Integer, State> elements();
+    void print(String message);
 
-    Point viewCenter(Object player);
+    int score(P player);
 
-    Object[] itemsInSameCell(State item, int layer);
+    void oneMoreDead(P player);
 }

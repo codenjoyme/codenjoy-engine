@@ -25,23 +25,27 @@ package com.codenjoy.dojo.services.settings;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
-public class SimpleParameter<T> implements Parameter<T> {
+public class ConsumerSupplierParameter<T> implements Parameter<T> {
 
-    private T value;
+    private Consumer<T> set;
+    private Supplier<T> get;
 
-    public SimpleParameter(T value) {
-        this.value = value;
+    public ConsumerSupplierParameter(Consumer<T> set, Supplier<T> get) {
+        this.set = set;
+        this.get = get;
     }
 
-    public static Parameter<Integer> v(int value) {
-        return new SimpleParameter<>(value);
+    public static Parameter<Integer> vcs(Consumer<Integer> set, Supplier<Integer> get) {
+        return new ConsumerSupplierParameter<>(set, get);
     }
 
     @Override
     public T getValue() {
-        return value;
+        return get.get();
     }
 
     @Override
@@ -51,7 +55,14 @@ public class SimpleParameter<T> implements Parameter<T> {
 
     @Override
     public Class<?> getValueType() {
-        return (value != null) ? value.getClass() : Object.class;
+        if (get != null) {
+            T value = getValue();
+            if (value != null) {
+                return value.getClass();
+            }
+        }
+
+        return Object.class;
     }
 
     @Override
@@ -61,7 +72,7 @@ public class SimpleParameter<T> implements Parameter<T> {
 
     @Override
     public Parameter<T> update(Object value) {
-        this.value = (T) value;
+        this.set.accept((T)value);
         return this;
     }
 
@@ -92,12 +103,12 @@ public class SimpleParameter<T> implements Parameter<T> {
 
     @Override
     public List<T> getOptions() {
-        return Arrays.asList(value);
+        return Arrays.asList(getValue());
     }
 
     @Override
     public T getDefault() {
-        return value;
+        return getValue();
     }
 
     @Override

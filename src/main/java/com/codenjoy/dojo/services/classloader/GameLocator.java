@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.services.printer.layeredview;
+package com.codenjoy.dojo.services.classloader;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2020 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,21 +22,17 @@ package com.codenjoy.dojo.services.printer.layeredview;
  * #L%
  */
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.State;
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class GameLocator {
 
-import java.util.function.BiFunction;
+    public final String name;
+    public final String jarPath;
+    public Class clazz;
 
-public interface LayeredBoardReader {
-
-    int size();
-
-    int viewSize();
-
-    BiFunction<Integer, Integer, State> elements();
-
-    Point viewCenter(Object player);
-
-    Object[] itemsInSameCell(State item, int layer);
 }

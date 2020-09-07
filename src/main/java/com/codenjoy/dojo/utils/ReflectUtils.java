@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.client;
+package com.codenjoy.dojo.utils;
 
 /*-
  * #%L
@@ -23,23 +23,26 @@ package com.codenjoy.dojo.client;
  */
 
 import lombok.experimental.UtilityClass;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.util.FilterBuilder;
+
+import java.util.Collection;
 
 @UtilityClass
-public class Encoding {
-    
-    public static final String UTF8 = "UTF-8";
+public class ReflectUtils {
 
-    public static String replaceN(String value) {
-        return value.replace("\\n", "\n")
-                .replace("\\r", "\r")
-                .replace("\r\n", "\n")
-                .replace("\n\r", "\n")
-                .replace("\r", "\n");
+    public static <T> Collection<? extends Class<? extends T>> findInPackage(String packageName, Class<T> subtype) {
+        Reflections reflections = new Reflections(
+                new ConfigurationBuilder()
+                        .filterInputsBy(
+                                // Consider only .class files (to avoid debug messages etc. on .dlls, etc
+                                new FilterBuilder().exclude("^(?!.*\\.class$).*$")
+                        ).forPackages(packageName)
+                        .setScanners(new SubTypesScanner()));
+
+        return reflections.getSubTypesOf(subtype);
     }
-
-    public static String removeN(String value) {
-        return value.replaceAll("\n|\r", "");
-    }
-
 
 }

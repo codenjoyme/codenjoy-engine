@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services.settings;
+package com.codenjoy.dojo.services.nullobj;
 
 /*-
  * #%L
@@ -23,61 +23,64 @@ package com.codenjoy.dojo.services.settings;
  */
 
 
+import com.codenjoy.dojo.services.settings.Parameter;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-public class SimpleParameter<T> implements Parameter<T> {
+public final class NullParameter<T> implements Parameter<T> {
 
-    private T value;
+    public static final Parameter INSTANCE = new NullParameter();
 
-    public SimpleParameter(T value) {
-        this.value = value;
-    }
-
-    public static Parameter<Integer> v(int value) {
-        return new SimpleParameter<>(value);
+    private NullParameter() {
+        // do nothing
     }
 
     @Override
     public T getValue() {
-        return value;
+        return (T)new Object();
     }
 
     @Override
     public String getType() {
-        return "noui";
+        return StringUtils.EMPTY;
     }
 
     @Override
     public Class<?> getValueType() {
-        return (value != null) ? value.getClass() : Object.class;
+        return Object.class;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException();
+        return StringUtils.EMPTY;
     }
 
     @Override
-    public Parameter<T> update(Object value) {
-        this.value = (T) value;
-        return this;
+    public Parameter<T> update(T value) {
+        return null;
     }
 
     @Override
-    public Parameter def(Object value) {
-        throw new UnsupportedOperationException();
+    public Parameter<T> def(T value) {
+        return INSTANCE;
+    }
+
+    @Override
+    public <V> Parameter<V> type(Class<V> type) {
+        return INSTANCE;
     }
 
     @Override
     public Parameter<T> parser(Function<String, T> parser) {
-        throw new UnsupportedOperationException();
+        return INSTANCE;
     }
 
     @Override
     public void select(int index) {
-        throw new UnsupportedOperationException();
+        // do nothing
     }
 
     @Override
@@ -92,16 +95,11 @@ public class SimpleParameter<T> implements Parameter<T> {
 
     @Override
     public List<T> getOptions() {
-        return Arrays.asList(value);
+        return Arrays.asList();
     }
 
     @Override
     public T getDefault() {
-        return value;
-    }
-
-    @Override
-    public Parameter type(Class type) {
-        throw new UnsupportedOperationException();
+        return null;
     }
 }
