@@ -86,7 +86,7 @@ public class JsonUtilsTest {
     }
 
     @Test
-    public void testPrettyPrintString() throws Exception {
+    public void testPrettyPrintString() {
         assertEquals("{\n" +
                         "  'field1':'string1',\n" +
                         "  'field2':[\n" +
@@ -98,7 +98,20 @@ public class JsonUtilsTest {
     }
 
     @Test
-    public void testPrettyPrintStringWithString() throws Exception {
+    public void testPrettyPrintString_withSubObjects(){
+        assertEquals("{\n" +
+                        "  'field1':'string1',\n" +
+                        "  'field2':{\n" +
+                        "    'string1':true,\n" +
+                        "    'string2':2,\n" +
+                        "    'string3':'data'\n" +
+                        "  }\n" +
+                        "}",
+                JsonUtils.prettyPrint("{'field2':{'string2':2,'string1':true,'string3':'data'},'field1':'string1'}"));
+    }
+
+    @Test
+    public void testPrettyPrintStringWithString() {
         assertEquals("{\n" +
                         "  'current':0,\n" +
                         "  'lastPassed':-1,\n" +
