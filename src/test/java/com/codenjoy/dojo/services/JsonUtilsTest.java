@@ -33,25 +33,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by indigo on 2017-03-04.
- */
 public class JsonUtilsTest {
-    @Test
-    public void testGetStrings() throws Exception {
-        assertGetStrings("['string1', 'string2', 'string3']",
-                "[string1, string2, string3]");
-
-        assertGetStrings("['string']",
-                "[string]");
-
-        assertGetStrings("[]",
-                "[]");
-    }
-
-    private void assertGetStrings(String source, String expected) {
-        assertEquals(expected, JsonUtils.getStrings(new JSONArray(source)).toString());
-    }
 
     public static class SomeObject {
         private String field1;
@@ -72,7 +54,7 @@ public class JsonUtilsTest {
     }
 
     @Test
-    public void testPrettyPrint() throws Exception {
+    public void testPrettyPrint() {
         assertEquals("{\n" +
                 "  'field1':'string1',\n" +
                 "  'field2':[\n" +
@@ -123,7 +105,7 @@ public class JsonUtilsTest {
     }
 
     @Test
-    public void testPrettyPrintStringWithJsonObject() throws Exception {
+    public void testPrettyPrintStringWithJsonObject() {
         assertEquals("{\n" +
                         "  'current':0,\n" +
                         "  'lastPassed':-1,\n" +
@@ -135,7 +117,7 @@ public class JsonUtilsTest {
     }
 
     @Test
-    public void testPrettyPrintStringWithJsonArray() throws Exception {
+    public void testPrettyPrintStringWithJsonArray() {
         assertEquals("[\n" +
                         "  '1, 2, 3, 4'\n" +
                         "]",

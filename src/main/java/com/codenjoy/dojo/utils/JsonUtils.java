@@ -37,14 +37,6 @@ import java.util.List;
 @UtilityClass
 public class JsonUtils {
 
-    public static List<String> getStrings(JSONArray array) {
-        List<String> result = new LinkedList<>();
-        for (Object object : array.toList()) {
-            result.add((String)object);
-        }
-        return result;
-    }
-
     public static String cleanSorted(Object object) {
         String json = toStringSorted(object);
         return clean(json);
