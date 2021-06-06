@@ -32,7 +32,7 @@ import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Single;
-import com.codenjoy.dojo.services.printer.CharElements;
+import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.utils.events.MockitoJunitTesting;
@@ -42,8 +42,6 @@ import lombok.experimental.UtilityClass;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
-import static com.codenjoy.dojo.services.PointImpl.pt;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
@@ -97,7 +95,7 @@ public class TestUtils {
     }
 
     public static String getWay(String inputBoard,
-                                Function<Character, CharElements> elements,
+                                Function<Character, CharElement> elements,
                                 Function<AbstractBoard, DeikstraFindWay.Possible> possible)
     {
         AbstractBoard board = getBoard(elements);
@@ -116,10 +114,10 @@ public class TestUtils {
         return split(map, "], \n[");
     }
 
-    public static AbstractBoard getBoard(Function<Character, CharElements> elements) {
+    public static AbstractBoard getBoard(Function<Character, CharElement> elements) {
         return new AbstractBoard() {
                 @Override
-                public CharElements valueOf(char ch) {
+                public CharElement valueOf(char ch) {
                     return elements.apply(ch);
                 }
 
@@ -205,8 +203,8 @@ public class TestUtils {
     }
 
     public static String printWay(String expected,
-                                  CharElements from, CharElements to,
-                                  CharElements none, CharElements wayChar,
+                                  CharElement from, CharElement to,
+                                  CharElement none, CharElement wayChar,
                                   AbstractBoard board,
                                   Function<AbstractBoard, DeikstraFindWay.Possible> possible)
     {
@@ -226,7 +224,7 @@ public class TestUtils {
             Direction direction = way.get(index);
             current = direction.change(current);
 
-            CharElements element = (index == way.size() - 1) ? to : wayChar;
+            CharElement element = (index == way.size() - 1) ? to : wayChar;
             board.set(current.getX(), current.getY(), element.ch());
         }
 

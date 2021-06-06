@@ -25,7 +25,7 @@ package com.codenjoy.dojo.services.printer;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 
 @FunctionalInterface
-public interface PrinterFactory <E extends CharElements, P extends GamePlayer> {
+public interface PrinterFactory <E extends CharElement, P extends GamePlayer> {
     Printer getPrinter(BoardReader reader, P player);
 
     /**
@@ -35,7 +35,7 @@ public interface PrinterFactory <E extends CharElements, P extends GamePlayer> {
      */
     static <P extends GamePlayer> PrinterFactory get(GraphicPrinter<Object, P> printer) {
         // во закрутил :)
-        return (PrinterFactory<CharElements, GamePlayer>) (reader, player)
+        return (PrinterFactory<CharElement, GamePlayer>) (reader, player)
                 -> parameters -> printer.print(reader, (P)player);
     }
 
@@ -46,7 +46,7 @@ public interface PrinterFactory <E extends CharElements, P extends GamePlayer> {
      * @return Фабрика, которая потом создаст кастомный принтер.
      */
     static <P extends GamePlayer, A> PrinterFactory get(GraphicPrinter2<Object, A, P> printer) {
-        return (PrinterFactory<CharElements, GamePlayer>) (reader, player) -> {
+        return (PrinterFactory<CharElement, GamePlayer>) (reader, player) -> {
                     Printer classic = PrinterImpl.getPrinter(reader, player);
                     return parameters -> printer.print(reader, classic, (P) player);
                 };

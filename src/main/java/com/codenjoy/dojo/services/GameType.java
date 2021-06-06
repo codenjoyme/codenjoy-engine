@@ -28,7 +28,7 @@ import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
-import com.codenjoy.dojo.services.printer.CharElements;
+import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.Settings;
@@ -69,9 +69,9 @@ public interface GameType<T extends Settings> extends Tickable {
 
     /**
      * @return Список элементов отображаеммых на доске
-     * Смотри класс com.codenjoy.dojo.sample.model.Elements конкретной игры
+     * Смотри класс com.codenjoy.dojo.sample.model.Element конкретной игры
      */
-    CharElements[] getPlots();
+    CharElement[] getPlots();
 
     /**
      * @return Настройки игры по умолчанию. Эти настройки будут использоваться

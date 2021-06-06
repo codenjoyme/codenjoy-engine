@@ -46,14 +46,14 @@ public class LayeredViewPrinterTest {
     private Point enemyPosition;
     private PrinterData board;
 
-    enum Elements {
+    enum Element {
 
         HERO('☺'), ENEMY('☻'), DOT('.'), CIRCLE('o'),
         AIR_OVER_CIRCLE('+'), AIR_OVER_DOT('*'), AIR_OVER_PLAYERS('~');
 
         private char ch;
 
-        Elements(char ch) {
+        Element(char ch) {
             this.ch = ch;
         }
 
@@ -71,8 +71,8 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Elements state(Object player, Object... alsoAtPoint) {
-            return Elements.ENEMY;
+        public Element state(Object player, Object... alsoAtPoint) {
+            return Element.ENEMY;
         }
     }
 
@@ -83,8 +83,8 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Elements state(Object player, Object... alsoAtPoint) {
-            return Elements.HERO;
+        public Element state(Object player, Object... alsoAtPoint) {
+            return Element.HERO;
         }
     }
 
@@ -95,8 +95,8 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Elements state(Object player, Object... alsoAtPoint) {
-            return Elements.DOT;
+        public Element state(Object player, Object... alsoAtPoint) {
+            return Element.DOT;
         }
     }
 
@@ -107,8 +107,8 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Elements state(Object player, Object... alsoAtPoint) {
-            return Elements.CIRCLE;
+        public Element state(Object player, Object... alsoAtPoint) {
+            return Element.CIRCLE;
         }
     }
 
@@ -119,13 +119,13 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Elements state(Object player, Object... alsoAtPoint) {
+        public Element state(Object player, Object... alsoAtPoint) {
             if (alsoAtPoint[0] instanceof Hero || alsoAtPoint[0] instanceof Enemy) {
-                return Elements.AIR_OVER_PLAYERS;
+                return Element.AIR_OVER_PLAYERS;
             } else if (alsoAtPoint[0] instanceof Circle) {
-                return Elements.AIR_OVER_CIRCLE;
+                return Element.AIR_OVER_CIRCLE;
             } else if (alsoAtPoint[0] instanceof Dot) {
-                return Elements.AIR_OVER_DOT;
+                return Element.AIR_OVER_DOT;
             } else {
                 throw new IllegalStateException();
             }

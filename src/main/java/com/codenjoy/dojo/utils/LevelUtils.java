@@ -24,7 +24,7 @@ package com.codenjoy.dojo.utils;
 
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.printer.CharElements;
+import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.experimental.UtilityClass;
 
 import java.util.LinkedList;
@@ -38,9 +38,9 @@ import static java.util.stream.Collectors.toList;
 @UtilityClass
 public class LevelUtils {
 
-    public <T, E extends CharElements> List<T> getObjects(LengthToXY xy, String map,
-                                                           BiFunction<Point, E, T> objects,
-                                                           E... elements)
+    public <T, E extends CharElement> List<T> getObjects(LengthToXY xy, String map,
+                                                         BiFunction<Point, E, T> objects,
+                                                         E... elements)
     {
         List<T> result = new LinkedList<>();
         for (E el : elements) {
@@ -54,17 +54,17 @@ public class LevelUtils {
         return result;
     }
 
-    public <T, E extends CharElements> List<T> getObjects(LengthToXY xy, String map,
-                                                          Function<Point, T> objects,
-                                                          E... elements)
+    public <T, E extends CharElement> List<T> getObjects(LengthToXY xy, String map,
+                                                         Function<Point, T> objects,
+                                                         E... elements)
     {
         return getObjects(xy, map,
                 (pt, el) -> objects.apply(pt),
                 elements);
     }
 
-    public static <T, E extends CharElements> List<T> getObjects(LengthToXY xy, String map,
-                                                                    Map<E, Function<Point, T>> conversions)
+    public static <T, E extends CharElement> List<T> getObjects(LengthToXY xy, String map,
+                                                                Map<E, Function<Point, T>> conversions)
     {
         return conversions.entrySet().stream()
                 .flatMap(entry -> getObjects(xy, map,

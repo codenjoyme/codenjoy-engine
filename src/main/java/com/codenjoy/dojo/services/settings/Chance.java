@@ -23,11 +23,11 @@ package com.codenjoy.dojo.services.settings;
  */
 
 import com.codenjoy.dojo.services.Dice;
-import com.codenjoy.dojo.services.printer.CharElements;
+import com.codenjoy.dojo.services.printer.CharElement;
 
 import java.util.*;
 
-public class Chance<T extends CharElements> {
+public class Chance<T extends CharElement> {
 
     public static final int MAX_PERCENT = 100;
     public static final int AUTO_VALUE = -1;

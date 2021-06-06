@@ -24,7 +24,7 @@ package com.codenjoy.dojo.services.printer;
 
 
 /**
- * Принтер доски может прежставить любой ее элемент как {@see Elements}
+ * Принтер доски может прежставить любой ее элемент как {@see Element}
  */
 public interface GamePrinter {
 

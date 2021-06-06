@@ -26,15 +26,11 @@ package com.codenjoy.dojo.services.algs;
 import com.codenjoy.dojo.client.AbstractBoard;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.printer.CharElements;
+import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import static com.codenjoy.dojo.services.algs.DeikstraFindWayTest.Elements.*;
+import static com.codenjoy.dojo.services.algs.DeikstraFindWayTest.Element.*;
 import static org.junit.Assert.assertEquals;
 
 public class DeikstraFindWayTest {
@@ -382,7 +378,7 @@ public class DeikstraFindWayTest {
     }
 
 
-    enum Elements implements CharElements {
+    enum Element implements CharElement {
         ONLY_UP('˄'),
         ONLY_DOWN('˅'),
         ONLY_LEFT('˂'),
@@ -399,7 +395,7 @@ public class DeikstraFindWayTest {
 
         final char ch;
 
-        Elements(char ch) {
+        Element(char ch) {
             this.ch = ch;
         }
 
@@ -408,8 +404,8 @@ public class DeikstraFindWayTest {
             return ch;
         }
 
-        public static Elements valueOf(char ch) {
-            for (Elements el : Elements.values()) {
+        public static Element valueOf(char ch) {
+            for (Element el : Element.values()) {
                 if (el.ch == ch) {
                     return el;
                 }
@@ -427,14 +423,14 @@ public class DeikstraFindWayTest {
                 TestUtils.printWay(map,
                         START, FINISH,
                         NONE, WAY,
-                        TestUtils.getBoard(Elements::valueOf),
+                        TestUtils.getBoard(Element::valueOf),
                         this::getPossible));
     }
 
     private void assertP(String inputBoard, String expected) {
         assertEquals(expected,
                 TestUtils.getWay(inputBoard,
-                        Elements::valueOf,
+                        Element::valueOf,
                         this::getPossible));
     }
 

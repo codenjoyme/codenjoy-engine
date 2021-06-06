@@ -24,15 +24,14 @@ package com.codenjoy.dojo.services.settings;
 
 import com.codenjoy.dojo.client.TestGameSettings;
 import com.codenjoy.dojo.services.Dice;
-import com.codenjoy.dojo.services.printer.CharElements;
+import com.codenjoy.dojo.services.printer.CharElement;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.services.settings.Chance.CHANCE_RESERVED;
-import static com.codenjoy.dojo.services.settings.ChanceTest.Elements.*;
+import static com.codenjoy.dojo.services.settings.ChanceTest.Element.*;
 import static com.codenjoy.dojo.services.settings.ChanceTest.Keys.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -49,7 +48,7 @@ public class ChanceTest {
         dice = mock(Dice.class);
     }
 
-    private int axis(Elements elements) {
+    private int axis(Element elements) {
         return (int) chance.axis().stream()
                 .filter(x -> x.equals(elements))
                 .count();
@@ -64,7 +63,7 @@ public class ChanceTest {
             .run();
     }
 
-    enum Elements implements CharElements {
+    enum Element implements CharElement {
 
         FIRST('1'),
         SECOND('2'),
@@ -74,7 +73,7 @@ public class ChanceTest {
 
         final char ch;
 
-        Elements(char ch) {
+        Element(char ch) {
             this.ch = ch;
         }
 
@@ -88,8 +87,8 @@ public class ChanceTest {
             return String.valueOf(ch);
         }
 
-        public static Elements valueOf(char ch) {
-            for (Elements el : values()) {
+        public static Element valueOf(char ch) {
+            for (Element el : values()) {
                 if (el.ch == ch) {
                     return el;
                 }

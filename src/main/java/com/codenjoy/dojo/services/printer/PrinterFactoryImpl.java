@@ -28,7 +28,7 @@ import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 /**
  * Фабрика для PrinterImpl. Используется by default для всех графических "квадратных" игр.--
  */
-public class PrinterFactoryImpl<E extends CharElements, P extends GamePlayer> implements PrinterFactory<E, P> {
+public class PrinterFactoryImpl<E extends CharElement, P extends GamePlayer> implements PrinterFactory<E, P> {
     @Override
     public Printer getPrinter(BoardReader reader, P player) {
         return PrinterImpl.getPrinter(reader, player);
