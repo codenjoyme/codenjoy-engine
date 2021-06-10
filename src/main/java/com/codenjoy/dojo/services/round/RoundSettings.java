@@ -101,7 +101,7 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     default void initRound() {
         // включен ли режим раундов
-        bool(ROUNDS_ENABLED, true);
+        bool(ROUNDS_ENABLED, false);
 
         // сколько участников в комнате
         integer(ROUNDS_PLAYERS_PER_ROOM, 5);

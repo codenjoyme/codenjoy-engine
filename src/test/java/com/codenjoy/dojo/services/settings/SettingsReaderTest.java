@@ -58,7 +58,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER2':true,\n" +
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -101,7 +101,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER2':true,\n" +
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -178,7 +178,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER2':false,\n" +
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -243,7 +243,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER2':false,\n" +
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
