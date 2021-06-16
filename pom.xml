@@ -65,7 +65,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>java-client</artifactId>
+            <artifactId>client-java</artifactId>
             <version>${project.version}</version>
         </dependency>
 
