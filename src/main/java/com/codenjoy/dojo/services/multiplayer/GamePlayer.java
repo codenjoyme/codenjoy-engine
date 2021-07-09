@@ -44,6 +44,7 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
     protected EventListener listener;
     protected SettingsReader settings;
     private LevelProgress progress;
+    protected int teamId;
 
     /**
      * @param listener Это шпийон от фреймоврка. Ты должен все ивенты
@@ -110,6 +111,14 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
      */
     public HeroData getHeroData() {
         return null;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
     }
 
     /**

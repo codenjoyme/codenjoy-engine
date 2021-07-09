@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
-import static com.codenjoy.dojo.services.round.RoundSettingsImpl.ROUNDS;
 
 public interface RoundSettings<T extends SettingsReader> extends SettingsReader<T> {
 
@@ -42,6 +41,7 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
         ROUNDS_ENABLED(ROUNDS + " Enabled"),
         ROUNDS_PLAYERS_PER_ROOM(ROUNDS + " Players per room"),
+        ROUNDS_MAX_TEAMS_PER_ROOM(ROUNDS + " Max amount of teams per room"),
         ROUNDS_TIME(ROUNDS + " Time per Round"),
         ROUNDS_TIME_FOR_WINNER(ROUNDS + " Time for Winner"),
         ROUNDS_TIME_BEFORE_START(ROUNDS + " Time before start Round"),
@@ -106,6 +106,9 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         // сколько участников в комнате
         integer(ROUNDS_PLAYERS_PER_ROOM, 5);
 
+        // максимальное количество команд среди игроков в комнате
+        integer(ROUNDS_MAX_TEAMS_PER_ROOM, 2);
+
         // сколько тиков на 1 раунд
         integer(ROUNDS_TIME, 200);
 
@@ -130,6 +133,10 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     default Parameter<Integer> playersPerRoom() {
         return integerValue(Keys.ROUNDS_PLAYERS_PER_ROOM);
+    }
+
+    default Parameter<Integer> maxTeamsPerRoom() {
+        return integerValue(ROUNDS_MAX_TEAMS_PER_ROOM);
     }
 
     default Parameter<Integer> timePerRound() {
@@ -162,6 +169,7 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         return new LinkedList<>(){{
             add(roundsEnabled());
             add(playersPerRoom());
+            add(maxTeamsPerRoom());
             add(timePerRound());
             add(timeForWinner());
             add(timeBeforeStart());
@@ -173,6 +181,7 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
     default RoundSettings update(RoundSettings input) {
         setRoundsEnabled(input.isRoundsEnabled());
         setPlayersPerRoom(input.getPlayersPerRoom());
+        setMaxTeamsPerRoom(input.getMaxTeamsPerRoom());
         setTimePerRound(input.getTimePerRound());
         setTimeForWinner(input.getTimeForWinner());
         setTimeBeforeStart(input.getTimeBeforeStart());
@@ -198,6 +207,10 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     default int getPlayersPerRoom() {
         return playersPerRoom().getValue();
+    }
+
+    default int getMaxTeamsPerRoom(){
+        return maxTeamsPerRoom().getValue();
     }
 
     default int getTimePerRound() {
@@ -229,6 +242,11 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     default RoundSettings setPlayersPerRoom(int input) {
         playersPerRoom().update(input);
+        return this;
+    }
+
+    default RoundSettings setMaxTeamsPerRoom(int input) {
+        maxTeamsPerRoom().update(input);
         return this;
     }
 
