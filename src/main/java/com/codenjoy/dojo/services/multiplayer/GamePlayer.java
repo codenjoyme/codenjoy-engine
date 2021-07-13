@@ -39,6 +39,8 @@ import java.util.Optional;
  */
 public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
 
+    public static final int DEFAULT_TEAM_ID = 0;
+
     protected F field;
     protected H hero;
     protected EventListener listener;
