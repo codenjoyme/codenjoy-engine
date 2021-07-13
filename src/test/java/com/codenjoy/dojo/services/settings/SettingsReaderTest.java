@@ -59,6 +59,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -102,6 +103,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -179,6 +181,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -195,7 +198,7 @@ public class SettingsReaderTest {
         SettingsReader settings = new SomeSemifinalSettings();
 
         // when
-         settings.update(new JSONObject("{\n" +
+        settings.update(new JSONObject("{\n" +
                 "  'PARAMETER4':'updated',\n" +
                 "  'PARAMETER2':false,\n" +
                 "  'PARAMETER1':23,\n" +
@@ -244,6 +247,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +

@@ -81,6 +81,7 @@ public class RoundSettingsTest {
         // then
         assertEquals("SettingsImpl(map={[Rounds] Enabled=[[Rounds] Enabled:Boolean = def[true] val[true]], \n" +
                         "[Rounds] Players per room=[[Rounds] Players per room:Integer = multiline[false] def[5] val[5]], \n" +
+                        "[Rounds] Max amount of teams per room=[[Rounds] Max amount of teams per room:Integer = multiline[false] def[2] val[2]], \n" +
                         "[Rounds] Time per Round=[[Rounds] Time per Round:Integer = multiline[false] def[200] val[200]], \n" +
                         "[Rounds] Time for Winner=[[Rounds] Time for Winner:Integer = multiline[false] def[1] val[1]], \n" +
                         "[Rounds] Time before start Round=[[Rounds] Time before start Round:Integer = multiline[false] def[5] val[5]], \n" +
@@ -104,6 +105,7 @@ public class RoundSettingsTest {
         // then
         assertEquals("Some[[Rounds] Enabled=true, \n" +
                         "[Rounds] Players per room=5, \n" +
+                        "[Rounds] Max amount of teams per room=2, \n" +
                         "[Rounds] Time per Round=200, \n" +
                         "[Rounds] Time for Winner=1, \n" +
                         "[Rounds] Time before start Round=5, \n" +
