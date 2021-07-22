@@ -59,10 +59,10 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
-                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                        "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                         "  'ROUNDS_TIME':200,\n" +
                         "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                         "  'ROUNDS_TIME_FOR_WINNER':1\n" +
@@ -103,10 +103,10 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
-                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                        "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                         "  'ROUNDS_TIME':200,\n" +
                         "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                         "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
@@ -181,10 +181,10 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
-                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                        "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                         "  'ROUNDS_TIME':200,\n" +
                         "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                         "  'ROUNDS_TIME_FOR_WINNER':10\n" +
@@ -247,10 +247,10 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
-                        "  'ROUNDS_MAX_TEAMS_PER_ROOM':2,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
+                        "  'ROUNDS_TEAMS_PER_ROOM':1,\n" +
                         "  'ROUNDS_TIME':200,\n" +
                         "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                         "  'ROUNDS_TIME_FOR_WINNER':10,\n" +
