@@ -79,7 +79,7 @@ public class RoundSettingsTest {
         SettingsImpl settings = givenAllPropertiesCopied();
 
         // then
-        assertEquals("SettingsImpl(map={[Rounds] Enabled=[[Rounds] Enabled:Boolean = def[true] val[true]], \n" +
+        assertEquals("SettingsImpl(map={[Rounds] Enabled=[[Rounds] Enabled:Boolean = def[false] val[true]], \n" +
                         "[Rounds] Players per room=[[Rounds] Players per room:Integer = multiline[false] def[5] val[5]], \n" +
                         "[Rounds] Teams per room=[[Rounds] Teams per room:Integer = multiline[false] def[1] val[1]], \n" +
                         "[Rounds] Time per Round=[[Rounds] Time per Round:Integer = multiline[false] def[200] val[200]], \n" +

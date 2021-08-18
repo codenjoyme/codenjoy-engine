@@ -28,6 +28,8 @@ import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
+import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_MIN_TICKS_FOR_WIN;
 import static com.codenjoy.dojo.services.settings.SomeGameSettings.Keys.*;
 
 public class SomeSemifinalRoundSettings extends SettingsImpl
@@ -67,6 +69,18 @@ public class SomeSemifinalRoundSettings extends SettingsImpl
         bool(PARAMETER2, true);
         real(PARAMETER3, 0.5);
         string(PARAMETER4, "string");
+    }
+
+    @Override
+    public void initRound() {
+        bool(ROUNDS_ENABLED, true);
+        integer(ROUNDS_PLAYERS_PER_ROOM, 5);
+        integer(ROUNDS_TEAMS_PER_ROOM, 1);
+        integer(ROUNDS_TIME, 200);
+        integer(ROUNDS_TIME_FOR_WINNER, 1);
+        integer(ROUNDS_TIME_BEFORE_START, 5);
+        integer(ROUNDS_PER_MATCH, 1);
+        integer(ROUNDS_MIN_TICKS_FOR_WIN, 1);
     }
 
     @Override
