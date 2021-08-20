@@ -57,7 +57,8 @@ public class MultiplayerType {
     /**
      * Все игроки на одном поле без ограничений по количеству.
      * Удалятеся игрок - поле остается с другими игроками.
-     * Последний игрок удаляется - поле тоже удаляется. TODO ##1 можно поменять тут
+     * Последний игрок не удаляется автоматически после выхода предпоследнего.
+     * Последний игрок если удаляется - поле тоже удаляется.
      * Каждый новый игрок создается на этом же поле.
      */
     public static final MultiplayerType MULTIPLE = new MultipleType();
@@ -168,6 +169,10 @@ public class MultiplayerType {
 
     protected MultiplayerType(int roomSize, boolean disposable) {
         this(roomSize, 1, disposable, RELOAD_ALONE);
+    }
+
+    protected MultiplayerType(int roomSize, boolean disposable, boolean reloadAlone) {
+        this(roomSize, 1, disposable, reloadAlone);
     }
 
     public MultiplayerType(int roomSize, int levelsCount, boolean disposable, boolean shouldReloadAlone) {
