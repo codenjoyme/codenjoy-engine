@@ -44,6 +44,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 
 @UtilityClass
 public class TestUtils {
@@ -87,7 +88,7 @@ public class TestUtils {
 
     public static Game buildSingle(GameType gameType, GameField gameField, EventListener listener, PrinterFactory factory) {
         Settings settings = gameType.getSettings();
-        GamePlayer gamePlayer = gameType.createPlayer(listener, null, settings);
+        GamePlayer gamePlayer = gameType.createPlayer(listener, DEFAULT_TEAM_ID, null, settings);
         Game game = new Single(gamePlayer, factory);
         game.on(gameField);
         game.newGame();

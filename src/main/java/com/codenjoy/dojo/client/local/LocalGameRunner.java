@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
+import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static java.util.stream.Collectors.toList;
 
 public class LocalGameRunner {
@@ -331,6 +332,7 @@ public class LocalGameRunner {
                     print(index, "Fire Event: " + event.toString());
                     score.event(event);
                 },
+                DEFAULT_TEAM_ID,
                 getPlayerId(), settings);
 
         PrinterFactory factory = gameType.getPrinterFactory();

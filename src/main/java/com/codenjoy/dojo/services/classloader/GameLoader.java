@@ -34,6 +34,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
 
+import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
@@ -79,7 +80,7 @@ public class GameLoader {
         GameType gameType = (GameType)new GameLoader().loadGames(directory).get("a2048").newInstance();
         Settings settings = gameType.getSettings();
         GameField game = gameType.createGame(0, settings);
-        game.newGame(gameType.createPlayer(event -> {}, "id", settings));
+        game.newGame(gameType.createPlayer(event -> {}, DEFAULT_TEAM_ID, "id", settings));
         game.tick();
         Iterator<? extends Point> iterator = game.reader().elements(null).iterator();
         System.out.println(iterator.next());

@@ -44,6 +44,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -197,7 +198,7 @@ public class LocalGameRunnerTest {
                 return "PLAYER" + id();
             }
         };
-        when(gameType.createPlayer(any(EventListener.class), any(String.class), any(Settings.class)))
+        when(gameType.createPlayer(any(EventListener.class), anyInt(), any(String.class), any(Settings.class)))
                 .thenReturn(gamePlayer);
 
         solver = board -> {

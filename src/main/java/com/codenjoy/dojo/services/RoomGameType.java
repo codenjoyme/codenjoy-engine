@@ -124,8 +124,8 @@ public class RoomGameType implements GameType {
     }
 
     @Override
-    public GamePlayer createPlayer(EventListener listener, String playerId, Settings settings) {
-        return type.createPlayer(listener, playerId, this.settings);
+    public GamePlayer createPlayer(EventListener listener, int teamId, String playerId, Settings settings) {
+        return type.createPlayer(listener, teamId, playerId, this.settings);
     }
 
     @Override

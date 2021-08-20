@@ -55,6 +55,7 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
     public GamePlayer(EventListener listener, SettingsReader settings) {
         this.listener = listener;
         this.settings = settings;
+        this.teamId = DEFAULT_TEAM_ID;
     }
 
     /**
@@ -119,8 +120,9 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public GamePlayer<H, F> inTeam(int teamId) {
         this.teamId = teamId;
+        return this;
     }
 
     /**
