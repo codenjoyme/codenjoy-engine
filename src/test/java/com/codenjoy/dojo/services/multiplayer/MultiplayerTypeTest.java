@@ -185,7 +185,7 @@ public class MultiplayerTypeTest {
         assertEquals(true, type.isMultiple());
 
         assertEquals(false, type.isLevels());
-        assertEquals(true, type.shouldReloadAlone());
+        assertEquals(false, type.shouldReloadAlone());
 
         assertEquals(false, type.isSingleplayer());
         assertEquals(true, type.isMultiplayer());
