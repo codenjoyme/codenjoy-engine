@@ -43,12 +43,6 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class Smoke {
 
-    public static final String SOURCE_FOLDER = "src/test/resources/";
-    public static final String TARGET_FOLDER = "target/";
-
-    // если потребуется дополнительна проверка финального результата, использу это чудо
-    public static Consumer<String> recheck;
-
     public static void play(int ticks,
                             String fileName,
                             GameType gameRunner,
@@ -81,44 +75,7 @@ public class Smoke {
         LocalGameRunner.run(gameRunner, solvers, boards);
 
         // then
-        String actual = String.join("\n", messages);
-        String expected;
-        String expectedFile = SOURCE_FOLDER + fileName;
-        if (new File(expectedFile).exists()) {
-            expected = load(expectedFile);
-            saveToFile(TARGET_FOLDER + fileName, actual);
-        } else {
-            expected = StringUtils.EMPTY;
-            saveToFile(expectedFile, actual);
-        }
-
-        TestUtils.assertSmoke(true, expected, actual);
-        if (recheck != null) {
-            recheck.accept(actual);
-        }
+        TestUtils.assertSmokeFile(fileName, messages);
     }
 
-    public void saveToFile(String path, String data) {
-        try {
-            File actualFile = new File(path);
-            System.out.println("Actual data is here: " + actualFile.getAbsolutePath());
-            File folder = actualFile.getParentFile();
-            if (!folder.exists()) {
-                folder.mkdirs();
-            }
-            Files.writeString(actualFile.toPath(), data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String load(String file) {
-        try {
-            return Files.lines(new File(file).toPath())
-                    .collect(Collectors.joining("\n"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return StringUtils.EMPTY;
-        }
-    }
 }

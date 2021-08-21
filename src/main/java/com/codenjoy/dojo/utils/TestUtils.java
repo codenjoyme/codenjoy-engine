@@ -38,10 +38,16 @@ import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.utils.events.MockitoJunitTesting;
 import com.codenjoy.dojo.utils.events.Testing;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
@@ -52,6 +58,12 @@ public class TestUtils {
     public static final int COUNT_NUMBERS = 3;
 
     private static Testing TESTING = null;
+
+    public static final String SOURCE_FOLDER = "src/test/resources/";
+    public static final String TARGET_FOLDER = "target/";
+
+    // если потребуется дополнительна проверка финального результата, использу это чудо
+    public static Consumer<String> recheck;
 
     public static String injectN(String expected) {
         int size = (int) Math.sqrt(expected.length());
@@ -270,4 +282,45 @@ public class TestUtils {
                 .replace(split.replace("\n", ""), split);
     }
 
+    public static void assertSmokeFile(String fileName, List<String> messages) {
+        String actual = String.join("\n", messages);
+        String expected;
+        String expectedFile = SOURCE_FOLDER + fileName;
+        if (new File(expectedFile).exists()) {
+            expected = load(expectedFile);
+            saveToFile(TARGET_FOLDER + fileName, actual);
+        } else {
+            expected = StringUtils.EMPTY;
+            saveToFile(expectedFile, actual);
+        }
+
+        TestUtils.assertSmoke(true, expected, actual);
+        if (recheck != null) {
+            recheck.accept(actual);
+        }
+    }
+
+    public static void saveToFile(String path, String data) {
+        try {
+            File actualFile = new File(path);
+            System.out.println("Actual data is here: " + actualFile.getAbsolutePath());
+            File folder = actualFile.getParentFile();
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            Files.writeString(actualFile.toPath(), data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String load(String file) {
+        try {
+            return Files.lines(new File(file).toPath())
+                    .collect(Collectors.joining("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return StringUtils.EMPTY;
+        }
+    }
 }
