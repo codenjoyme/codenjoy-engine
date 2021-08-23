@@ -60,6 +60,9 @@ public class PointField {
     }
 
     private PointList get(Point point) {
+        if (point.isOutOf(size())) {
+            return new PointList(); // TODO а точно тут так надо?
+        }
         return field[point.getX()][point.getY()];
     }
 
@@ -71,6 +74,8 @@ public class PointField {
         List<T> all();
 
         void removeNotIn(List<T> valid);
+
+        void add(T element);
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -104,6 +109,11 @@ public class PointField {
                 all().stream()
                         .filter(it -> !valid.contains(it))
                         .forEach(it -> remove(it));
+            }
+
+            @Override
+            public void add(T element) {
+                PointField.this.add(element);
             }
         };
     }
