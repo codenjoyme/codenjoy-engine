@@ -1,10 +1,10 @@
 package com.codenjoy.dojo.services;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class PointField {
 
@@ -26,8 +26,8 @@ public class PointField {
             elements.removeAll(filter);
         }
 
-        public void remove(Class<?> filter, Point element) {
-            elements.remove(filter, element);
+        public boolean remove(Class<?> filter, Point element) {
+            return elements.remove(filter, element);
         }
 
         public <T> List<T> get(Class<T> filter) {
@@ -59,8 +59,10 @@ public class PointField {
         get(point).add(point);
 
         point.onChange((from, to) -> {
-            get(from).remove(point.getClass(), from); // TODO проверить что удаляется именно 1 элемент
-            get(to).add(to);
+            // TODO проверить что удаляется именно 1 элемент
+            if (get(from).remove(point.getClass(), from)) {
+                get(to).add(to);
+            }
         });
     }
 
@@ -71,6 +73,10 @@ public class PointField {
         return field[point.getX()][point.getY()];
     }
 
+    private <T extends Point> T getAt(Point point) {
+        return null;
+    }
+
     public interface Accessor<T> extends Iterable<T> {
         <E extends Point> boolean contains(E element);
 
@@ -78,9 +84,9 @@ public class PointField {
 
         List<T> all();
 
-        // TODO added stream method
+        Stream<T> stream();
 
-        void removeNotIn(List<T> valid);
+        void removeNotIn(List<? extends Point> valid);
 
         void add(T element);
 
@@ -88,9 +94,11 @@ public class PointField {
 
         void clear();
 
-        void removeIn(List<T> elements);
+        void removeIn(List<? extends Point> elements);
 
         void addAll(List<T> elements);
+
+        List<T> getAt(Point point);
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -123,9 +131,13 @@ public class PointField {
             }
 
             @Override
-            public void removeNotIn(List<T> elements) {
-                all().stream()
-                        .filter(it -> !elements.contains(it))
+            public Stream<T> stream() {
+                return all().stream();
+            }
+
+            @Override
+            public void removeNotIn(List<? extends Point> elements) {
+                stream().filter(it -> !elements.contains(it))
                         .forEach(this::remove);
             }
 
@@ -150,15 +162,19 @@ public class PointField {
             }
 
             @Override
-            public void removeIn(List<T> elements) {
-                all().stream()
-                        .filter(elements::contains)
+            public void removeIn(List<? extends Point> elements) {
+                stream().filter(elements::contains)
                         .forEach(this::remove);
             }
 
             @Override
             public void addAll(List<T> elements) {
                 elements.forEach(this::add);
+            }
+
+            @Override
+            public List<T> getAt(Point point) {
+                return get(point).get(filter);
             }
         };
     }
