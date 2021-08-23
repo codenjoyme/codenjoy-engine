@@ -17,8 +17,8 @@ public class PointField {
         }
 
         public boolean contains(Class<?> filter) {
-            return elements.containsKey(filter)
-                    && !elements.get(filter).isEmpty();
+            List<Point> list = elements.get(filter);
+            return list != null && !list.isEmpty();
         }
 
         public void removeAll(Class<?> filter) {
@@ -27,7 +27,7 @@ public class PointField {
 
         public boolean remove(Class<?> filter, Point element) {
             List<Point> list = elements.get(filter);
-            return list.remove(element);
+            return list != null && list.remove(element);
         }
 
         public <T> List<T> get(Class<T> filter) {
@@ -157,8 +157,9 @@ public class PointField {
             @Override
             public void clear() {
                 // TODO устранить дублирование с циклом выше
-                for (int x = 0; x < PointField.this.size(); x++) {
-                    for (int y = 0; y < PointField.this.size(); y++) {
+                int size = PointField.this.size();
+                for (int x = 0; x < size; x++) {
+                    for (int y = 0; y < size; y++) {
                         field[x][y].removeAll(filter);
                     }
                 }
