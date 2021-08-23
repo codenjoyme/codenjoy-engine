@@ -77,6 +77,8 @@ public class PointField {
         void add(T element);
 
         int size();
+
+        void clear();
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -125,6 +127,19 @@ public class PointField {
             @Override
             public int size() {
                 return all().size();
+            }
+
+            @Override
+            public void clear() {
+                // TODO устранить дублирование с циклом выше
+                for (int x = 0; x < PointField.this.size(); x++) {
+                    for (int y = 0; y < PointField.this.size(); y++) {
+                        T element = field[x][y].get(filter);
+                        if (element != null) {
+                            field[x][y].remove(filter);
+                        }
+                    }
+                }
             }
         };
     }
