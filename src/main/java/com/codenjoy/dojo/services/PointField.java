@@ -1,6 +1,8 @@
 package com.codenjoy.dojo.services;
 
-import com.codenjoy.dojo.services.Point;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 import java.util.*;
 
@@ -10,22 +12,28 @@ public class PointField {
 
     static class PointList {
 
-        private Map<Class, Point> list = new HashMap<>();
+        private Multimap<Class, Point> elements = ArrayListMultimap.create();
 
-        public void add(Point point) {
-            list.put(point.getClass(), point);
+        public void add(Point element) {
+            elements.put(element.getClass(), element);
         }
 
         public boolean contains(Class<?> filter) {
-            return list.containsKey(filter);
+            return elements.containsKey(filter);
         }
 
-        public void remove(Class<?> filter) {
-            list.remove(filter);
+        public void removeAll(Class<?> filter) {
+            elements.removeAll(filter);
         }
 
-        public <T> T get(Class<T> filter) {
-            return (T) list.get(filter);
+        public void remove(Class<?> filter, Point element) {
+            elements.remove(filter, element);
+        }
+
+        public <T> List<T> get(Class<T> filter) {
+            ArrayList<T> result = new ArrayList<>();
+            result.addAll((Collection) elements.get(filter));
+            return result;
         }
     }
 
@@ -51,7 +59,7 @@ public class PointField {
         get(point).add(point);
 
         point.onChange((from, to) -> {
-            get(from).remove(point.getClass());
+            get(from).remove(point.getClass(), from); // TODO проверить что удаляется именно 1 элемент
             get(to).add(to);
         });
     }
@@ -79,6 +87,10 @@ public class PointField {
         int size();
 
         void clear();
+
+        void removeIn(List<T> elements);
+
+        void addAll(List<T> elements);
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -94,8 +106,8 @@ public class PointField {
             }
 
             @Override
-            public <E extends Point> void remove(E element) {
-                get(element).remove(filter);
+            public <E extends Point> void remove(E element) { // TODO проверить что уделяется именно 1 элемент
+                get(element).remove(filter, element);
             }
 
             @Override
@@ -103,20 +115,18 @@ public class PointField {
                 List<T> result = new LinkedList<>();
                 for (int x = 0; x < PointField.this.size(); x++) {
                     for (int y = 0; y < PointField.this.size(); y++) {
-                        T element = field[x][y].get(filter);
-                        if (element != null) {
-                            result.add(element);
-                        }
+                        List<T> elements = field[x][y].get(filter);
+                        result.addAll(elements);
                     }
                 }
                 return result;
             }
 
             @Override
-            public void removeNotIn(List<T> valid) {
+            public void removeNotIn(List<T> elements) {
                 all().stream()
-                        .filter(it -> !valid.contains(it))
-                        .forEach(it -> remove(it));
+                        .filter(it -> !elements.contains(it))
+                        .forEach(this::remove);
             }
 
             @Override
@@ -134,12 +144,21 @@ public class PointField {
                 // TODO устранить дублирование с циклом выше
                 for (int x = 0; x < PointField.this.size(); x++) {
                     for (int y = 0; y < PointField.this.size(); y++) {
-                        T element = field[x][y].get(filter);
-                        if (element != null) {
-                            field[x][y].remove(filter);
-                        }
+                        field[x][y].removeAll(filter);
                     }
                 }
+            }
+
+            @Override
+            public void removeIn(List<T> elements) {
+                all().stream()
+                        .filter(elements::contains)
+                        .forEach(this::remove);
+            }
+
+            @Override
+            public void addAll(List<T> elements) {
+                elements.forEach(this::add);
             }
         };
     }
