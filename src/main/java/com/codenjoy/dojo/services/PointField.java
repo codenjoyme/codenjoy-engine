@@ -123,8 +123,11 @@ public class PointField {
                 int size = PointField.this.size();
                 for (int x = 0; x < size; x++) {
                     for (int y = 0; y < size; y++) {
-                        List<T> elements = field[x][y].get(filter);
-                        result.addAll(elements);
+                        PointList list = field[x][y];
+                        if (list.contains(filter)) {
+                            List<T> elements = list.get(filter);
+                            result.addAll(elements);
+                        }
                     }
                 }
                 return result;
