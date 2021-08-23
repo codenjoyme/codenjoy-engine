@@ -1,8 +1,5 @@
 package com.codenjoy.dojo.services;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -12,28 +9,33 @@ public class PointField {
 
     static class PointList {
 
-        private Multimap<Class, Point> elements = ArrayListMultimap.create();
+        private Map<Class, List<Point>> elements = new LinkedHashMap<>();
 
         public void add(Point element) {
-            elements.put(element.getClass(), element);
+            List list = get(element.getClass());
+            list.add(element);
         }
 
         public boolean contains(Class<?> filter) {
-            return elements.containsKey(filter);
+            return elements.containsKey(filter)
+                    && !elements.get(filter).isEmpty();
         }
 
         public void removeAll(Class<?> filter) {
-            elements.removeAll(filter);
+            elements.remove(filter);
         }
 
         public boolean remove(Class<?> filter, Point element) {
-            return elements.remove(filter, element);
+            List<Point> list = elements.get(filter);
+            return list.remove(element);
         }
 
         public <T> List<T> get(Class<T> filter) {
-            ArrayList<T> result = new ArrayList<>();
-            result.addAll((Collection) elements.get(filter));
-            return result;
+            List<Point> list = elements.get(filter);
+            if (list == null) {
+                elements.put(filter, list = new LinkedList<>());
+            }
+            return (List<T>) list;
         }
     }
 
@@ -73,14 +75,10 @@ public class PointField {
         return field[point.getX()][point.getY()];
     }
 
-    private <T extends Point> T getAt(Point point) {
-        return null;
-    }
-
     public interface Accessor<T> extends Iterable<T> {
         <E extends Point> boolean contains(E element);
 
-        <E extends Point> void remove(E element);
+        <E extends Point> boolean remove(E element);
 
         List<T> all();
 
@@ -110,19 +108,21 @@ public class PointField {
 
             @Override
             public <E extends Point> boolean contains(E element) {
-                return get(element).contains(filter);
+                PointList list = get(element);
+                return list.contains(filter);
             }
 
             @Override
-            public <E extends Point> void remove(E element) { // TODO проверить что уделяется именно 1 элемент
-                get(element).remove(filter, element);
+            public <E extends Point> boolean remove(E element) { // TODO проверить что уделяется именно 1 элемент
+                return get(element).remove(filter, element);
             }
 
             @Override
             public List<T> all() {
                 List<T> result = new LinkedList<>();
-                for (int x = 0; x < PointField.this.size(); x++) {
-                    for (int y = 0; y < PointField.this.size(); y++) {
+                int size = PointField.this.size();
+                for (int x = 0; x < size; x++) {
+                    for (int y = 0; y < size; y++) {
                         List<T> elements = field[x][y].get(filter);
                         result.addAll(elements);
                     }
