@@ -6,10 +6,11 @@ import java.util.stream.Stream;
 public class PointField {
 
     private PointList[][] field;
+    private Map<Class, List<Point>> all = new HashMap<>();
 
     static class PointList {
 
-        private Map<Class, List<Point>> elements = new LinkedHashMap<>();
+        private Map<Class, List<Point>> elements = new HashMap<>();
 
         public void add(Point element) {
             List list = get(element.getClass());
@@ -59,13 +60,25 @@ public class PointField {
 
     public void add(Point point) {
         get(point).add(point);
+        get_all(point.getClass()).add(point);
 
         point.onChange((from, to) -> {
             // TODO проверить что удаляется именно 1 элемент
             if (get(from).remove(point.getClass(), from)) {
                 get(to).add(to);
+
+                get_all(point.getClass()).remove(from);
+                get_all(point.getClass()).add(to);
             }
         });
+    }
+
+    private List get_all(Class<?> filter) {
+        List<Point> list = all.get(filter);
+        if (list == null) {
+            all.put(filter, list = new LinkedList<>());
+        }
+        return list;
     }
 
     private PointList get(Point point) {
@@ -103,7 +116,7 @@ public class PointField {
         return new Accessor<>() {
             @Override
             public Iterator<T> iterator() {
-                return all().iterator();
+                return (Iterator) get_all(filter).iterator();
             }
 
             @Override
@@ -114,23 +127,13 @@ public class PointField {
 
             @Override
             public <E extends Point> boolean remove(E element) { // TODO проверить что уделяется именно 1 элемент
+                get_all(filter).remove(element);
                 return get(element).remove(filter, element);
             }
 
             @Override
             public List<T> all() {
-                List<T> result = new LinkedList<>();
-                int size = PointField.this.size();
-                for (int x = 0; x < size; x++) {
-                    for (int y = 0; y < size; y++) {
-                        PointList list = field[x][y];
-                        if (list.contains(filter)) {
-                            List<T> elements = list.get(filter);
-                            result.addAll(elements);
-                        }
-                    }
-                }
-                return result;
+                return (List) get_all(filter);
             }
 
             @Override
@@ -163,12 +166,12 @@ public class PointField {
                         field[x][y].removeAll(filter);
                     }
                 }
+                get_all(filter).clear();
             }
 
             @Override
             public void removeIn(List<? extends Point> elements) {
-                stream().filter(elements::contains)
-                        .forEach(this::remove);
+                elements.forEach(this::remove);
             }
 
             @Override
