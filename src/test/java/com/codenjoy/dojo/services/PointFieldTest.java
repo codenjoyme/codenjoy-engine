@@ -119,6 +119,10 @@ public class PointFieldTest {
         field.add(new One(1, 1));
 
         // then
+        assert_oneElement(field);
+    }
+
+    private void assert_oneElement(PointField field) {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(1,1)]}]\n" +
@@ -138,7 +142,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testAdd_twoElements_inDifferentCell() {
+    public void testAdd_twoElements_sameType_differentCell() {
         // given
         PointField field = new PointField(3);
 
@@ -147,29 +151,11 @@ public class PointFieldTest {
         field.add(new One(1, 2));
 
         // then
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one2(1,2)]}]\n" +
-                "\n" +
-                "[field=[0,0]:null\n" +
-                "[0,1]:null\n" +
-                "[0,2]:null\n" +
-                "[1,0]:null\n" +
-                "[1,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)]}\n" +
-                "[1,2]:{\n" +
-                "        One.class=[\n" +
-                "                one2(1,2)]}\n" +
-                "[2,0]:null\n" +
-                "[2,1]:null\n" +
-                "[2,2]:null\n" +
-                "]", field.toString());
+        assert_twoElements_sameType_differentCells(field);
     }
 
     @Test
-    public void testAdd_twoElements_inSameCell() {
+    public void testAdd_twoElements_sameType_sameCell() {
         // given
         PointField field = new PointField(3);
 
@@ -178,6 +164,10 @@ public class PointFieldTest {
         field.add(new One(1, 1));
 
         // then
+        assert_twoElements_sameType_sameCell(field);
+    }
+
+    private void assert_twoElements_sameType_sameCell(PointField field) {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(1,1)\n" +
@@ -208,28 +198,7 @@ public class PointFieldTest {
         field.add(new Two(2, 1));
 
         // then
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(2,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two2(2,1)]}]\n" +
-                "\n" +
-                "[field=[0,0]:null\n" +
-                "[0,1]:null\n" +
-                "[0,2]:null\n" +
-                "[1,0]:null\n" +
-                "[1,1]:null\n" +
-                "[1,2]:null\n" +
-                "[2,0]:null\n" +
-                "[2,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(2,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two2(2,1)]}\n" +
-                "[2,2]:null\n" +
-                "]", field.toString());
+        assert_twoElements_differentTypes_sameCell(field);
     }
 
     @Test
@@ -242,6 +211,10 @@ public class PointFieldTest {
         field.add(new Two(2, 0));
 
         // then
+        assert_twoElements_differentTypes_differentCells(field);
+    }
+
+    private void assert_twoElements_differentTypes_differentCells(PointField field) {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(2,1)]}\n" +
@@ -276,27 +249,7 @@ public class PointFieldTest {
         field.add(new One(1, 2));
 
         // then
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one2(1,1)\n" +
-                "                one3(1,2)]}]\n" +
-                "\n" +
-                "[field=[0,0]:null\n" +
-                "[0,1]:null\n" +
-                "[0,2]:null\n" +
-                "[1,0]:null\n" +
-                "[1,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one2(1,1)]}\n" +
-                "[1,2]:{\n" +
-                "        One.class=[\n" +
-                "                one3(1,2)]}\n" +
-                "[2,0]:null\n" +
-                "[2,1]:null\n" +
-                "[2,2]:null\n" +
-                "]", field.toString());
+        assert_threeElements_mixed(field);
     }
 
     @Test
@@ -308,26 +261,11 @@ public class PointFieldTest {
         field.addAll(Arrays.asList(new One(1, 1)));
 
         // then
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)]}]\n" +
-                "\n" +
-                "[field=[0,0]:null\n" +
-                "[0,1]:null\n" +
-                "[0,2]:null\n" +
-                "[1,0]:null\n" +
-                "[1,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)]}\n" +
-                "[1,2]:null\n" +
-                "[2,0]:null\n" +
-                "[2,1]:null\n" +
-                "[2,2]:null\n" +
-                "]", field.toString());
+        assert_oneElement(field);
     }
 
     @Test
-    public void testAddAll_twoElements_inDifferentCell() {
+    public void testAddAll_twoElements_sameType_differentCells() {
         // given
         PointField field = new PointField(3);
 
@@ -336,6 +274,10 @@ public class PointFieldTest {
                 new One(1, 2)));
 
         // then
+        assert_twoElements_sameType_differentCells(field);
+    }
+
+    private void assert_twoElements_sameType_differentCells(PointField field) {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(1,1)\n" +
@@ -358,7 +300,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testAddAll_twoElements_inSameCell() {
+    public void testAddAll_twoElements_sameType_sameCell() {
         // given
         PointField field = new PointField(3);
 
@@ -367,24 +309,7 @@ public class PointFieldTest {
                 new One(1, 1)));
 
         // then
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one2(1,1)]}]\n" +
-                "\n" +
-                "[field=[0,0]:null\n" +
-                "[0,1]:null\n" +
-                "[0,2]:null\n" +
-                "[1,0]:null\n" +
-                "[1,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one2(1,1)]}\n" +
-                "[1,2]:null\n" +
-                "[2,0]:null\n" +
-                "[2,1]:null\n" +
-                "[2,2]:null\n" +
-                "]", field.toString());
+        assert_twoElements_sameType_sameCell(field);
     }
 
     @Test
@@ -397,6 +322,10 @@ public class PointFieldTest {
                 new Two(2, 1)));
 
         // then
+        assert_twoElements_differentTypes_sameCell(field);
+    }
+
+    private void assert_twoElements_differentTypes_sameCell(PointField field) {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(2,1)]}\n" +
@@ -431,27 +360,7 @@ public class PointFieldTest {
                 new Two(2, 0)));
 
         // then
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(2,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two2(2,0)]}]\n" +
-                "\n" +
-                "[field=[0,0]:null\n" +
-                "[0,1]:null\n" +
-                "[0,2]:null\n" +
-                "[1,0]:null\n" +
-                "[1,1]:null\n" +
-                "[1,2]:null\n" +
-                "[2,0]:{\n" +
-                "        Two.class=[\n" +
-                "                two2(2,0)]}\n" +
-                "[2,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(2,1)]}\n" +
-                "[2,2]:null\n" +
-                "]", field.toString());
+        assert_twoElements_differentTypes_differentCells(field);
     }
 
     @Test
@@ -465,6 +374,10 @@ public class PointFieldTest {
                 new One(1, 2)));
 
         // then
+        assert_threeElements_mixed(field);
+    }
+
+    private void assert_threeElements_mixed(PointField field) {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(1,1)\n" +
