@@ -209,15 +209,15 @@ public class PointField {
          * @param element Любой элемент типа Point, у которого будут взяты только координаты.
          * @return true - если заданного типа элемент содержится в этой клетке.
          */
-        <E extends Point> boolean contains(E element);
+        <P extends Point> boolean contains(P element);
 
-        <E extends Point> boolean remove(E element);
+        <P extends Point> boolean remove(P element); // TODO test me
 
         List<T> all(); // TODO test me
 
         Stream<T> stream(); // TODO test me
 
-        void removeNotIn(List<? extends Point> valid); // TODO test me
+        <P extends Point> void removeNotIn(List<P> valid); // TODO test me
 
         void add(T element); // TODO test me
 
@@ -225,11 +225,11 @@ public class PointField {
 
         void clear(); // TODO test me
 
-        void removeIn(List<? extends Point> elements); // TODO test me
+        <P extends Point> void removeIn(List<P> elements); // TODO test me
 
         void addAll(List<T> elements); // TODO test me
 
-        List<T> getAt(Point point); // TODO test me
+        <P extends Point> List<T> getAt(P point); // TODO test me
 
         List<T> copy(); // TODO test me
 
@@ -247,13 +247,13 @@ public class PointField {
             }
 
             @Override
-            public <E extends Point> boolean contains(E element) {
+            public <P extends Point> boolean contains(P element) {
                 PointList list = get(element);
                 return list.contains(filter);
             }
 
             @Override
-            public <E extends Point> boolean remove(E element) { // TODO проверить что уделяется именно 1 элемент
+            public <P extends Point> boolean remove(P element) { // TODO проверить что уделяется именно 1 элемент
                 all.get(filter).remove(element);
                 return get(element).remove(filter, element);
             }
@@ -269,7 +269,7 @@ public class PointField {
             }
 
             @Override
-            public void removeNotIn(List<? extends Point> elements) {
+            public <P extends Point> void removeNotIn(List<P> elements) {
                 List<T> toRemove = stream().filter(it -> !elements.contains(it))
                         .collect(toList());
                 toRemove.forEach(this::remove);
@@ -298,7 +298,7 @@ public class PointField {
             }
 
             @Override
-            public void removeIn(List<? extends Point> elements) {
+            public <P extends Point> void removeIn(List<P> elements) {
                 elements.forEach(this::remove);
             }
 
