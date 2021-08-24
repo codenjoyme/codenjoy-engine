@@ -66,6 +66,11 @@ public class PointField {
                     .collect(joining("\n\t"))
                     .replace("\t", "        ");
         }
+
+        public boolean isEmpty() {
+            return map.entrySet().stream()
+                    .allMatch(entry -> entry.getValue().isEmpty());
+        }
     }
 
     static class PointList {
@@ -98,6 +103,10 @@ public class PointField {
         @Override
         public String toString() {
             return map.toString();
+        }
+
+        public boolean isEmpty() {
+            return map.isEmpty();
         }
     }
 
@@ -147,6 +156,11 @@ public class PointField {
     }
 
     public interface Accessor<T> extends Iterable<T> {
+
+        /**
+         * @param element Любой элемент типа Point, у которого будут взяты только координаты.
+         * @return true - если заданного типа элемент содержится в этой клетке.
+         */
         <E extends Point> boolean contains(E element);
 
         <E extends Point> boolean remove(E element);
@@ -246,7 +260,7 @@ public class PointField {
 
     public String toString() {
         return String.format("[map=%s]\n\n[field=%s]",
-                all, toString(field));
+                all.toString(), toString(field));
     }
 
     private String toString(PointList[][] field) {
@@ -254,9 +268,10 @@ public class PointField {
         int size = PointField.this.size();
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
+                PointList list = field[x][y];
                 result.append(pt(x, y))
                         .append(":")
-                        .append(field[x][y])
+                        .append(list == null || list.isEmpty() ? "{}" : list.toString())
                         .append('\n');
             }
         }
