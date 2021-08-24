@@ -410,6 +410,13 @@ public class PointFieldTest {
         testAdd_oneElement();
 
         // when then
+        assertContains_oneElement();
+
+        // then
+        assert_oneElement();
+    }
+
+    private void assertContains_oneElement() {
         assertEquals(true, field.of(One.class).contains(new One(1, 1)));
         assertEquals(true, field.of(One.class).contains(pt(1, 1)));
         assertEquals(true, field.of(One.class).contains(new Two(1, 1)));
@@ -418,9 +425,18 @@ public class PointFieldTest {
         assertEquals(false, field.of(One.class).contains(new One(1, 2)));
         assertEquals(false, field.of(One.class).contains(new Two(2, 2)));
         assertEquals(false, field.of(One.class).contains(new Three(2, 2)));
+    }
+
+    @Test
+    public void testContains_twoElements_sameType_sameCell() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+
+        // when then
+        assertContains_oneElement();
 
         // then
-        assert_oneElement();
+        assert_twoElements_sameType_sameCell();
     }
 
 
