@@ -25,6 +25,8 @@ package com.codenjoy.dojo.services;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class PointFieldTest {
@@ -272,6 +274,195 @@ public class PointFieldTest {
         field.add(new One(1, 1));
         field.add(new One(1, 1));
         field.add(new One(1, 2));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)]}\n" +
+                "[2,0]:null\n" +
+                "[2,1]:null\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testAddAll_oneElement() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.addAll(Arrays.asList(new One(1, 1)));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)]}\n" +
+                "[1,2]:null\n" +
+                "[2,0]:null\n" +
+                "[2,1]:null\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testAddAll_twoElements_inDifferentCell() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.addAll(Arrays.asList(new One(1, 1),
+                new One(1, 2)));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one2(1,2)]}\n" +
+                "[2,0]:null\n" +
+                "[2,1]:null\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testAddAll_twoElements_inSameCell() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.addAll(Arrays.asList(new One(1, 1),
+                new One(1, 1)));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "[1,2]:null\n" +
+                "[2,0]:null\n" +
+                "[2,1]:null\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testAddAll_twoElements_differentTypes_sameCell() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.addAll(Arrays.asList(new One(2, 1),
+                new Two(2, 1)));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two2(2,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:null\n" +
+                "[1,2]:null\n" +
+                "[2,0]:null\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two2(2,1)]}\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testAddAll_twoElements_differentTypes_differentCells() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.addAll(Arrays.asList(new One(2, 1),
+                new Two(2, 0)));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two2(2,0)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:null\n" +
+                "[1,2]:null\n" +
+                "[2,0]:{\n" +
+                "        Two.class=[\n" +
+                "                two2(2,0)]}\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testAddAll_threeElements_mixed() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.addAll(Arrays.asList(new One(1, 1),
+                new One(1, 1),
+                new One(1, 2)));
 
         // then
         assertEquals("[map={\n" +
