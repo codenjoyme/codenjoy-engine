@@ -29,6 +29,17 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
+/**
+ * Квадратное поле заданного размера. В каждой ячейке которого содержится
+ * список из нескольких корзинок для объектов заданного типа (определяется по классу
+ * объекта-наследника PointImpl). Так же существует отдельный список корзинок
+ * для всех объектов независимо от их координат - сделано для оптимизации производительности
+ * при работе со всеми данными. Важно держать этих два контейнера в консистентном состоянии.
+ * Класс умеет реагировать на изменениие координаты объекта за пределами хранилища
+ * - он разместит объект в новом месте, предварительно удалив его из старого
+ * (я очень надеюсь на это). Пожелания принимаются, если получится сделать более
+ * производительную реализацию этого контракта - буду признателен.
+ */
 public class PointField {
 
     private PointList[][] field;
@@ -116,14 +127,27 @@ public class PointField {
         }
     }
 
+    /**
+     * @return Размер поля.
+     */
     public int size() {
         return field.length;
     }
 
+    /**
+     * Добавляет все элементы из списка каждый в корзинку своего типа
+     * (тип будет извлечен из класса передаваемого объекта).
+     * @param elements Элементы к добавлению.
+     */
     public void addAll(List<? extends Point> elements) {
         elements.forEach(this::add);
     }
 
+    /**
+     * Добавляет текущий элемент в кординку его типа (тип будет извлечен из
+     * класса передаваемого объекта).
+     * @param point Добавляемые элемент.
+     */
     public void add(Point point) {
         get(point).add(point);
         all.get(point.getClass()).add(point);
@@ -166,23 +190,23 @@ public class PointField {
 
         <E extends Point> boolean remove(E element);
 
-        List<T> all();
+        List<T> all(); // TODO test me
 
-        Stream<T> stream();
+        Stream<T> stream(); // TODO test me
 
-        void removeNotIn(List<? extends Point> valid);
+        void removeNotIn(List<? extends Point> valid); // TODO test me
 
-        void add(T element);
+        void add(T element); // TODO test me
 
-        int size();
+        int size(); // TODO test me
 
-        void clear();
+        void clear(); // TODO test me
 
-        void removeIn(List<? extends Point> elements);
+        void removeIn(List<? extends Point> elements); // TODO test me
 
-        void addAll(List<T> elements);
+        void addAll(List<T> elements); // TODO test me
 
-        List<T> getAt(Point point);
+        List<T> getAt(Point point); // TODO test me
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
