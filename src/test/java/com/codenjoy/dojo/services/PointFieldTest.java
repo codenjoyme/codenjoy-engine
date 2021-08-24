@@ -196,4 +196,38 @@ public class PointFieldTest {
                 "]", field.toString());
     }
 
+    @Test
+    public void testAdd_threeElements_mixed() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.add(new One(1, 1));
+        field.add(new One(1, 1));
+        field.add(new One(1, 2));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)]}\n" +
+                "[2,0]:null\n" +
+                "[2,1]:null\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
 }
