@@ -155,17 +155,18 @@ public class PointField {
         }
     }
 
-    public BoardReader reader() { // TODO test me
+    public BoardReader reader(Class<? extends Point>... classes) { // TODO test me
         return new BoardReader() {
-
             @Override
             public int size() {
                 return PointField.this.size();
             }
 
             @Override
-            public Iterable<? extends Point> elements(Object player) {
-                return PointField.this.all.all();
+            public Iterable<?> elements(Object player) {
+                return Arrays.stream(classes)
+                        .flatMap(clazz -> PointField.this.of(clazz).stream())
+                        .collect(toList());
             }
         };
     }
