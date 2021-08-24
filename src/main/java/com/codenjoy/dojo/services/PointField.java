@@ -99,6 +99,65 @@ public class PointField {
         List<T> getAt(Point point);
     }
 
+    public static class ListOfList<E> extends AbstractList<E> {
+
+        private int size;
+        private List<Collection> lists = new ArrayList<>(100);
+        private int currentList;
+        private Iterator<E> iterator;
+
+        @Override
+        public Iterator<E> iterator() {
+            init();
+            return new Iterator<>() {
+                @Override
+                public boolean hasNext() {
+                    if (size == 0) {
+                        return false;
+                    }
+
+                    while (iterator == null || !iterator.hasNext()) {
+                        currentList++;
+                        if (currentList == lists.size()) {
+                            return false;
+                        }
+                        iterator = lists.get(currentList).iterator();
+                    }
+
+                    return true;
+                }
+
+                @Override
+                public E next() {
+                    return iterator.next();
+                }
+            };
+        }
+
+        private void init() {
+            currentList = -1;
+            iterator = null;
+        }
+
+        @Override
+        public int size() {
+            return size;
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends E> c) {
+            size += c.size();
+            lists.add(c);
+            init();
+            return true;
+        }
+
+        @Override
+        public E get(int index) {
+            throw new RuntimeException("Not implemented");
+        }
+    }
+
     public <T extends Point> Accessor<T> of(Class<T> filter) {
         return new Accessor<>() {
             @Override
@@ -119,7 +178,7 @@ public class PointField {
 
             @Override
             public List<T> all() {
-                List<T> result = new LinkedList<>();
+                List<T> result = new ListOfList<>();
                 int size = PointField.this.size();
                 for (int x = 0; x < size; x++) {
                     for (int y = 0; y < size; y++) {
