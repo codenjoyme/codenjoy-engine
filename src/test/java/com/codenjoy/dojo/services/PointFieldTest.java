@@ -422,6 +422,11 @@ public class PointFieldTest {
         assertEquals(true, field.of(One.class).contains(new Two(1, 1)));
         assertEquals(true, field.of(One.class).contains(new Three(1, 1)));
 
+        assertEquals(false, field.of(Two.class).contains(new One(1, 1)));
+        assertEquals(false, field.of(Two.class).contains(pt(1, 1)));
+        assertEquals(false, field.of(Two.class).contains(new Two(1, 1)));
+        assertEquals(false, field.of(Two.class).contains(new Three(1, 1)));
+
         assertEquals(false, field.of(One.class).contains(new One(1, 2)));
         assertEquals(false, field.of(One.class).contains(new Two(2, 2)));
         assertEquals(false, field.of(One.class).contains(new Three(2, 2)));
@@ -455,11 +460,73 @@ public class PointFieldTest {
         assertEquals(true, field.of(One.class).contains(new Two(1, 2)));
         assertEquals(true, field.of(One.class).contains(new Three(1, 2)));
 
+        assertEquals(false, field.of(Two.class).contains(new One(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(pt(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Two(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Three(1, 2)));
+
         assertEquals(false, field.of(One.class).contains(new Two(2, 2)));
         assertEquals(false, field.of(One.class).contains(new Three(2, 2)));
 
+        assertEquals(false, field.of(Two.class).contains(new Two(2, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Three(2, 2)));
+
         // then
         assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testContains_twoElements_differentTypes_sameCell() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+
+        // when then
+        assertEquals(true, field.of(One.class).contains(new One(2, 1)));
+        assertEquals(true, field.of(One.class).contains(pt(2, 1)));
+        assertEquals(true, field.of(One.class).contains(new Two(2, 1)));
+        assertEquals(true, field.of(One.class).contains(new Three(2, 1)));
+
+        assertEquals(false, field.of(One.class).contains(new One(1, 2)));
+        assertEquals(false, field.of(One.class).contains(pt(1, 2)));
+        assertEquals(false, field.of(One.class).contains(new Two(1, 2)));
+        assertEquals(false, field.of(One.class).contains(new Three(1, 2)));
+        assertEquals(false, field.of(One.class).contains(new Two(2, 2)));
+        assertEquals(false, field.of(One.class).contains(new Three(2, 2)));
+
+        assertEquals(false, field.of(Two.class).contains(new One(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(pt(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Two(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Three(1, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Two(2, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Three(2, 2)));
+
+        // then
+        assert_twoElements_differentTypes_sameCell();
+    }
+
+    @Test
+    public void testContains_twoElements_differentTypes_differentCells() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+
+        // when then
+        assertEquals(true, field.of(One.class).contains(new One(2, 1)));
+        assertEquals(true, field.of(One.class).contains(pt(2, 1)));
+        assertEquals(true, field.of(One.class).contains(new Two(2, 1)));
+        assertEquals(true, field.of(One.class).contains(new Three(2, 1)));
+
+        assertEquals(true, field.of(Two.class).contains(new One(2, 0)));
+        assertEquals(true, field.of(Two.class).contains(pt(2, 0)));
+        assertEquals(true, field.of(Two.class).contains(new Two(2, 0)));
+        assertEquals(true, field.of(Two.class).contains(new Three(2, 0)));
+
+        assertEquals(false, field.of(Two.class).contains(new Two(2, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Three(2, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Two(2, 2)));
+        assertEquals(false, field.of(Two.class).contains(new Three(2, 2)));
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
     }
 
 
