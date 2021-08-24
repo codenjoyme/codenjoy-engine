@@ -145,7 +145,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testAdd_twoElements_sameType_differentCell() {
+    public void testAdd_twoElements_sameType_differentCells() {
         // given
         field = new PointField(3);
 
@@ -437,6 +437,29 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testContains_twoElements_sameType_differentCells() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+
+        // when then
+        assertEquals(true, field.of(One.class).contains(new One(1, 1)));
+        assertEquals(true, field.of(One.class).contains(pt(1, 1)));
+        assertEquals(true, field.of(One.class).contains(new Two(1, 1)));
+        assertEquals(true, field.of(One.class).contains(new Three(1, 1)));
+
+        assertEquals(true, field.of(One.class).contains(new One(1, 2)));
+        assertEquals(true, field.of(One.class).contains(pt(1, 2)));
+        assertEquals(true, field.of(One.class).contains(new Two(1, 2)));
+        assertEquals(true, field.of(One.class).contains(new Three(1, 2)));
+
+        assertEquals(false, field.of(One.class).contains(new Two(2, 2)));
+        assertEquals(false, field.of(One.class).contains(new Three(2, 2)));
+
+        // then
+        assert_twoElements_sameType_differentCells();
     }
 
 
