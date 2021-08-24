@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.toMap;
 
 public class PointField {
 
@@ -12,18 +13,26 @@ public class PointField {
 
     static class Multimap {
 
-        private Map<Class, List<Point>> elements = new HashMap<>();
+        private Map<Class, List<Point>> map = new LinkedHashMap<>();
 
         public List<Point> get(Class<?> key) {
-            return elements.computeIfAbsent(key, k -> new LinkedList<>());
+            return map.computeIfAbsent(key, k -> new LinkedList<>());
         }
 
         public List<Point> getOnly(Class<?> key) {
-            return elements.get(key);
+            return map.get(key);
         }
 
         public void remove(Class<?> key) {
-            elements.remove(key);
+            map.remove(key);
+        }
+
+        @Override
+        public String toString() {
+            return map.entrySet().stream()
+                    .collect(toMap(entry -> entry.getKey().getSimpleName() + ".class",
+                            entry -> entry.getValue().toString()))
+                    .toString();
         }
     }
 
@@ -52,6 +61,11 @@ public class PointField {
 
         public List<Point> get(Class<?> filter) {
             return map.get(filter);
+        }
+
+        @Override
+        public String toString() {
+            return map.toString();
         }
     }
 
@@ -196,5 +210,24 @@ public class PointField {
                 return (List) get(point).get(filter);
             }
         };
+    }
+
+    public String toString() {
+        return String.format("[map=%s]\n[field=%s]",
+                all, toString(field));
+    }
+
+    private String toString(PointList[][] field) {
+        StringBuilder result = new StringBuilder();
+        int size = PointField.this.size();
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                result.append(pt(x, y))
+                        .append(":")
+                        .append(field[x][y])
+                        .append('\n');
+            }
+        }
+        return result.toString();
     }
 }
