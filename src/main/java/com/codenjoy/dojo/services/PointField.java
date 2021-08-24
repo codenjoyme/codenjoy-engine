@@ -6,37 +6,50 @@ import java.util.stream.Stream;
 public class PointField {
 
     private PointList[][] field;
-    private Map<Class, List<Point>> all = new HashMap<>();
+    private Multimap all = new Multimap();
 
-    static class PointList {
+    static class Multimap {
 
         private Map<Class, List<Point>> elements = new HashMap<>();
 
+        public List<Point> get(Class<?> key) {
+            return elements.computeIfAbsent(key, k -> new LinkedList<>());
+        }
+
+        public List<Point> getOnly(Class<?> key) {
+            return elements.get(key);
+        }
+
+        public void remove(Class<?> key) {
+            elements.remove(key);
+        }
+    }
+
+    static class PointList {
+
+        private Multimap map = new Multimap();
+
         public void add(Point element) {
-            List list = get(element.getClass());
+            List list = map.get(element.getClass());
             list.add(element);
         }
 
         public boolean contains(Class<?> filter) {
-            List<Point> list = elements.get(filter);
+            List<Point> list = map.getOnly(filter);
             return list != null && !list.isEmpty();
         }
 
         public void removeAll(Class<?> filter) {
-            elements.remove(filter);
+            map.remove(filter);
         }
 
         public boolean remove(Class<?> filter, Point element) {
-            List<Point> list = elements.get(filter);
+            List<Point> list = map.getOnly(filter);
             return list != null && list.remove(element);
         }
 
-        public <T> List<T> get(Class<T> filter) {
-            List<Point> list = elements.get(filter);
-            if (list == null) {
-                elements.put(filter, list = new LinkedList<>());
-            }
-            return (List<T>) list;
+        public List<Point> get(Class<?> filter) {
+            return map.get(filter);
         }
     }
 
@@ -60,25 +73,17 @@ public class PointField {
 
     public void add(Point point) {
         get(point).add(point);
-        get_all(point.getClass()).add(point);
+        all.get(point.getClass()).add(point);
 
         point.onChange((from, to) -> {
             // TODO проверить что удаляется именно 1 элемент
             if (get(from).remove(point.getClass(), from)) {
                 get(to).add(to);
 
-                get_all(point.getClass()).remove(from);
-                get_all(point.getClass()).add(to);
+                all.get(point.getClass()).remove(from);
+                all.get(point.getClass()).add(to);
             }
         });
-    }
-
-    private List get_all(Class<?> filter) {
-        List<Point> list = all.get(filter);
-        if (list == null) {
-            all.put(filter, list = new LinkedList<>());
-        }
-        return list;
     }
 
     private PointList get(Point point) {
@@ -116,7 +121,7 @@ public class PointField {
         return new Accessor<>() {
             @Override
             public Iterator<T> iterator() {
-                return (Iterator) get_all(filter).iterator();
+                return (Iterator) all.get(filter).iterator();
             }
 
             @Override
@@ -127,13 +132,13 @@ public class PointField {
 
             @Override
             public <E extends Point> boolean remove(E element) { // TODO проверить что уделяется именно 1 элемент
-                get_all(filter).remove(element);
+                all.get(filter).remove(element);
                 return get(element).remove(filter, element);
             }
 
             @Override
             public List<T> all() {
-                return (List) get_all(filter);
+                return (List) all.get(filter);
             }
 
             @Override
@@ -166,7 +171,7 @@ public class PointField {
                         field[x][y].removeAll(filter);
                     }
                 }
-                get_all(filter).clear();
+                all.get(filter).clear();
             }
 
             @Override
@@ -181,7 +186,7 @@ public class PointField {
 
             @Override
             public List<T> getAt(Point point) {
-                return get(point).get(filter);
+                return (List) get(point).get(filter);
             }
         };
     }
