@@ -91,6 +91,21 @@ public class PointField {
         }
     }
 
+    private static boolean removeAllExact(List list, Point element) {
+        if (list == null || list.isEmpty()) {
+            return false;
+        }
+        boolean result = false;
+        Iterator<Point> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next() == element) {
+                iterator.remove();
+                result = true;
+            }
+        }
+        return result;
+    }
+
     static class PointList {
 
         private Multimap map = new Multimap();
@@ -107,6 +122,11 @@ public class PointField {
 
         public void removeAll(Class<?> filter) {
             map.remove(filter);
+        }
+
+        public boolean removeAllExact(Class<?> filter, Point element) {
+            List<Point> list = map.getOnly(filter);
+            return PointField.removeAllExact(list, element);
         }
 
         public boolean remove(Class<?> filter, Point element) {
@@ -176,9 +196,8 @@ public class PointField {
         all.get(point.getClass()).add(point);
 
         point.beforeChange(from -> {
-            // TODO проверить что удаляется именно 1 элемент
-            if (get(from).remove(point.getClass(), from)) {
-                all.get(point.getClass()).remove(from);
+            if (get(from).removeAllExact(point.getClass(), from)) {
+                removeAllExact(all.get(point.getClass()), from);
             }
         });
 
@@ -211,13 +230,30 @@ public class PointField {
          */
         <P extends Point> boolean contains(P element);
 
+        /**
+         * Удаляются все вхождения (дубликаты) этого элемента. Проверка осуществляется
+         * не по координатам, но по ссылке на объект.
+         * @param element Удаляемый элемент.
+         * @return true - если было удаление.
+         */
+        <P extends Point> boolean removeExact(P element); // TODO test me
+
+        /**
+         * Удаляются первый найденный по координатам элемент.
+         * @param element Координаты удаляемого элемента.
+         * @return true - если было удаление.
+         */
         <P extends Point> boolean remove(P element); // TODO test me
 
         List<T> all(); // TODO test me
 
         Stream<T> stream(); // TODO test me
 
-        <P extends Point> void removeNotIn(List<P> valid); // TODO test me
+        /**
+         * Удаляет все невалидные объекты, не содержащиеся в заданном списке.
+         * @param valid валидные объекты, которые должны остаться.
+         */
+        void removeNotSame(List<T> valid); // TODO test me
 
         void add(T element); // TODO test me
 
@@ -253,7 +289,13 @@ public class PointField {
             }
 
             @Override
-            public <P extends Point> boolean remove(P element) { // TODO проверить что уделяется именно 1 элемент
+            public <P extends Point> boolean removeExact(P element) {
+                removeAllExact(all.get(filter), element);
+                return get(element).removeAllExact(filter, element);
+            }
+
+            @Override
+            public <P extends Point> boolean remove(P element) {
                 all.get(filter).remove(element);
                 return get(element).remove(filter, element);
             }
@@ -269,10 +311,12 @@ public class PointField {
             }
 
             @Override
-            public <P extends Point> void removeNotIn(List<P> elements) {
-                List<T> toRemove = stream().filter(it -> !elements.contains(it))
+            public void removeNotSame(List<T> elements) {
+                List<T> toRemove = stream()
+                        .filter(it -> elements.stream()
+                                .noneMatch(el -> el == it))
                         .collect(toList());
-                toRemove.forEach(this::remove);
+                toRemove.forEach(this::removeExact);
             }
 
             @Override
