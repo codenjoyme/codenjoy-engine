@@ -22,6 +22,8 @@ package com.codenjoy.dojo.services;
  * #L%
  */
 
+import com.codenjoy.dojo.services.printer.BoardReader;
+
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -59,6 +61,12 @@ public class PointField {
 
         public void remove(Class<?> key) {
             map.remove(key);
+        }
+
+        public List<Point> all() { // TODO test me
+            return map.entrySet().stream()
+                .flatMap(entry -> entry.getValue().stream())
+                .collect(toList());
         }
 
         @Override
@@ -125,6 +133,21 @@ public class PointField {
         for (int x = 0; x < size; x++) {
             field[x] = new PointList[size];
         }
+    }
+
+    public BoardReader reader() { // TODO test me
+        return new BoardReader() {
+
+            @Override
+            public int size() {
+                return PointField.this.size();
+            }
+
+            @Override
+            public Iterable<? extends Point> elements(Object player) {
+                return PointField.this.all.all();
+            }
+        };
     }
 
     /**
