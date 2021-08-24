@@ -3,6 +3,8 @@ package com.codenjoy.dojo.services;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static com.codenjoy.dojo.services.PointImpl.pt;
+
 public class PointField {
 
     private PointList[][] field;
@@ -57,9 +59,6 @@ public class PointField {
         field = new PointList[size][];
         for (int x = 0; x < size; x++) {
             field[x] = new PointList[size];
-            for (int y = 0; y < size; y++) {
-                field[x][y] = new PointList();
-            }
         }
     }
 
@@ -86,11 +85,19 @@ public class PointField {
         });
     }
 
-    private PointList get(Point point) {
-        if (point.isOutOf(size())) {
+    private PointList get(Point pt) {
+        if (pt.isOutOf(size())) {
             return new PointList(); // TODO а точно тут так надо?
         }
-        return field[point.getX()][point.getY()];
+        return get(pt.getX(), pt.getY());
+    }
+
+    private PointList get(int x, int y) {
+        PointList list = field[x][y];
+        if (list == null) {
+            list = field[x][y] = new PointList();
+        }
+        return list;
     }
 
     public interface Accessor<T> extends Iterable<T> {
@@ -168,7 +175,7 @@ public class PointField {
                 int size = PointField.this.size();
                 for (int x = 0; x < size; x++) {
                     for (int y = 0; y < size; y++) {
-                        field[x][y].removeAll(filter);
+                        get(x, y).removeAll(filter);
                     }
                 }
                 all.get(filter).clear();
