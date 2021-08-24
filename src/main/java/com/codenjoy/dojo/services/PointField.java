@@ -26,6 +26,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
@@ -56,6 +57,7 @@ public class PointField {
                     .collect(toMap(entry -> "\n\t" + entry.getKey().getSimpleName() + ".class",
                             Map.Entry::getValue))
                     .entrySet().stream()
+                    .sorted(comparing(Map.Entry::getKey))
                     .map(entry -> String.format("{%s=[\n\t\t%s]}",
                             entry.getKey(),
                             entry.getValue().stream()

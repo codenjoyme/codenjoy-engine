@@ -197,6 +197,40 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testAdd_twoElements_differentTypes_sameCell() {
+        // given
+        PointField field = new PointField(3);
+
+        // when
+        field.add(new One(2, 1));
+        field.add(new Two(2, 1));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two2(2,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:null\n" +
+                "[0,1]:null\n" +
+                "[0,2]:null\n" +
+                "[1,0]:null\n" +
+                "[1,1]:null\n" +
+                "[1,2]:null\n" +
+                "[2,0]:null\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two2(2,1)]}\n" +
+                "[2,2]:null\n" +
+                "]", field.toString());
+    }
+
+    @Test
     public void testAdd_threeElements_mixed() {
         // given
         PointField field = new PointField(3);
