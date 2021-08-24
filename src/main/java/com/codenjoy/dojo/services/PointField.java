@@ -27,8 +27,7 @@ import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.*;
 
 public class PointField {
 
@@ -129,14 +128,16 @@ public class PointField {
         get(point).add(point);
         all.get(point.getClass()).add(point);
 
-        point.onChange((from, to) -> {
+        point.beforeChange(from -> {
             // TODO проверить что удаляется именно 1 элемент
             if (get(from).remove(point.getClass(), from)) {
-                get(to).add(to);
-
                 all.get(point.getClass()).remove(from);
-                all.get(point.getClass()).add(to);
             }
+        });
+
+        point.onChange((from, to) -> {
+            get(to).add(to);
+            all.get(point.getClass()).add(to);
         });
     }
 
@@ -215,8 +216,9 @@ public class PointField {
 
             @Override
             public void removeNotIn(List<? extends Point> elements) {
-                stream().filter(it -> !elements.contains(it))
-                        .forEach(this::remove);
+                List<T> toRemove = stream().filter(it -> !elements.contains(it))
+                        .collect(toList());
+                toRemove.forEach(this::remove);
             }
 
             @Override
