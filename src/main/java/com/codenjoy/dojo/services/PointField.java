@@ -211,10 +211,13 @@ public class PointField {
         List<T> copy(); // TODO test me
 
         void tick(); // TODO test me
+
+        void remove(int index); // TODO test me
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
         return new Accessor<>() {
+
             @Override
             public Iterator<T> iterator() {
                 return (Iterator) all.get(filter).iterator();
@@ -296,6 +299,14 @@ public class PointField {
                 copy().stream()
                         .filter(it -> it instanceof Tickable)
                         .forEach(it -> ((Tickable)it).tick());
+            }
+
+            @Override
+            public void remove(int index) {
+                Iterator<Point> iterator = all.get(filter).iterator();
+                if (iterator.hasNext()) {
+                    remove(iterator.next());
+                }
             }
         };
     }
