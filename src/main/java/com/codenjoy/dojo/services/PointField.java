@@ -207,6 +207,10 @@ public class PointField {
         void addAll(List<T> elements); // TODO test me
 
         List<T> getAt(Point point); // TODO test me
+
+        List<T> copy(); // TODO test me
+
+        void tick(); // TODO test me
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -280,6 +284,18 @@ public class PointField {
             @Override
             public List<T> getAt(Point point) {
                 return (List) get(point).get(filter);
+            }
+
+            @Override
+            public List<T> copy() {
+                return new ArrayList<>(all());
+            }
+
+            @Override
+            public void tick() {
+                copy().stream()
+                        .filter(it -> it instanceof Tickable)
+                        .forEach(it -> ((Tickable)it).tick());
             }
         };
     }
