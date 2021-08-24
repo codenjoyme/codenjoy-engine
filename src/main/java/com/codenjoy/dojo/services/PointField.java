@@ -1,9 +1,32 @@
 package com.codenjoy.dojo.services;
 
+/*-
+ * #%L
+ * Codenjoy - it's a dojo-like platform from developers to developers.
+ * %%
+ * Copyright (C) 2018 Codenjoy
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
+
 import java.util.*;
 import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 public class PointField {
@@ -30,9 +53,16 @@ public class PointField {
         @Override
         public String toString() {
             return map.entrySet().stream()
-                    .collect(toMap(entry -> entry.getKey().getSimpleName() + ".class",
-                            entry -> entry.getValue().toString()))
-                    .toString();
+                    .collect(toMap(entry -> "\n\t" + entry.getKey().getSimpleName() + ".class",
+                            Map.Entry::getValue))
+                    .entrySet().stream()
+                    .map(entry -> String.format("{%s=[\n\t\t%s]}",
+                            entry.getKey(),
+                            entry.getValue().stream()
+                                    .map(Object::toString)
+                                    .collect(joining("\n\t\t"))))
+                    .collect(joining("\n\t"))
+                    .replace("\t", "        ");
         }
     }
 
@@ -213,7 +243,7 @@ public class PointField {
     }
 
     public String toString() {
-        return String.format("[map=%s]\n[field=%s]",
+        return String.format("[map=%s]\n\n[field=%s]",
                 all, toString(field));
     }
 
