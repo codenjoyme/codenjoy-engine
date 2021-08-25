@@ -25,6 +25,8 @@ package com.codenjoy.dojo.services.printer;
 
 import com.codenjoy.dojo.services.Point;
 
+import java.util.function.Consumer;
+
 /**
  * Этот абстракция над доской для Printer
  */
@@ -34,12 +36,13 @@ public interface BoardReader<P> {
 
     /**
      * @param player Игрок от имени которого рисуем.
-     * @return Коллекция всей живности на поле.
+     * @param process этому методу стоит скормить по очереди все коллекции
+     * представляющие живность на поле.
      * Порядок предлагаемых игрой элементов имеет значение -
      * вначале размещай элементы типа Hero, тогда при отрисовке
      * элементов в одной и той же клетке в его реализацию
      * интерфейса State прилетят расположенные ниже по
      * этому списку объекты в параметре alsoAtPoint.
      */
-    Iterable<? extends Point> elements(P player);
+    void addAll(P player, Consumer<Iterable<? extends Point>> process);
 }

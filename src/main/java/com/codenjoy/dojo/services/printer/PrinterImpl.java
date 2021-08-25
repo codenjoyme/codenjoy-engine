@@ -26,7 +26,7 @@ package com.codenjoy.dojo.services.printer;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 
-import static com.codenjoy.dojo.services.PointImpl.pt;
+import java.util.function.Consumer;
 
 /**
  * Этот малый умеет печатать состояние борды на экране.
@@ -95,7 +95,7 @@ class PrinterImpl implements Printer<String> {
             field = new Object[size][size][];
             len = new byte[size][size];
 
-            addAll(board.elements(player));
+            board.addAll(player, addAll());
         }
 
         @Override
@@ -103,19 +103,21 @@ class PrinterImpl implements Printer<String> {
             return board.size();
         }
 
-        private void addAll(Iterable<? extends Point> elements) {
-            for (Point el : elements) {
-                int x = el.getX();
-                int y = el.getY();
+        private Consumer<Iterable<? extends Point>> addAll() {
+            return (Iterable<? extends Point> elements) -> {
+                for (Point el : elements) {
+                    int x = el.getX();
+                    int y = el.getY();
 
-                if (el.isOutOf(field.length)) {
-                    continue; // TODO test me (пропускаем элементы за пределами борды)
+                    if (el.isOutOf(field.length)) {
+                        continue; // TODO test me (пропускаем элементы за пределами борды)
+                    }
+                    Object[] existing = data(x, y);
+                    byte index = index(x, y, existing.length);
+                    existing[index] = el;
+                    len[x][y]++;
                 }
-                Object[] existing = data(x, y);
-                byte index = index(x, y, existing.length);
-                existing[index] = el;
-                len[x][y]++;
-            }
+            };
         }
 
         private byte index(int x, int y, int max) {

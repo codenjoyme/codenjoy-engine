@@ -26,7 +26,7 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
-import java.util.LinkedList;
+import java.util.function.Consumer;
 
 public final class NullBoardReader implements BoardReader<GamePlayer> {
 
@@ -42,7 +42,7 @@ public final class NullBoardReader implements BoardReader<GamePlayer> {
     }
 
     @Override
-    public Iterable<? extends Point> elements(GamePlayer player) {
-        return new LinkedList<>();
+    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> process) {
+        // do nothing
     }
 }

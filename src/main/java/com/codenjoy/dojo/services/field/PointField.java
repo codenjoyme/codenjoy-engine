@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -65,10 +66,10 @@ public class PointField {
             }
 
             @Override
-            public Iterable<? extends Point> elements(Object player) {
-                return Arrays.stream(classes)
-                        .flatMap(clazz -> PointField.this.of(clazz).stream())
-                        .collect(toList());
+            public void addAll(Object player, Consumer<Iterable<? extends Point>> process) {
+                for (Class clazz : classes) {
+                    process.accept(PointField.this.of(clazz).all());
+                }
             }
         };
     }
