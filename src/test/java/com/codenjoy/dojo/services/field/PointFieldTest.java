@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services;
+package com.codenjoy.dojo.services.field;
 
 /*-
  * #%L
@@ -22,6 +22,8 @@ package com.codenjoy.dojo.services;
  * #L%
  */
 
+import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.field.PointField;
 import org.junit.Before;
 import org.junit.Test;
 
