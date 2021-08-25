@@ -6,7 +6,7 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 
 public class MultimapMatrix<K, V> {
 
-    private Multimap<K, V>[][] field;
+    private final Multimap<K, V>[][] field;
 
     public MultimapMatrix(int size) {
         field = new Multimap[size][];

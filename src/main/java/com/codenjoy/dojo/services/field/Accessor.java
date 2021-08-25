@@ -5,13 +5,13 @@ import com.codenjoy.dojo.services.Point;
 import java.util.List;
 import java.util.stream.Stream;
 
-public interface Accessor<T> extends Iterable<T> {
+public interface Accessor<E> extends Iterable<E> {
 
     /**
      * @param element Любой элемент типа Point, у которого будут взяты только координаты.
      * @return true - если заданного типа элемент содержится в этой клетке.
      */
-    <P extends Point> boolean contains(P element);
+    <E2 extends Point> boolean contains(E2 element);
 
     /**
      * Удаляются все вхождения (дубликаты) этого элемента. Проверка осуществляется
@@ -20,7 +20,7 @@ public interface Accessor<T> extends Iterable<T> {
      * @param element Удаляемый элемент.
      * @return true - если было удаление.
      */
-    <P extends Point> boolean removeExact(P element); // TODO test me
+    <E2 extends Point> boolean removeExact(E2 element); // TODO test me
 
     /**
      * Удаляются первый найденный по координатам элемент.
@@ -28,32 +28,32 @@ public interface Accessor<T> extends Iterable<T> {
      * @param element Координаты удаляемого элемента.
      * @return true - если было удаление.
      */
-    <P extends Point> boolean remove(P element); // TODO test me
+    <E2 extends Point> boolean remove(E2 element); // TODO test me
 
-    List<T> all(); // TODO test me
+    List<E> all(); // TODO test me
 
-    Stream<T> stream(); // TODO test me
+    Stream<E> stream(); // TODO test me
 
     /**
      * Удаляет все невалидные объекты, не содержащиеся в заданном списке.
      *
      * @param valid валидные объекты, которые должны остаться.
      */
-    void removeNotSame(List<T> valid); // TODO test me
+    void removeNotSame(List<E> valid); // TODO test me
 
-    void add(T element); // TODO test me
+    void add(E element); // TODO test me
 
     int size(); // TODO test me
 
     void clear(); // TODO test me
 
-    <P extends Point> void removeIn(List<P> elements); // TODO test me
+    <E2 extends Point> void removeIn(List<E2> elements); // TODO test me
 
-    void addAll(List<T> elements); // TODO test me
+    void addAll(List<E> elements); // TODO test me
 
-    <P extends Point> List<T> getAt(P point); // TODO test me
+    <E2 extends Point> List<E> getAt(E2 point); // TODO test me
 
-    List<T> copy(); // TODO test me
+    List<E> copy(); // TODO test me
 
     void tick(); // TODO test me
 

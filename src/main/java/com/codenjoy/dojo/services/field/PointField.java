@@ -179,7 +179,7 @@ public class PointField {
             }
 
             @Override
-            public List<E> getAt(Point point) {
+            public <E2 extends Point> List<E> getAt(E2 point) {
                 return (List) get(point).get(filter);
             }
 
