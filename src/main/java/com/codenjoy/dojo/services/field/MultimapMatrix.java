@@ -1,7 +1,6 @@
 package com.codenjoy.dojo.services.field;
 
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.PointImpl;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 

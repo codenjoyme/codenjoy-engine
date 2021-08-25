@@ -83,4 +83,8 @@ public class Multimap<K, V> {
             return result;
         });
     }
+
+    public void clear(K key) {
+        get(key).clear();
+    }
 }

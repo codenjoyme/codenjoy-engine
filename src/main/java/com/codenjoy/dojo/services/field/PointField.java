@@ -167,7 +167,7 @@ public class PointField {
             @Override
             public void clear() {
                 field.clear(filter);
-                all.get(filter).clear();
+                all.clear(filter);
             }
 
             @Override
