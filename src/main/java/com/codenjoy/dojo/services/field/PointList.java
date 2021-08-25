@@ -19,7 +19,7 @@ public class PointList {
     }
 
     public void removeAll(Class<?> filter) {
-        map.remove(filter);
+        map.removeKey(filter);
     }
 
     public boolean removeAllExact(Class<?> filter, Point element) {

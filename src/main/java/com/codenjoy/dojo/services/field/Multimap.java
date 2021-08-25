@@ -20,7 +20,7 @@ public class Multimap<K, V> {
         return map.get(key);
     }
 
-    public void remove(K key) {
+    public void removeKey(K key) {
         map.remove(key);
     }
 
