@@ -32,6 +32,8 @@ import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
@@ -64,67 +66,68 @@ public class LayeredViewPrinterTest {
         }
     }
 
-    static class Enemy extends PointImpl implements State {
+    static class Enemy extends PointImpl implements State<Element, Object> {
 
         public Enemy(Point point) {
             super(point);
         }
 
         @Override
-        public Element state(Object player, Object... alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.ENEMY;
         }
     }
 
-    static class Hero extends PointImpl implements State {
+    static class Hero extends PointImpl implements State<Element, Object> {
 
         public Hero(Point point) {
             super(point);
         }
 
         @Override
-        public Element state(Object player, Object... alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.HERO;
         }
     }
 
-    static class Dot extends PointImpl implements State {
+    static class Dot extends PointImpl implements State<Element, Object> {
 
         public Dot(Point point) {
             super(point);
         }
 
         @Override
-        public Element state(Object player, Object... alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.DOT;
         }
     }
 
-    static class Circle extends PointImpl implements State {
+    static class Circle extends PointImpl implements State<Element, Object> {
 
         public Circle(Point point) {
             super(point);
         }
 
         @Override
-        public Element state(Object player, Object... alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.CIRCLE;
         }
     }
 
-    static class Air extends PointImpl implements State {
+    static class Air extends PointImpl implements State<Element, Object> {
 
         public Air(Point point) {
             super(point);
         }
 
         @Override
-        public Element state(Object player, Object... alsoAtPoint) {
-            if (alsoAtPoint[0] instanceof Hero || alsoAtPoint[0] instanceof Enemy) {
+        public Element state(Object player, List<State> alsoAtPoint) {
+            State element = alsoAtPoint.get(0);
+            if (element instanceof Hero || element instanceof Enemy) {
                 return Element.AIR_OVER_PLAYERS;
-            } else if (alsoAtPoint[0] instanceof Circle) {
+            } else if (element instanceof Circle) {
                 return Element.AIR_OVER_CIRCLE;
-            } else if (alsoAtPoint[0] instanceof Dot) {
+            } else if (element instanceof Dot) {
                 return Element.AIR_OVER_DOT;
             } else {
                 throw new IllegalStateException();
@@ -181,14 +184,14 @@ public class LayeredViewPrinterTest {
             }
 
             @Override
-            public Object[] itemsInSameCell(State item, int layer) {
+            public List<State> itemsInSameCell(State item, int layer) {
                 Point pt = (Point) item;
                 int length = lxy.getLength(pt.getX(), pt.getY());
                 State inCell = elements().apply(length, 0);
                 if (inCell == item) {
-                    return new Object[0];
+                    return Arrays.asList();
                 }
-                return new Object[]{inCell};
+                return Arrays.asList(inCell);
             }
         };
         GamePlayer player = mock(GamePlayer.class);

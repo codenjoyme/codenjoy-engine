@@ -25,8 +25,14 @@ package com.codenjoy.dojo.services.printer;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.field.Multimap;
+import com.codenjoy.dojo.services.field.PointField;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Этот малый умеет печатать состояние борды на экране.
@@ -56,6 +62,7 @@ class PrinterImpl implements Printer<String> {
         StringBuilder string = new StringBuilder();
         for (char[] row : field) {
             for (char ch : row) {
+                if (ch == '\0') ch = ' '; // TODO а это так для всех игр?
                 string.append(ch);
             }
             string.append("\n");
@@ -87,26 +94,19 @@ class PrinterImpl implements Printer<String> {
     static class GamePrinterImpl<E extends CharElement, P> implements GamePrinter {
 
         private final BoardReader board;
-        private int size;
         private P player;
-        private char emptyChar;
-
-        private Object[][][] field;
-        private byte[][] len;
+        private PointField field;
+        private List<Class> order;
 
         public GamePrinterImpl(BoardReader board, P player) {
             this.board = board;
             this.player = player;
-            this.emptyChar = ' ';
         }
 
         @Override
         public void init() {
-            size = board.size();
-            field = new Object[size][size][];
-            len = new byte[size][size];
-
-            addAll(board.elements(player));
+            field = board.elements(player);
+            order = board.order();
         }
 
         @Override
@@ -114,56 +114,28 @@ class PrinterImpl implements Printer<String> {
             return board.size();
         }
 
-        private void addAll(Iterable<? extends Point> elements) {
-            for (Point el : elements) {
-                int x = el.getX();
-                int y = el.getY();
-
-                if (el.isOutOf(field.length)) {
-                    continue; // TODO test me (пропускаем элементы за пределами борды)
-                }
-                Object[] existing = data(x, y);
-                byte index = index(x, y, existing.length);
-                existing[index] = el;
-                len[x][y]++;
-            }
-        }
-
-        private byte index(int x, int y, int max) {
-            byte index = len[x][y];
-            if (index < max) {
-                return index;
-            }
-
-            throw new IllegalStateException(String.format(
-                    "There are many items in one cell [%s,%s]: %s" +
-                            ", expected max: %s",
-                    x, y, index, (max - 1)));
-        }
-
-        private Object[] data(int x, int y) {
-            Object[] result = field[x][y];
-            if (result != null) {
-                return result;
-            }
-            return field[x][y] = new Object[7];
-        }
-
         @Override
         public void printAll(Filler filler) {
-            for (int x = 0; x < size; x++) {
-                for (int y = 0; y < size; y++) {
-                    Object[] elements = field[x][y];
-                    if (elements == null || len[x][y] == 0) {
-                        filler.set(x, y, emptyChar);
+            for (int x = 0; x < size(); x++) {
+                for (int y = 0; y < size(); y++) {
+                    Multimap<Class<? extends Point>, Point> map = field.getOnly(x, y);
+
+                    if (map == null || map.isEmpty()) {
                         continue;
                     }
 
-                    for (int index = 0; index < len[x][y]; index++) {
-                        State<E, P> state = (State<E, P>)elements[index];
-                        E el = state.state(player, elements);
+                    List<Point> elements = new LinkedList<>();
+                    for (Class clazz : order) {
+                        List list = map.getOnly(clazz);
+                        if (list != null) {
+                            elements.addAll(list);
+                        }
+                    }
+
+                    for (Point pt : elements) {
+                        E el = (E)((State) pt).state(player, elements);
                         if (el != null) {
-                            filler.set(x, y, el.ch());
+                            filler.set(pt.getX(), pt.getY(), el.ch());
                             break;
                         }
                     }

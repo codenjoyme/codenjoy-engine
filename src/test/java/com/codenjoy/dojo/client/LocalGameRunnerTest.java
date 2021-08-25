@@ -28,6 +28,7 @@ import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.GameType;
 import com.codenjoy.dojo.services.PlayerScores;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
@@ -88,8 +89,13 @@ public class LocalGameRunnerTest {
                     }
 
                     @Override
-                    public Iterable<? extends Point> elements(GamePlayer player) {
-                        return new LinkedList<Point>(){{
+                    public List<Class<? extends Point>> order() {
+                        return Arrays.asList(Point.class);
+                    }
+
+                    @Override
+                    public PointField elements(GamePlayer player) {
+                        return new PointField(size()){{
                             add(pt(1, id++));
                             add(pt(2, id++));
                             add(pt(3, id++));

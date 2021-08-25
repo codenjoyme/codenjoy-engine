@@ -82,7 +82,7 @@ public class GameLoader {
         GameField game = gameType.createGame(0, settings);
         game.newGame(gameType.createPlayer(event -> {}, DEFAULT_TEAM_ID, "id", settings));
         game.tick();
-        Iterator<? extends Point> iterator = game.reader().elements(null).iterator();
+        Iterator<? extends Point> iterator = game.reader().elements(null).all().iterator();
         System.out.println(iterator.next());
     }
 }

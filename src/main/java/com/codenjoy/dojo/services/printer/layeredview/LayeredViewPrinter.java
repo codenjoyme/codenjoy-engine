@@ -27,6 +27,7 @@ package com.codenjoy.dojo.services.printer.layeredview;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.printer.Printer;
 
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
@@ -93,7 +94,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
 
                 for (int layer = 0; layer < countLayers; ++layer) {
                     State item = elements.apply(index, layer);
-                    Object[] inSameCell = reader.itemsInSameCell(item, layer);
+                    List<State> inSameCell = reader.itemsInSameCell(item, layer);
                     builders[layer].append(makeState(item, player, inSameCell));
                 }
             }
@@ -130,7 +131,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
         adjustView(size);
     }
 
-    private String makeState(State item, Object player, Object[] elements) {
+    private String makeState(State item, Object player, List<State> elements) {
         return (item == null) ? "-" : item.state(player, elements).toString();
     }
 
