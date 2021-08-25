@@ -65,13 +65,10 @@ public class PointField {
             }
 
             @Override
-            public List<Class<? extends Point>> order() {
-                return Arrays.asList(classes);
-            }
-
-            @Override
-            public PointField elements(Object player) {
-                return PointField.this;
+            public Iterable<? extends Point> elements(Object player) {
+                return Arrays.stream(classes)
+                        .flatMap(clazz -> PointField.this.of(clazz).stream())
+                        .collect(toList());
             }
         };
     }
@@ -119,10 +116,6 @@ public class PointField {
                 with(from, map -> map.removeAllExact(pt.getClass(), from)));
         pt.onChange((from, to) ->
                 with(to, map -> map.get(pt.getClass()).add(to)));
-    }
-
-    public Multimap<Class<? extends Point>, Point> getOnly(int x, int y) {
-        return field.getOnly(x, y);
     }
 
     private Multimap<Class<? extends Point>, Point> get(Point pt) {
@@ -232,9 +225,5 @@ public class PointField {
     public String toString() {
         return String.format("[map=%s]\n\n[field=%s]",
                 all.toString(), field.toString());
-    }
-
-    public List<Point> all() {
-        return all.all();
     }
 }

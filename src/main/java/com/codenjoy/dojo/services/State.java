@@ -23,8 +23,6 @@ package com.codenjoy.dojo.services;
  */
 
 
-import java.util.List;
-
 public interface State<E, T> {
-    E state(T player, List<State> alsoAtPoint);
+    E state(T player, Object... alsoAtPoint);
 }

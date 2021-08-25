@@ -23,13 +23,10 @@ package com.codenjoy.dojo.services.nullobj;
  */
 
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.field.PointField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public final class NullBoardReader implements BoardReader<GamePlayer> {
 
@@ -45,12 +42,7 @@ public final class NullBoardReader implements BoardReader<GamePlayer> {
     }
 
     @Override
-    public List<Class<? extends Point>> order() {
-        return Arrays.asList();
-    }
-
-    @Override
-    public PointField elements(GamePlayer player) {
-        return new PointField(0);
+    public Iterable<? extends Point> elements(GamePlayer player) {
+        return new LinkedList<>();
     }
 }

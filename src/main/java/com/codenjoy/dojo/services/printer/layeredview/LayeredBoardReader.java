@@ -26,7 +26,6 @@ package com.codenjoy.dojo.services.printer.layeredview;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 
-import java.util.List;
 import java.util.function.BiFunction;
 
 public interface LayeredBoardReader {
@@ -39,5 +38,5 @@ public interface LayeredBoardReader {
 
     Point viewCenter(Object player);
 
-    List<State> itemsInSameCell(State item, int layer);
+    Object[] itemsInSameCell(State item, int layer);
 }

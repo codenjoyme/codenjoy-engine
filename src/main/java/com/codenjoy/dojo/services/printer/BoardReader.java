@@ -24,9 +24,6 @@ package com.codenjoy.dojo.services.printer;
 
 
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.field.PointField;
-
-import java.util.List;
 
 /**
  * Этот абстракция над доской для Printer
@@ -34,8 +31,6 @@ import java.util.List;
 public interface BoardReader<P> {
 
     int size();
-
-    List<Class<? extends Point>> order();
 
     /**
      * @param player Игрок от имени которого рисуем.
@@ -46,5 +41,5 @@ public interface BoardReader<P> {
      * интерфейса State прилетят расположенные ниже по
      * этому списку объекты в параметре alsoAtPoint.
      */
-    PointField elements(P player);
+    Iterable<? extends Point> elements(P player);
 }

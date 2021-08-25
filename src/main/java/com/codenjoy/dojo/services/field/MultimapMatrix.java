@@ -30,10 +30,6 @@ public class MultimapMatrix<K, V> {
         return map;
     }
 
-    public Multimap<K, V> getOnly(int x, int y) {
-        return field[x][y];
-    }
-
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int x = 0; x < size(); x++) {
