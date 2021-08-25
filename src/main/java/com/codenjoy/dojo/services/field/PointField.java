@@ -27,9 +27,9 @@ import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
-import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.*;
 
 /**
@@ -85,24 +85,28 @@ public class PointField {
         elements.forEach(this::add);
     }
 
+    private boolean process(Point point, Function<Multimap, Boolean> function) {
+        boolean result = function.apply(get(point));
+        if (result) {
+            function.apply(all);
+        }
+        return result;
+    }
+
     /**
      * Добавляет текущий элемент в кординку его типа (тип будет извлечен из
      * класса передаваемого объекта).
      * @param point Добавляемые элемент.
      */
     public void add(Point point) {
-        get(point).get(point.getClass()).add(point);
-        all.get(point.getClass()).add(point);
+        process(point, map -> map.get(point.getClass()).add(point));
 
         point.beforeChange(from -> {
-            if (get(from).removeAllExact(point.getClass(), from)) {
-                all.removeAllExact(point.getClass(), from);
-            }
+            process(from, map -> map.removeAllExact(point.getClass(), from));
         });
 
         point.onChange((from, to) -> {
-            get(to).get(point.getClass()).add(to);
-            all.get(point.getClass()).add(to);
+            process(to, map -> map.get(point.getClass()).add(to));
         });
     }
 
@@ -125,14 +129,12 @@ public class PointField {
 
             @Override
             public <P extends Point> boolean removeExact(P element) {
-                all.removeAllExact(filter, element);
-                return get(element).removeAllExact(filter, element);
+                return process(element, map -> map.removeAllExact(filter, element));
             }
 
             @Override
             public <P extends Point> boolean remove(P element) {
-                all.remove(filter, element);
-                return get(element).remove(filter, element);
+                return process(element, map -> map.remove(filter, element));
             }
 
             @Override
