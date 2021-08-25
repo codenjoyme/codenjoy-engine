@@ -62,8 +62,8 @@ class PrinterImpl implements Printer<String> {
         StringBuilder string = new StringBuilder();
         for (char[] row : field) {
             for (char ch : row) {
-                if (ch == '\0') ch = ' '; // TODO а это так для всех игр?
-                string.append(ch);
+                // TODO а это так для всех игр?
+                string.append((ch == '\0') ? ' ' : ch);
             }
             string.append("\n");
         }
@@ -79,15 +79,6 @@ class PrinterImpl implements Printer<String> {
     }
 
     private void set(int x, int y, char ch) {
-        if (x == -1 || y == -1) { // TODO убрать это
-            return;
-        }
-
-        if (ch == ERROR_SYMBOL) {
-            throw new IllegalArgumentException(String.format("Обрати внимание на поле - в месте %s появился " +
-                    "null Element. И как только он туда попал?\n", pt(x, y)));
-        }
-
         field[printer.size() - 1 - y][x] = ch;
     }
 
