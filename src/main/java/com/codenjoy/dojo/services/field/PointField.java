@@ -198,8 +198,7 @@ public class PointField {
             }
 
             @Override
-            public void remove(int index) {
-                // TODO тут не удаляется с матрицы ничего
+            public void removeAny() {
                 Iterator<Point> iterator = all.get(filter).iterator();
                 if (iterator.hasNext()) {
                     remove(iterator.next());

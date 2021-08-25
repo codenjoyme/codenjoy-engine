@@ -57,5 +57,5 @@ public interface Accessor<T> extends Iterable<T> {
 
     void tick(); // TODO test me
 
-    void remove(int index); // TODO test me
+    void removeAny(); // TODO test me
 }
