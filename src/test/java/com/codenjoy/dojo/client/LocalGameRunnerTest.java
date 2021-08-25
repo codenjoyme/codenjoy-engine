@@ -88,8 +88,8 @@ public class LocalGameRunnerTest {
                     }
 
                     @Override
-                    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> process) {
-                        process.accept(elements());
+                    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> processor) {
+                        processor.accept(elements());
                     }
 
                     private LinkedList<Point> elements() {

@@ -36,7 +36,7 @@ public interface BoardReader<P> {
 
     /**
      * @param player Игрок от имени которого рисуем.
-     * @param process этому методу стоит скормить по очереди все коллекции
+     * @param processor этому методу стоит скормить по очереди все коллекции
      * представляющие живность на поле.
      * Порядок предлагаемых игрой элементов имеет значение -
      * вначале размещай элементы типа Hero, тогда при отрисовке
@@ -44,5 +44,5 @@ public interface BoardReader<P> {
      * интерфейса State прилетят расположенные ниже по
      * этому списку объекты в параметре alsoAtPoint.
      */
-    void addAll(P player, Consumer<Iterable<? extends Point>> process);
+    void addAll(P player, Consumer<Iterable<? extends Point>> processor);
 }

@@ -33,7 +33,6 @@ import java.util.function.Consumer;
  * @see PrinterImpl#print(Object...)
   */
 class PrinterImpl implements Printer<String> {
-    public static final char ERROR_SYMBOL = 'Ъ';
     private char[][] field;
     private GamePrinter printer;
 

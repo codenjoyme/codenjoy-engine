@@ -66,9 +66,9 @@ public class PointField {
             }
 
             @Override
-            public void addAll(Object player, Consumer<Iterable<? extends Point>> process) {
+            public void addAll(Object player, Consumer<Iterable<? extends Point>> processor) {
                 for (Class clazz : classes) {
-                    process.accept(PointField.this.of(clazz).all());
+                    processor.accept(PointField.this.of(clazz).all());
                 }
             }
         };

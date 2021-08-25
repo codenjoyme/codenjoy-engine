@@ -42,7 +42,7 @@ public final class NullBoardReader implements BoardReader<GamePlayer> {
     }
 
     @Override
-    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> process) {
+    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> processor) {
         // do nothing
     }
 }
