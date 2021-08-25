@@ -53,6 +53,10 @@ public class PointField {
         all = new Multimap<>();
     }
 
+    /**
+     * @param classes Порядок отрисовки типов элементов.
+     * @return BoardReader для отрисовки элементов на поле в заданном порядке.
+     */
     public BoardReader<?> reader(Class<? extends Point>... classes) { // TODO test me
         return new BoardReader<>() {
             @Override
@@ -70,7 +74,7 @@ public class PointField {
     }
 
     /**
-     * @return Размер поля.
+     * @return Размер квадратного поля.
      */
     public int size() {
         return field.size();
@@ -85,6 +89,14 @@ public class PointField {
         elements.forEach(this::add);
     }
 
+    /**
+     * Метод помогает работать в связке с двумя контейнерами данных.
+     * Если выполнение операции на первом вернул false, со вторым (из за
+     * опатимизаций производительности) операция не будет осуществляться.
+     * @param point Координата с которой работаем.
+     * @param function Осуществляемая операция.
+     * @return Результат выполнения операции на первом контейнере.
+     */
     private boolean with(Point point, Function<Multimap<Class<? extends Point>, Point>, Boolean> function) {
         boolean result = function.apply(get(point));
         if (result) {
@@ -110,6 +122,11 @@ public class PointField {
         return field.get(pt.getX(), pt.getY());
     }
 
+    /**
+     * @param filter Класс объекта коллекцию которых в этой клетке хотим получить.
+     * @param <E> Тип объекта наследуемого от PointImpl.
+     * @return Удобный интерфейс для работы с коллекцией выбранных элементов.
+     */
     public <E extends Point> Accessor<E> of(Class<E> filter) {
         return new Accessor<>() {
 
