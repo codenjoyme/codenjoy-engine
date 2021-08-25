@@ -30,7 +30,6 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
 /**

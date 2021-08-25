@@ -1,7 +1,5 @@
 package com.codenjoy.dojo.services.field;
 
-import com.codenjoy.dojo.services.Point;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,23 +8,23 @@ import java.util.Map;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
-class Multimap {
+public class Multimap<K, V> {
 
-    private Map<Class, List<Point>> map = new LinkedHashMap<>();
+    private Map<K, List<V>> map = new LinkedHashMap<>();
 
-    public List<Point> get(Class<?> key) {
+    public List<V> get(K key) {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
     }
 
-    public List<Point> getOnly(Class<?> key) {
+    public List<V> getOnly(K key) {
         return map.get(key);
     }
 
-    public void remove(Class<?> key) {
+    public void remove(K key) {
         map.remove(key);
     }
 
-    public List<Point> all() { // TODO test me
+    public List<V> all() { // TODO test me
         return map.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream())
                 .collect(toList());
@@ -35,7 +33,7 @@ class Multimap {
     @Override
     public String toString() {
         return map.entrySet().stream()
-                .collect(toMap(entry -> "\n\t" + entry.getKey().getSimpleName() + ".class",
+                .collect(toMap(entry -> "\n\t" + string(entry.getKey()) + ".class",
                         Map.Entry::getValue))
                 .entrySet().stream()
                 .sorted(comparing(Map.Entry::getKey))
@@ -46,6 +44,11 @@ class Multimap {
                                 .collect(joining("\n\t\t"))))
                 .collect(joining("\n\t"))
                 .replace("\t", "        ");
+    }
+
+    private String string(K key) {
+        // TODO тут может быть любой тип, но нам хотелось бы в toString получать именно короткое имя
+        return ((Class)key).getSimpleName();
     }
 
     public boolean isEmpty() {

@@ -4,12 +4,12 @@ import com.codenjoy.dojo.services.Point;
 
 import java.util.List;
 
-class PointList {
+public class PointList {
 
-    private Multimap map = new Multimap();
+    private Multimap<Class<?>, Point> map = new Multimap<>();
 
     public void add(Point element) {
-        List list = map.get(element.getClass());
+        List<Point> list = map.get(element.getClass());
         list.add(element);
     }
 
