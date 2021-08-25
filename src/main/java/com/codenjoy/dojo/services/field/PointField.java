@@ -45,8 +45,8 @@ import static java.util.stream.Collectors.*;
  */
 public class PointField {
 
-    private MultimapMatrix<Class, Point> field;
-    private Multimap<Class, Point> all;
+    private final MultimapMatrix<Class<? extends Point>, Point> field;
+    private final Multimap<Class<? extends Point>, Point> all;
 
     public PointField(int size) {
         field = new MultimapMatrix<>(size);
@@ -54,14 +54,14 @@ public class PointField {
     }
 
     public BoardReader<?> reader(Class<? extends Point>... classes) { // TODO test me
-        return new BoardReader() {
+        return new BoardReader<>() {
             @Override
             public int size() {
                 return PointField.this.size();
             }
 
             @Override
-            public Iterable<?> elements(Object player) {
+            public Iterable<? extends Point> elements(Object player) {
                 return Arrays.stream(classes)
                         .flatMap(clazz -> PointField.this.of(clazz).stream())
                         .collect(toList());
@@ -85,7 +85,7 @@ public class PointField {
         elements.forEach(this::add);
     }
 
-    private boolean process(Point point, Function<Multimap, Boolean> function) {
+    private boolean with(Point point, Function<Multimap<Class<? extends Point>, Point>, Boolean> function) {
         boolean result = function.apply(get(point));
         if (result) {
             function.apply(all);
@@ -96,60 +96,56 @@ public class PointField {
     /**
      * Добавляет текущий элемент в кординку его типа (тип будет извлечен из
      * класса передаваемого объекта).
-     * @param point Добавляемые элемент.
+     * @param pt Добавляемые элемент.
      */
-    public void add(Point point) {
-        process(point, map -> map.get(point.getClass()).add(point));
-
-        point.beforeChange(from -> {
-            process(from, map -> map.removeAllExact(point.getClass(), from));
-        });
-
-        point.onChange((from, to) -> {
-            process(to, map -> map.get(point.getClass()).add(to));
-        });
+    public void add(Point pt) {
+        with(pt, map -> map.get(pt.getClass()).add(pt));
+        pt.beforeChange(from ->
+                with(from, map -> map.removeAllExact(pt.getClass(), from)));
+        pt.onChange((from, to) ->
+                with(to, map -> map.get(pt.getClass()).add(to)));
     }
 
-    private Multimap<Class, Point> get(Point point) {
-        return field.get(point.getX(), point.getY());
+    private Multimap<Class<? extends Point>, Point> get(Point pt) {
+        return field.get(pt.getX(), pt.getY());
     }
 
-    public <T extends Point> Accessor<T> of(Class<T> filter) {
+    public <E extends Point> Accessor<E> of(Class<E> filter) {
         return new Accessor<>() {
 
             @Override
-            public Iterator<T> iterator() {
+            public Iterator<E> iterator() {
                 return (Iterator) all.get(filter).iterator();
             }
 
             @Override
-            public <P extends Point> boolean contains(P element) {
+            public <E2 extends Point> boolean contains(E2 element) {
                 return get(element).contains(filter);
             }
 
             @Override
-            public <P extends Point> boolean removeExact(P element) {
-                return process(element, map -> map.removeAllExact(filter, element));
+            public <E2 extends Point> boolean removeExact(E2 element) {
+                return with(element, map -> map.removeAllExact(filter, element));
             }
 
             @Override
-            public <P extends Point> boolean remove(P element) {
-                return process(element, map -> map.remove(filter, element));
+            public <E2 extends Point> boolean remove(E2 element) {
+                return with(element, map -> map.remove(filter, element));
             }
 
             @Override
-            public List<T> all() {
-                return (List<T>) all.get(filter);
+            public List<E> all() {
+                return (List) all.get(filter);
             }
 
             @Override
-            public Stream<T> stream() {
+            public Stream<E> stream() {
                 return all().stream();
             }
 
             @Override
-            public void removeNotSame(List<T> elements) {
-                List<T> toRemove = stream()
+            public void removeNotSame(List<E> elements) {
+                List<E> toRemove = stream()
                         .filter(it -> elements.stream()
                                 .noneMatch(el -> el == it))
                         .collect(toList());
@@ -157,7 +153,7 @@ public class PointField {
             }
 
             @Override
-            public void add(T element) {
+            public void add(E element) {
                 PointField.this.add(element);
             }
 
@@ -173,22 +169,22 @@ public class PointField {
             }
 
             @Override
-            public <P extends Point> void removeIn(List<P> elements) {
+            public <E2 extends Point> void removeIn(List<E2> elements) {
                 elements.forEach(this::remove);
             }
 
             @Override
-            public void addAll(List<T> elements) {
+            public void addAll(List<E> elements) {
                 elements.forEach(this::add);
             }
 
             @Override
-            public List<T> getAt(Point point) {
-                return (List<T>) get(point).get(filter);
+            public List<E> getAt(Point point) {
+                return (List) get(point).get(filter);
             }
 
             @Override
-            public List<T> copy() {
+            public List<E> copy() {
                 return new ArrayList<>(all());
             }
 
