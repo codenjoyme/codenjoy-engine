@@ -56,7 +56,8 @@ class PrinterImpl implements Printer<String> {
         StringBuilder string = new StringBuilder();
         for (char[] row : field) {
             for (char ch : row) {
-                string.append(ch);
+                // TODO а точно у всех символов пробел это пустота?
+                string.append((ch == '\0') ? ' ' : ch);
             }
             string.append("\n");
         }
@@ -72,15 +73,6 @@ class PrinterImpl implements Printer<String> {
     }
 
     private void set(int x, int y, char ch) {
-        if (x == -1 || y == -1) { // TODO убрать это
-            return;
-        }
-
-        if (ch == ERROR_SYMBOL) {
-            throw new IllegalArgumentException(String.format("Обрати внимание на поле - в месте %s появился " +
-                    "null Element. И как только он туда попал?\n", pt(x, y)));
-        }
-
         field[printer.size() - 1 - y][x] = ch;
     }
 
@@ -89,15 +81,12 @@ class PrinterImpl implements Printer<String> {
         private final BoardReader board;
         private int size;
         private P player;
-        private char emptyChar;
-
         private Object[][][] field;
         private byte[][] len;
 
         public GamePrinterImpl(BoardReader board, P player) {
             this.board = board;
             this.player = player;
-            this.emptyChar = ' ';
         }
 
         @Override
@@ -155,7 +144,6 @@ class PrinterImpl implements Printer<String> {
                 for (int y = 0; y < size; y++) {
                     Object[] elements = field[x][y];
                     if (elements == null || len[x][y] == 0) {
-                        filler.set(x, y, emptyChar);
                         continue;
                     }
 
