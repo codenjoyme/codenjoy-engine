@@ -16,10 +16,6 @@ public class Multimap<K, V> {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
     }
 
-    public List<V> getOnly(K key) {
-        return map.get(key);
-    }
-
     public boolean contains(K key) {
         return ifPresent(key, false,
                 list -> !list.isEmpty());
@@ -43,11 +39,9 @@ public class Multimap<K, V> {
     }
 
     public List<V> all() { // TODO test me
-        List<V> result = new LinkedList<>();
-        for (Map.Entry<K, List<V>> entry : map.entrySet()) {
-            result.addAll(entry.getValue());
-        }
-        return result;
+        return map.entrySet().stream()
+                .flatMap(entry -> entry.getValue().stream())
+                .collect(toList());
     }
 
     @Override
@@ -72,7 +66,8 @@ public class Multimap<K, V> {
     }
 
     public boolean isEmpty() {
-        return map.isEmpty();
+        return map.entrySet().stream()
+                .allMatch(entry -> entry.getValue().isEmpty());
     }
 
     public boolean removeAllExact(K key, V value) {
