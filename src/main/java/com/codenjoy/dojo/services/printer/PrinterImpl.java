@@ -28,11 +28,9 @@ import com.codenjoy.dojo.services.State;
 import com.codenjoy.dojo.services.field.Multimap;
 import com.codenjoy.dojo.services.field.PointField;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.codenjoy.dojo.services.PointImpl.pt;
-import static java.util.stream.Collectors.toList;
 
 /**
  * Этот малый умеет печатать состояние борды на экране.
@@ -88,6 +86,9 @@ class PrinterImpl implements Printer<String> {
         private P player;
         private PointField field;
         private List<Class> order;
+        private Object[][][] data;
+        private byte[][] len;
+        private int size;
 
         public GamePrinterImpl(BoardReader board, P player) {
             this.board = board;
@@ -96,8 +97,15 @@ class PrinterImpl implements Printer<String> {
 
         @Override
         public void init() {
+            size = board.size();
             field = board.elements(player);
             order = board.order();
+            data = new Object[size][size][];
+            len = new byte[size][size];
+
+            for (Class clazz : order) {
+                addAll(field.of(clazz).all());
+            }
         }
 
         @Override
@@ -105,30 +113,55 @@ class PrinterImpl implements Printer<String> {
             return board.size();
         }
 
+        private void addAll(Iterable<? extends Point> elements) {
+            for (Point el : elements) {
+                int x = el.getX();
+                int y = el.getY();
+
+                if (el.isOutOf(data.length)) {
+                    continue; // TODO test me (пропускаем элементы за пределами борды)
+                }
+                Object[] existing = data(x, y);
+                byte index = index(x, y, existing.length);
+                existing[index] = el;
+                len[x][y]++;
+            }
+        }
+
+        private byte index(int x, int y, int max) {
+            byte index = len[x][y];
+            if (index < max) {
+                return index;
+            }
+
+            throw new IllegalStateException(String.format(
+                    "There are many items in one cell [%s,%s]: %s" +
+                            ", expected max: %s",
+                    x, y, index, (max - 1)));
+        }
+
+        private Object[] data(int x, int y) {
+            Object[] result = data[x][y];
+            if (result != null) {
+                return result;
+            }
+            return data[x][y] = new Object[7];
+        }
+
         @Override
         public void printAll(Filler filler) {
             for (int x = 0; x < size(); x++) {
                 for (int y = 0; y < size(); y++) {
-                    Multimap<Class<? extends Point>, Point> map = field.getOnly(x, y);
-
-                    if (map == null || map.isEmpty()) {
+                    Object[] elements = data[x][y];
+                    if (elements == null || len[x][y] == 0) {
                         continue;
                     }
 
-                    List<Point> elements = new LinkedList<>();
-                    for (Class clazz : order) {
-                        List list = map.getOnly(clazz);
-                        if (list != null) {
-                            elements.addAll(list);
-                        }
-                    }
-
-                    for (Point pt : elements) {
-                        E el = (E)((State) pt).state(player, elements);
-                        if (el != null) {
-                            filler.set(pt.getX(), pt.getY(), el.ch());
-                            break;
-                        }
+                    Multimap<Class<? extends Point>, Point> map = field.getOnly(x, y);
+                    Point pt = (Point) data[x][y][0];
+                    E el = (E)((State) pt).state(player, map);
+                    if (el != null) {
+                        filler.set(pt.getX(), pt.getY(), el.ch());
                     }
                 }
             }
