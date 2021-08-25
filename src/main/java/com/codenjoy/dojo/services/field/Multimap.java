@@ -1,6 +1,7 @@
 package com.codenjoy.dojo.services.field;
 
 import java.util.*;
+import java.util.function.Function;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
@@ -13,8 +14,12 @@ public class Multimap<K, V> {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
     }
 
-    public List<V> getOnly(K key) {
-        return map.get(key);
+    public <T> T getAnd(K key, T defaultValue, Function<List<V>, T> function) {
+        List<V> list = map.get(key);
+        if (list == null || list.isEmpty()) {
+            return defaultValue;
+        }
+        return function.apply(list);
     }
 
     public void removeKey(K key) {
@@ -54,18 +59,16 @@ public class Multimap<K, V> {
     }
 
     public boolean removeAllExact(K key, V value) {
-        List<V> list = getOnly(key);
-        if (list == null || list.isEmpty()) {
-            return false;
-        }
-        boolean result = false;
-        Iterator<?> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next() == value) {
-                iterator.remove();
-                result = true;
+        return getAnd(key, false, list -> {
+            boolean result = false;
+            Iterator<?> iterator = list.iterator();
+            while (iterator.hasNext()) {
+                if (iterator.next() == value) {
+                    iterator.remove();
+                    result = true;
+                }
             }
-        }
-        return result;
+            return result;
+        });
     }
 }

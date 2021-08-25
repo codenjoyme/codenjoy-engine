@@ -9,13 +9,12 @@ public class PointList {
     private Multimap<Class<?>, Point> map = new Multimap<>();
 
     public void add(Point element) {
-        List<Point> list = map.get(element.getClass());
-        list.add(element);
+        map.get(element.getClass()).add(element);
     }
 
     public boolean contains(Class<?> filter) {
-        List<Point> list = map.getOnly(filter);
-        return list != null && !list.isEmpty();
+        return map.getAnd(filter, false,
+                list -> !list.isEmpty());
     }
 
     public void removeAll(Class<?> filter) {
@@ -27,8 +26,8 @@ public class PointList {
     }
 
     public boolean remove(Class<?> filter, Point element) {
-        List<Point> list = map.getOnly(filter);
-        return list != null && list.remove(element);
+        return map.getAnd(filter, false,
+                list -> list.remove(element));
     }
 
     public List<Point> get(Class<?> filter) {
