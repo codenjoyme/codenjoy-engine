@@ -45,14 +45,12 @@ import static java.util.stream.Collectors.*;
  */
 public class PointField {
 
-    private Multimap<Class, Point>[][] field;
-    private Multimap<Class, Point> all = new Multimap<>();
+    private MultimapMatrix<Class, Point> field;
+    private Multimap<Class, Point> all;
 
     public PointField(int size) {
-        field = new Multimap[size][];
-        for (int x = 0; x < size; x++) {
-            field[x] = new Multimap[size];
-        }
+        field = new MultimapMatrix<>(size);
+        all = new Multimap<>();
     }
 
     public BoardReader<?> reader(Class<? extends Point>... classes) { // TODO test me
@@ -75,7 +73,7 @@ public class PointField {
      * @return Размер поля.
      */
     public int size() {
-        return field.length;
+        return field.size();
     }
 
     /**
@@ -112,15 +110,7 @@ public class PointField {
         if (pt.isOutOf(size())) {
             return new Multimap<>(); // TODO а точно тут так надо?
         }
-        return get(pt.getX(), pt.getY());
-    }
-
-    private Multimap<Class, Point> get(int x, int y) {
-        Multimap<Class, Point> list = field[x][y];
-        if (list == null) {
-            list = field[x][y] = new Multimap<>();
-        }
-        return list;
+        return field.get(pt.getX(), pt.getY());
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -183,7 +173,7 @@ public class PointField {
                 int size = PointField.this.size();
                 for (int x = 0; x < size; x++) {
                     for (int y = 0; y < size; y++) {
-                        get(x, y).removeKey(filter);
+                        field.get(x, y).removeKey(filter);
                     }
                 }
                 all.get(filter).clear();
@@ -228,21 +218,6 @@ public class PointField {
 
     public String toString() {
         return String.format("[map=%s]\n\n[field=%s]",
-                all.toString(), toString(field));
-    }
-
-    private String toString(Multimap<Class, Point>[][] field) {
-        StringBuilder result = new StringBuilder();
-        int size = PointField.this.size();
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                Multimap<Class, Point> list = field[x][y];
-                result.append(pt(x, y))
-                        .append(":")
-                        .append(list == null || list.isEmpty() ? "{}" : list.toString())
-                        .append('\n');
-            }
-        }
-        return result.toString();
+                all.toString(), field.toString());
     }
 }
