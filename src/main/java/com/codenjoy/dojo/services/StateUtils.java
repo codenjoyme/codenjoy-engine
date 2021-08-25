@@ -26,26 +26,31 @@ import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 // TODO перенести в utils пакет
 public class StateUtils {
 
 	public static <T> List<T> filter(Object[] array, Class<T> clazz) {
-		return (List) Arrays.stream(array)
-				.filter(it -> it != null)
-				.filter(it -> clazz.isAssignableFrom(it.getClass()))
-				.collect(toList());
+		List<T> result = new LinkedList<>();
+		for (int index = 0; index < array.length; index++) {
+			Object object = array[index];
+			if (object != null && clazz.isAssignableFrom(object.getClass())) {
+				result.add((T) object);
+			}
+		}
+		return result;
 	}
 
 	public static <T> T filterOne(Object[] array, Class<T> clazz) {
-		return (T) Arrays.stream(array)
-				.filter(it -> it != null)
-				.filter(it -> clazz.isAssignableFrom(it.getClass()))
-				.findFirst()
-				.orElse(null);
+		for (int index = 0; index < array.length; index++) {
+			Object object = array[index];
+			if (object != null && clazz.isAssignableFrom(object.getClass())) {
+				return (T) object;
+			}
+		}
+		return null;
 	}
 
 	public static boolean itsMe(GamePlayer player, PlayerHero hero,
