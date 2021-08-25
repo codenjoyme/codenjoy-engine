@@ -134,7 +134,7 @@ public class PointField {
 
             @Override
             public <P extends Point> boolean remove(P element) {
-                all.get(filter).remove(element);
+                all.remove(filter, element);
                 return get(element).remove(filter, element);
             }
 
