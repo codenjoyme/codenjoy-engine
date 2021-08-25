@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.codenjoy.dojo.services.semifinal.SemifinalSettings.Keys.*;
 import static com.codenjoy.dojo.services.settings.SomeGameSettings.Keys.*;
 
 public class SomeSemifinalSettings extends SettingsImpl
@@ -64,6 +65,17 @@ public class SomeSemifinalSettings extends SettingsImpl
         bool(PARAMETER2, true);
         real(PARAMETER3, 0.5);
         string(PARAMETER4, "string");
+    }
+
+    @Override
+    public void initSemifinal() {
+        bool(SEMIFINAL_ENABLED, false);
+        integer(SEMIFINAL_TIMEOUT, 900);
+        bool(SEMIFINAL_PERCENTAGE, true);
+        integer(SEMIFINAL_LIMIT, 50);
+        bool(SEMIFINAL_RESET_BOARD, true);
+        bool(SEMIFINAL_SHUFFLE_BOARD, true);
+        bool(SEMIFINAL_CLEAR_SCORES, false);
     }
 
     @Override

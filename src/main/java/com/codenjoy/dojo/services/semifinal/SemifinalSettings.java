@@ -44,7 +44,8 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         SEMIFINAL_PERCENTAGE(SEMIFINAL + " Percentage"),
         SEMIFINAL_LIMIT(SEMIFINAL + " Limit"),
         SEMIFINAL_RESET_BOARD(SEMIFINAL + " Reset board"),
-        SEMIFINAL_SHUFFLE_BOARD(SEMIFINAL + " Shuffle board");
+        SEMIFINAL_SHUFFLE_BOARD(SEMIFINAL + " Shuffle board"),
+        SEMIFINAL_CLEAR_SCORES(SEMIFINAL + " Clear scores");
 
         private String key;
 
@@ -122,6 +123,9 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
 
         // перемешивать ли игроков в комнатах после каждого пересчета
         bool(SEMIFINAL_SHUFFLE_BOARD, true);
+
+        // очищения очков между полуфиналами
+        bool(SEMIFINAL_CLEAR_SCORES, false);
     }
 
     // parameters getters
@@ -150,6 +154,10 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         return boolValue(SEMIFINAL_SHUFFLE_BOARD);
     }
 
+    default Parameter<Boolean> isClearScoresValue() {
+        return boolValue(SEMIFINAL_CLEAR_SCORES);
+    }
+
     // update methods
 
     // TODO test me
@@ -164,6 +172,7 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
             add(getLimitValue());
             add(isResetBoardValue());
             add(isShuffleBoardValue());
+            add(isClearScoresValue());
         }};
     }
 
@@ -174,6 +183,7 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         setTimeout(input.getTimeout());
         setResetBoard(input.isResetBoard());
         setShuffleBoard(input.isShuffleBoard());
+        setClearScores(input.isClearScores());
         return this;
     }
 
@@ -212,6 +222,10 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         return isShuffleBoardValue().getValue();
     }
 
+    default boolean isClearScores() {
+        return isClearScoresValue().getValue();
+    }
+
     // setters
 
     default SemifinalSettings setEnabled(boolean input) {
@@ -241,6 +255,11 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
 
     default SemifinalSettings setShuffleBoard(boolean input) {
         isShuffleBoardValue().update(input);
+        return this;
+    }
+
+    default SemifinalSettings setClearScores(boolean input) {
+        isClearScoresValue().update(input);
         return this;
     }
 }
