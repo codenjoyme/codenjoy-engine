@@ -26,8 +26,6 @@ package com.codenjoy.dojo.services.printer;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 
-import static com.codenjoy.dojo.services.PointImpl.pt;
-
 /**
  * Этот малый умеет печатать состояние борды на экране.
  * @see PrinterImpl#print(Object...)
@@ -93,7 +91,7 @@ class PrinterImpl implements Printer<String> {
         private P player;
         private char emptyChar;
 
-        private Object[][] field;
+        private Object[][][] field;
         private byte[][] len;
 
         public GamePrinterImpl(BoardReader board, P player) {
@@ -105,7 +103,7 @@ class PrinterImpl implements Printer<String> {
         @Override
         public void init() {
             size = board.size();
-            field = new Object[size][size];
+            field = new Object[size][size][];
             len = new byte[size][size];
 
             addAll(board.elements(player));
@@ -121,31 +119,41 @@ class PrinterImpl implements Printer<String> {
                 int x = el.getX();
                 int y = el.getY();
 
-                if (Point.isOutOf(x, y, 0, 0, field.length)) {
+                if (el.isOutOf(field.length)) {
                     continue; // TODO test me (пропускаем элементы за пределами борды)
                 }
-                Object[] existing = (Object[]) field[x][y];
-                if (existing == null) {
-                    existing = new Object[7];
-                    field[x][y] = existing;
-                }
-                byte index = len[x][y];
-                if (index >= existing.length) {
-                    throw new IllegalStateException(String.format(
-                            "There are many items in one cell [%s,%s]: %s" +
-                                    ", expected max: %s",
-                            x, y, index, (existing.length - 1)));
-                }
+                Object[] existing = data(x, y);
+                byte index = index(x, y, existing.length);
                 existing[index] = el;
                 len[x][y]++;
             }
+        }
+
+        private byte index(int x, int y, int max) {
+            byte index = len[x][y];
+            if (index < max) {
+                return index;
+            }
+
+            throw new IllegalStateException(String.format(
+                    "There are many items in one cell [%s,%s]: %s" +
+                            ", expected max: %s",
+                    x, y, index, (max - 1)));
+        }
+
+        private Object[] data(int x, int y) {
+            Object[] result = field[x][y];
+            if (result != null) {
+                return result;
+            }
+            return field[x][y] = new Object[7];
         }
 
         @Override
         public void printAll(Filler filler) {
             for (int x = 0; x < size; x++) {
                 for (int y = 0; y < size; y++) {
-                    Object[] elements = (Object[]) field[x][y];
+                    Object[] elements = field[x][y];
                     if (elements == null || len[x][y] == 0) {
                         filler.set(x, y, emptyChar);
                         continue;
