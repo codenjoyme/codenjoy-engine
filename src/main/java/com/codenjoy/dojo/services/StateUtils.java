@@ -38,7 +38,10 @@ public class StateUtils {
 	}
 
 	public static <T extends Point> T filterOne(Multimap<Class<? extends Point>, Point> alsoAtPoint, Class<? extends Point> clazz) {
-		return (T) alsoAtPoint.getFirst(clazz);
+		for (Point state : alsoAtPoint.get(clazz)) {
+			return (T) state;
+		}
+		return null;
 	}
 
 	public static <T> List<T> filter(Object[] array, Class<T> clazz) {
