@@ -26,12 +26,14 @@ package com.codenjoy.dojo.services.printer;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
 
+import static com.codenjoy.dojo.services.PointImpl.pt;
+
 /**
  * Этот малый умеет печатать состояние борды на экране.
  * @see PrinterImpl#print(Object...)
   */
 class PrinterImpl implements Printer<String> {
-    public static final String ERROR_SYMBOL = "Ъ";
+    public static final char ERROR_SYMBOL = 'Ъ';
     private char[][] field;
     private GamePrinter printer;
 
@@ -52,20 +54,13 @@ class PrinterImpl implements Printer<String> {
         fillField();
 
         StringBuilder string = new StringBuilder();
-        for (char[] currentRow : field) {
-            for (char ch : currentRow) {
+        for (char[] row : field) {
+            for (char ch : row) {
                 string.append(ch);
             }
             string.append("\n");
         }
-
-        String result = string.toString();
-        if (result.contains(ERROR_SYMBOL)) {
-            throw new IllegalArgumentException("Обрати внимание на поле - в месте 'Ъ' появился " +
-                    "null Element. И как только он туда попал?\n" + result);
-        }
-
-        return result;
+        return string.toString();
     }
 
     private void fillField() {
@@ -79,6 +74,11 @@ class PrinterImpl implements Printer<String> {
     private void set(int x, int y, char ch) {
         if (x == -1 || y == -1) { // TODO убрать это
             return;
+        }
+
+        if (ch == ERROR_SYMBOL) {
+            throw new IllegalArgumentException(String.format("Обрати внимание на поле - в месте %s появился " +
+                    "null Element. И как только он туда попал?\n", pt(x, y)));
         }
 
         field[printer.size() - 1 - y][x] = ch;
