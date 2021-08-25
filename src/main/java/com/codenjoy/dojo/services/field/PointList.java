@@ -13,7 +13,7 @@ public class PointList {
     }
 
     public boolean contains(Class<?> filter) {
-        return map.getAnd(filter, false,
+        return map.ifPresent(filter, false,
                 list -> !list.isEmpty());
     }
 
@@ -26,7 +26,7 @@ public class PointList {
     }
 
     public boolean remove(Class<?> filter, Point element) {
-        return map.getAnd(filter, false,
+        return map.ifPresent(filter, false,
                 list -> list.remove(element));
     }
 

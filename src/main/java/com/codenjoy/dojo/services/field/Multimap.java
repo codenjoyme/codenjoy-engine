@@ -14,7 +14,7 @@ public class Multimap<K, V> {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
     }
 
-    public <T> T getAnd(K key, T defaultValue, Function<List<V>, T> function) {
+    public <T> T ifPresent(K key, T defaultValue, Function<List<V>, T> function) {
         List<V> list = map.get(key);
         if (list == null || list.isEmpty()) {
             return defaultValue;
@@ -59,7 +59,7 @@ public class Multimap<K, V> {
     }
 
     public boolean removeAllExact(K key, V value) {
-        return getAnd(key, false, list -> {
+        return ifPresent(key, false, list -> {
             boolean result = false;
             Iterator<?> iterator = list.iterator();
             while (iterator.hasNext()) {
