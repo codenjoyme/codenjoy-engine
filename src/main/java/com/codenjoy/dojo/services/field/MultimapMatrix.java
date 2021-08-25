@@ -1,5 +1,8 @@
 package com.codenjoy.dojo.services.field;
 
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointImpl;
+
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
 public class MultimapMatrix<K, V> {
@@ -18,24 +21,39 @@ public class MultimapMatrix<K, V> {
     }
 
     public Multimap<K, V> get(int x, int y) {
-        Multimap<K, V> list = field[x][y];
-        if (list == null) {
-            list = field[x][y] = new Multimap<>();
+        if (Point.isOutOf(x, y, 0, 0, size())) {
+            return new Multimap<>(); // TODO а точно тут так надо?
         }
-        return list;
+        Multimap<K, V> map = field[x][y];
+        if (map == null) {
+            map = field[x][y] = new Multimap<>();
+        }
+        return map;
     }
 
-    public String toString(Multimap<K, V>[][] field) {
+    public String toString() {
         StringBuilder result = new StringBuilder();
         for (int x = 0; x < size(); x++) {
             for (int y = 0; y < size(); y++) {
-                Multimap<K, V> list = field[x][y];
+                Multimap<K, V> map = field[x][y];
                 result.append(pt(x, y))
                         .append(":")
-                        .append(list == null || list.isEmpty() ? "{}" : list.toString())
+                        .append(map == null || map.isEmpty() ? "{}" : map.toString())
                         .append('\n');
             }
         }
         return result.toString();
+    }
+
+    public void clear(K key) {
+        // TODO устранить дублирование с циклом выше
+        for (int x = 0; x < size(); x++) {
+            for (int y = 0; y < size(); y++) {
+                Multimap<K, V> map = field[x][y];
+                if (map != null) {
+                    map.removeKey(key);
+                }
+            }
+        }
     }
 }

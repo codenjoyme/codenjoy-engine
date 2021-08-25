@@ -106,11 +106,8 @@ public class PointField {
         });
     }
 
-    private Multimap<Class, Point> get(Point pt) {
-        if (pt.isOutOf(size())) {
-            return new Multimap<>(); // TODO а точно тут так надо?
-        }
-        return field.get(pt.getX(), pt.getY());
+    private Multimap<Class, Point> get(Point point) {
+        return field.get(point.getX(), point.getY());
     }
 
     public <T extends Point> Accessor<T> of(Class<T> filter) {
@@ -169,13 +166,7 @@ public class PointField {
 
             @Override
             public void clear() {
-                // TODO устранить дублирование с циклом выше
-                int size = PointField.this.size();
-                for (int x = 0; x < size; x++) {
-                    for (int y = 0; y < size; y++) {
-                        field.get(x, y).removeKey(filter);
-                    }
-                }
+                field.clear(filter);
                 all.get(filter).clear();
             }
 
@@ -208,6 +199,7 @@ public class PointField {
 
             @Override
             public void remove(int index) {
+                // TODO тут не удаляется с матрицы ничего
                 Iterator<Point> iterator = all.get(filter).iterator();
                 if (iterator.hasNext()) {
                     remove(iterator.next());
