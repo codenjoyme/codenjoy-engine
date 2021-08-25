@@ -23,8 +23,7 @@ public class PointList {
     }
 
     public boolean removeAllExact(Class<?> filter, Point element) {
-        List<Point> list = map.getOnly(filter);
-        return Utils.removeAllExact(list, element);
+        return map.removeAllExact(filter, element);
     }
 
     public boolean remove(Class<?> filter, Point element) {

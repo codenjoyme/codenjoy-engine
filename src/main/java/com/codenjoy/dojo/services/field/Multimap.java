@@ -1,9 +1,6 @@
 package com.codenjoy.dojo.services.field;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
@@ -54,5 +51,21 @@ public class Multimap<K, V> {
     public boolean isEmpty() {
         return map.entrySet().stream()
                 .allMatch(entry -> entry.getValue().isEmpty());
+    }
+
+    public boolean removeAllExact(K key, V value) {
+        List<V> list = getOnly(key);
+        if (list == null || list.isEmpty()) {
+            return false;
+        }
+        boolean result = false;
+        Iterator<?> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next() == value) {
+                iterator.remove();
+                result = true;
+            }
+        }
+        return result;
     }
 }

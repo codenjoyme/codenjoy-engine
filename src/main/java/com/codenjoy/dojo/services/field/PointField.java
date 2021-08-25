@@ -98,7 +98,7 @@ public class PointField {
 
         point.beforeChange(from -> {
             if (get(from).removeAllExact(point.getClass(), from)) {
-                Utils.removeAllExact(all.getOnly(point.getClass()), from);
+                all.removeAllExact(point.getClass(), from);
             }
         });
 
@@ -139,7 +139,7 @@ public class PointField {
 
             @Override
             public <P extends Point> boolean removeExact(P element) {
-                Utils.removeAllExact(all.getOnly(filter), element);
+                all.removeAllExact(filter, element);
                 return get(element).removeAllExact(filter, element);
             }
 
