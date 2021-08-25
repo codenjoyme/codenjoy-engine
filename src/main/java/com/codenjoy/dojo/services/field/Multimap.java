@@ -16,8 +16,12 @@ public class Multimap<K, V> {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
     }
 
-    public List<V> getOnly(K key) {
-        return map.get(key);
+    public V getFirst(K key) {
+        List<V> list = map.get(key);
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     public boolean contains(K key) {
