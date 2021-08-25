@@ -121,7 +121,7 @@ class PrinterImpl implements Printer<String> {
                 int x = el.getX();
                 int y = el.getY();
 
-                if (pt(x, y).isOutOf(field.length)) {
+                if (Point.isOutOf(x, y, 0, 0, field.length)) {
                     continue; // TODO test me (пропускаем элементы за пределами борды)
                 }
                 Object[] existing = (Object[]) field[x][y];
