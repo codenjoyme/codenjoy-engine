@@ -1,5 +1,7 @@
 package com.codenjoy.dojo.services.field;
 
+import com.codenjoy.dojo.services.Point;
+
 import java.util.*;
 import java.util.function.Function;
 
@@ -12,6 +14,16 @@ public class Multimap<K, V> {
 
     public List<V> get(K key) {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
+    }
+
+    public boolean contains(K key) {
+        return ifPresent(key, false,
+                list -> !list.isEmpty());
+    }
+
+    public boolean remove(K key, Point element) {
+        return ifPresent(key, false,
+                list -> list.remove(element));
     }
 
     public <T> T ifPresent(K key, T defaultValue, Function<List<V>, T> function) {

@@ -45,17 +45,17 @@ import static java.util.stream.Collectors.*;
  */
 public class PointField {
 
-    private PointList[][] field;
-    private Multimap all = new Multimap();
+    private Multimap<Class, Point>[][] field;
+    private Multimap<Class, Point> all = new Multimap<>();
 
     public PointField(int size) {
-        field = new PointList[size][];
+        field = new Multimap[size][];
         for (int x = 0; x < size; x++) {
-            field[x] = new PointList[size];
+            field[x] = new Multimap[size];
         }
     }
 
-    public BoardReader reader(Class<? extends Point>... classes) { // TODO test me
+    public BoardReader<?> reader(Class<? extends Point>... classes) { // TODO test me
         return new BoardReader() {
             @Override
             public int size() {
@@ -93,7 +93,7 @@ public class PointField {
      * @param point Добавляемые элемент.
      */
     public void add(Point point) {
-        get(point).add(point);
+        get(point).get(point.getClass()).add(point);
         all.get(point.getClass()).add(point);
 
         point.beforeChange(from -> {
@@ -103,22 +103,22 @@ public class PointField {
         });
 
         point.onChange((from, to) -> {
-            get(to).add(to);
+            get(to).get(point.getClass()).add(to);
             all.get(point.getClass()).add(to);
         });
     }
 
-    private PointList get(Point pt) {
+    private Multimap<Class, Point> get(Point pt) {
         if (pt.isOutOf(size())) {
-            return new PointList(); // TODO а точно тут так надо?
+            return new Multimap<>(); // TODO а точно тут так надо?
         }
         return get(pt.getX(), pt.getY());
     }
 
-    private PointList get(int x, int y) {
-        PointList list = field[x][y];
+    private Multimap<Class, Point> get(int x, int y) {
+        Multimap<Class, Point> list = field[x][y];
         if (list == null) {
-            list = field[x][y] = new PointList();
+            list = field[x][y] = new Multimap<>();
         }
         return list;
     }
@@ -133,8 +133,7 @@ public class PointField {
 
             @Override
             public <P extends Point> boolean contains(P element) {
-                PointList list = get(element);
-                return list.contains(filter);
+                return get(element).contains(filter);
             }
 
             @Override
@@ -151,7 +150,7 @@ public class PointField {
 
             @Override
             public List<T> all() {
-                return (List) all.get(filter);
+                return (List<T>) all.get(filter);
             }
 
             @Override
@@ -184,7 +183,7 @@ public class PointField {
                 int size = PointField.this.size();
                 for (int x = 0; x < size; x++) {
                     for (int y = 0; y < size; y++) {
-                        get(x, y).removeAll(filter);
+                        get(x, y).removeKey(filter);
                     }
                 }
                 all.get(filter).clear();
@@ -202,7 +201,7 @@ public class PointField {
 
             @Override
             public List<T> getAt(Point point) {
-                return (List) get(point).get(filter);
+                return (List<T>) get(point).get(filter);
             }
 
             @Override
@@ -232,12 +231,12 @@ public class PointField {
                 all.toString(), toString(field));
     }
 
-    private String toString(PointList[][] field) {
+    private String toString(Multimap<Class, Point>[][] field) {
         StringBuilder result = new StringBuilder();
         int size = PointField.this.size();
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                PointList list = field[x][y];
+                Multimap<Class, Point> list = field[x][y];
                 result.append(pt(x, y))
                         .append(":")
                         .append(list == null || list.isEmpty() ? "{}" : list.toString())
