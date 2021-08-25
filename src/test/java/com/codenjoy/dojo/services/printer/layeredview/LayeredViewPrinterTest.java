@@ -26,7 +26,6 @@ import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.State;
-import com.codenjoy.dojo.services.field.Multimap;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.utils.TestUtils;
@@ -74,7 +73,7 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.ENEMY;
         }
     }
@@ -86,7 +85,7 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.HERO;
         }
     }
@@ -98,7 +97,7 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.DOT;
         }
     }
@@ -110,7 +109,7 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
+        public Element state(Object player, List<State> alsoAtPoint) {
             return Element.CIRCLE;
         }
     }
@@ -122,8 +121,8 @@ public class LayeredViewPrinterTest {
         }
 
         @Override
-        public Element state(Object player, Multimap<Class<? extends Point>, Point> alsoAtPoint) {
-            Point element = alsoAtPoint.all().get(0);
+        public Element state(Object player, List<State> alsoAtPoint) {
+            State element = alsoAtPoint.get(0);
             if (element instanceof Hero || element instanceof Enemy) {
                 return Element.AIR_OVER_PLAYERS;
             } else if (element instanceof Circle) {

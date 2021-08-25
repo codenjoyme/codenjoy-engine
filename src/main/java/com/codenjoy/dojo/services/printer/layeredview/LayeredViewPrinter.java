@@ -25,7 +25,6 @@ package com.codenjoy.dojo.services.printer.layeredview;
 
 
 import com.codenjoy.dojo.services.*;
-import com.codenjoy.dojo.services.field.Multimap;
 import com.codenjoy.dojo.services.printer.Printer;
 
 import java.util.List;
@@ -96,9 +95,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
                 for (int layer = 0; layer < countLayers; ++layer) {
                     State item = elements.apply(index, layer);
                     List<State> inSameCell = reader.itemsInSameCell(item, layer);
-                    Multimap multimap = new Multimap<>();
-                    inSameCell.forEach(it -> multimap.get(it.getClass()).add(it));
-                    builders[layer].append(makeState(item, player, multimap));
+                    builders[layer].append(makeState(item, player, inSameCell));
                 }
             }
         }
@@ -134,7 +131,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
         adjustView(size);
     }
 
-    private String makeState(State item, Object player, Multimap<Class<? extends Point>, Point> elements) {
+    private String makeState(State item, Object player, List<State> elements) {
         return (item == null) ? "-" : item.state(player, elements).toString();
     }
 

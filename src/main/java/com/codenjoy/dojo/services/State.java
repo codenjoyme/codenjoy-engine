@@ -23,10 +23,8 @@ package com.codenjoy.dojo.services;
  */
 
 
-import com.codenjoy.dojo.services.field.Multimap;
-
 import java.util.List;
 
 public interface State<E, T> {
-    E state(T player, Multimap<Class<? extends Point>, Point> alsoAtPoint);
+    E state(T player, List<State> alsoAtPoint);
 }
