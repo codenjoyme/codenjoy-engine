@@ -659,4 +659,20 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
+    @Test
+    public void testReader_emptyList() {
+        // given
+        testAdd_severalElements_mixed();
+        GamePlayer player = null;
+
+        // when then
+        List<Point> all = getReader(player);
+
+        assertEquals("[]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
 }
