@@ -179,6 +179,24 @@ public class PointFieldTest {
         assert_twoElements_sameType_sameCell();
     }
 
+    @Test
+    public void testAdd_twoElements_sameType_sameCell_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        field.add(new One(1, 1));
+        One another = new One(1, 1);
+        field.add(another);
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        another.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
+    }
+
     private void assert_twoElements_sameType_sameCell() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
@@ -196,6 +214,28 @@ public class PointFieldTest {
                 "[1,2]:{}\n" +
                 "[2,0]:{}\n" +
                 "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    private void assert_twoElements_sameType_sameCell_afterReplaceCoordinates() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(2,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one2(2,1)]}\n" +
                 "[2,2]:{}\n" +
                 "]", field.toString());
     }
@@ -258,6 +298,8 @@ public class PointFieldTest {
         field.add(new One(2, 1));
         Two two = new Two(2, 0);
         field.add(two);
+
+        assert_twoElements_differentTypes_differentCells();
 
         // when
         two.move(1, 2);
@@ -364,6 +406,24 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testAddAll_twoElements_sameType_sameCell_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        field.addAll(Arrays.asList(one, another));
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        another.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
     }
 
     @Test
