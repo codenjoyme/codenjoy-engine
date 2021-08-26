@@ -1177,4 +1177,26 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
+    @Test
+    public void testOf_all_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1), one3(1,2)]",
+                field.of(One.class).all().toString());
+
+        assertEquals("[two4(1,2)]",
+                field.of(Two.class).all().toString());
+
+        assertEquals("[three5(2,2)]",
+                field.of(Three.class).all().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).all().toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
 }
