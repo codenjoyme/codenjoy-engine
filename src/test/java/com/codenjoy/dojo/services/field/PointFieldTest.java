@@ -42,8 +42,9 @@ public class PointFieldTest {
 
     private PointField field;
     
-    static int id;
+    private GamePlayer player = null;
 
+    private static int id;
     private static int id() {
         return ++id;
     }
@@ -583,7 +584,6 @@ public class PointFieldTest {
     public void testReader_getTwoTypesFromDifferentPoints() {
         // given
         testAdd_severalElements_mixed();
-        GamePlayer player = null;
 
         // when then
         List<Point> all = getReader(player, One.class, Two.class);
@@ -599,7 +599,6 @@ public class PointFieldTest {
     public void testReader_getTwoTypesFromDifferentPoints_inverseOrder() {
         // given
         testAdd_severalElements_mixed();
-        GamePlayer player = null;
 
         // when then
         List<Point> all = getReader(player, Two.class, One.class);
@@ -615,7 +614,6 @@ public class PointFieldTest {
     public void testReader_allTypes() {
         // given
         testAdd_severalElements_mixed();
-        GamePlayer player = null;
 
         // when then
         List<Point> all = getReader(player, Three.class, Two.class, One.class);
@@ -631,7 +629,6 @@ public class PointFieldTest {
     public void testReader_notExists_only() {
         // given
         testAdd_severalElements_mixed();
-        GamePlayer player = null;
 
         // when then
         List<Point> all = getReader(player, Four.class);
@@ -647,7 +644,6 @@ public class PointFieldTest {
     public void testReader_notExists_withExists() {
         // given
         testAdd_severalElements_mixed();
-        GamePlayer player = null;
 
         // when then
         List<Point> all = getReader(player, Four.class, Three.class, Two.class, One.class);
@@ -663,7 +659,6 @@ public class PointFieldTest {
     public void testReader_emptyList() {
         // given
         testAdd_severalElements_mixed();
-        GamePlayer player = null;
 
         // when then
         List<Point> all = getReader(player);
