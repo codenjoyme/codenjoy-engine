@@ -721,4 +721,16 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
+    @Test
+    public void testSize() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals(3, field.size());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
 }
