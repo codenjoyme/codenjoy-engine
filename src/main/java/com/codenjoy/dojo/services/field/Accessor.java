@@ -60,7 +60,7 @@ public interface Accessor<E> extends Iterable<E> {
     /**
      * @return Возвращает всю коллекцию.
      */
-    List<E> all(); // TODO test me
+    List<E> all();
 
     /**
      * @return Stream над всеми элементами коллекции.

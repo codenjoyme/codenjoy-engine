@@ -1202,14 +1202,7 @@ public class PointFieldTest {
     @Test
     public void testOf_all_severalElements_mixed_inOneCell() {
         // given
-        field = new PointField(3);
-
-        field.add(new One(1, 1));
-        One some = new One(1, 1);
-        field.add(some);
-        field.add(new One(1, 1));
-        field.add(new Two(1, 1));
-        field.add(new Three(1, 1));
+        One some = givenSeveralElements_mixed_inOneCell();
 
         assert_severalElements_mixed_inOneCell();
 
@@ -1245,6 +1238,18 @@ public class PointFieldTest {
 
         // then
         assert_severalElements_mixed_inOneCell_changedOrder();
+    }
+
+    private One givenSeveralElements_mixed_inOneCell() {
+        field = new PointField(3);
+
+        field.add(new One(1, 1));
+        One some = new One(1, 1);
+        field.add(some);
+        field.add(new One(1, 1));
+        field.add(new Two(1, 1));
+        field.add(new Three(1, 1));
+        return some;
     }
 
     private void assert_severalElements_mixed_inOneCell() {
@@ -1315,6 +1320,37 @@ public class PointFieldTest {
                 "[2,1]:{}\n" +
                 "[2,2]:{}\n" +
                 "]", field.toString());
+    }
+
+    @Test
+    public void testOf_all_methodReturnsTheOriginalCollectionNotACopy() {
+        // given
+        givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        List<One> all = field.of(One.class).all();
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                all.toString());
+
+        // when then
+        all.get(1).move(2, 2);
+
+
+        all = field.of(One.class).all();
+        assertEquals("[one1(1,1), one3(1,1), one2(2,2)]",
+                all.toString());
+
+        // when then
+        all.get(2).move(1, 1);
+
+        all = field.of(One.class).all();
+        assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell_changedOrder();
     }
 
 }
