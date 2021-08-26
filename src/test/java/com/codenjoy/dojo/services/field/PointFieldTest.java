@@ -568,7 +568,7 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
-    private List<Point> getReader(GamePlayer player, Class<One> classes) {
+    private List<Point> getReader(GamePlayer player, Class... classes) {
         // when
         BoardReader reader = field.reader(classes);
 
@@ -578,6 +578,23 @@ public class PointFieldTest {
         reader.addAll(player, processor);
         return result;
     }
+
+    @Test
+    public void testReader_getTwoTypesFromDifferentPoints() {
+        // given
+        testAdd_severalElements_mixed();
+        GamePlayer player = null;
+
+        // when then
+        List<Point> all = getReader(player, One.class, Two.class);
+
+        assertEquals("[one1(1,1), one2(1,1), one3(1,2), two4(1,2)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
 
 
 }
