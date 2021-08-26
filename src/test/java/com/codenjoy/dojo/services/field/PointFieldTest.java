@@ -134,6 +134,18 @@ public class PointFieldTest {
         assert_oneElement();
     }
 
+    @Test
+    public void testOf_add_oneElement() {
+        // given
+        field = new PointField(3);
+
+        // when
+        field.of(One.class).add(new One(1, 1));
+
+        // then
+        assert_oneElement();
+    }
+
     private void assert_oneElement() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
@@ -167,6 +179,34 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_add_twoElements_sameType_differentCells() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of = field.of(One.class);
+
+        of.add(new One(1, 1));
+        of.add(new One(1, 2));
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testDifferentOf_add_twoElements_sameType_differentCells() {
+        // given
+        field = new PointField(3);
+
+        // when
+        field.of(One.class).add(new One(1, 1));
+        field.of(One.class).add(new One(1, 2));
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
     public void testAdd_twoElements_sameType_sameCell() {
         // given
         field = new PointField(3);
@@ -174,6 +214,33 @@ public class PointFieldTest {
         // when
         field.add(new One(1, 1));
         field.add(new One(1, 1));
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_add_twoElements_sameType_sameCell() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of = field.of(One.class);
+        of.add(new One(1, 1));
+        of.add(new One(1, 1));
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testDifferentOf_add_twoElements_sameType_sameCell() {
+        // given
+        field = new PointField(3);
+
+        // when
+        field.of(One.class).add(new One(1, 1));
+        field.of(One.class).add(new One(1, 1));
 
         // then
         assert_twoElements_sameType_sameCell();
@@ -199,6 +266,45 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_add_twoElements_sameType_sameCell_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        Accessor<One> of = field.of(One.class);
+        of.add(one);
+        of.add(another);
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        another.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
+    }
+
+    @Test
+    public void testDifferentOf_Add_twoElements_sameType_sameCell_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        field.of(One.class).add(one);
+        field.of(One.class).add(another);
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        another.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
+    }
+
+    @Test
     public void testAdd_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
         // given
         field = new PointField(3);
@@ -207,6 +313,46 @@ public class PointFieldTest {
         One another = new One(1, 1);
         field.add(one);
         field.add(another);
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        one.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded();
+    }
+
+    @Test
+    public void testSameOf_add_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        Accessor<One> of = field.of(One.class);
+        of.add(one);
+        of.add(another);
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        one.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded();
+    }
+
+    @Test
+    public void testDifferentOf_add_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        Accessor<One> of = field.of(One.class);
+        of.add(one);
+        of.add(another);
 
         assert_twoElements_sameType_sameCell();
 
@@ -296,6 +442,21 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testOf_add_twoElements_differentTypes_sameCell() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of1 = field.of(One.class);
+        Accessor<Two> of2 = field.of(Two.class);
+        of1.add(new One(2, 1));
+        of2.add(new Two(2, 1));
+
+        // then
+        assert_twoElements_differentTypes_sameCell();
+    }
+
+    @Test
     public void testAdd_twoElements_differentTypes_differentCells() {
         // given
         field = new PointField(3);
@@ -303,6 +464,21 @@ public class PointFieldTest {
         // when
         field.add(new One(2, 1));
         field.add(new Two(2, 0));
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testOf_add_twoElements_differentTypes_differentCells() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of1 = field.of(One.class);
+        Accessor<Two> of2 = field.of(Two.class);
+        of1.add(new One(2, 1));
+        of2.add(new Two(2, 0));
 
         // then
         assert_twoElements_differentTypes_differentCells();
@@ -350,6 +526,27 @@ public class PointFieldTest {
         assert_differentTypes_differentCells_afterReplaceCoordinates();
     }
 
+
+    @Test
+    public void testOf_add_differentTypes_differentCells_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        Accessor<One> of1 = field.of(One.class);
+        Accessor<Two> of2 = field.of(Two.class);
+        of1.add(new One(2, 1));
+        Two two = new Two(2, 0);
+        of2.add(two);
+
+        assert_twoElements_differentTypes_differentCells();
+
+        // when
+        two.move(1, 2);
+
+        // then
+        assert_differentTypes_differentCells_afterReplaceCoordinates();
+    }
+
     private void assert_differentTypes_differentCells_afterReplaceCoordinates() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
@@ -385,6 +582,62 @@ public class PointFieldTest {
         field.add(new One(1, 2));
         field.add(new Two(1, 2));
         field.add(new Three(2, 2));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testSameOf_add_severalElements_mixed() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of1 = field.of(One.class);
+        Accessor<Two> of2 = field.of(Two.class);
+        Accessor<Three> of3 = field.of(Three.class);
+        of1.add(new One(1, 1));
+        of1.add(new One(1, 1));
+        of1.add(new One(1, 2));
+        of2.add(new Two(1, 2));
+        of3.add(new Three(2, 2));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testSame2Of_add_severalElements_mixed() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of1 = field.of(One.class);
+        of1.add(new One(1, 1));
+        of1.add(new One(1, 1));
+        of1.add(new One(1, 2));
+
+        Accessor<Two> of2 = field.of(Two.class);
+        of2.add(new Two(1, 2));
+
+        Accessor<Three> of3 = field.of(Three.class);
+        of3.add(new Three(2, 2));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testDifferentOf_add_severalElements_mixed() {
+        // given
+        field = new PointField(3);
+
+        // when
+        field.of(One.class).add(new One(1, 1));
+        field.of(One.class).add(new One(1, 1));
+        field.of(One.class).add(new One(1, 2));
+        field.of(Two.class).add(new Two(1, 2));
+        field.of(Three.class).add(new Three(2, 2));
 
         // then
         assert_severalElements_mixed();
