@@ -78,7 +78,8 @@ public class SemifinalSettingsTest {
                         "[Semifinal] Percentage=[[Semifinal] Percentage:Boolean = def[true] val[true]], \n" +
                         "[Semifinal] Limit=[[Semifinal] Limit:Integer = multiline[false] def[50] val[50]], \n" +
                         "[Semifinal] Reset board=[[Semifinal] Reset board:Boolean = def[true] val[true]], \n" +
-                        "[Semifinal] Shuffle board=[[Semifinal] Shuffle board:Boolean = def[true] val[true]]})",
+                        "[Semifinal] Shuffle board=[[Semifinal] Shuffle board:Boolean = def[true] val[true]], \n" +
+                        "[Semifinal] Clear scores=[[Semifinal] Clear scores:Boolean = def[false] val[false]]})",
                 split(SemifinalSettings.get(settings), ", \n[Semifinal]"));
     }
 
@@ -101,6 +102,7 @@ public class SemifinalSettingsTest {
                         "[Semifinal] Limit=50, \n" +
                         "[Semifinal] Reset board=true, \n" +
                         "[Semifinal] Shuffle board=true, \n" +
+                        "[Semifinal] Clear scores=false, \n" +
                         "Parameter 1=15, \n" +
                         "Parameter 2=true, \n" +
                         "Parameter 3=0.5, \n" +

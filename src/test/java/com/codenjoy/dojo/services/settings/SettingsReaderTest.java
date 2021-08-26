@@ -81,6 +81,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER2':true,\n" +
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
+                        "  'SEMIFINAL_CLEAR_SCORES':false,\n" +
                         "  'SEMIFINAL_ENABLED':false,\n" +
                         "  'SEMIFINAL_LIMIT':50,\n" +
                         "  'SEMIFINAL_PERCENTAGE':true,\n" +
@@ -110,6 +111,7 @@ public class SettingsReaderTest {
                         "  'ROUNDS_TIME':200,\n" +
                         "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                         "  'ROUNDS_TIME_FOR_WINNER':1,\n" +
+                        "  'SEMIFINAL_CLEAR_SCORES':false,\n" +
                         "  'SEMIFINAL_ENABLED':false,\n" +
                         "  'SEMIFINAL_LIMIT':50,\n" +
                         "  'SEMIFINAL_PERCENTAGE':true,\n" +
@@ -213,6 +215,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER2':false,\n" +
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
+                        "  'SEMIFINAL_CLEAR_SCORES':false,\n" +
                         "  'SEMIFINAL_ENABLED':true,\n" +
                         "  'SEMIFINAL_LIMIT':10,\n" +
                         "  'SEMIFINAL_PERCENTAGE':true,\n" +
@@ -254,6 +257,7 @@ public class SettingsReaderTest {
                         "  'ROUNDS_TIME':200,\n" +
                         "  'ROUNDS_TIME_BEFORE_START':5,\n" +
                         "  'ROUNDS_TIME_FOR_WINNER':10,\n" +
+                        "  'SEMIFINAL_CLEAR_SCORES':false,\n" +
                         "  'SEMIFINAL_ENABLED':true,\n" +
                         "  'SEMIFINAL_LIMIT':10,\n" +
                         "  'SEMIFINAL_PERCENTAGE':true,\n" +
