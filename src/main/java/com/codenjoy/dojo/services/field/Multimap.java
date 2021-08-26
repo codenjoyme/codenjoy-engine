@@ -72,6 +72,7 @@ public class Multimap<K, V> {
                 .collect(toMap(entry -> "\n\t" + string(entry.getKey()) + ".class",
                         Map.Entry::getValue))
                 .entrySet().stream()
+                .filter(entry -> !entry.getValue().isEmpty())
                 .sorted(comparing(Map.Entry::getKey))
                 .map(entry -> String.format("{%s=[\n\t\t%s]}",
                         entry.getKey(),
