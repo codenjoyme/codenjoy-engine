@@ -595,6 +595,21 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
+    @Test
+    public void testReader_getTwoTypesFromDifferentPoints_inverseOrder() {
+        // given
+        testAdd_severalElements_mixed();
+        GamePlayer player = null;
+
+        // when then
+        List<Point> all = getReader(player, Two.class, One.class);
+
+        assertEquals("[two4(1,2), one1(1,1), one2(1,1), one3(1,2)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
 
 
 }
