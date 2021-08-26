@@ -706,4 +706,19 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
+    @Test
+    public void testReader_getFieldSize() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when
+        BoardReader reader = field.reader(One.class, Two.class, Three.class);
+
+        // then
+        assertEquals(3, reader.size());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
 }
