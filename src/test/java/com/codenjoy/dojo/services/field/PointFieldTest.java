@@ -484,6 +484,21 @@ public class PointFieldTest {
         assert_twoElements_differentTypes_differentCells();
     }
 
+    @Test
+    public void testOf_add_twoElements_differentTypes_differentCells_tryToChangeAccessorType() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor of = field.of(Three.class);
+        // don't worry, accessor is used as syntactic sugar
+        of.add(new One(2, 1));
+        of.add(new Two(2, 0));
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
     private void assert_twoElements_differentTypes_differentCells() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
