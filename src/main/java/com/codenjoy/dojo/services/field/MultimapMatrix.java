@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.field;
  */
 
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
@@ -41,6 +42,7 @@ public class MultimapMatrix<K, V> {
         return field.length;
     }
 
+    @PerformanceOptimized
     public Multimap<K, V> get(int x, int y) {
         if (Point.isOutOf(x, y, 0, 0, size())) {
             return new Multimap<>(); // TODO а точно тут так надо?
@@ -66,6 +68,7 @@ public class MultimapMatrix<K, V> {
         return result.toString();
     }
 
+    @PerformanceOptimized
     public void clear(K key) {
         // TODO устранить дублирование с циклом выше
         for (int x = 0; x < size(); x++) {

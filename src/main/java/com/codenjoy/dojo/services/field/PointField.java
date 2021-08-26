@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.field;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.Tickable;
+import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
 import java.util.*;
@@ -66,6 +67,7 @@ public class PointField {
             }
 
             @Override
+            @PerformanceOptimized
             public void addAll(Object player, Consumer<Iterable<? extends Point>> processor) {
                 for (Class clazz : classes) {
                     processor.accept(PointField.this.of(clazz).all());
@@ -98,6 +100,7 @@ public class PointField {
      * @param function Осуществляемая операция.
      * @return Результат выполнения операции на первом контейнере.
      */
+    @PerformanceOptimized
     private boolean with(Point point, Function<Multimap<Class<? extends Point>, Point>, Boolean> function) {
         boolean result = function.apply(get(point));
         if (result) {
@@ -111,6 +114,7 @@ public class PointField {
      * класса передаваемого объекта).
      * @param pt Добавляемые элемент.
      */
+    @PerformanceOptimized
     public void add(Point pt) {
         with(pt, map -> map.get(pt.getClass()).add(pt));
         pt.beforeChange(from ->
@@ -132,26 +136,31 @@ public class PointField {
         return new Accessor<>() {
 
             @Override
+            @PerformanceOptimized
             public Iterator<E> iterator() {
                 return (Iterator) all.get(filter).iterator();
             }
 
             @Override
+            @PerformanceOptimized
             public <E2 extends Point> boolean contains(E2 element) {
                 return get(element).contains(filter);
             }
 
             @Override
+            @PerformanceOptimized
             public <E2 extends Point> boolean removeExact(E2 element) {
                 return with(element, map -> map.removeAllExact(filter, element));
             }
 
             @Override
+            @PerformanceOptimized
             public <E2 extends Point> boolean remove(E2 element) {
                 return with(element, map -> map.remove(filter, element));
             }
 
             @Override
+            @PerformanceOptimized
             public List<E> all() {
                 return (List) Collections.unmodifiableList(all.get(filter));
             }
@@ -171,6 +180,7 @@ public class PointField {
             }
 
             @Override
+            @PerformanceOptimized
             public void add(E element) {
                 PointField.this.add(element);
             }
@@ -181,6 +191,7 @@ public class PointField {
             }
 
             @Override
+            @PerformanceOptimized
             public void clear() {
                 field.clear(filter);
                 all.clear(filter);
@@ -197,11 +208,13 @@ public class PointField {
             }
 
             @Override
+            @PerformanceOptimized
             public <E2 extends Point> List<E> getAt(E2 point) {
                 return (List) get(point).get(filter);
             }
 
             @Override
+            @PerformanceOptimized
             public List<E> copy() {
                 return new ArrayList<>(all());
             }
@@ -214,6 +227,7 @@ public class PointField {
             }
 
             @Override
+            @PerformanceOptimized
             public void removeAny() {
                 Iterator<Point> iterator = all.get(filter).iterator();
                 if (iterator.hasNext()) {

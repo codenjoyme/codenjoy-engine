@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.field;
  */
 
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
 import java.util.*;
 import java.util.function.Function;
@@ -34,20 +35,24 @@ public class Multimap<K, V> {
 
     private Map<K, List<V>> map = new LinkedHashMap<>();
 
+    @PerformanceOptimized
     public List<V> get(K key) {
         return map.computeIfAbsent(key, k -> new LinkedList<>());
     }
 
+    @PerformanceOptimized
     public boolean contains(K key) {
         return ifPresent(key, false,
                 list -> !list.isEmpty());
     }
 
+    @PerformanceOptimized
     public boolean remove(K key, Point element) {
         return ifPresent(key, false,
                 list -> list.remove(element));
     }
 
+    @PerformanceOptimized
     public <T> T ifPresent(K key, T defaultValue, Function<List<V>, T> function) {
         List<V> list = map.get(key);
         if (list == null || list.isEmpty()) {
@@ -93,6 +98,7 @@ public class Multimap<K, V> {
                 .allMatch(entry -> entry.getValue().isEmpty());
     }
 
+    @PerformanceOptimized
     public boolean removeAllExact(K key, V value) {
         return ifPresent(key, false, list -> {
             boolean result = false;
@@ -107,6 +113,7 @@ public class Multimap<K, V> {
         });
     }
 
+    @PerformanceOptimized
     public void clear(K key) {
         get(key).clear();
     }

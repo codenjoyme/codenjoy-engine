@@ -25,6 +25,7 @@ package com.codenjoy.dojo.services.printer;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
 import java.util.function.Consumer;
 
@@ -102,6 +103,7 @@ class PrinterImpl implements Printer<String> {
             return board.size();
         }
 
+        @PerformanceOptimized
         private Consumer<Iterable<? extends Point>> addAll() {
             return (Iterable<? extends Point> elements) -> {
                 for (Point el : elements) {
@@ -140,6 +142,7 @@ class PrinterImpl implements Printer<String> {
         }
 
         @Override
+        @PerformanceOptimized
         public void printAll(Filler filler) {
             for (int x = 0; x < size; x++) {
                 for (int y = 0; y < size; y++) {
