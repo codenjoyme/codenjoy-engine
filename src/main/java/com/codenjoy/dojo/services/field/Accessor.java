@@ -81,7 +81,7 @@ public interface Accessor<E> extends Iterable<E> {
      *
      * @param element Добавляемый в коллекцию элемент.
      */
-    void add(E element); // TODO test me
+    void add(E element);
 
     /**
      * @return Количество элементов в этой коллекции.
