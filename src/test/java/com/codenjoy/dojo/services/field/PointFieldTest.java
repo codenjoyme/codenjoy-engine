@@ -184,8 +184,9 @@ public class PointFieldTest {
         // given
         field = new PointField(3);
 
-        field.add(new One(1, 1));
+        One one = new One(1, 1);
         One another = new One(1, 1);
+        field.add(one);
         field.add(another);
 
         assert_twoElements_sameType_sameCell();
@@ -195,6 +196,25 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
+    }
+
+    @Test
+    public void testAdd_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        field.add(one);
+        field.add(another);
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        one.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded();
     }
 
     private void assert_twoElements_sameType_sameCell() {
@@ -236,6 +256,28 @@ public class PointFieldTest {
                 "[2,1]:{\n" +
                 "        One.class=[\n" +
                 "                one2(2,1)]}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    private void assert_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one2(1,1)\n" +
+                "                one1(2,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one2(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
                 "[2,2]:{}\n" +
                 "]", field.toString());
     }
@@ -424,6 +466,24 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
+    }
+
+    @Test
+    public void testAddAll_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        field.addAll(Arrays.asList(one, another));
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        one.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded();
     }
 
     @Test
