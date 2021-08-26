@@ -1178,7 +1178,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testOf_all_mixed() {
+    public void testOf_all_severalElements_mixed() {
         // given
         testAdd_severalElements_mixed();
 
@@ -1197,6 +1197,124 @@ public class PointFieldTest {
 
         // then
         assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testOf_all_severalElements_mixed_inOneCell() {
+        // given
+        field = new PointField(3);
+
+        field.add(new One(1, 1));
+        One some = new One(1, 1);
+        field.add(some);
+        field.add(new One(1, 1));
+        field.add(new Two(1, 1));
+        field.add(new Three(1, 1));
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                field.of(One.class).all().toString());
+
+        assertEquals("[two4(1,1)]",
+                field.of(Two.class).all().toString());
+
+        assertEquals("[three5(1,1)]",
+                field.of(Three.class).all().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).all().toString());
+
+        // when
+        some.move(2, 2);
+        some.move(1, 1);
+
+        // when then
+        assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
+                field.of(One.class).all().toString());
+
+        assertEquals("[two4(1,1)]",
+                field.of(Two.class).all().toString());
+
+        assertEquals("[three5(1,1)]",
+                field.of(Three.class).all().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).all().toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell_changedOrder();
+    }
+
+    private void assert_severalElements_mixed_inOneCell() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    private void assert_severalElements_mixed_inOneCell_changedOrder() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one3(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one3(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
     }
 
 }
