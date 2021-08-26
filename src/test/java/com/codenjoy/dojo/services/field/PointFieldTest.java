@@ -251,6 +251,46 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testAdd_differentTypes_differentCells_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        field.add(new One(2, 1));
+        Two two = new Two(2, 0);
+        field.add(two);
+
+        // when
+        two.move(1, 2);
+
+        // then
+        assert_differentTypes_differentCells_afterReplaceCoordinates();
+    }
+
+    private void assert_differentTypes_differentCells_afterReplaceCoordinates() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two2(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{\n" +
+                "        Two.class=[\n" +
+                "                two2(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    @Test
     public void testAdd_severalElements_mixed() {
         // given
         field = new PointField(3);
@@ -375,6 +415,22 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testAddAll_differentTypes_differentCells_afterReplaceCoordinates() {
+        // given
+        field = new PointField(3);
+
+        One one = new One(2, 1);
+        Two two = new Two(2, 0);
+        field.addAll(Arrays.asList(one, two));
+
+        // when
+        two.move(1, 2);
+
+        // then
+        assert_differentTypes_differentCells_afterReplaceCoordinates();
     }
 
     @Test
