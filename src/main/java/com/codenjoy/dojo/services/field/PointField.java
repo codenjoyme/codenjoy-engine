@@ -58,7 +58,7 @@ public class PointField {
      * @param classes Порядок отрисовки типов элементов.
      * @return BoardReader для отрисовки элементов на поле в заданном порядке.
      */
-    public BoardReader<?> reader(Class<? extends Point>... classes) { // TODO test me
+    public BoardReader<?> reader(Class<? extends Point>... classes) {
         return new BoardReader<>() {
             @Override
             public int size() {

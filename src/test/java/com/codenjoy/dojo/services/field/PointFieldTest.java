@@ -685,4 +685,25 @@ public class PointFieldTest {
         assert_severalElements_mixed();
     }
 
+    @Test
+    public void testReader_objectsAreAddedByWaves() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when
+        BoardReader reader = field.reader(One.class, Two.class, Three.class);
+
+        // then
+        List<Collection<Point>> all = new LinkedList<>();
+        Consumer<Collection<Point>> processor = list -> all.add(list);
+        reader.addAll(player, processor);
+        assertEquals("[[one1(1,1), one2(1,1), one3(1,2)],\n" +
+                        "[two4(1,2)],\n" +
+                        "[three5(2,2)]]",
+                all.toString().replace("], [", "],\n["));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
 }
