@@ -26,17 +26,17 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
+import com.google.common.base.Supplier;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class PointFieldTest {
 
@@ -1323,7 +1323,84 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testOf_all_methodReturnsTheOriginalCollectionNotACopy() {
+    public void testOf_all_methodReturnsReadOnlyCollectionNotACopy_caseWrite() {
+        // given
+        givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        List<One> all = field.of(One.class).all();
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                all.toString());
+
+        // when then
+        assertUsupported(() -> all.remove(1));
+        assertUsupported(() -> all.add(new One(1, 1)));
+        assertUsupported(() -> all.addAll(Arrays.asList(new One(1, 1))));
+        assertUsupported(() -> all.remove(new One(1, 1)));
+        assertUsupported(() -> all.clear());
+        assertUsupported(() -> all.removeAll(Arrays.asList(new One(1, 1))));
+        assertUsupported(() -> all.sort(Comparator.naturalOrder()));
+        assertUsupported(() -> all.replaceAll(UnaryOperator.identity()));
+        assertUsupported(() -> all.subList(0, 1).clear());
+        assertUsupported(() -> {
+            Iterator<One> iterator = all.iterator();
+            iterator.hasNext();
+            iterator.remove();
+        });
+
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell();
+    }
+
+    private void assertUsupported(Runnable runnable) {
+        try {
+            runnable.run();
+            fail("Expected exception");
+        } catch (UnsupportedOperationException e) {
+            // do nothing
+        }
+    }
+
+    private void assert_severalElements_mixed_inOneCell_removed() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testOf_all_methodReturnsReadOnlyCollectionNotACopy_caseUpdateElements() {
         // given
         givenSeveralElements_mixed_inOneCell();
 

@@ -153,7 +153,7 @@ public class PointField {
 
             @Override
             public List<E> all() {
-                return (List) all.get(filter);
+                return (List) Collections.unmodifiableList(all.get(filter));
             }
 
             @Override
