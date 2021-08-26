@@ -58,12 +58,14 @@ public interface Accessor<E> extends Iterable<E> {
     <E2 extends Point> boolean remove(E2 element); // TODO test me
 
     /**
-     * @return Возвращает всю коллекцию.
+     * @return Возвращает всю коллекцию, изменение которой приведет к изменению
+     * содержимого всего контейнера.
      */
     List<E> all();
 
     /**
-     * @return Stream над всеми элементами коллекции.
+     * @return Stream над всеми элементами коллекции, изменение которой
+     * приведет к изменению содержимого всего контейнера.
      */
     Stream<E> stream(); // TODO test me
 
@@ -117,9 +119,10 @@ public interface Accessor<E> extends Iterable<E> {
     <E2 extends Point> List<E> getAt(E2 point); // TODO test me
 
     /**
-     * @return Копия коллекции всех элементов.
+     * @return Копия коллекции всех элементов, изменение которой
+     * не приведет к изменению содержимого всего контейнера.
      */
-    List<E> copy(); // TODO test me
+    List<E> copy();
 
     /**
      * Возможность тикнуть каждый элемент коллекции, если у него есть метод tick.

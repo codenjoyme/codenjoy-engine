@@ -41,7 +41,7 @@ import static org.junit.Assert.assertEquals;
 public class PointFieldTest {
 
     private PointField field;
-    
+
     private GamePlayer player = null;
 
     private static int id;
@@ -1348,6 +1348,122 @@ public class PointFieldTest {
         all = field.of(One.class).all();
         assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
                 all.toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell_changedOrder();
+    }
+
+    @Test
+    public void testOf_copy_methodReturnsCopyOfTheOriginalCollection() {
+        // given
+        givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        List<One> all = field.of(One.class).copy();
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                all.toString());
+
+        // when then
+        all.remove(1);
+
+        all = field.of(One.class).copy();
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell();
+    }
+
+    @Test
+    public void testOf_copy_methodReturnsCopyOfTheOriginalCollection_butEveryElementCanBeChanged() {
+        // given
+        givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        List<One> all = field.of(One.class).copy();
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                all.toString());
+
+        // when then
+        all.get(1).move(2, 2);
+
+        all = field.of(One.class).copy();
+        assertEquals("[one1(1,1), one3(1,1), one2(2,2)]",
+                all.toString());
+
+        // when then
+        all.get(2).move(1, 1);
+
+        all = field.of(One.class).copy();
+        assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell_changedOrder();
+    }
+
+    @Test
+    public void testOf_copy_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1), one3(1,2)]",
+                field.of(One.class).copy().toString());
+
+        assertEquals("[two4(1,2)]",
+                field.of(Two.class).copy().toString());
+
+        assertEquals("[three5(2,2)]",
+                field.of(Three.class).copy().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).copy().toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testOf_copy_severalElements_mixed_inOneCell() {
+        // given
+        One some = givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                field.of(One.class).copy().toString());
+
+        assertEquals("[two4(1,1)]",
+                field.of(Two.class).copy().toString());
+
+        assertEquals("[three5(1,1)]",
+                field.of(Three.class).copy().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).copy().toString());
+
+        // when
+        some.move(2, 2);
+        some.move(1, 1);
+
+        // when then
+        assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
+                field.of(One.class).copy().toString());
+
+        assertEquals("[two4(1,1)]",
+                field.of(Two.class).copy().toString());
+
+        assertEquals("[three5(1,1)]",
+                field.of(Three.class).copy().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).copy().toString());
 
         // then
         assert_severalElements_mixed_inOneCell_changedOrder();
