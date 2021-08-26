@@ -22,12 +22,18 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.field.PointField;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
+import com.codenjoy.dojo.services.printer.BoardReader;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static org.junit.Assert.assertEquals;
@@ -244,7 +250,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testAdd_threeElements_mixed() {
+    public void testAdd_severalElements_mixed() {
         // given
         field = new PointField(3);
 
@@ -252,9 +258,11 @@ public class PointFieldTest {
         field.add(new One(1, 1));
         field.add(new One(1, 1));
         field.add(new One(1, 2));
+        field.add(new Two(1, 2));
+        field.add(new Three(2, 2));
 
         // then
-        assert_threeElements_mixed();
+        assert_severalElements_mixed();
     }
 
     @Test
@@ -369,25 +377,33 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testAddAll_threeElements_mixed() {
+    public void testAddAll_severalElements_mixed() {
         // given
         field = new PointField(3);
 
         // when
         field.addAll(Arrays.asList(new One(1, 1),
                 new One(1, 1),
-                new One(1, 2)));
+                new One(1, 2),
+                new Two(1, 2),
+                new Three(2, 2)));
 
         // then
-        assert_threeElements_mixed();
+        assert_severalElements_mixed();
     }
 
-    private void assert_threeElements_mixed() {
+    private void assert_severalElements_mixed() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(1,1)\n" +
                 "                one2(1,1)\n" +
-                "                one3(1,2)]}]\n" +
+                "                one3(1,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
                 "\n" +
                 "[field=[0,0]:{}\n" +
                 "[0,1]:{}\n" +
@@ -400,9 +416,14 @@ public class PointFieldTest {
                 "[1,2]:{\n" +
                 "        One.class=[\n" +
                 "                one3(1,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
                 "[2,0]:{}\n" +
                 "[2,1]:{}\n" +
-                "[2,2]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
                 "]", field.toString());
     }
 
@@ -529,6 +550,33 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testReader_getOnlyOneType() {
+        // given
+        testAdd_severalElements_mixed();
+        GamePlayer player = null;
+
+        // when then
+        List<Point> all = getReader(player, One.class);
+
+        assertEquals("[one1(1,1), one2(1,1), one3(1,2)]",
+                all.toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    private List<Point> getReader(GamePlayer player, Class<One> classes) {
+        // when
+        BoardReader reader = field.reader(classes);
+
+        // then
+        List<Point> result = new LinkedList<>();
+        Consumer<Collection<Point>> processor = list -> result.addAll(list);
+        reader.addAll(player, processor);
+        return result;
     }
 
 
