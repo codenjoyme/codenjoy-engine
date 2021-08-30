@@ -209,9 +209,8 @@ public class PointField {
             }
 
             @Override
-            @PerformanceOptimized
             public <E2 extends Point> List<E> getAt(E2 point) {
-                return (List) get(point).get(filter);
+                return (List) new ArrayList<>(get(point).get(filter));
             }
 
             @Override
