@@ -26,6 +26,7 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static java.util.Comparator.comparing;
@@ -65,10 +66,10 @@ public class Multimap<K, V> {
         map.remove(key);
     }
 
-    public List<V> all() { // TODO test me
-        return map.entrySet().stream()
-                .flatMap(entry -> entry.getValue().stream())
-                .collect(toList());
+    public void forEach(Consumer<V> action) { // TODO test me
+        for (Collection<V> list : map.values()) {
+           list.forEach(action);
+        }
     }
 
     @Override

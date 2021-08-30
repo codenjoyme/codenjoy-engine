@@ -25,6 +25,7 @@ package com.codenjoy.dojo.services.field;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
+import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
 import java.util.*;
@@ -244,4 +245,13 @@ public class PointField {
         return String.format("[map=%s]\n\n[field=%s]",
                 all.toString(), field.toString());
     }
+
+    public <T extends GameField> void init(T field) { // TODO test me
+        all.forEach(it -> {
+            if (it instanceof Fieldable) {
+                ((Fieldable<T>) it).init(field);
+            }
+        });
+    }
+
 }
