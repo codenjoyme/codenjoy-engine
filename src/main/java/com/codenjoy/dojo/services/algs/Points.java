@@ -41,7 +41,7 @@ public class Points {
     private Status[][] all;
 
     public Points(int size) {
-        all = new Status[size][size];;
+        all = new Status[size][size];
     }
 
     private Status set(Point pt, Status status) {
