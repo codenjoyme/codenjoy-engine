@@ -33,17 +33,6 @@ import java.util.List;
 // TODO перенести в utils пакет
 public class StateUtils {
 
-	public static <T extends Point> List<T> filter(Multimap<Class<? extends Point>, Point> alsoAtPoint, Class<? extends Point> clazz) {
-		return (List) alsoAtPoint.get(clazz);
-	}
-
-	public static <T extends Point> T filterOne(Multimap<Class<? extends Point>, Point> alsoAtPoint, Class<? extends Point> clazz) {
-		for (Point state : alsoAtPoint.get(clazz)) {
-			return (T) state;
-		}
-		return null;
-	}
-
 	public static <T> List<T> filter(Object[] array, Class<T> clazz) {
 		List<T> result = new LinkedList<>();
 		for (int index = 0; index < array.length; index++) {
