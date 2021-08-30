@@ -220,10 +220,13 @@ public class PointField {
             }
 
             @Override
+            @PerformanceOptimized
             public void tick() {
-                copy().stream()
-                        .filter(it -> it instanceof Tickable)
-                        .forEach(it -> ((Tickable)it).tick());
+                for(Point element : copy()) {
+                    if (element instanceof Tickable) {
+                        ((Tickable)element).tick();
+                    }
+                }
             }
 
             @Override
