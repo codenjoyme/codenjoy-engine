@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.field;
  */
 
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.Tickable;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,7 +32,7 @@ import java.util.stream.Stream;
  * С помощью этого интерфейса мы работаем с элементами на поле определенного типа.
  * @param <E> Тип выбранного объекта.
  */
-public interface Accessor<E> extends Iterable<E> {
+public interface Accessor<E> extends Iterable<E>, Tickable {
 
     /**
      * @param element Любой элемент типа Point, у которого будут взяты только координаты.
@@ -137,6 +138,7 @@ public interface Accessor<E> extends Iterable<E> {
     /**
      * Возможность тикнуть каждый элемент коллекции, если у него есть метод tick.
      */
+    @Override
     void tick(); // TODO test me
 
     /**
