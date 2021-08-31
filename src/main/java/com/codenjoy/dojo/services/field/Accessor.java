@@ -142,7 +142,9 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     void tick(); // TODO test me
 
     /**
-     * Удаление первого попавшегося элемента списка (в любой клетке).
+     * Удаление элементов из диапазона (в любой клетке).
+     * @param from Начальный индекс (включительно).
+     * @param from Конечный индекс (не включается).
      */
-    void removeAny(); // TODO test me
+    void remove(int from, int to); // TODO test me
 }

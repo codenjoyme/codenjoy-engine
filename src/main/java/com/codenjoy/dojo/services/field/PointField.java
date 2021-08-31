@@ -230,11 +230,10 @@ public class PointField {
             }
 
             @Override
-            @PerformanceOptimized
-            public void removeAny() {
-                Iterator<Point> iterator = all.get(filter).iterator();
-                if (iterator.hasNext()) {
-                    remove(iterator.next());
+            public void remove(int from, int to) {
+                List<Point> points = all.get(filter);
+                for (int index = from; index < to; index++) {
+                    remove(points.get(index));
                 }
             }
         };
