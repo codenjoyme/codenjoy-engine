@@ -1412,16 +1412,16 @@ public class PointFieldTest {
                 all.toString());
 
         // when then
-        assertUsupported(() -> all.remove(1));
-        assertUsupported(() -> all.add(new One(1, 1)));
-        assertUsupported(() -> all.addAll(Arrays.asList(new One(1, 1))));
-        assertUsupported(() -> all.remove(new One(1, 1)));
-        assertUsupported(() -> all.clear());
-        assertUsupported(() -> all.removeAll(Arrays.asList(new One(1, 1))));
-        assertUsupported(() -> all.sort(Comparator.naturalOrder()));
-        assertUsupported(() -> all.replaceAll(UnaryOperator.identity()));
-        assertUsupported(() -> all.subList(0, 1).clear());
-        assertUsupported(() -> {
+        assertUnsupported(() -> all.remove(1));
+        assertUnsupported(() -> all.add(new One(1, 1)));
+        assertUnsupported(() -> all.addAll(Arrays.asList(new One(1, 1))));
+        assertUnsupported(() -> all.remove(new One(1, 1)));
+        assertUnsupported(() -> all.clear());
+        assertUnsupported(() -> all.removeAll(Arrays.asList(new One(1, 1))));
+        assertUnsupported(() -> all.sort(Comparator.naturalOrder()));
+        assertUnsupported(() -> all.replaceAll(UnaryOperator.identity()));
+        assertUnsupported(() -> all.subList(0, 1).clear());
+        assertUnsupported(() -> {
             Iterator<One> iterator = all.iterator();
             iterator.hasNext();
             iterator.remove();
@@ -1434,12 +1434,16 @@ public class PointFieldTest {
         assert_severalElements_mixed_inOneCell();
     }
 
-    private void assertUsupported(Runnable runnable) {
+    private void assertUnsupported(Runnable runnable) {
+        assertException(runnable, UnsupportedOperationException.class);
+    }
+
+    private void assertException(Runnable runnable, Class<? extends Throwable> expected) {
         try {
             runnable.run();
             fail("Expected exception");
-        } catch (UnsupportedOperationException e) {
-            // do nothing
+        } catch (Throwable actual) {
+            assertEquals(expected, actual.getClass());
         }
     }
 
