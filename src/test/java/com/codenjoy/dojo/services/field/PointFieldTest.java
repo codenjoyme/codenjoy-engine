@@ -122,6 +122,30 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testEmptyCollection() {
+        // given
+        field = new PointField(3);
+
+        // when then
+        assert_emptyCollection();
+    }
+
+    private void assert_emptyCollection() {
+        assertEquals("[map=]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    @Test
     public void testAdd_oneElement() {
         // given
         field = new PointField(3);
