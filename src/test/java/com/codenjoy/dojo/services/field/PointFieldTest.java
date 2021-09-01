@@ -1476,6 +1476,66 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testOf_clear_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when
+        field.of(Four.class).size();
+
+        // then
+        assert_severalElements_mixed();
+
+        // when
+        field.of(One.class).clear();
+
+        // then
+        assert_mixed_without_any_one();
+
+        // when
+        field.of(Two.class).clear();
+
+        // then
+        assert_oneElement_three5_at2_2();
+
+        // when
+        field.of(Three.class).clear();
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testOf_clear_severalElements_mixed_inOneCell() {
+        // given
+        givenSeveralElements_mixed_inOneCell();
+
+        // when
+        field.of(Four.class).size();
+
+        // then
+        assert_severalElements_mixed_inOneCell();
+
+        // when
+        field.of(One.class).clear();
+
+        // then
+        assert_mixed_inOneCell_withoutAny_one();
+
+        // when
+        field.of(Two.class).clear();
+
+        // then
+        assert_oneElement_three5_at1_1();
+
+        // when
+        field.of(Three.class).clear();
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
     public void testOf_all_severalElements_mixed() {
         // given
         testAdd_severalElements_mixed();
@@ -2563,6 +2623,22 @@ public class PointFieldTest {
         field.of(One.class).removeExact(get(One.class, 1, 1));
 
         // then
+        assert_mixed_inOneCell_withoutAny_one();
+
+        // when
+        field.of(Two.class).removeExact(get(Two.class, 1, 1));
+
+        // then
+        assert_oneElement_three5_at1_1();
+
+        // when
+        field.of(Three.class).removeExact(get(Three.class, 1, 1));
+
+        // then
+        assert_emptyCollection();
+    }
+
+    private void assert_mixed_inOneCell_withoutAny_one() {
         assertEquals("[map={\n" +
                 "        Three.class=[\n" +
                 "                three5(1,1)]}\n" +
@@ -2585,33 +2661,6 @@ public class PointFieldTest {
                 "[2,1]:{}\n" +
                 "[2,2]:{}\n" +
                 "]", field.toString());
-
-        // when
-        field.of(Two.class).removeExact(get(Two.class, 1, 1));
-
-        // then
-        assertEquals("[map={\n" +
-                "        Three.class=[\n" +
-                "                three5(1,1)]}]\n" +
-                "\n" +
-                "[field=[0,0]:{}\n" +
-                "[0,1]:{}\n" +
-                "[0,2]:{}\n" +
-                "[1,0]:{}\n" +
-                "[1,1]:{\n" +
-                "        Three.class=[\n" +
-                "                three5(1,1)]}\n" +
-                "[1,2]:{}\n" +
-                "[2,0]:{}\n" +
-                "[2,1]:{}\n" +
-                "[2,2]:{}\n" +
-                "]", field.toString());
-
-        // when
-        field.of(Three.class).removeExact(get(Three.class, 1, 1));
-
-        // then
-        assert_emptyCollection();
     }
 
     @Test
@@ -2637,7 +2686,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(get(Two.class, 1, 2));
 
         // then
-        asssert_mixed_three5_at2_2();
+        assert_oneElement_three5_at2_2();
 
         // when
         field.of(Three.class).removeExact(get(Three.class, 2, 2));
@@ -2646,7 +2695,7 @@ public class PointFieldTest {
         assert_emptyCollection();
     }
 
-    private void asssert_mixed_three5_at2_2() {
+    private void assert_oneElement_three5_at2_2() {
         assertEquals("[map={\n" +
                 "        Three.class=[\n" +
                 "                three5(2,2)]}]\n" +
@@ -2662,6 +2711,25 @@ public class PointFieldTest {
                 "[2,2]:{\n" +
                 "        Three.class=[\n" +
                 "                three5(2,2)]}\n" +
+                "]", field.toString());
+    }
+
+    private void assert_oneElement_three5_at1_1() {
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
                 "]", field.toString());
     }
 
@@ -3349,28 +3417,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(one.copy());
 
         // then
-        assertEquals("[map={\n" +
-                "        Three.class=[\n" +
-                "                three5(1,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two4(1,1)]}]\n" +
-                "\n" +
-                "[field=[0,0]:{}\n" +
-                "[0,1]:{}\n" +
-                "[0,2]:{}\n" +
-                "[1,0]:{}\n" +
-                "[1,1]:{\n" +
-                "        Three.class=[\n" +
-                "                three5(1,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two4(1,1)]}\n" +
-                "[1,2]:{}\n" +
-                "[2,0]:{}\n" +
-                "[2,1]:{}\n" +
-                "[2,2]:{}\n" +
-                "]", field.toString());
+        assert_mixed_inOneCell_withoutAny_one();
 
         // when
         field.of(Three.class).removeAt(one.copy());
@@ -3421,7 +3468,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(pt(1, 2));
 
         // then
-        asssert_mixed_three5_at2_2();
+        assert_oneElement_three5_at2_2();
 
         // when
         field.of(Three.class).removeAt(pt(2, 2));
