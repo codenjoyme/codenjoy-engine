@@ -989,6 +989,10 @@ public class PointFieldTest {
         return field.of(filter).all().get(index);
     }
 
+    private <T extends Point> T get(Class<T> filter, int x, int y) {
+        return field.of(filter).getAt(pt(x, y)).get(0);
+    }
+
     private void assertContains_oneElement() {
         One one = get(One.class, 0);
         assertEquals(true, field.of(One.class).contains(one));
@@ -2331,6 +2335,217 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_removeExact_severalElements_mixed_inOneCell() {
+        // given
+        One one = givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when
+        field.of(One.class).removeExact(get(One.class, 1, 1));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+
+        // when
+        field.of(One.class).removeExact(get(One.class, 1, 1));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+
+        // when
+        field.of(One.class).removeExact(get(One.class, 1, 1));
+
+        // then
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+
+        // when
+        field.of(Two.class).removeExact(get(Two.class, 1, 1));
+
+        // then
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+
+        // when
+        field.of(Three.class).removeExact(get(Three.class, 1, 1));
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_removeExact_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+
+        // when
+        field.of(One.class).removeExact(get(One.class, 1, 1));
+        field.of(One.class).removeExact(get(One.class, 1, 1));
+
+        // then
+        assert_mixed_without_one_at1_1();
+
+        // when
+        field.of(One.class).removeExact(get(One.class, 1, 2));
+
+        // then
+        assert_mixed_without_any_one();
+
+        // when
+        field.of(Two.class).removeExact(get(Two.class, 1, 2));
+
+        // then
+        asssert_mixed_three5_at2_2();
+
+        // when
+        field.of(Three.class).removeExact(get(Three.class, 2, 2));
+
+        // then
+        assert_emptyCollection();
+    }
+
+    private void asssert_mixed_three5_at2_2() {
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
+    }
+
+    private void assert_mixed_without_one_at1_1() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
+    }
+
+    @Test
     public void testSameOf_removeAt_oneElement() {
         // given
         testAdd_oneElement();
@@ -2971,5 +3186,121 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testSameOf_removeAt_severalElements_mixed_inOneCell() {
+        // given
+        One one = givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when
+        field.of(One.class).removeAt(one.copy());
+
+        // then
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+
+        // when
+        field.of(Three.class).removeAt(one.copy());
+
+        // then
+        assertEquals("[map={\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+
+        // when
+        field.of(Two.class).removeAt(one.copy());
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_removeAt_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when
+        field.of(One.class).removeAt(pt(1, 1));
+
+        // then
+        assert_mixed_without_one_at1_1();
+
+        // when
+        field.of(One.class).removeAt(pt(1, 2));
+
+        // then
+        assert_mixed_without_any_one();
+
+        // when
+        field.of(Two.class).removeAt(pt(1, 2));
+
+        // then
+        asssert_mixed_three5_at2_2();
+
+        // when
+        field.of(Three.class).removeAt(pt(2, 2));
+
+        // then
+        assert_emptyCollection();
+    }
+
+    private void assert_mixed_without_any_one() {
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
     }
 }
