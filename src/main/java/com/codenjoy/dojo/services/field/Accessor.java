@@ -98,9 +98,10 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     void add(E element);
 
     /**
-     * @return Количество элементов в этой коллекции.
+     * @return Количество элементов (выбранного
+     * в Accessor типа) этой коллекции во всех ячейках поля.
      */
-    int size(); // TODO test me
+    int size();
 
     /**
      * Очищает все элементы этой коллекции.

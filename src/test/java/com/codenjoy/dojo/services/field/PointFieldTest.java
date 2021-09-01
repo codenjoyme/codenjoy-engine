@@ -1429,6 +1429,53 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testOf_size_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assert_size();
+
+        // then
+        assert_severalElements_mixed();
+
+        // when
+        get(One.class, 1, 1).move(2, 2);
+        get(Two.class, 1, 2).move(1, 1);
+
+        // when then
+        assert_size();
+    }
+
+    private void assert_size() {
+        assertEquals(3, field.of(One.class).size());
+        assertEquals(1, field.of(Two.class).size());
+        assertEquals(1, field.of(Three.class).size());
+        assertEquals(0, field.of(Four.class).size());
+    }
+
+    @Test
+    public void testOf_size_severalElements_mixed_inOneCell() {
+        // given
+        One some = givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        assert_size();
+
+        // when
+        some.move(2, 2);
+        some.move(1, 1);
+
+        // when then
+        assert_size();
+
+        // then
+        assert_severalElements_mixed_inOneCell_changedOrder();
+    }
+
+    @Test
     public void testOf_all_severalElements_mixed() {
         // given
         testAdd_severalElements_mixed();
