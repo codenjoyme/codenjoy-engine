@@ -154,7 +154,7 @@ public class PointFieldTest {
         field.add(new One(1, 1));
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -166,10 +166,10 @@ public class PointFieldTest {
         field.of(One.class).add(new One(1, 1));
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
-    private void assert_oneElement() {
+    private void assert_oneElement_one1_at1_1() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(1,1)]}]\n" +
@@ -755,7 +755,7 @@ public class PointFieldTest {
         field.addAll(Arrays.asList(new One(1, 1)));
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -982,7 +982,7 @@ public class PointFieldTest {
         assertContains_oneElement();
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     private <T extends Point> T get(Class<T> filter, int index) {
@@ -1531,39 +1531,6 @@ public class PointFieldTest {
         }
     }
 
-    private void assert_severalElements_mixed_inOneCell_removed() {
-        assertEquals("[map={\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one3(1,1)]}\n" +
-                "        {\n" +
-                "        Three.class=[\n" +
-                "                three5(1,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two4(1,1)]}]\n" +
-                "\n" +
-                "[field=[0,0]:{}\n" +
-                "[0,1]:{}\n" +
-                "[0,2]:{}\n" +
-                "[1,0]:{}\n" +
-                "[1,1]:{\n" +
-                "        One.class=[\n" +
-                "                one1(1,1)\n" +
-                "                one3(1,1)]}\n" +
-                "        {\n" +
-                "        Three.class=[\n" +
-                "                three5(1,1)]}\n" +
-                "        {\n" +
-                "        Two.class=[\n" +
-                "                two4(1,1)]}\n" +
-                "[1,2]:{}\n" +
-                "[2,0]:{}\n" +
-                "[2,1]:{}\n" +
-                "[2,2]:{}\n" +
-                "]", field.toString());
-    }
-
     @Test
     public void testOf_all_methodReturnsReadOnlyCollectionNotACopy_caseUpdateElements() {
         // given
@@ -1735,7 +1702,7 @@ public class PointFieldTest {
         field.of(otherType).removeExact((Point)one);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -1749,7 +1716,7 @@ public class PointFieldTest {
         field.of(One.class).removeExact(anotherOne);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -1763,7 +1730,7 @@ public class PointFieldTest {
         field.of(One.class).removeExact(anotherOne);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -1777,7 +1744,7 @@ public class PointFieldTest {
         field.of(One.class).removeExact(anotherTwo);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -1791,7 +1758,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(anotherOne);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -1805,7 +1772,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(another);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -1829,7 +1796,7 @@ public class PointFieldTest {
         field.of(One.class).removeExact(one2);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
 
         // when
         field.of(One.class).removeExact(one1);
@@ -1950,7 +1917,7 @@ public class PointFieldTest {
         field.of(One.class).removeExact(one2);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
 
         // when
         field.of(One.class).removeExact(one1);
@@ -2071,7 +2038,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(two);
 
         // then
-        assert_oneElement_anotherCell_one1();
+        assert_oneElement_one1_at2_1();
 
         // when
         field.of(One.class).removeExact(one1);
@@ -2183,7 +2150,7 @@ public class PointFieldTest {
         assert_twoElements_differentTypes_sameCell();
     }
 
-    private void assert_oneElement_anotherCell_one1() {
+    private void assert_oneElement_one1_at2_1() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(2,1)]}]\n" +
@@ -2202,7 +2169,7 @@ public class PointFieldTest {
                 "]", field.toString());
     }
 
-    private void assert_oneElement_anotherCell_two2() {
+    private void assert_oneElement_two2_at2_1() {
         assertEquals("[map={\n" +
                 "        Two.class=[\n" +
                 "                two2(2,1)]}]\n" +
@@ -2221,7 +2188,7 @@ public class PointFieldTest {
                 "]", field.toString());
     }
 
-    private void assert_oneElement_anotherCell_two2_2() {
+    private void assert_oneElement_two2_at2_0() {
         assertEquals("[map={\n" +
                 "        Two.class=[\n" +
                 "                two2(2,0)]}]\n" +
@@ -2251,7 +2218,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(two);
 
         // then
-        assert_oneElement_anotherCell_one1();
+        assert_oneElement_one1_at2_1();
 
         // when
         field.of(One.class).removeExact(one1);
@@ -2387,7 +2354,7 @@ public class PointFieldTest {
         field.of(otherType).removeAt((Point)one);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -2415,7 +2382,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherOne);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -2443,7 +2410,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(anotherOne);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -2457,7 +2424,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(another);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
     }
 
     @Test
@@ -2592,7 +2559,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(one2);
 
         // then
-        assert_oneElement();
+        assert_oneElement_one1_at1_1();
 
         // when
         field.of(One.class).removeAt(one1);
@@ -2630,7 +2597,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherOne1);
 
         // then
-        assert_oneElement_anotherCell_one2();
+        assert_oneElement_one2_at1_2();
 
         // when
         field.of(One.class).removeAt(anotherOne2);
@@ -2669,7 +2636,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherTwo1);
 
         // then
-        assert_oneElement_anotherCell_one2();
+        assert_oneElement_one2_at1_2();
 
         // when
         field.of(One.class).removeAt(anotherTwo2);
@@ -2678,7 +2645,7 @@ public class PointFieldTest {
         assert_emptyCollection();
     }
 
-    private void assert_oneElement_anotherCell_one2() {
+    private void assert_oneElement_one2_at1_2() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one2(1,2)]}]\n" +
@@ -2742,7 +2709,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(two);
 
         // then
-        assert_oneElement_anotherCell_one1();
+        assert_oneElement_one1_at2_1();
 
         // when
         field.of(One.class).removeAt(one1);
@@ -2763,7 +2730,7 @@ public class PointFieldTest {
         field.of(twoType).removeAt((Point)one);
 
         // then
-        assert_oneElement_anotherCell_one1();
+        assert_oneElement_one1_at2_1();
 
         // when
         Class<One> oneType = One.class;
@@ -2786,7 +2753,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherOne);
 
         // then
-        assert_oneElement_anotherCell_two2();
+        assert_oneElement_two2_at2_1();
 
         // when
         field.of(Two.class).removeAt(anotherTwo);
@@ -2842,7 +2809,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherTwo);
 
         // then
-        assert_oneElement_anotherCell_two2();
+        assert_oneElement_two2_at2_1();
 
         // when
         field.of(Two.class).removeAt(anotherOne);
@@ -2864,7 +2831,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(anotherOne);
 
         // then
-        assert_oneElement_anotherCell_one1();
+        assert_oneElement_one1_at2_1();
 
         // when
         field.of(One.class).removeAt(anotherTwo);
@@ -2884,7 +2851,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(two);
 
         // then
-        assert_oneElement_anotherCell_one1();
+        assert_oneElement_one1_at2_1();
 
         // when
         field.of(One.class).removeAt(one1);
@@ -2924,7 +2891,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherOne);
 
         // then
-        assert_oneElement_anotherCell_two2_2();
+        assert_oneElement_two2_at2_0();
 
         // when
         field.of(Two.class).removeAt(anotherTwo);
@@ -2980,7 +2947,7 @@ public class PointFieldTest {
         field.of(One.class).removeAt(anotherTwo);
 
         // then
-        assert_oneElement_anotherCell_two2_2();
+        assert_oneElement_two2_at2_0();
 
         // when
         field.of(Two.class).removeAt(anotherOne);
