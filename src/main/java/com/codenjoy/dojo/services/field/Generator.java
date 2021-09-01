@@ -86,7 +86,7 @@ public class Generator {
             }
 
             @Override
-            public <E2 extends Point> boolean removeExact(E2 element) {
+            public boolean removeExact(E element) {
                 throw exception();
             }
 
@@ -126,7 +126,7 @@ public class Generator {
             }
 
             @Override
-            public <E2 extends Point> void removeIn(List<E2> points) {
+            public void removeIn(List<? extends Point> points) {
                 throw exception();
             }
 

@@ -48,12 +48,12 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      * Проверка осуществляется не по координатам, но по
      * ссылке на объект. Удаление производится во всех
      * ячейках поля, где будет найден этот объект,
-     * независимо от выбранного в Accessor типа.
+     * в соответствии с выбранным в Accessor типом.
      *
      * @param element Удаляемый элемент.
      * @return true - если было удаление.
      */
-    <E2 extends Point> boolean removeExact(E2 element);
+    boolean removeExact(E element);
 
     /**
      * Удаляются все найденные (по выбранному в Accessor типу)
@@ -125,7 +125,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      *
      * @param points Координаты ячеек в которых будет проводится удаление.
      */
-    <E2 extends Point> void removeIn(List<E2> points); // TODO test me
+    void removeIn(List<? extends Point> points); // TODO test me
 
     /**
      * Каждый элемент исходного списка добавится в конкретную ячейку

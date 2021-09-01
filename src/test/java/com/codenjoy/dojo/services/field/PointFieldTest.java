@@ -1913,7 +1913,8 @@ public class PointFieldTest {
 
         // when
         Class<Two> otherType = Two.class;
-        field.of(otherType).removeExact((Point)one);
+        Accessor of = field.of(otherType);
+        of.removeExact((Point)one);
 
         // then
         assert_oneElement_one1_at1_1();
@@ -1955,7 +1956,8 @@ public class PointFieldTest {
         Two anotherTwo = new Two(one.getX(), one.getY());
 
         // when
-        field.of(One.class).removeExact(anotherTwo);
+        Accessor of = field.of(One.class);
+        of.removeExact(anotherTwo);
 
         // then
         assert_oneElement_one1_at1_1();
@@ -1969,7 +1971,8 @@ public class PointFieldTest {
         One anotherOne = new One(one.getX(), one.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne);
+        Accessor of = field.of(Two.class);
+        of.removeExact(anotherOne);
 
         // then
         assert_oneElement_one1_at1_1();
@@ -2028,8 +2031,9 @@ public class PointFieldTest {
 
         // when
         Class<Two> otherType = Two.class;
-        field.of(otherType).removeExact((Point)one1);
-        field.of(otherType).removeExact((Point)one2);
+        Accessor of = field.of(otherType);
+        of.removeExact((Point)one1);
+        of.removeExact((Point)one2);
 
         // then
         assert_twoElements_sameType_sameCell();
@@ -2079,8 +2083,9 @@ public class PointFieldTest {
         Two anotherTwo2 = new Two(one2.getX(), one2.getY());
 
         // when
-        field.of(One.class).removeExact(anotherTwo1);
-        field.of(One.class).removeExact(anotherTwo2);
+        Accessor of = field.of(One.class);
+        of.removeExact(anotherTwo1);
+        of.removeExact(anotherTwo2);
 
         // then
         assert_twoElements_sameType_sameCell();
@@ -2096,8 +2101,9 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX(), one2.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne1);
-        field.of(Two.class).removeExact(anotherOne2);
+        Accessor of = field.of(Two.class);
+        of.removeExact(anotherOne1);
+        of.removeExact(anotherOne2);
 
         // then
         assert_twoElements_sameType_sameCell();
@@ -2149,8 +2155,9 @@ public class PointFieldTest {
 
         // when
         Class<Two> otherType = Two.class;
-        field.of(otherType).removeExact((Point)one1);
-        field.of(otherType).removeExact((Point)one2);
+        Accessor of = field.of(otherType);
+        of.removeExact((Point)one1);
+        of.removeExact((Point)one2);
 
         // then
         assert_twoElements_sameType_differentCells();
@@ -2200,8 +2207,9 @@ public class PointFieldTest {
         Two anotherTwo2 = new Two(one2.getX(), one2.getY());
 
         // when
-        field.of(One.class).removeExact(anotherTwo1);
-        field.of(One.class).removeExact(anotherTwo2);
+        Accessor of = field.of(One.class);
+        of.removeExact(anotherTwo1);
+        of.removeExact(anotherTwo2);
 
         // then
         assert_twoElements_sameType_differentCells();
@@ -2217,8 +2225,9 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX(), one2.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne1);
-        field.of(Two.class).removeExact(anotherOne2);
+        Accessor of = field.of(Two.class);
+        of.removeExact(anotherOne1);
+        of.removeExact(anotherOne2);
 
         // then
         assert_twoElements_sameType_differentCells();
@@ -2270,10 +2279,12 @@ public class PointFieldTest {
 
         // when
         Class<Two> twoType = Two.class;
-        field.of(twoType).removeExact((Point)one);
+        Accessor of1 = field.of(twoType);
+        of1.removeExact((Point)one);
 
         Class<One> ontType = One.class;
-        field.of(ontType).removeExact((Point)two);
+        Accessor of2 = field.of(ontType);
+        of2.removeExact((Point)two);
 
         // then
         assert_twoElements_differentTypes_sameCell();
@@ -2340,8 +2351,11 @@ public class PointFieldTest {
         One anotherOne = new One(two.getX(), two.getY());
 
         // when
-        field.of(One.class).removeExact(anotherTwo);
-        field.of(Two.class).removeExact(anotherOne);
+        Accessor ofOne = field.of(One.class);
+        ofOne.removeExact(anotherTwo);
+
+        Accessor ofTwo = field.of(Two.class);
+        ofTwo.removeExact(anotherOne);
 
         // then
         assert_twoElements_differentTypes_sameCell();
@@ -2357,8 +2371,11 @@ public class PointFieldTest {
         Two anotherTwo = new Two(two.getX(), two.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne);
-        field.of(One.class).removeExact(anotherTwo);
+        Accessor ofTwo = field.of(Two.class);
+        ofTwo.removeExact(anotherOne);
+
+        Accessor ofOne = field.of(One.class);
+        ofOne.removeExact(anotherTwo);
 
         // then
         assert_twoElements_differentTypes_sameCell();
@@ -2450,10 +2467,12 @@ public class PointFieldTest {
 
         // when
         Class<Two> twoType = Two.class;
-        field.of(twoType).removeExact((Point)one);
+        Accessor ofTwo = field.of(twoType);
+        ofTwo.removeExact((Point)one);
 
         Class<One> ontType = One.class;
-        field.of(ontType).removeExact((Point)two);
+        Accessor ofOne = field.of(ontType);
+        ofOne.removeExact((Point)two);
 
         // then
         assert_twoElements_differentTypes_differentCells();
@@ -2520,8 +2539,11 @@ public class PointFieldTest {
         One anotherOne = new One(two.getX(), two.getY());
 
         // when
-        field.of(One.class).removeExact(anotherTwo);
-        field.of(Two.class).removeExact(anotherOne);
+        Accessor ofOne = field.of(One.class);
+        ofOne.removeExact(anotherTwo);
+
+        Accessor ofTwo = field.of(Two.class);
+        ofTwo.removeExact(anotherOne);
 
         // then
         assert_twoElements_differentTypes_differentCells();
@@ -2537,8 +2559,11 @@ public class PointFieldTest {
         Two anotherTwo = new Two(two.getX(), two.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne);
-        field.of(One.class).removeExact(anotherTwo);
+        Accessor ofTwo = field.of(Two.class);
+        ofTwo.removeExact(anotherOne);
+
+        Accessor ofOne = field.of(One.class);
+        ofOne.removeExact(anotherTwo);
 
         // then
         assert_twoElements_differentTypes_differentCells();
