@@ -79,7 +79,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      * всего контейнера (при этом он останется консистентным, т.к. умеет
      * обрабатывать подобные случаи).
      */
-    Stream<E> stream(); // TODO test me
+    Stream<E> stream();
 
     /**
      * Удаляет все невалидные объекты, не содержащиеся в заданном списке.

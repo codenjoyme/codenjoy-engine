@@ -32,8 +32,10 @@ import org.junit.Test;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -1340,6 +1342,73 @@ public class PointFieldTest {
 
         // then
         assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testOf_stream_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1), one3(1,2)]",
+                toString(field.of(One.class).stream()));
+
+        assertEquals("[two4(1,2)]",
+                toString(field.of(Two.class).stream()));
+
+        assertEquals("[three5(2,2)]",
+                toString(field.of(Three.class).stream()));
+
+        assertEquals("[]",
+                toString(field.of(Four.class).stream()));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    private String toString(Stream stream) {
+        return stream.collect(toList()).toString();
+    }
+
+    @Test
+    public void testOf_stream_severalElements_mixed_inOneCell() {
+        // given
+        One some = givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1), one3(1,1)]",
+                toString(field.of(One.class).stream()));
+
+        assertEquals("[two4(1,1)]",
+                toString(field.of(Two.class).stream()));
+
+        assertEquals("[three5(1,1)]",
+                toString(field.of(Three.class).stream()));
+
+        assertEquals("[]",
+                toString(field.of(Four.class).stream()));
+
+        // when
+        some.move(2, 2);
+        some.move(1, 1);
+
+        // when then
+        assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
+                field.of(One.class).all().toString());
+
+        assertEquals("[two4(1,1)]",
+                field.of(Two.class).all().toString());
+
+        assertEquals("[three5(1,1)]",
+                field.of(Three.class).all().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).all().toString());
+
+        // then
+        assert_severalElements_mixed_inOneCell_changedOrder();
     }
 
     @Test
