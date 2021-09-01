@@ -1364,6 +1364,23 @@ public class PointFieldTest {
 
         // then
         assert_severalElements_mixed();
+
+        // when
+        get(One.class, 1, 1).move(2, 2);
+        get(Two.class, 1, 2).move(1, 1);
+
+        // when then
+        assertEquals("[one2(1,1), one3(1,2), one1(2,2)]",
+                toString(field.of(One.class).stream()));
+
+        assertEquals("[two4(1,1)]",
+                toString(field.of(Two.class).stream()));
+
+        assertEquals("[three5(2,2)]",
+                toString(field.of(Three.class).stream()));
+
+        assertEquals("[]",
+                toString(field.of(Four.class).stream()));
     }
 
     private String toString(Stream stream) {
@@ -1396,16 +1413,16 @@ public class PointFieldTest {
 
         // when then
         assertEquals("[one1(1,1), one3(1,1), one2(1,1)]",
-                field.of(One.class).all().toString());
+                toString(field.of(One.class).stream()));
 
         assertEquals("[two4(1,1)]",
-                field.of(Two.class).all().toString());
+                toString(field.of(Two.class).stream()));
 
         assertEquals("[three5(1,1)]",
-                field.of(Three.class).all().toString());
+                toString(field.of(Three.class).stream()));
 
         assertEquals("[]",
-                field.of(Four.class).all().toString());
+                toString(field.of(Four.class).stream()));
 
         // then
         assert_severalElements_mixed_inOneCell_changedOrder();
@@ -1431,6 +1448,23 @@ public class PointFieldTest {
 
         // then
         assert_severalElements_mixed();
+
+        // when
+        get(One.class, 1, 1).move(2, 2);
+        get(Two.class, 1, 2).move(1, 1);
+
+        // when then
+        assertEquals("[one2(1,1), one3(1,2), one1(2,2)]",
+                field.of(One.class).all().toString());
+
+        assertEquals("[two4(1,1)]",
+                field.of(Two.class).all().toString());
+
+        assertEquals("[three5(2,2)]",
+                field.of(Three.class).all().toString());
+
+        assertEquals("[]",
+                field.of(Four.class).all().toString());
     }
 
     @Test
