@@ -985,10 +985,14 @@ public class PointFieldTest {
         assert_oneElement();
     }
 
+    private <T extends Point> T get(Class<T> filter, int index) {
+        return field.of(filter).all().get(index);
+    }
+
     private void assertContains_oneElement() {
-        One same = field.of(One.class).all().get(0);
-        assertEquals(true, field.of(One.class).contains(same));
-        assertEquals(false, field.of(Two.class).contains(same));
+        One one = get(One.class, 0);
+        assertEquals(true, field.of(One.class).contains(one));
+        assertEquals(false, field.of(Two.class).contains(one));
 
         assertException(() -> field.of(One.class).contains(null),
                 NullPointerException.class);
@@ -1026,12 +1030,12 @@ public class PointFieldTest {
         testAdd_twoElements_sameType_differentCells();
 
         // when then
-        One one = field.of(One.class).all().get(0);
-        One another = field.of(One.class).all().get(1);
-        assertEquals(true, field.of(One.class).contains(one));
-        assertEquals(false, field.of(Two.class).contains(another));
-        assertEquals(true, field.of(One.class).contains(another));
-        assertEquals(false, field.of(Two.class).contains(one));
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        assertEquals(true, field.of(One.class).contains(one1));
+        assertEquals(false, field.of(Two.class).contains(one2));
+        assertEquals(true, field.of(One.class).contains(one2));
+        assertEquals(false, field.of(Two.class).contains(one1));
 
         assertException(() -> field.of(One.class).contains(null),
                 NullPointerException.class);
@@ -1067,12 +1071,12 @@ public class PointFieldTest {
         testAdd_twoElements_differentTypes_sameCell();
 
         // when then
-        One one = field.of(One.class).all().get(0);
-        Two another = field.of(Two.class).all().get(0);
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
         assertEquals(true, field.of(One.class).contains(one));
-        assertEquals(true, field.of(Two.class).contains(another));
+        assertEquals(true, field.of(Two.class).contains(two));
         // true потому что contains(pt) а не same object
-        assertEquals(true, field.of(One.class).contains(another));
+        assertEquals(true, field.of(One.class).contains(two));
         // true потому что contains(pt) а не same object
         assertEquals(true, field.of(Two.class).contains(one));
 
@@ -1108,11 +1112,11 @@ public class PointFieldTest {
         testAdd_twoElements_differentTypes_differentCells();
 
         // when then
-        One one = field.of(One.class).all().get(0);
-        Two another = field.of(Two.class).all().get(0);
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
         assertEquals(true, field.of(One.class).contains(one));
-        assertEquals(true, field.of(Two.class).contains(another));
-        assertEquals(false, field.of(One.class).contains(another));
+        assertEquals(true, field.of(Two.class).contains(two));
+        assertEquals(false, field.of(One.class).contains(two));
         assertEquals(false, field.of(Two.class).contains(one));
 
         assertException(() -> field.of(One.class).contains(null),
