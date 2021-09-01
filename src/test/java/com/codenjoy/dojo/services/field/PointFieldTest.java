@@ -1711,4 +1711,116 @@ public class PointFieldTest {
         assert_severalElements_mixed_inOneCell_changedOrder();
     }
 
+    @Test
+    public void testSameOf_removeExact_oneElement() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+
+        // when
+        field.of(One.class).removeExact(one);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_removeExact_twoElements_sameType_sameCell() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+
+        // when
+        field.of(One.class).removeExact(one2);
+
+        // then
+        assert_oneElement();
+
+        // when
+        field.of(One.class).removeExact(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_removeExact_twoElements_sameType_differentCells() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+
+        // when
+        field.of(One.class).removeExact(one2);
+
+        // then
+        assert_oneElement();
+
+        // when
+        field.of(One.class).removeExact(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_removeExact_twoElements_differentTypes_sameCell() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one1 = get(One.class, 0);
+        Two two = get(Two.class, 0);
+
+        // when
+        field.of(Two.class).removeExact(two);
+
+        // then
+        assert_oneElement_anotherCell();
+
+        // when
+        field.of(One.class).removeExact(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    private void assert_oneElement_anotherCell() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(2,1)]}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testSameOf_removeExact_twoElements_differentTypes_differentCells() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one1 = get(One.class, 0);
+        Two two = get(Two.class, 0);
+
+        // when
+        field.of(Two.class).removeExact(two);
+
+        // then
+        assert_oneElement_anotherCell();
+
+        // when
+        field.of(One.class).removeExact(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
 }
