@@ -144,8 +144,8 @@ public class PointField {
 
             @Override
             @PerformanceOptimized
-            public <E2 extends Point> boolean contains(E2 element) {
-                return get(element).contains(filter);
+            public boolean contains(Point point) {
+                return get(point).contains(filter);
             }
 
             @Override
@@ -156,8 +156,8 @@ public class PointField {
 
             @Override
             @PerformanceOptimized
-            public <E2 extends Point> boolean removeAt(E2 element) {
-                return with(element, map -> map.remove(filter, element));
+            public boolean removeAt(Point point) {
+                return with(point, map -> map.remove(filter, point));
             }
 
             @Override
@@ -199,8 +199,8 @@ public class PointField {
             }
 
             @Override
-            public <E2 extends Point> void removeIn(List<E2> elements) {
-                elements.forEach(this::removeAt);
+            public <E2 extends Point> void removeIn(List<E2> points) {
+                points.forEach(this::removeAt);
             }
 
             @Override
@@ -209,7 +209,7 @@ public class PointField {
             }
 
             @Override
-            public <E2 extends Point> List<E> getAt(E2 point) {
+            public List<E> getAt(Point point) {
                 return (List) new ArrayList<>(get(point).get(filter));
             }
 
@@ -233,7 +233,7 @@ public class PointField {
             public void remove(int from, int to) {
                 List<Point> list = all.get(filter);
                 for (int index = from; index < to; index++) {
-                    removeExact(list.get(index));
+                    removeExact((E) list.get(index));
                 }
             }
         };

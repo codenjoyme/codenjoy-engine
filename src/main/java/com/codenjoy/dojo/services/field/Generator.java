@@ -74,10 +74,10 @@ public class Generator {
     }
 
     // TODO удалить после того как Loderunner будет переведен на PointField
-    private static <T> Accessor<T> accessor(List<T> list) {
-        return new Accessor<T>() {
+    private static <E> Accessor<E> accessor(List<E> list) {
+        return new Accessor<E>() {
             @Override
-            public <E2 extends Point> boolean contains(E2 element) {
+            public boolean contains(Point point) {
                 throw exception();
             }
 
@@ -91,27 +91,27 @@ public class Generator {
             }
 
             @Override
-            public <E2 extends Point> boolean removeAt(E2 element) {
+            public boolean removeAt(Point point) {
                 throw exception();
             }
 
             @Override
-            public List<T> all() {
+            public List<E> all() {
                 throw exception();
             }
 
             @Override
-            public Stream<T> stream() {
+            public Stream<E> stream() {
                 throw exception();
             }
 
             @Override
-            public void removeNotSame(List<T> valid) {
+            public void removeNotSame(List<E> valid) {
                 throw exception();
             }
 
             @Override
-            public void add(T element) {
+            public void add(E element) {
                 list.add(element);
             }
 
@@ -126,22 +126,22 @@ public class Generator {
             }
 
             @Override
-            public <E2 extends Point> void removeIn(List<E2> elements) {
+            public <E2 extends Point> void removeIn(List<E2> points) {
                 throw exception();
             }
 
             @Override
-            public void addAll(List<T> elements) {
+            public void addAll(List<E> elements) {
                 throw exception();
             }
 
             @Override
-            public <E2 extends Point> List<T> getAt(E2 point) {
+            public List<E> getAt(Point point) {
                 throw exception();
             }
 
             @Override
-            public List<T> copy() {
+            public List<E> copy() {
                 throw exception();
             }
 
@@ -156,7 +156,7 @@ public class Generator {
             }
 
             @Override
-            public Iterator<T> iterator() {
+            public Iterator<E> iterator() {
                 throw exception();
             }
         };
