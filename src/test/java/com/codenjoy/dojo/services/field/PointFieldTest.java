@@ -1158,6 +1158,21 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testReader_twoElements_sameObjects() {
+        // given
+        testAdd_twoElements_sameObjects();
+
+        // when then
+        List<Point> all = getReader(player, One.class);
+
+        assertEquals("[one1(1,1), one1(1,1)]",
+                all.toString());
+
+        // then
+        assert_twoElements_sameObjects();
+    }
+
+    @Test
     public void testReader_getTwoTypesFromDifferentPoints_inverseOrder() {
         // given
         testAdd_severalElements_mixed();
