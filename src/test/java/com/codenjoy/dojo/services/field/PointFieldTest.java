@@ -26,7 +26,6 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
-import com.google.common.base.Supplier;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -179,6 +178,41 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testAdd_twoElements_sameObjects() {
+        // given
+        field = new PointField(3);
+
+        // when
+        One one = new One(1, 1);
+        field.add(one);
+        field.add(one);
+
+        // then
+        assert_twoElements_sameObjects();
+    }
+
+    private void assert_twoElements_sameObjects() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one1(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one1(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    @Test
     public void testSameOf_add_twoElements_sameType_differentCells() {
         // given
         field = new PointField(3);
@@ -194,6 +228,22 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_add_twoElements_sameObjects() {
+        // given
+        field = new PointField(3);
+
+        // when
+        Accessor<One> of = field.of(One.class);
+
+        One one = new One(1, 1);
+        of.add(one);
+        of.add(one);
+
+        // then
+        assert_twoElements_sameObjects();
+    }
+
+    @Test
     public void testDifferentOf_add_twoElements_sameType_differentCells() {
         // given
         field = new PointField(3);
@@ -204,6 +254,20 @@ public class PointFieldTest {
 
         // then
         assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testDifferentOf_add_twoElements_sameObjects() {
+        // given
+        field = new PointField(3);
+
+        // when
+        One one = new One(1, 1);
+        field.of(One.class).add(one);
+        field.of(One.class).add(one);
+
+        // then
+        assert_twoElements_sameObjects();
     }
 
     @Test
