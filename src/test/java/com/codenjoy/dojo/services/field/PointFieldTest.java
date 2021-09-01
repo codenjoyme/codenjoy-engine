@@ -962,6 +962,13 @@ public class PointFieldTest {
     }
 
     private void assertContains_oneElement() {
+        One same = field.of(One.class).all().get(0);
+        assertEquals(true, field.of(One.class).contains(same));
+        assertEquals(false, field.of(Two.class).contains(same));
+
+        assertException(() -> field.of(One.class).contains(null),
+                NullPointerException.class);
+
         assertEquals(true, field.of(One.class).contains(new One(1, 1)));
         assertEquals(true, field.of(One.class).contains(pt(1, 1)));
         assertEquals(true, field.of(One.class).contains(new Two(1, 1)));
@@ -995,6 +1002,16 @@ public class PointFieldTest {
         testAdd_twoElements_sameType_differentCells();
 
         // when then
+        One one = field.of(One.class).all().get(0);
+        One another = field.of(One.class).all().get(1);
+        assertEquals(true, field.of(One.class).contains(one));
+        assertEquals(false, field.of(Two.class).contains(another));
+        assertEquals(true, field.of(One.class).contains(another));
+        assertEquals(false, field.of(Two.class).contains(one));
+
+        assertException(() -> field.of(One.class).contains(null),
+                NullPointerException.class);
+
         assertEquals(true, field.of(One.class).contains(new One(1, 1)));
         assertEquals(true, field.of(One.class).contains(pt(1, 1)));
         assertEquals(true, field.of(One.class).contains(new Two(1, 1)));
@@ -1026,6 +1043,18 @@ public class PointFieldTest {
         testAdd_twoElements_differentTypes_sameCell();
 
         // when then
+        One one = field.of(One.class).all().get(0);
+        Two another = field.of(Two.class).all().get(0);
+        assertEquals(true, field.of(One.class).contains(one));
+        assertEquals(true, field.of(Two.class).contains(another));
+        // true потому что contains(pt) а не same object
+        assertEquals(true, field.of(One.class).contains(another));
+        // true потому что contains(pt) а не same object
+        assertEquals(true, field.of(Two.class).contains(one));
+
+        assertException(() -> field.of(One.class).contains(null),
+                NullPointerException.class);
+
         assertEquals(true, field.of(One.class).contains(new One(2, 1)));
         assertEquals(true, field.of(One.class).contains(pt(2, 1)));
         assertEquals(true, field.of(One.class).contains(new Two(2, 1)));
@@ -1055,6 +1084,18 @@ public class PointFieldTest {
         testAdd_twoElements_differentTypes_differentCells();
 
         // when then
+        One one = field.of(One.class).all().get(0);
+        Two another = field.of(Two.class).all().get(0);
+        assertEquals(true, field.of(One.class).contains(one));
+        assertEquals(true, field.of(Two.class).contains(another));
+        assertEquals(false, field.of(One.class).contains(another));
+        assertEquals(false, field.of(Two.class).contains(one));
+
+        assertException(() -> field.of(One.class).contains(null),
+                NullPointerException.class);
+        assertException(() -> field.of(Two.class).contains(null),
+                NullPointerException.class);
+
         assertEquals(true, field.of(One.class).contains(new One(2, 1)));
         assertEquals(true, field.of(One.class).contains(pt(2, 1)));
         assertEquals(true, field.of(One.class).contains(new Two(2, 1)));
