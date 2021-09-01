@@ -55,12 +55,14 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     <E2 extends Point> boolean removeExact(E2 element);
 
     /**
-     * Удаляюеся первый найденный в конкретной клетке поля (по координатам) элемент.
+     * Удаляются все найденные (по выбранному в Accessor типу)
+     * в конкретной клетке поля элементы.
+     * Поиск клетки осуществляется по координатам.
      *
      * @param element Координаты удаляемого элемента.
      * @return true - если было удаление.
      */
-    <E2 extends Point> boolean remove(E2 element); // TODO test me
+    <E2 extends Point> boolean removeAt(E2 element);
 
     /**
      * @return Возвращает всю коллекцию в неизменяемом виде.

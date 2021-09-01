@@ -91,7 +91,7 @@ public class Generator {
             }
 
             @Override
-            public <E2 extends Point> boolean remove(E2 element) {
+            public <E2 extends Point> boolean removeAt(E2 element) {
                 throw exception();
             }
 

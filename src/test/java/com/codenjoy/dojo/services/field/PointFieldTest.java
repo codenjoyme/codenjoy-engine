@@ -2325,4 +2325,595 @@ public class PointFieldTest {
         assert_twoElements_differentTypes_differentCells();
     }
 
+    // -----------------
+
+    @Test
+    public void testSameOf_remove_oneElement() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+
+        // when
+        field.of(One.class).removeAt(one);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_oneElement_cantRemove_typeIsNotSame() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+
+        // when
+        Class<Two> otherType = Two.class;
+        field.of(otherType).removeAt((Point)one);
+
+        // then
+        assert_oneElement();
+    }
+
+    @Test
+    public void testSameOf_remove_oneElement_shouldRemove_objectIsNotSame_samePoint_sameType() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+        One anotherOne = new One(one.getX(), one.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherOne);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_oneElement_cantRemove_objectIsNotSame_otherPoint_sameType() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+        One anotherOne = new One(one.getX() + 1, one.getY() + 1);
+
+        // when
+        field.of(One.class).removeAt(anotherOne);
+
+        // then
+        assert_oneElement();
+    }
+
+    @Test
+    public void testSameOf_remove_oneElement_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+        Two anotherTwo = new Two(one.getX(), one.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherTwo);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_oneElement_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+        One anotherOne = new One(one.getX(), one.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne);
+
+        // then
+        assert_oneElement();
+    }
+
+    @Test
+    public void testSameOf_remove_oneElement_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+        // given
+        testAdd_oneElement();
+        One one = get(One.class, 0);
+        Two another = new Two(one.getX(), one.getY());
+
+        // when
+        field.of(Two.class).removeAt(another);
+
+        // then
+        assert_oneElement();
+    }
+
+    @Test
+    public void testSameOf_remove_exceptionIfNull() {
+        // given
+        testAdd_oneElement();
+
+        // when then
+        assertException(() -> field.of(One.class).removeAt(null),
+                NullPointerException.class);
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+
+        // when
+        field.of(One.class).removeAt(one2);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_typeIsNotSame() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+
+        // when
+        Class<Two> otherType = Two.class;
+        field.of(otherType).removeAt((Point)one1);
+        field.of(otherType).removeAt((Point)one2);
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_sameType() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        One anotherOne1 = new One(one1.getX(), one1.getY());
+        One anotherOne2 = new One(one2.getX(), one2.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne1);
+        field.of(Two.class).removeAt(anotherOne2);
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_otherPoint_sameType() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        One anotherOne1 = new One(one1.getX() + 1, one1.getY() + 1);
+        One anotherOne2 = new One(one2.getX() + 1, one2.getY() + 1);
+
+        // when
+        field.of(Two.class).removeAt(anotherOne1);
+        field.of(Two.class).removeAt(anotherOne2);
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        Two anotherTwo1 = new Two(one1.getX(), one1.getY());
+        Two anotherTwo2 = new Two(one2.getX(), one2.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherTwo1);
+        field.of(One.class).removeAt(anotherTwo2);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        One anotherOne1 = new One(one1.getX(), one1.getY());
+        One anotherOne2 = new One(one2.getX(), one2.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne1);
+        field.of(Two.class).removeAt(anotherOne2);
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+        // given
+        testAdd_twoElements_sameType_sameCell();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        Two anotherTwo1 = new Two(one1.getX(), one1.getY());
+        Two anotherTwo2 = new Two(one2.getX(), one2.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherTwo1);
+        field.of(Two.class).removeAt(anotherTwo2);
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+
+        // when
+        field.of(One.class).removeAt(one2);
+
+        // then
+        assert_oneElement();
+
+        // when
+        field.of(One.class).removeAt(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_typeIsNotSame() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+
+        // when
+        Class<Two> otherType = Two.class;
+        field.of(otherType).removeAt((Point)one1);
+        field.of(otherType).removeAt((Point)one2);
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_sameType() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        One anotherOne1 = new One(one1.getX(), one1.getY());
+        One anotherOne2 = new One(one2.getX(), one2.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne1);
+        field.of(Two.class).removeAt(anotherOne2);
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_otherPoint_sameType() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        One anotherOne1 = new One(one1.getX() + 1, one1.getY() + 1);
+        One anotherOne2 = new One(one2.getX() + 1, one2.getY() + 1);
+
+        // when
+        field.of(Two.class).removeAt(anotherOne1);
+        field.of(Two.class).removeAt(anotherOne2);
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        Two anotherTwo1 = new Two(one1.getX(), one1.getY());
+        Two anotherTwo2 = new Two(one2.getX(), one2.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherTwo1);
+        field.of(One.class).removeAt(anotherTwo2);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        One anotherOne1 = new One(one1.getX(), one1.getY());
+        One anotherOne2 = new One(one2.getX(), one2.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne1);
+        field.of(Two.class).removeAt(anotherOne2);
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+        // given
+        testAdd_twoElements_sameType_differentCells();
+        One one1 = get(One.class, 0);
+        One one2 = get(One.class, 1);
+        Two anotherTwo1 = new Two(one1.getX(), one1.getY());
+        Two anotherTwo2 = new Two(one2.getX(), one2.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherTwo1);
+        field.of(Two.class).removeAt(anotherTwo2);
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_sameCell() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one1 = get(One.class, 0);
+        Two two = get(Two.class, 0);
+
+        // when
+        field.of(Two.class).removeAt(two);
+
+        // then
+        assert_oneElement_anotherCell();
+
+        // when
+        field.of(One.class).removeAt(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_typeIsNotSame() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+
+        // when
+        Class<Two> twoType = Two.class;
+        field.of(twoType).removeAt((Point)one);
+
+        Class<One> ontType = One.class;
+        field.of(ontType).removeAt((Point)two);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_sameType() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        One anotherOne = new One(one.getX(), one.getY());
+        Two anotherTwo = new Two(two.getX(), two.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherOne);
+        field.of(Two.class).removeAt(anotherTwo);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_sameCell_cantRemove_objectIsNotSame_otherPoint_sameType() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        One anotherOne = new One(one.getX() + 1, one.getY() + 1);
+        Two anotherTwo = new Two(two.getX() + 1, two.getY() + 1);
+
+        // when
+        field.of(One.class).removeAt(anotherOne);
+        field.of(Two.class).removeAt(anotherTwo);
+
+        // then
+        assert_twoElements_differentTypes_sameCell();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_shouldCell_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        Two anotherTwo = new Two(one.getX(), one.getY());
+        One anotherOne = new One(two.getX(), two.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherTwo);
+        field.of(One.class).removeAt(anotherOne);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        Two anotherTwo = new Two(one.getX(), one.getY());
+        One anotherOne = new One(two.getX(), two.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherTwo);
+        field.of(Two.class).removeAt(anotherOne);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inOf() {
+        // given
+        testAdd_twoElements_differentTypes_sameCell();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        One anotherOne = new One(one.getX(), one.getY());
+        Two anotherTwo = new Two(two.getX(), two.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne);
+        field.of(One.class).removeAt(anotherTwo);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one1 = get(One.class, 0);
+        Two two = get(Two.class, 0);
+
+        // when
+        field.of(Two.class).removeAt(two);
+
+        // then
+        assert_oneElement_anotherCell();
+
+        // when
+        field.of(One.class).removeAt(one1);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_typeIsNotSame() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+
+        // when
+        Class<Two> twoType = Two.class;
+        field.of(twoType).removeAt((Point)one);
+
+        Class<One> ontType = One.class;
+        field.of(ontType).removeAt((Point)two);
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells_shouldRemove_objectIsNotSame_samePoint_sameType() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        One anotherOne = new One(one.getX(), one.getY());
+        Two anotherTwo = new Two(two.getX(), two.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherOne);
+        field.of(Two.class).removeAt(anotherTwo);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_otherPoint_sameType() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        One anotherOne = new One(one.getX() + 1, one.getY() + 1);
+        Two anotherTwo = new Two(two.getX() + 1, two.getY() + 1);
+
+        // when
+        field.of(One.class).removeAt(anotherOne);
+        field.of(Two.class).removeAt(anotherTwo);
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        Two anotherTwo = new Two(one.getX(), one.getY());
+        One anotherOne = new One(two.getX(), two.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherTwo);
+        field.of(One.class).removeAt(anotherOne);
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        Two anotherTwo = new Two(one.getX(), one.getY());
+        One anotherOne = new One(two.getX(), two.getY());
+
+        // when
+        field.of(One.class).removeAt(anotherTwo);
+        field.of(Two.class).removeAt(anotherOne);
+
+        // then
+        assert_emptyCollection();
+    }
+
+    @Test
+    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+        // given
+        testAdd_twoElements_differentTypes_differentCells();
+        One one = get(One.class, 0);
+        Two two = get(Two.class, 0);
+        One anotherOne = new One(one.getX(), one.getY());
+        Two anotherTwo = new Two(two.getX(), two.getY());
+
+        // when
+        field.of(Two.class).removeAt(anotherOne);
+        field.of(One.class).removeAt(anotherTwo);
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
 }

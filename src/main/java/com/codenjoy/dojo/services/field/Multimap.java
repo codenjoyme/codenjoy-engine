@@ -50,7 +50,7 @@ public class Multimap<K, V> {
     @PerformanceOptimized
     public boolean remove(K key, Point element) {
         return ifPresent(key, false,
-                list -> list.remove(element));
+                list -> list.removeIf(it -> it.equals(element)));
     }
 
     @PerformanceOptimized
