@@ -1864,8 +1864,8 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX(), one2.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne1);
-        field.of(Two.class).removeExact(anotherOne2);
+        field.of(One.class).removeExact(anotherOne1);
+        field.of(One.class).removeExact(anotherOne2);
 
         // then
         assert_twoElements_sameType_sameCell();
@@ -1881,8 +1881,8 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX() + 1, one2.getY() + 1);
 
         // when
-        field.of(Two.class).removeExact(anotherOne1);
-        field.of(Two.class).removeExact(anotherOne2);
+        field.of(One.class).removeExact(anotherOne1);
+        field.of(One.class).removeExact(anotherOne2);
 
         // then
         assert_twoElements_sameType_sameCell();
@@ -1985,8 +1985,8 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX(), one2.getY());
 
         // when
-        field.of(Two.class).removeExact(anotherOne1);
-        field.of(Two.class).removeExact(anotherOne2);
+        field.of(One.class).removeExact(anotherOne1);
+        field.of(One.class).removeExact(anotherOne2);
 
         // then
         assert_twoElements_sameType_differentCells();
@@ -2002,8 +2002,8 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX() + 1, one2.getY() + 1);
 
         // when
-        field.of(Two.class).removeExact(anotherOne1);
-        field.of(Two.class).removeExact(anotherOne2);
+        field.of(One.class).removeExact(anotherOne1);
+        field.of(One.class).removeExact(anotherOne2);
 
         // then
         assert_twoElements_sameType_differentCells();
@@ -2071,7 +2071,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(two);
 
         // then
-        assert_oneElement_anotherCell();
+        assert_oneElement_anotherCell_one1();
 
         // when
         field.of(One.class).removeExact(one1);
@@ -2183,7 +2183,7 @@ public class PointFieldTest {
         assert_twoElements_differentTypes_sameCell();
     }
 
-    private void assert_oneElement_anotherCell() {
+    private void assert_oneElement_anotherCell_one1() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
                 "                one1(2,1)]}]\n" +
@@ -2202,6 +2202,44 @@ public class PointFieldTest {
                 "]", field.toString());
     }
 
+    private void assert_oneElement_anotherCell_two2() {
+        assertEquals("[map={\n" +
+                "        Two.class=[\n" +
+                "                two2(2,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{\n" +
+                "        Two.class=[\n" +
+                "                two2(2,1)]}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
+    private void assert_oneElement_anotherCell_two2_2() {
+        assertEquals("[map={\n" +
+                "        Two.class=[\n" +
+                "                two2(2,0)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{\n" +
+                "        Two.class=[\n" +
+                "                two2(2,0)]}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
     @Test
     public void testSameOf_removeExact_twoElements_differentTypes_differentCells() {
         // given
@@ -2213,7 +2251,7 @@ public class PointFieldTest {
         field.of(Two.class).removeExact(two);
 
         // then
-        assert_oneElement_anotherCell();
+        assert_oneElement_anotherCell_one1();
 
         // when
         field.of(One.class).removeExact(one1);
@@ -2325,10 +2363,8 @@ public class PointFieldTest {
         assert_twoElements_differentTypes_differentCells();
     }
 
-    // -----------------
-
     @Test
-    public void testSameOf_remove_oneElement() {
+    public void testSameOf_removeAt_oneElement() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2341,7 +2377,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_oneElement_cantRemove_typeIsNotSame() {
+    public void testSameOf_removeAt_oneElement_cantRemove_typeIsNotSame() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2355,7 +2391,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_oneElement_shouldRemove_objectIsNotSame_samePoint_sameType() {
+    public void testSameOf_removeAt_oneElement_shouldRemove_objectIsNotSame_samePoint_sameType() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2369,7 +2405,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_oneElement_cantRemove_objectIsNotSame_otherPoint_sameType() {
+    public void testSameOf_removeAt_oneElement_cantRemove_objectIsNotSame_otherPoint_sameType() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2383,7 +2419,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_oneElement_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+    public void testSameOf_removeAt_oneElement_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2397,7 +2433,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_oneElement_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+    public void testSameOf_removeAt_oneElement_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2411,7 +2447,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_oneElement_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+    public void testSameOf_removeAt_oneElement_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
         // given
         testAdd_oneElement();
         One one = get(One.class, 0);
@@ -2425,7 +2461,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_exceptionIfNull() {
+    public void testSameOf_removeAt_exceptionIfNull() {
         // given
         testAdd_oneElement();
 
@@ -2435,7 +2471,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
@@ -2449,7 +2485,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_typeIsNotSame() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell_cantRemove_typeIsNotSame() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
@@ -2465,24 +2501,23 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_sameType() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell_shouldRemove_objectIsNotSame_samePoint_sameType() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
         One one2 = get(One.class, 1);
-        One anotherOne1 = new One(one1.getX(), one1.getY());
-        One anotherOne2 = new One(one2.getX(), one2.getY());
+        assertEquals(one1, one2);
+        One anotherOne = new One(one1.getX(), one1.getY());
 
         // when
-        field.of(Two.class).removeAt(anotherOne1);
-        field.of(Two.class).removeAt(anotherOne2);
+        field.of(One.class).removeAt(anotherOne);
 
         // then
-        assert_twoElements_sameType_sameCell();
+        assert_emptyCollection();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_otherPoint_sameType() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_otherPoint_sameType() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
@@ -2491,66 +2526,63 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX() + 1, one2.getY() + 1);
 
         // when
-        field.of(Two.class).removeAt(anotherOne1);
-        field.of(Two.class).removeAt(anotherOne2);
+        field.of(One.class).removeAt(anotherOne1);
+        field.of(One.class).removeAt(anotherOne2);
 
         // then
         assert_twoElements_sameType_sameCell();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
         One one2 = get(One.class, 1);
-        Two anotherTwo1 = new Two(one1.getX(), one1.getY());
-        Two anotherTwo2 = new Two(one2.getX(), one2.getY());
+        assertEquals(one1, one2);
+        Two anotherTwo = new Two(one1.getX(), one1.getY());
 
         // when
-        field.of(One.class).removeAt(anotherTwo1);
-        field.of(One.class).removeAt(anotherTwo2);
+        field.of(One.class).removeAt(anotherTwo);
 
         // then
         assert_emptyCollection();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
         One one2 = get(One.class, 1);
-        One anotherOne1 = new One(one1.getX(), one1.getY());
-        One anotherOne2 = new One(one2.getX(), one2.getY());
+        assertEquals(one1, one2);
+        One anotherOne = new One(one1.getX(), one1.getY());
 
         // when
-        field.of(Two.class).removeAt(anotherOne1);
-        field.of(Two.class).removeAt(anotherOne2);
+        field.of(Two.class).removeAt(anotherOne);
 
         // then
         assert_twoElements_sameType_sameCell();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+    public void testSameOf_removeAt_twoElements_sameType_sameCell_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
         // given
         testAdd_twoElements_sameType_sameCell();
         One one1 = get(One.class, 0);
         One one2 = get(One.class, 1);
-        Two anotherTwo1 = new Two(one1.getX(), one1.getY());
-        Two anotherTwo2 = new Two(one2.getX(), one2.getY());
+        assertEquals(one1, one2);
+        Two anotherTwo = new Two(one1.getX(), one1.getY());
 
         // when
-        field.of(Two.class).removeAt(anotherTwo1);
-        field.of(Two.class).removeAt(anotherTwo2);
+        field.of(Two.class).removeAt(anotherTwo);
 
         // then
         assert_twoElements_sameType_sameCell();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2570,7 +2602,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_typeIsNotSame() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells_cantRemove_typeIsNotSame() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2586,7 +2618,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_sameType() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells_shouldRemove_objectIsNotSame_samePoint_sameType() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2595,15 +2627,20 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX(), one2.getY());
 
         // when
-        field.of(Two.class).removeAt(anotherOne1);
-        field.of(Two.class).removeAt(anotherOne2);
+        field.of(One.class).removeAt(anotherOne1);
 
         // then
-        assert_twoElements_sameType_differentCells();
+        assert_oneElement_anotherCell_one2();
+
+        // when
+        field.of(One.class).removeAt(anotherOne2);
+
+        // then
+        assert_emptyCollection();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_otherPoint_sameType() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_otherPoint_sameType() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2612,15 +2649,15 @@ public class PointFieldTest {
         One anotherOne2 = new One(one2.getX() + 1, one2.getY() + 1);
 
         // when
-        field.of(Two.class).removeAt(anotherOne1);
-        field.of(Two.class).removeAt(anotherOne2);
+        field.of(One.class).removeAt(anotherOne1);
+        field.of(One.class).removeAt(anotherOne2);
 
         // then
         assert_twoElements_sameType_differentCells();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2630,14 +2667,38 @@ public class PointFieldTest {
 
         // when
         field.of(One.class).removeAt(anotherTwo1);
+
+        // then
+        assert_oneElement_anotherCell_one2();
+
+        // when
         field.of(One.class).removeAt(anotherTwo2);
 
         // then
         assert_emptyCollection();
     }
 
+    private void assert_oneElement_anotherCell_one2() {
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one2(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one2(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{}\n" +
+                "]", field.toString());
+    }
+
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2654,7 +2715,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+    public void testSameOf_removeAt_twoElements_sameType_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
         // given
         testAdd_twoElements_sameType_differentCells();
         One one1 = get(One.class, 0);
@@ -2671,7 +2732,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_sameCell() {
+    public void testSameOf_removeAt_twoElements_differentTypes_sameCell() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one1 = get(One.class, 0);
@@ -2681,7 +2742,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(two);
 
         // then
-        assert_oneElement_anotherCell();
+        assert_oneElement_anotherCell_one1();
 
         // when
         field.of(One.class).removeAt(one1);
@@ -2691,7 +2752,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_typeIsNotSame() {
+    public void testSameOf_removeAt_twoElements_differentTypes_sameCell_shouldRemove_typeIsNotSame() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one = get(One.class, 0);
@@ -2701,15 +2762,19 @@ public class PointFieldTest {
         Class<Two> twoType = Two.class;
         field.of(twoType).removeAt((Point)one);
 
-        Class<One> ontType = One.class;
-        field.of(ontType).removeAt((Point)two);
+        // then
+        assert_oneElement_anotherCell_one1();
+
+        // when
+        Class<One> oneType = One.class;
+        field.of(oneType).removeAt((Point)two);
 
         // then
         assert_emptyCollection();
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_sameType() {
+    public void testSameOf_removeAt_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_sameType() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one = get(One.class, 0);
@@ -2719,6 +2784,11 @@ public class PointFieldTest {
 
         // when
         field.of(One.class).removeAt(anotherOne);
+
+        // then
+        assert_oneElement_anotherCell_two2();
+
+        // when
         field.of(Two.class).removeAt(anotherTwo);
 
         // then
@@ -2726,7 +2796,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_sameCell_cantRemove_objectIsNotSame_otherPoint_sameType() {
+    public void testSameOf_removeAt_twoElements_differentTypes_sameCell_cantRemove_objectIsNotSame_otherPoint_sameType() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one = get(One.class, 0);
@@ -2743,7 +2813,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_shouldCell_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+    public void testSameOf_removeAt_twoElements_differentTypes_shouldCell_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one = get(One.class, 0);
@@ -2760,7 +2830,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+    public void testSameOf_removeAt_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one = get(One.class, 0);
@@ -2770,6 +2840,11 @@ public class PointFieldTest {
 
         // when
         field.of(One.class).removeAt(anotherTwo);
+
+        // then
+        assert_oneElement_anotherCell_two2();
+
+        // when
         field.of(Two.class).removeAt(anotherOne);
 
         // then
@@ -2777,7 +2852,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inOf() {
+    public void testSameOf_removeAt_twoElements_differentTypes_sameCell_shouldRemove_objectIsNotSame_samePoint_otherType_inOf() {
         // given
         testAdd_twoElements_differentTypes_sameCell();
         One one = get(One.class, 0);
@@ -2787,6 +2862,11 @@ public class PointFieldTest {
 
         // when
         field.of(Two.class).removeAt(anotherOne);
+
+        // then
+        assert_oneElement_anotherCell_one1();
+
+        // when
         field.of(One.class).removeAt(anotherTwo);
 
         // then
@@ -2794,7 +2874,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one1 = get(One.class, 0);
@@ -2804,7 +2884,7 @@ public class PointFieldTest {
         field.of(Two.class).removeAt(two);
 
         // then
-        assert_oneElement_anotherCell();
+        assert_oneElement_anotherCell_one1();
 
         // when
         field.of(One.class).removeAt(one1);
@@ -2814,7 +2894,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_typeIsNotSame() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells_cantRemove_typeIsNotSame() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one = get(One.class, 0);
@@ -2832,7 +2912,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells_shouldRemove_objectIsNotSame_samePoint_sameType() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells_shouldRemove_objectIsNotSame_samePoint_sameType() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one = get(One.class, 0);
@@ -2842,6 +2922,11 @@ public class PointFieldTest {
 
         // when
         field.of(One.class).removeAt(anotherOne);
+
+        // then
+        assert_oneElement_anotherCell_two2_2();
+
+        // when
         field.of(Two.class).removeAt(anotherTwo);
 
         // then
@@ -2849,7 +2934,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_otherPoint_sameType() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_otherPoint_sameType() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one = get(One.class, 0);
@@ -2866,7 +2951,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOfAndObject() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one = get(One.class, 0);
@@ -2883,7 +2968,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells_shouldRemove_objectIsNotSame_samePoint_otherType_inObject() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one = get(One.class, 0);
@@ -2893,6 +2978,11 @@ public class PointFieldTest {
 
         // when
         field.of(One.class).removeAt(anotherTwo);
+
+        // then
+        assert_oneElement_anotherCell_two2_2();
+
+        // when
         field.of(Two.class).removeAt(anotherOne);
 
         // then
@@ -2900,7 +2990,7 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_remove_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
+    public void testSameOf_removeAt_twoElements_differentTypes_differentCells_cantRemove_objectIsNotSame_samePoint_otherType_inOf() {
         // given
         testAdd_twoElements_differentTypes_differentCells();
         One one = get(One.class, 0);
@@ -2915,5 +3005,4 @@ public class PointFieldTest {
         // then
         assert_twoElements_differentTypes_differentCells();
     }
-
 }
