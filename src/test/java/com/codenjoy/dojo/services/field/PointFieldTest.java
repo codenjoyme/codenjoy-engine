@@ -747,6 +747,19 @@ public class PointFieldTest {
         assert_twoElements_sameType_differentCells();
     }
 
+    @Test
+    public void testAddAll_twoElements_sameObjects() {
+        // given
+        field = new PointField(3);
+
+        // when
+        One one = new One(1, 1);
+        field.addAll(Arrays.asList(one, one));
+
+        // then
+        assert_twoElements_sameObjects();
+    }
+
     private void assert_twoElements_sameType_differentCells() {
         assertEquals("[map={\n" +
                 "        One.class=[\n" +
