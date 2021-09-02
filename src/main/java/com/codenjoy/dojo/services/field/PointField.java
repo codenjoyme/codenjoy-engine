@@ -220,7 +220,7 @@ public class PointField {
             @Override
             @PerformanceOptimized
             public List<E> copy() {
-                return new ArrayList<>(all());
+                return new ArrayList(points());
             }
 
             @Override

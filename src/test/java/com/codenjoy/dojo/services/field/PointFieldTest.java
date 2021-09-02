@@ -3683,25 +3683,7 @@ public class PointFieldTest {
     @Test
     public void testSameOf_tick_tickOnlyTickable_ofThisType() {
         // given
-        field.add(new One(1, 1));
-        field.add(new One(1, 1));
-        field.add(new One(1, 2));
-        field.add(new One(2, 2));
-
-        field.add(new Two(1, 1));
-        field.add(new Two(1, 1));
-        field.add(new Two(1, 2));
-        field.add(new Two(2, 2));
-
-        field.add(new Three(1, 1));
-        field.add(new Three(1, 1));
-        field.add(new Three(1, 2));
-        field.add(new Three(2, 2));
-
-        field.add(new Four(1, 1));
-        field.add(new Four(1, 1));
-        field.add(new Four(1, 2));
-        field.add(new Four(2, 2));
+        givenTickData();
 
         // when
         field.of(One.class).tick();
@@ -3736,9 +3718,113 @@ public class PointFieldTest {
         assertMessages("");
     }
 
+    private void givenTickData() {
+        field.add(new One(1, 1));
+        field.add(new One(1, 1));
+        field.add(new One(1, 2));
+        field.add(new One(2, 2));
+
+        field.add(new Two(1, 1));
+        field.add(new Two(1, 1));
+        field.add(new Two(1, 2));
+        field.add(new Two(2, 2));
+
+        field.add(new Three(1, 1));
+        field.add(new Three(1, 1));
+        field.add(new Three(1, 2));
+        field.add(new Three(2, 2));
+
+        field.add(new Four(1, 1));
+        field.add(new Four(1, 1));
+        field.add(new Four(1, 2));
+        field.add(new Four(2, 2));
+    }
+
     private void assertMessages(String expected) {
         assertEquals(expected,
                 messages.stream()
                     .collect(joining("\n")));
+    }
+
+    @Test
+    public void testSameOf_tick_ableToChangeCollectionInTick() {
+        // given
+        givenTickData();
+
+        messages = new LinkedList<>(){
+            @Override
+            public boolean add(String s) {
+                // this can trow ConcurrentModificationException
+                field.of(One.class).remove(0, 1);
+                return super.add(s);
+            }
+        };
+
+        // when
+        field.of(One.class).tick();
+
+        // then
+        assertMessages(
+                "one1(1,1)\n" +
+                "one2(1,1)\n" +
+                "one3(1,2)\n" +
+                "one4(2,2)");
+
+        assertEquals("[map={\n" +
+                "        Four.class=[\n" +
+                "                four13(1,1)\n" +
+                "                four14(1,1)\n" +
+                "                four15(1,2)\n" +
+                "                four16(2,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three9(1,1)\n" +
+                "                three10(1,1)\n" +
+                "                three11(1,2)\n" +
+                "                three12(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two5(1,1)\n" +
+                "                two6(1,1)\n" +
+                "                two7(1,2)\n" +
+                "                two8(2,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        Four.class=[\n" +
+                "                four13(1,1)\n" +
+                "                four14(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three9(1,1)\n" +
+                "                three10(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two5(1,1)\n" +
+                "                two6(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        Four.class=[\n" +
+                "                four15(1,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three11(1,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two7(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Four.class=[\n" +
+                "                four16(2,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three12(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two8(2,2)]}\n" +
+                "]", field.toString());
     }
 }
