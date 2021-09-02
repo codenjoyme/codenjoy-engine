@@ -236,7 +236,13 @@ public class PointField {
             @Override
             public void remove(int from, int to) {
                 List<Point> list = points();
-                for (int index = from; index < to; index++) {
+                if (list.isEmpty()) {
+                    return;
+                }
+                if (from < 0 || to > list.size() || from > to) {
+                    throw new IndexOutOfBoundsException();
+                }
+                for (int index = to - 1; index >= from; index--) {
                     removeExact((E) list.get(index));
                 }
             }

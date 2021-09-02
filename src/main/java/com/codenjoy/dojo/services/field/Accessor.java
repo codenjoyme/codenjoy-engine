@@ -176,6 +176,9 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      *
      * @param from Начальный индекс (включительно).
      * @param from Конечный индекс (не включается).
+     * @throws IndexOutOfBoundsException for an illegal endpoint index value
+     *         ({@code from < 0 || to > size ||
+     *         from > to})
      */
-    void remove(int from, int to); // TODO test me
+    void remove(int from, int to);
 }
