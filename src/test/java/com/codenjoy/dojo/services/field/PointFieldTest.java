@@ -885,6 +885,125 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_addAll_oneElement() {
+        // when
+        field.of(One.class).addAll(Arrays.asList(new One(1, 1)));
+
+        // then
+        assert_oneElement_one1_at1_1();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_sameType_differentCells() {
+        // when
+        field.of(One.class).addAll(Arrays.asList(new One(1, 1),
+                new One(1, 2)));
+
+        // then
+        assert_twoElements_sameType_differentCells();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_sameObjects() {
+        // when
+        One one = new One(1, 1);
+        field.of(One.class).addAll(Arrays.asList(one, one));
+
+        // then
+        assert_twoElements_sameObjects();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_sameType_sameCell() {
+        // when
+        field.of(One.class).addAll(Arrays.asList(new One(1, 1),
+                new One(1, 1)));
+
+        // then
+        assert_twoElements_sameType_sameCell();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_sameType_sameCell_afterReplaceCoordinates() {
+        // given
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        field.of(One.class).addAll(Arrays.asList(one, another));
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        another.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
+        // given
+        One one = new One(1, 1);
+        One another = new One(1, 1);
+        field.of(One.class).addAll(Arrays.asList(one, another));
+
+        assert_twoElements_sameType_sameCell();
+
+        // when
+        one.move(2, 1);
+
+        // then
+        assert_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_differentTypes_sameCell() {
+        // when
+        field.of(One.class)
+                .addAll((List) Arrays.asList(new One(2, 1), new Two(2, 1)));
+
+        // then
+        assert_twoElements_differentTypes_sameCell();
+    }
+
+    @Test
+    public void testSameOf_addAll_twoElements_differentTypes_differentCells() {
+        // when
+        field.of(Two.class)
+                .addAll((List) Arrays.asList(new One(2, 1), new Two(2, 0)));
+
+        // then
+        assert_twoElements_differentTypes_differentCells();
+    }
+
+    @Test
+    public void testSameOf_addAll_differentTypes_differentCells_afterReplaceCoordinates() {
+        // given
+        One one = new One(2, 1);
+        Two two = new Two(2, 0);
+        field.of(Two.class).addAll((List) Arrays.asList(one, two));
+
+        // when
+        two.move(1, 2);
+
+        // then
+        assert_differentTypes_differentCells_afterReplaceCoordinates();
+    }
+
+    @Test
+    public void testSameOf_addAll_severalElements_mixed() {
+        // when
+        field.of(Three.class)
+                .addAll((List) Arrays.asList(new One(1, 1),
+                        new One(1, 1),
+                        new One(1, 2),
+                        new Two(1, 2),
+                        new Three(2, 2)));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
     public void testContains_oneElement() {
         // given
         testAdd_oneElement();

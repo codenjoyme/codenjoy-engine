@@ -138,7 +138,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      *
      * @param elements Добавляемые элементы.
      */
-    void addAll(List<E> elements); // TODO test me
+    void addAll(List<E> elements);
 
     /**
      * @param point Координата ячейки которой интересуемся.
