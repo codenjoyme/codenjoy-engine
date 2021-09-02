@@ -163,10 +163,12 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
 
     /**
      * Возможность тикнуть каждый элемент (выбранного в Accessor типа),
-     * если у него есть метод tick.
+     * если у него есть метод tick. При этом в тике может быть изменено
+     * содержимое всего контейнера, при этом не будет
+     * ConcurrentModificationException.
      */
     @Override
-    void tick(); // TODO test me
+    void tick();
 
     /**
      * Удаление некоторого числа элементов во всех ячейках поля

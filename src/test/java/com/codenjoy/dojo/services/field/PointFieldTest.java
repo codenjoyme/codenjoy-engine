@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.field;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import org.junit.Before;
@@ -35,6 +36,7 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -42,8 +44,8 @@ import static org.junit.Assert.fail;
 public class PointFieldTest {
 
     private PointField field;
-
-    private GamePlayer player = null;
+    private GamePlayer player;
+    private List<String> messages;
 
     private static int id;
     private static int id() {
@@ -54,9 +56,11 @@ public class PointFieldTest {
     public void setup() {
         id = 0;
         field = new PointField(3);
+        messages = new LinkedList<>();
+        player = null;
     }
 
-    static class One extends PointImpl {
+    class One extends PointImpl implements Tickable {
         private final int id;
 
         public One(int x, int y) {
@@ -71,9 +75,14 @@ public class PointFieldTest {
                     getX(),
                     getY());
         }
+
+        @Override
+        public void tick() {
+            messages.add(toString());
+        }
     }
 
-    static class Two extends PointImpl {
+    class Two extends PointImpl {
         private final int id;
 
         public Two(int x, int y) {
@@ -90,7 +99,7 @@ public class PointFieldTest {
         }
     }
 
-    static class Three extends PointImpl {
+    class Three extends PointImpl  {
         private final int id;
 
         public Three(int x, int y) {
@@ -107,7 +116,7 @@ public class PointFieldTest {
         }
     }
 
-    static class Four extends PointImpl {
+    class Four extends PointImpl implements Tickable {
         private final int id;
 
         public Four(int x, int y) {
@@ -121,6 +130,11 @@ public class PointFieldTest {
                     id,
                     getX(),
                     getY());
+        }
+
+        @Override
+        public void tick() {
+            messages.add(toString());
         }
     }
 
@@ -3664,5 +3678,67 @@ public class PointFieldTest {
 
         // then
         assert_severalElements_mixed();
+    }
+    
+    @Test
+    public void testSameOf_tick_tickOnlyTickable_ofThisType() {
+        // given
+        field.add(new One(1, 1));
+        field.add(new One(1, 1));
+        field.add(new One(1, 2));
+        field.add(new One(2, 2));
+
+        field.add(new Two(1, 1));
+        field.add(new Two(1, 1));
+        field.add(new Two(1, 2));
+        field.add(new Two(2, 2));
+
+        field.add(new Three(1, 1));
+        field.add(new Three(1, 1));
+        field.add(new Three(1, 2));
+        field.add(new Three(2, 2));
+
+        field.add(new Four(1, 1));
+        field.add(new Four(1, 1));
+        field.add(new Four(1, 2));
+        field.add(new Four(2, 2));
+
+        // when
+        field.of(One.class).tick();
+
+        // then
+        assertMessages(
+                "one1(1,1)\n" +
+                "one2(1,1)\n" +
+                "one3(1,2)\n" +
+                "one4(2,2)");
+
+        // given
+        messages.clear();
+
+        // when
+        field.of(Four.class).tick();
+
+        // then
+        assertMessages(
+                "four13(1,1)\n" +
+                "four14(1,1)\n" +
+                "four15(1,2)\n" +
+                "four16(2,2)");
+
+        // given
+        messages.clear();
+
+        // when
+        field.of(Two.class).tick();
+
+        // then
+        assertMessages("");
+    }
+
+    private void assertMessages(String expected) {
+        assertEquals(expected,
+                messages.stream()
+                    .collect(joining("\n")));
     }
 }

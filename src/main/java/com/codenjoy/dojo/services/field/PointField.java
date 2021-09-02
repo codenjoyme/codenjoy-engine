@@ -226,7 +226,7 @@ public class PointField {
             @Override
             @PerformanceOptimized
             public void tick() {
-                for(Point element : copy()) {
+                for (Point element : copy()) {
                     if (element instanceof Tickable) {
                         ((Tickable)element).tick();
                     }
