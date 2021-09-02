@@ -22,8 +22,6 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
-import com.codenjoy.dojo.client.local.LocalGameRunner;
-import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
@@ -32,7 +30,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
@@ -56,6 +53,7 @@ public class PointFieldTest {
     @Before
     public void setup() {
         id = 0;
+        field = new PointField(3);
     }
 
     static class One extends PointImpl {
@@ -128,9 +126,6 @@ public class PointFieldTest {
 
     @Test
     public void testEmptyCollection() {
-        // given
-        field = new PointField(3);
-
         // when then
         assert_emptyCollection();
     }
@@ -152,9 +147,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_oneElement() {
-        // given
-        field = new PointField(3);
-
         // when
         field.add(new One(1, 1));
 
@@ -164,9 +156,6 @@ public class PointFieldTest {
 
     @Test
     public void testOf_add_oneElement() {
-        // given
-        field = new PointField(3);
-
         // when
         field.of(One.class).add(new One(1, 1));
 
@@ -195,9 +184,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_twoElements_sameType_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         field.add(new One(1, 1));
         field.add(new One(1, 2));
@@ -208,9 +194,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_twoElements_sameObjects() {
-        // given
-        field = new PointField(3);
-
         // when
         One one = new One(1, 1);
         field.add(one);
@@ -243,9 +226,6 @@ public class PointFieldTest {
 
     @Test
     public void testSameOf_add_twoElements_sameType_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of = field.of(One.class);
 
@@ -258,9 +238,6 @@ public class PointFieldTest {
 
     @Test
     public void testSameOf_add_twoElements_sameObjects() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of = field.of(One.class);
 
@@ -274,9 +251,6 @@ public class PointFieldTest {
 
     @Test
     public void testDifferentOf_add_twoElements_sameType_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         field.of(One.class).add(new One(1, 1));
         field.of(One.class).add(new One(1, 2));
@@ -287,9 +261,6 @@ public class PointFieldTest {
 
     @Test
     public void testDifferentOf_add_twoElements_sameObjects() {
-        // given
-        field = new PointField(3);
-
         // when
         One one = new One(1, 1);
         field.of(One.class).add(one);
@@ -301,9 +272,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_twoElements_sameType_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         field.add(new One(1, 1));
         field.add(new One(1, 1));
@@ -314,9 +282,6 @@ public class PointFieldTest {
 
     @Test
     public void testSameOf_add_twoElements_sameType_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of = field.of(One.class);
         of.add(new One(1, 1));
@@ -328,9 +293,6 @@ public class PointFieldTest {
 
     @Test
     public void testDifferentOf_add_twoElements_sameType_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         field.of(One.class).add(new One(1, 1));
         field.of(One.class).add(new One(1, 1));
@@ -342,8 +304,6 @@ public class PointFieldTest {
     @Test
     public void testAdd_twoElements_sameType_sameCell_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         field.add(one);
@@ -361,8 +321,6 @@ public class PointFieldTest {
     @Test
     public void testSameOf_add_twoElements_sameType_sameCell_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         Accessor<One> of = field.of(One.class);
@@ -381,8 +339,6 @@ public class PointFieldTest {
     @Test
     public void testDifferentOf_Add_twoElements_sameType_sameCell_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         field.of(One.class).add(one);
@@ -400,8 +356,6 @@ public class PointFieldTest {
     @Test
     public void testAdd_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         field.add(one);
@@ -419,8 +373,6 @@ public class PointFieldTest {
     @Test
     public void testSameOf_add_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         Accessor<One> of = field.of(One.class);
@@ -439,8 +391,6 @@ public class PointFieldTest {
     @Test
     public void testDifferentOf_add_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         Accessor<One> of = field.of(One.class);
@@ -523,9 +473,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_twoElements_differentTypes_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         field.add(new One(2, 1));
         field.add(new Two(2, 1));
@@ -536,9 +483,6 @@ public class PointFieldTest {
 
     @Test
     public void testOf_add_twoElements_differentTypes_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of1 = field.of(One.class);
         Accessor<Two> of2 = field.of(Two.class);
@@ -551,9 +495,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_twoElements_differentTypes_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         field.add(new One(2, 1));
         field.add(new Two(2, 0));
@@ -564,9 +505,6 @@ public class PointFieldTest {
 
     @Test
     public void testOf_add_twoElements_differentTypes_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of1 = field.of(One.class);
         Accessor<Two> of2 = field.of(Two.class);
@@ -579,9 +517,6 @@ public class PointFieldTest {
 
     @Test
     public void testOf_add_twoElements_differentTypes_differentCells_tryToChangeAccessorType() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor of = field.of(Three.class);
         // don't worry, accessor is used as syntactic sugar
@@ -619,8 +554,6 @@ public class PointFieldTest {
     @Test
     public void testAdd_differentTypes_differentCells_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         field.add(new One(2, 1));
         Two two = new Two(2, 0);
         field.add(two);
@@ -638,8 +571,6 @@ public class PointFieldTest {
     @Test
     public void testOf_add_differentTypes_differentCells_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         Accessor<One> of1 = field.of(One.class);
         Accessor<Two> of2 = field.of(Two.class);
         of1.add(new One(2, 1));
@@ -681,9 +612,6 @@ public class PointFieldTest {
 
     @Test
     public void testAdd_severalElements_mixed() {
-        // given
-        field = new PointField(3);
-
         // when
         field.add(new One(1, 1));
         field.add(new One(1, 1));
@@ -697,9 +625,6 @@ public class PointFieldTest {
 
     @Test
     public void testSameOf_add_severalElements_mixed() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of1 = field.of(One.class);
         Accessor<Two> of2 = field.of(Two.class);
@@ -716,9 +641,6 @@ public class PointFieldTest {
 
     @Test
     public void testSame2Of_add_severalElements_mixed() {
-        // given
-        field = new PointField(3);
-
         // when
         Accessor<One> of1 = field.of(One.class);
         of1.add(new One(1, 1));
@@ -737,9 +659,6 @@ public class PointFieldTest {
 
     @Test
     public void testDifferentOf_add_severalElements_mixed() {
-        // given
-        field = new PointField(3);
-
         // when
         field.of(One.class).add(new One(1, 1));
         field.of(One.class).add(new One(1, 1));
@@ -753,9 +672,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_oneElement() {
-        // given
-        field = new PointField(3);
-
         // when
         field.addAll(Arrays.asList(new One(1, 1)));
 
@@ -765,9 +681,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_twoElements_sameType_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         field.addAll(Arrays.asList(new One(1, 1),
                 new One(1, 2)));
@@ -778,9 +691,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_twoElements_sameObjects() {
-        // given
-        field = new PointField(3);
-
         // when
         One one = new One(1, 1);
         field.addAll(Arrays.asList(one, one));
@@ -813,9 +723,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_twoElements_sameType_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         field.addAll(Arrays.asList(new One(1, 1),
                 new One(1, 1)));
@@ -827,8 +734,6 @@ public class PointFieldTest {
     @Test
     public void testAddAll_twoElements_sameType_sameCell_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         field.addAll(Arrays.asList(one, another));
@@ -845,8 +750,6 @@ public class PointFieldTest {
     @Test
     public void testAddAll_twoElements_sameType_sameCell_afterReplaceCoordinates_changeFirstAdded() {
         // given
-        field = new PointField(3);
-
         One one = new One(1, 1);
         One another = new One(1, 1);
         field.addAll(Arrays.asList(one, another));
@@ -862,9 +765,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_twoElements_differentTypes_sameCell() {
-        // given
-        field = new PointField(3);
-
         // when
         field.addAll(Arrays.asList(new One(2, 1),
                 new Two(2, 1)));
@@ -900,9 +800,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_twoElements_differentTypes_differentCells() {
-        // given
-        field = new PointField(3);
-
         // when
         field.addAll(Arrays.asList(new One(2, 1),
                 new Two(2, 0)));
@@ -914,8 +811,6 @@ public class PointFieldTest {
     @Test
     public void testAddAll_differentTypes_differentCells_afterReplaceCoordinates() {
         // given
-        field = new PointField(3);
-
         One one = new One(2, 1);
         Two two = new Two(2, 0);
         field.addAll(Arrays.asList(one, two));
@@ -929,9 +824,6 @@ public class PointFieldTest {
 
     @Test
     public void testAddAll_severalElements_mixed() {
-        // given
-        field = new PointField(3);
-
         // when
         field.addAll(Arrays.asList(new One(1, 1),
                 new One(1, 1),
@@ -1619,8 +1511,6 @@ public class PointFieldTest {
     }
 
     private One givenSeveralElements_mixed_inOneCell() {
-        field = new PointField(3);
-
         field.add(new One(1, 1));
         One some = new One(1, 1);
         field.add(some);
