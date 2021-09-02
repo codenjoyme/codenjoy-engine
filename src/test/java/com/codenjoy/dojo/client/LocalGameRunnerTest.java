@@ -42,9 +42,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -88,8 +88,12 @@ public class LocalGameRunnerTest {
                     }
 
                     @Override
-                    public Iterable<? extends Point> elements(GamePlayer player) {
-                        return new LinkedList<Point>(){{
+                    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> processor) {
+                        processor.accept(elements());
+                    }
+
+                    private LinkedList<Point> elements() {
+                        return new LinkedList<>() {{
                             add(pt(1, id++));
                             add(pt(2, id++));
                             add(pt(3, id++));
@@ -98,7 +102,7 @@ public class LocalGameRunnerTest {
 
                     @Override
                     public String toString() {
-                        return String.format("size:%s,elements:%s", size(), elements(null));
+                        return String.format("size:%s,elements:%s", size(), elements());
                     }
                 };
             }

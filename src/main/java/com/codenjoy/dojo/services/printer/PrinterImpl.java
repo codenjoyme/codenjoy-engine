@@ -25,15 +25,15 @@ package com.codenjoy.dojo.services.printer;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
-import static com.codenjoy.dojo.services.PointImpl.pt;
+import java.util.function.Consumer;
 
 /**
  * Этот малый умеет печатать состояние борды на экране.
  * @see PrinterImpl#print(Object...)
   */
 class PrinterImpl implements Printer<String> {
-    public static final String ERROR_SYMBOL = "Ъ";
     private char[][] field;
     private GamePrinter printer;
 
@@ -54,20 +54,14 @@ class PrinterImpl implements Printer<String> {
         fillField();
 
         StringBuilder string = new StringBuilder();
-        for (char[] currentRow : field) {
-            for (char ch : currentRow) {
-                string.append(ch);
+        for (char[] row : field) {
+            for (char ch : row) {
+                // TODO а точно у всех символов пробел это пустота?
+                string.append((ch == '\0') ? ' ' : ch);
             }
             string.append("\n");
         }
-
-        String result = string.toString();
-        if (result.contains(ERROR_SYMBOL)) {
-            throw new IllegalArgumentException("Обрати внимание на поле - в месте 'Ъ' появился " +
-                    "null Element. И как только он туда попал?\n" + result);
-        }
-
-        return result;
+        return string.toString();
     }
 
     private void fillField() {
@@ -79,10 +73,6 @@ class PrinterImpl implements Printer<String> {
     }
 
     private void set(int x, int y, char ch) {
-        if (x == -1 || y == -1) { // TODO убрать это
-            return;
-        }
-
         field[printer.size() - 1 - y][x] = ch;
     }
 
@@ -91,24 +81,21 @@ class PrinterImpl implements Printer<String> {
         private final BoardReader board;
         private int size;
         private P player;
-        private char emptyChar;
-
-        private Object[][] field;
+        private Object[][][] field;
         private byte[][] len;
 
         public GamePrinterImpl(BoardReader board, P player) {
             this.board = board;
             this.player = player;
-            this.emptyChar = ' ';
         }
 
         @Override
         public void init() {
             size = board.size();
-            field = new Object[size][size];
+            field = new Object[size][size][];
             len = new byte[size][size];
 
-            addAll(board.elements(player));
+            board.addAll(player, addAll());
         }
 
         @Override
@@ -116,38 +103,51 @@ class PrinterImpl implements Printer<String> {
             return board.size();
         }
 
-        private void addAll(Iterable<? extends Point> elements) {
-            for (Point el : elements) {
-                int x = el.getX();
-                int y = el.getY();
+        @PerformanceOptimized
+        private Consumer<Iterable<? extends Point>> addAll() {
+            return (Iterable<? extends Point> elements) -> {
+                for (Point el : elements) {
+                    int x = el.getX();
+                    int y = el.getY();
 
-                if (pt(x, y).isOutOf(field.length)) {
-                    continue; // TODO test me (пропускаем элементы за пределами борды)
+                    if (el.isOutOf(field.length)) {
+                        continue; // TODO test me (пропускаем элементы за пределами борды)
+                    }
+                    Object[] existing = data(x, y);
+                    byte index = index(x, y, existing.length);
+                    existing[index] = el;
+                    len[x][y]++;
                 }
-                Object[] existing = (Object[]) field[x][y];
-                if (existing == null) {
-                    existing = new Object[7];
-                    field[x][y] = existing;
-                }
-                byte index = len[x][y];
-                if (index >= existing.length) {
-                    throw new IllegalStateException(String.format(
-                            "There are many items in one cell [%s,%s]: %s" +
-                                    ", expected max: %s",
-                            x, y, index, (existing.length - 1)));
-                }
-                existing[index] = el;
-                len[x][y]++;
+            };
+        }
+
+        private byte index(int x, int y, int max) {
+            byte index = len[x][y];
+            if (index < max) {
+                return index;
             }
+
+            throw new IllegalStateException(String.format(
+                    "There are many items in one cell [%s,%s]: %s" +
+                            ", expected max: %s",
+                    x, y, index, (max - 1)));
+        }
+
+        private Object[] data(int x, int y) {
+            Object[] result = field[x][y];
+            if (result != null) {
+                return result;
+            }
+            return field[x][y] = new Object[7];
         }
 
         @Override
+        @PerformanceOptimized
         public void printAll(Filler filler) {
             for (int x = 0; x < size; x++) {
                 for (int y = 0; y < size; y++) {
-                    Object[] elements = (Object[]) field[x][y];
+                    Object[] elements = field[x][y];
                     if (elements == null || len[x][y] == 0) {
-                        filler.set(x, y, emptyChar);
                         continue;
                     }
 

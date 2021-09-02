@@ -285,10 +285,13 @@ public class TestUtils {
     public static void assertSmokeFile(String fileName, List<String> messages) {
         String actual = String.join("\n", messages);
         String expected;
-        String expectedFile = SOURCE_FOLDER + fileName;
-        if (new File(expectedFile).exists()) {
+        File expectedFile = new File(SOURCE_FOLDER + fileName);
+        File actualFile = new File(TARGET_FOLDER + fileName);
+        System.out.println("Expected data is here: " + expectedFile.getAbsolutePath());
+        System.out.println("Actual data is here:   " + actualFile.getAbsolutePath());
+        if (expectedFile.exists()) {
             expected = load(expectedFile);
-            saveToFile(TARGET_FOLDER + fileName, actual);
+            saveToFile(actualFile, actual);
         } else {
             expected = StringUtils.EMPTY;
             saveToFile(expectedFile, actual);
@@ -300,10 +303,8 @@ public class TestUtils {
         }
     }
 
-    public static void saveToFile(String path, String data) {
+    public static void saveToFile(File actualFile, String data) {
         try {
-            File actualFile = new File(path);
-            System.out.println("Actual data is here: " + actualFile.getAbsolutePath());
             File folder = actualFile.getParentFile();
             if (!folder.exists()) {
                 folder.mkdirs();
@@ -314,9 +315,9 @@ public class TestUtils {
         }
     }
 
-    private static String load(String file) {
+    private static String load(File file) {
         try {
-            return Files.lines(new File(file).toPath())
+            return Files.lines(file.toPath())
                     .collect(Collectors.joining("\n"));
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services.nullobj;
+package com.codenjoy.dojo.services.field;
 
 /*-
  * #%L
@@ -22,27 +22,8 @@ package com.codenjoy.dojo.services.nullobj;
  * #L%
  */
 
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.multiplayer.GamePlayer;
-import com.codenjoy.dojo.services.printer.BoardReader;
+import com.codenjoy.dojo.services.multiplayer.GameField;
 
-import java.util.function.Consumer;
-
-public final class NullBoardReader implements BoardReader<GamePlayer> {
-
-    public static final BoardReader INSTANCE = new NullBoardReader();
-
-    private NullBoardReader(){
-        // do nothing
-    }
-
-    @Override
-    public int size() {
-        return 0;
-    }
-
-    @Override
-    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> processor) {
-        // do nothing
-    }
+public interface Fieldable<T extends GameField> {
+    void init(T field);
 }

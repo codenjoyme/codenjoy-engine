@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.services.nullobj;
+package com.codenjoy.dojo.services.annotations;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2018 - 2021 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,27 +22,23 @@ package com.codenjoy.dojo.services.nullobj;
  * #L%
  */
 
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.multiplayer.GamePlayer;
-import com.codenjoy.dojo.services.printer.BoardReader;
+import java.lang.annotation.*;
 
-import java.util.function.Consumer;
-
-public final class NullBoardReader implements BoardReader<GamePlayer> {
-
-    public static final BoardReader INSTANCE = new NullBoardReader();
-
-    private NullBoardReader(){
-        // do nothing
-    }
-
-    @Override
-    public int size() {
-        return 0;
-    }
-
-    @Override
-    public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> processor) {
-        // do nothing
-    }
+/**
+ * The mark on the method says that the shit
+ * in it is the reason for the performance
+ * optimization. This method was most likely
+ * once beautiful, but because of the criticality
+ * it was optimized, then it looks like this.
+ * Refactoring in this method is only possible
+ * with benchmarking performance tests.
+ *
+ * Thank you for understanding.
+ *
+ * P.S. If suddenly you can find a more
+ * optimal solution, it will be great!
+ */
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.CLASS)
+public @interface PerformanceOptimized {
 }
