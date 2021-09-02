@@ -3530,52 +3530,126 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testSameOf_removeNotSame_performance() {
-        int size = 30;
-
-        Dice dice = LocalGameRunner.getDice("435874345435874365843564398", 100, 200);
-
+    public void testSameOf_removeNotSame_mixed_removeAllExceptOne_severalObjects() {
         // given
-        field = new PointField(size);
+        testAdd_severalElements_mixed();
+        One one = get(One.class, 0);
+        assertEquals("one1(1,1)", one.toString());
 
         // when
-        for (int index = 0; index < size*size*100; index++) {
-            Point pt = PointImpl.random(dice, size);
-            field.add(create(dice).apply(pt.getX(), pt.getY()));
-        }
+        field.of(One.class).removeNotSame(Arrays.asList(one));
 
-        for (int iteration = 0; iteration < size; iteration++) {
-            List elements = new LinkedList<>();
-            for (int index = 0; index < size; index++) {
-                Point pt = PointImpl.random(dice, size);
-                List<? extends Point> list = field.of(type(dice)).getAt(pt);
-                if (list.isEmpty()) {
-                    continue;
-                }
-                elements.add(list.get(dice.next(list.size())));
-            }
-
-            field.of(type(dice)).removeNotSame(elements);
-        }
-
-
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
     }
 
-    private Class<? extends Point> type(Dice dice) {
-        switch (dice.next(4)) {
-            case 0 : return One.class;
-            case 1 : return Two.class;
-            case 2 : return Three.class;
-            default: return Four.class;
-        }
+    @Test
+    public void testSameOf_removeNotSame_mixed_removeOnlyOne_severalObjects() {
+        // given
+        testAdd_severalElements_mixed();
+
+        One one1 = get(One.class, 0);
+        assertEquals("one1(1,1)", one1.toString());
+
+        One one2 = get(One.class, 1);
+        assertEquals("one2(1,1)", one2.toString());
+
+        // when
+        field.of(One.class).removeNotSame(Arrays.asList(one1, one2));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one2(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
     }
 
-    private BiFunction<Integer, Integer, Point> create(Dice dice) {
-        switch (dice.next(4)) {
-            case 0 : return One::new;
-            case 1 : return Two::new;
-            case 2 : return Three::new;
-            default: return Four::new;
-        }
+    @Test
+    public void testSameOf_removeNotSame_mixed_removeAllExceptOne_doNotRemove_onlyOne() {
+        // given
+        testAdd_severalElements_mixed();
+        Two two = get(Two.class, 0);
+        assertEquals("two4(1,2)", two.toString());
+
+        // when
+        field.of(Two.class).removeNotSame(Arrays.asList(two));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testSameOf_removeNotSame_mixed_removeAllExceptOne_doNotRemove_otherType() {
+        // given
+        testAdd_severalElements_mixed();
+        Four four = new Four(5, 5);
+
+        // when
+        field.of(Four.class).removeNotSame(Arrays.asList(four));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testSameOf_removeNotSame_mixed_removeAllExceptOne_removeAll_becausePassedNotExists() {
+        // given
+        testAdd_severalElements_mixed();
+        One one = new One(5, 5); // not exists
+
+        // when
+        field.of(One.class).removeNotSame(Arrays.asList(one));
+
+        // then
+        assert_mixed_without_any_one();
     }
 }

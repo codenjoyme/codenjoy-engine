@@ -139,7 +139,7 @@ public class PointField {
             @Override
             @PerformanceOptimized
             public Iterator<E> iterator() {
-                return (Iterator) all.get(filter).iterator();
+                return (Iterator) points().iterator();
             }
 
             @Override
@@ -163,12 +163,16 @@ public class PointField {
             @Override
             @PerformanceOptimized
             public List<E> all() {
-                return (List) Collections.unmodifiableList(all.get(filter));
+                return (List) Collections.unmodifiableList(points());
             }
 
             @Override
             public Stream<E> stream() {
-                return all().stream();
+                return (Stream) points().stream();
+            }
+
+            private List<Point> points() {
+                return all.get(filter);
             }
 
             @Override
@@ -231,7 +235,7 @@ public class PointField {
 
             @Override
             public void remove(int from, int to) {
-                List<Point> list = all.get(filter);
+                List<Point> list = points();
                 for (int index = from; index < to; index++) {
                     removeExact((E) list.get(index));
                 }
