@@ -22,6 +22,8 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
+import com.codenjoy.dojo.client.local.LocalGameRunner;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
@@ -30,6 +32,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
@@ -3524,5 +3527,55 @@ public class PointFieldTest {
                 "        Three.class=[\n" +
                 "                three5(2,2)]}\n" +
                 "]", field.toString());
+    }
+
+    @Test
+    public void testSameOf_removeNotSame_performance() {
+        int size = 30;
+
+        Dice dice = LocalGameRunner.getDice("435874345435874365843564398", 100, 200);
+
+        // given
+        field = new PointField(size);
+
+        // when
+        for (int index = 0; index < size*size*100; index++) {
+            Point pt = PointImpl.random(dice, size);
+            field.add(create(dice).apply(pt.getX(), pt.getY()));
+        }
+
+        for (int iteration = 0; iteration < size; iteration++) {
+            List elements = new LinkedList<>();
+            for (int index = 0; index < size; index++) {
+                Point pt = PointImpl.random(dice, size);
+                List<? extends Point> list = field.of(type(dice)).getAt(pt);
+                if (list.isEmpty()) {
+                    continue;
+                }
+                elements.add(list.get(dice.next(list.size())));
+            }
+
+            field.of(type(dice)).removeNotSame(elements);
+        }
+
+
+    }
+
+    private Class<? extends Point> type(Dice dice) {
+        switch (dice.next(4)) {
+            case 0 : return One.class;
+            case 1 : return Two.class;
+            case 2 : return Three.class;
+            default: return Four.class;
+        }
+    }
+
+    private BiFunction<Integer, Integer, Point> create(Dice dice) {
+        switch (dice.next(4)) {
+            case 0 : return One::new;
+            case 1 : return Two::new;
+            case 2 : return Three::new;
+            default: return Four::new;
+        }
     }
 }
