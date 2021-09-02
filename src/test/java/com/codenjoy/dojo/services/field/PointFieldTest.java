@@ -4117,4 +4117,108 @@ public class PointFieldTest {
                 "                two8(2,2)]}\n" +
                 "]", field.toString());
     }
+
+    @Test
+    public void testSameOf_getAt_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1)]",
+                field.of(One.class).getAt(pt(1, 1)).toString());
+
+        assertEquals("[one3(1,2)]",
+                field.of(One.class).getAt(pt(1, 2)).toString());
+
+        assertEquals("[]",
+                field.of(One.class).getAt(pt(2, 2)).toString());
+
+        assertEquals("[]",
+                field.of(Two.class).getAt(pt(1, 1)).toString());
+
+        assertEquals("[two4(1,2)]",
+                field.of(Two.class).getAt(pt(1, 2)).toString());
+
+        assertEquals("[]",
+                field.of(Two.class).getAt(pt(1, 1)).toString());
+
+        assertEquals("[three5(2,2)]",
+                field.of(Three.class).getAt(pt(2, 2)).toString());
+
+        assertEquals("[]",
+                field.of(Four.class).getAt(pt(1, 1)).toString());
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testSameOf_getAt_mixed_modifyElement() {
+        // given
+        testSameOf_getAt_mixed();
+        One one = get(One.class, 1, 1);
+        assertEquals("one1(1,1)", one.toString());
+
+        // when
+        one.move(1, 2);
+
+        // then
+        assertEquals("[one2(1,1)]",
+                field.of(One.class).getAt(pt(1, 1)).toString());
+
+        assertEquals("[one3(1,2), one1(1,2)]",
+                field.of(One.class).getAt(pt(1, 2)).toString());
+
+        assertEquals("[]",
+                field.of(One.class).getAt(pt(2, 2)).toString());
+
+        assertEquals("[]",
+                field.of(Two.class).getAt(pt(1, 1)).toString());
+
+        assertEquals("[two4(1,2)]",
+                field.of(Two.class).getAt(pt(1, 2)).toString());
+
+        assertEquals("[]",
+                field.of(Two.class).getAt(pt(1, 1)).toString());
+
+        assertEquals("[three5(2,2)]",
+                field.of(Three.class).getAt(pt(2, 2)).toString());
+
+        assertEquals("[]",
+                field.of(Four.class).getAt(pt(1, 1)).toString());
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one2(1,1)\n" +
+                "                one3(1,2)\n" +
+                "                one1(1,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one2(1,1)]}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)\n" +
+                "                one1(1,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
+    }
 }

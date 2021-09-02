@@ -152,7 +152,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      * (при этом он останется консистентным, т.к. умеет
      * обрабатывать подобные случаи).
      */
-    List<E> getAt(Point point); // TODO test me
+    List<E> getAt(Point point);
 
     /**
      * @return Копия списка всех элементов во всех ячейках поля
