@@ -86,14 +86,17 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     Stream<E> stream();
 
     /**
-     * Удаляет все невалидные объекты, не содержащиеся в заданном списке.
+     * Удаляет все невалидные объекты (выбранного в Accessor типа)
+     * не содержащиеся в заданном списке.
+     *
      * Проверка осуществляется не по координатам, а по ссылкам на объект.
+     *
      * Все что не находится в этом списке будет удалено со всех ячеек поля
      * но только среди объектов в соответствии с выбранным в Accessor типом.
      *
      * @param valid валидные объекты, которые должны остаться на поле.
      */
-    void removeNotSame(List<E> valid); // TODO test me
+    void removeNotSame(List<E> valid);
 
     /**
      * Элемент добавится в конкретную ячейку поля в соответствии
@@ -125,7 +128,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      *
      * @param points Координаты ячеек в которых будет проводится удаление.
      */
-    void removeIn(List<? extends Point> points); // TODO test me
+    void removeIn(List<? extends Point> points);
 
     /**
      * Каждый элемент исходного списка добавится в конкретную ячейку
