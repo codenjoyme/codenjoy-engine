@@ -46,6 +46,10 @@ public abstract class AbstractLevel implements Level {
 
     public AbstractLevel(String map) {
         this.map = LevelUtils.clear(map);
+        resize();
+    }
+
+    protected void resize() {
         this.size = (int) Math.sqrt(map.length());
         this.xy = new LengthToXY(size);
     }
