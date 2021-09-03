@@ -39,8 +39,9 @@ import static java.util.stream.Collectors.toList;
 
 public abstract class AbstractLevel implements Level {
 
+    // TODO make all final & private after migrating all games
     protected final String map;
-    protected final int size;
+    protected int size;
     protected LengthToXY xy;
 
     public AbstractLevel(String map) {
