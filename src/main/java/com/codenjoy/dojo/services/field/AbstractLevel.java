@@ -41,7 +41,7 @@ public abstract class AbstractLevel implements Level {
 
     protected final String map;
     protected final int size;
-    protected final LengthToXY xy;
+    protected LengthToXY xy;
 
     public AbstractLevel(String map) {
         this.map = LevelUtils.clear(map);
