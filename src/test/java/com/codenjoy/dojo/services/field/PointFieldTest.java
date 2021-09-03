@@ -55,7 +55,7 @@ public class PointFieldTest {
     @Before
     public void setup() {
         id = 0;
-        field = new PointField(3);
+        field = new PointField().size(3);
         messages = new LinkedList<>();
         player = null;
     }
