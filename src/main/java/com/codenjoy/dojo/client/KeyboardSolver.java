@@ -26,9 +26,6 @@ import com.codenjoy.dojo.services.Direction;
 
 import java.util.Scanner;
 
-/**
- * Created by Oleksandr_Baglai on 2019-07-12.
- */
 public class KeyboardSolver implements Solver {
 
     private Scanner scanner;

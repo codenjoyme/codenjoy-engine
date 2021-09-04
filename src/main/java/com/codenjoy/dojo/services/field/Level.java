@@ -1,10 +1,10 @@
-package com.codenjoy.dojo.utils;
+package com.codenjoy.dojo.services.field;
 
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 - 2020 Codenjoy
+ * Copyright (C) 2018 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -22,23 +22,13 @@ package com.codenjoy.dojo.utils;
  * #L%
  */
 
-import com.codenjoy.dojo.services.LengthToXY;
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.printer.CharElement;
-import lombok.experimental.UtilityClass;
+import com.codenjoy.dojo.services.printer.BoardReader;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Function;
+public interface Level {
 
-import static java.util.stream.Collectors.toList;
+    int size();
 
-@UtilityClass
-public class LevelUtils {
+    BoardReader reader();
 
-    public static String clear(String map) {
-        return map.replaceAll("[\n\r]", "");
-    }
+    void saveTo(PointField field);
 }

@@ -29,9 +29,15 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 
 public class MultimapMatrix<K, V> {
 
-    private final Multimap<K, V>[][] field;
+    private int size;
+    private Multimap<K, V>[][] field;
 
     public MultimapMatrix(int size) {
+        this.size = size;
+        clearAll();
+    }
+
+    private void clearAll() {
         field = new Multimap[size][];
         for (int x = 0; x < size; x++) {
             field[x] = new Multimap[size];
@@ -39,12 +45,12 @@ public class MultimapMatrix<K, V> {
     }
 
     public int size() {
-        return field.length;
+        return size;
     }
 
     @PerformanceOptimized
     public Multimap<K, V> get(int x, int y) {
-        if (Point.isOutOf(x, y, 0, 0, size())) {
+        if (Point.isOutOf(x, y, 0, 0, size)) {
             return new Multimap<>(); // TODO а точно тут так надо?
         }
         Multimap<K, V> map = field[x][y];
@@ -56,8 +62,8 @@ public class MultimapMatrix<K, V> {
 
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int x = 0; x < size(); x++) {
-            for (int y = 0; y < size(); y++) {
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 Multimap<K, V> map = field[x][y];
                 result.append(pt(x, y))
                         .append(":")
@@ -71,8 +77,8 @@ public class MultimapMatrix<K, V> {
     @PerformanceOptimized
     public void clear(K key) {
         // TODO устранить дублирование с циклом выше
-        for (int x = 0; x < size(); x++) {
-            for (int y = 0; y < size(); y++) {
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
                 Multimap<K, V> map = field[x][y];
                 if (map != null) {
                     map.removeKey(key);

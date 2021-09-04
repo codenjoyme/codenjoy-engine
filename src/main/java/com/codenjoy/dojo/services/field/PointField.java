@@ -48,12 +48,13 @@ import static java.util.stream.Collectors.*;
  */
 public class PointField {
 
-    private final MultimapMatrix<Class<? extends Point>, Point> field;
-    private final Multimap<Class<? extends Point>, Point> all;
+    private MultimapMatrix<Class<? extends Point>, Point> field;
+    private Multimap<Class<? extends Point>, Point> all;
 
-    public PointField(int size) {
+    public PointField size(int size) {
         field = new MultimapMatrix<>(size);
         all = new Multimap<>();
+        return this;
     }
 
     /**
