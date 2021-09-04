@@ -2,3 +2,4 @@
 *.iml
 target
 /**/engine-libs.zip
+/**/pitest/**
