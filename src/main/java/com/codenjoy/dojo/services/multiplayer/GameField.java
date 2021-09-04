@@ -80,4 +80,8 @@ public interface GameField<P extends GamePlayer> extends Tickable {
         // актуально для игр, герои которых не бегают по полю
         return null;
     }
+
+    default int id() {
+        return hashCode(); // TODO сделать тут нормальный id генератор
+    }
 }
