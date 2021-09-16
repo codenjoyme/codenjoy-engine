@@ -86,6 +86,7 @@ public class LevelsType extends MultiplayerType {
 
     @Override
     public String getRoom(String room, int levelNumber) {
+        // TODO #7D4 это будет иметь нежелательные последствия, надо придумать иной подход
         return room + "[" + levelNumber + "]";
     }
 }
