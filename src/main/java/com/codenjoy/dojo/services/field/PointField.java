@@ -125,7 +125,7 @@ public class PointField {
                 with(to, map -> map.get(pt.getClass()).add(to)));
     }
 
-    private Multimap<Class<? extends Point>, Point> get(Point pt) {
+    public Multimap<Class<? extends Point>, Point> get(Point pt) {
         return field.get(pt.getX(), pt.getY());
     }
 
