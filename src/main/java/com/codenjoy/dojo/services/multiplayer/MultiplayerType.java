@@ -217,6 +217,10 @@ public class MultiplayerType {
         return isSingle();
     }
 
+    public boolean is(MultiplayerType type) {
+        return this == type;
+    }
+
     public boolean isMultiplayer() {
         return !isSingle();
     }
