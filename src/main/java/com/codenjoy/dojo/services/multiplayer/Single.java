@@ -61,6 +61,9 @@ public class Single implements Game {
     }
 
     public void on(GameField field) {
+        if (field != null && field != this.field) {
+            close();
+        }
         this.field = field;
         if (field == null) {
             printer = null;

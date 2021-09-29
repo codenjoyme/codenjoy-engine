@@ -25,15 +25,14 @@ package com.codenjoy.dojo.services.multiplayer;
 
 import com.codenjoy.dojo.services.Game;
 import com.codenjoy.dojo.services.Joystick;
-import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.hero.HeroData;
+import com.codenjoy.dojo.services.printer.PrinterFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class SingleTest {
 
@@ -129,5 +128,44 @@ public class SingleTest {
         assertEquals("HeroDataImpl(level=0, coordinate=[7,9], " +
                         "isMultiplayer=true, additionalData=null)",
                 heroData.toString());
+    }
+
+    @Test
+    public void shouldRemovePlayerFromLastField_whenCreateNewGame() {
+        // given
+        game = new Single(player, factory, MultiplayerType.MULTIPLE);
+        game.on(field);
+
+        // when
+        game.on(mock(GameField.class));
+
+        // then
+        verify(field).remove(player);
+    }
+
+    @Test
+    public void shouldNotRemovePlayerFromLastField_whenCreateNewGameInTheSameField() {
+        // given
+        game = new Single(player, factory, MultiplayerType.MULTIPLE);
+        game.on(field);
+
+        // when
+        game.on(field);
+
+        // then
+        verify(field, never()).remove(player);
+    }
+
+    @Test
+    public void shouldNotRemovePlayerFromLastField_whenTryToCreateNewGameInNullField() {
+        // given
+        game = new Single(player, factory, MultiplayerType.MULTIPLE);
+        game.on(field);
+
+        // when
+        game.on(null);
+
+        // then
+        verify(field, never()).remove(player);
     }
 }
