@@ -31,6 +31,9 @@ import static java.util.stream.Collectors.toList;
 
 public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayerHero, ? extends RoundGameField>> implements RoundGameField<P>, Tickable {
 
+    private static final boolean FIRE_EVENTS = true;
+    private static final boolean DONT_FIRE_EVENTS = !FIRE_EVENTS;
+
     private Round round;
     private List<P> inactive;
 
@@ -54,6 +57,10 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     protected abstract void cleanStuff();
 
     protected abstract void setNewObjects();
+
+    protected abstract void onAdd(P player);
+
+    protected abstract void onRemove(P player);
 
     @Override
     public void tick() {
@@ -126,6 +133,13 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
         if (inactive.contains(player)) {
             inactive.remove(player);
         }
+
+        if (players().contains(player)) {
+            remove(player, DONT_FIRE_EVENTS);
+        }
+
+        players().add(player);
+        onAdd(player);
     }
 
     @Override
@@ -137,22 +151,33 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     }
 
     public void resetAllPlayers() {
-        players().forEach(p -> newGame(p));
+        new LinkedList<>(players()).forEach(p -> newGame(p));
     }
 
+    @Override
     public void remove(P player) {
+        remove(player, FIRE_EVENTS);
+    }
+
+    private void remove(P player, boolean fireEvents) {
         if (!players().contains(player)) {
             return;
         }
 
-        players().remove(player);
+        if (!players().remove(player)) {
+            return;
+        }
 
         // кто уходит из игры не лишает коллег очков за победу
         // но только если он был жив к этому моменту
-        if (player.getHero().isActiveAndAlive()) {
+        if (fireEvents && player.getHero().isActiveAndAlive()) {
             player.getHero().die();
             rewardTheWinnerIfNeeded(() -> {});
         }
+
+        onRemove(player);
+
+        return;
     }
 
 }

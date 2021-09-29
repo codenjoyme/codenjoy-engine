@@ -27,18 +27,9 @@ import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.client.local.LocalGameRunner;
 import com.codenjoy.dojo.services.GameType;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @UtilityClass
 public class Smoke {
