@@ -56,7 +56,13 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
 
     protected abstract void cleanStuff();
 
-    protected abstract void setNewObjects();
+    /**
+     * После вручения призов победителю полю может понадобиться
+     * провести какую-то работу. Тут это можно сделать.
+     */
+    protected void setNewObjects() {
+        // do nothing
+    }
 
     protected abstract void onAdd(P player);
 
