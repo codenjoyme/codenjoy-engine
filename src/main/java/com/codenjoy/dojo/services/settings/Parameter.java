@@ -28,25 +28,26 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
- * Изменяемый параметр. Фишка его в том, чтобы на админке можно было в рантайме менять параметры игры,
- * которые иначе тебе пришлось бы тебе захардкодить в твоей игре.
+ * Изменяемый параметр. Фишка его в том, чтобы на админке
+ * можно было в runtime менять параметры игры,
+ * которые иначе тебе пришлось бы тебе прошить в твоей игре.
  *
  * @see Settings
  */
 public interface Parameter<T> extends Cloneable {
 
     /**
-     * @return Значение параметра
+     * @return Значение параметра.
      */
     T getValue();
 
     /**
-     * @return Тип параметра
+     * @return Тип параметра.
      */
     String getType();
 
     /**
-     * @return Тип значения
+     * @return Тип значения.
      */
     Class<?> getValueType();
 
@@ -55,10 +56,11 @@ public interface Parameter<T> extends Cloneable {
     Parameter<T> update(Object value);
 
     /**
-     * Так ты указываешь значение по умолчанию. Обычно этого достаточно для ввода значения.
+     * Так ты указываешь значение по умолчанию.
+     * Обычно этого достаточно для ввода значения.
      *
-     * @param value значение
-     * @return возвращается this
+     * @param value Значение.
+     * @return Возвращается this.
      */
     Parameter<T> def(T value);
 
@@ -67,7 +69,7 @@ public interface Parameter<T> extends Cloneable {
     Parameter<T> parser(Function<String, T> parser);
 
     /**
-     * Установка значения по индексу (актуально для SelectBox и CheckBox)
+     * Установка значения по индексу (актуально для SelectBox и CheckBox).
      * @param index
      */
     void select(int index);

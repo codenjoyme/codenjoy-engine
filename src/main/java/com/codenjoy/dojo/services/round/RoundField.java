@@ -50,10 +50,22 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
         inactive = new LinkedList<>();
     }
 
+    /**
+     * @return Доступ к игрокам на поле.
+     */
     protected abstract List<P> players();
 
+    /**
+     * Если раунд начался, то к этому методу доходит сигнал из
+     * {@link #tick()}, в противном случае нет.
+     */
     protected abstract void tickField();
 
+    /**
+     * Перед каждым тиком поле может захотеть почистить некоторые
+     * устаревшие за время с прошлого тика артефакты. Актуально
+     * например для "умирающих" объектов, которые пропадают на 2й тик.
+     */
     protected abstract void cleanStuff();
 
     /**
@@ -64,10 +76,23 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
         // do nothing
     }
 
+    /**
+     * После добавления игрока поле может захотеть сделать
+     * некоторые подготовительные действия.
+     * @param player Добавляемый на поле игрок.
+     */
     protected abstract void onAdd(P player);
 
+    /**
+     * После удаления игрока поле может захотеть сделать
+     * некоторые подготовительные действия.
+     * @param player Удаляемый из поля игрок.
+     */
     protected abstract void onRemove(P player);
 
+    /**
+     * Сердце игры. Метод "тикается" фреймворком каждую секунду.
+     */
     @Override
     public void tick() {
         cleanStuff();
@@ -148,6 +173,10 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
         onAdd(player);
     }
 
+    /**
+     * Иногда ведущий игры хочет обнулить состояние
+     * на поле - этот метод ему в помощь.
+     */
     @Override
     public void clearScore() {
         round.clear();

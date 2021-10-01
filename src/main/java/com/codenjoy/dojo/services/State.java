@@ -23,6 +23,12 @@ package com.codenjoy.dojo.services;
  */
 
 
+/**
+ * Каждый артефакт, который хочет быть отрисован на поле
+ * должен реализовать этот интерфейс.
+ * @param <E> Element, которым будет отрисован данный артефакт.
+ * @param <T> Игрок с точки зрения которого мы рисуем поле.
+ */
 public interface State<E, T> {
     E state(T player, Object... alsoAtPoint);
 }

@@ -29,7 +29,7 @@ package com.codenjoy.dojo.services;
 public interface PlayerScores extends EventListener {
 
     /**
-     * @return текущее значение очков, что успел набрать пользователь
+     * @return Текущее значение очков, что успел набрать игрок.
      */
     Object getScore();
 
@@ -40,8 +40,8 @@ public interface PlayerScores extends EventListener {
     int clear();
 
     /**
-     * В крайних случаях можно обновить количество очков
-     * @param score
+     * В крайних случаях можно обновить количество очков напрямую.
+     * @param score Новое значения очков.
      */
     void update(Object score);
 }

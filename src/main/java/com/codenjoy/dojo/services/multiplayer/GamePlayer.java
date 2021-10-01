@@ -59,8 +59,8 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
     }
 
     /**
-     * Борда может файрить ивенты юзера с помощью этого метода
-     * @param event тип ивента
+     * С помощью этого метода поле может отправлять ивенты игрока фреймворку.
+     * @param event Тип ивента.
      */
     public void event(Object event) {
         if (progress != null && progress.getCurrent() <= progress.getPassed()) {
@@ -74,14 +74,14 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
     }
 
     /**
-     * @param message Сообщение, которое будет напечатано на борде игрока в этом тике
+     * @param message Сообщение, которое будет напечатано на борде игрока в этом тике.
      */
     public void printMessage(String message) {
         event(new CustomMessage(message));
     }
 
     /**
-     * @return Герой игрока, готорым можно управлять через {@see Joystick}
+     * @return Герой игрока, которым можно управлять через {@link Joystick}.
      */
     public H getHero() {
         return hero;
@@ -100,7 +100,7 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
 
     /**
      * Ты можешь переопределить этот метод, и тогда у этих данных будет приоритет.
-     * Иначе {@see Joystick} будет построен на основе объекта {@see #getHero()}
+     * Иначе {@link Joystick} будет построен на основе объекта {@link #getHero()}
      * @return Джойстик для управления героем
      */
     public Joystick getJoystick() {
@@ -109,7 +109,7 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
 
     /**
      * Ты можешь переопределить этот метод, и тогда у этих данных будет приоритет.
-     * Иначе {@see HeroData} будет построен на основе объекта {@see #getHero()}
+     * Иначе {@link HeroData} будет построен на основе объекта {@link #getHero()}
      * @return данные для отрисовки дополнительной информации на UI
      */
     public HeroData getHeroData() {
@@ -126,8 +126,8 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
     }
 
     /**
-     * Когда создается новая игра для пользователя, кто-то должен создать героя
-     * @param field борда
+     * Когда создается новая игра для пользователя, кто-то должен создать героя.
+     * @param field Поле.
      */
     public void newHero(F field) {
         this.field = field;
@@ -161,9 +161,9 @@ public abstract class GamePlayer<H extends PlayerHero, F extends GameField> {
     }
 
     /**
-     * А так большинство игр создают своего героя
-     * @param pt в каком месте карты мы это делаем
-     * @return Созданный герой
+     * А так большинство игр создают своего героя.
+     * @param pt Координата в каком месте карты мы это делаем.
+     * @return Созданный герой.
      */
     public H createHero(Point pt) {
         return null;

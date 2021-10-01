@@ -27,102 +27,120 @@ import com.codenjoy.dojo.client.ClientBoard;
 import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
+import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
 import com.codenjoy.dojo.services.printer.CharElement;
+import com.codenjoy.dojo.services.printer.GraphicPrinter;
+import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.Settings;
 
 /**
- * Это интерфейс указывает на тип игры. Как только ты его реулизуешь -
- * на админке (http://localhost:8080/codenjoy-contest/admin)
+ * Это интерфейс указывает на тип игры. Стоит его реализовать -
+ * как на админке (http://localhost:8080/codenjoy-contest/admin)
  * будет возможность переключиться на твою игру.
  */
 public interface GameType<T extends Settings> extends Tickable {
 
     /**
-     * @param score значения очков перед началом игры (используется например при загрузке игры из save)
-     * @param settings настройки по умолчанию связанные с текущей комнатой
-     * @return Возвращается объект который умеет в зависимости от типа события на карте подчитывать очки игроков
+     * @param score Значения очков перед началом игры
+     *         (используется например при загрузке игры из save).
+     * @param settings Настройки по умолчанию связанные с текущей комнатой.
+     * @return объект, который умеет в зависимости от типа события
+     *         на карте подчитывать очки игроков.
      */
     PlayerScores getPlayerScores(Object score, T settings);
 
     /**
-     * Так фреймворк будет стартовать новую игру для каждого пользователя
+     * Так фреймворк будет стартовать новую игру для каждого пользователя.
      * @param level уровень игры (опциональное поле, обычно начинается с 1
-     *          {@see LevelProgress#levelsStartsFrom1})
-     * @param settings настройки по умолчанию связанные с текущей комнатой
-     * @return Экземпляр игры пользователя
+     *          {@link LevelProgress#levelsStartsFrom1}).
+     * @param settings Настройки по умолчанию связанные с текущей комнатой.
+     * @return Экземпляр игры пользователя.
      */
     GameField createGame(int level, T settings);
 
     /**
-     * @param settings настройки по умолчанию связанные с текущей комнатой
-     * @return Размер доски. Важно, чтобы у всех пользователей были одинаковые по размеру поля
+     * @param settings Настройки по умолчанию связанные с текущей комнатой.
+     * @return Размер поля. Важно, чтобы у всех пользователей
+     *         были одинаковые по размеру поля.
      */
     Parameter<Integer> getBoardSize(T settings);
 
     /**
-     * @return Имя твоей игры
+     * @return Имя игры.
      */
     String name();
 
     /**
-     * @return Список элементов отображаеммых на доске
-     * Смотри класс com.codenjoy.dojo.sample.model.Element конкретной игры
+     * @return Список элементов, отображаемых на поле.
+     * Смотри класс {@link com.codenjoy.dojo.games.sample.Element} конкретной игры.
      */
     CharElement[] getPlots();
 
     /**
      * @return Настройки игры по умолчанию. Эти настройки будут использоваться
      * для каждой отдельной комнаты и смогут меняться независимо.
-     * @see Settings
+     *
+     * Настройки представлены несколькими интерфейсами и классами
+     * {@link com.codenjoy.dojo.services.settings.SettingsReader},
+     * {@link Settings}, {@link Parameter} и др.
      */
     T getSettings();
 
     /**
-     * @return каждая игра должна предоставить своего AI который будет развлекать новопришедших игроков
+     * @return Каждая игра может (null - если это не так) предоставить
+     *      своего AI который будет развлекать новопришедших игроков.
      */
     Class<? extends Solver> getAI();
 
     /**
-     * @return А это борда клиентская для игры
+     * @return Объект, который предоставляет игроку api для игры.
      */
     Class<? extends ClientBoard> getBoard();
 
     /**
-     * Если подложить в 'src\main\resources\<GAME>\version.properties' игры строчку '${project.version}_${build.time}'
-     * то ее потом мождно будет прочитать с помощью VersionReader.getCurrentVersion();
-     * @return версия игры
+     * Если подложить в 'src\main\resources\<GAME>\version.properties'
+     * игры строчку '${project.version}_${build.time}'
+     * то ее потом можно будет прочитать с помощью
+     * VersionReader.getCurrentVersion();
+     *
+     * @return Версия игры.
      */
     String getVersion();
 
     /**
-     * @param settings настройки по умолчанию связанные с текущей комнатой
-     * @return Возвращает тип мультиплеера для этой игы
+     * @param settings Настройки по умолчанию связанные с текущей комнатой.
+     *
+     * @return Возвращает тип мультиплеера этой игры.
      */
     MultiplayerType getMultiplayerType(T settings);
 
     /**
-     * Метод для создания игрового пользователя внутри игры
-     * @param listener Через этот интерфейс фреймворк будет слушать какие ивенты возникают в твоей игре
-     * @param settings Настройки по умолчанию связанные с текущей комнатой
-     * @param teamId Команда в которой будет играть игрок. При смене команды игра пересоздастся.
-     * @param playerId Имейл игровка зарегавшегося на сервере
-     * @return Игрок
+     * Метод для создания игрового пользователя внутри игры.
+     * @param listener Через этот интерфейс фреймворк будет
+     *                 слушать какие ивенты возникают в твоей игре.
+     * @param settings Настройки по умолчанию связанные с текущей комнатой.
+     * @param teamId Команда в которой будет играть игрок.
+     *               При смене команды игра пересоздается.
+     * @param playerId идентификатор игрока, зарегистрировавшегося на сервере.
+     * @return Объект игрока.
      */
     GamePlayer createPlayer(EventListener listener, int teamId, String playerId, T settings);
 
     /**
-     * @return нормальный Random, но ты можешь переопределить его, например, для тестовых целей
+     * @return Объект реализующий функцию random. Ты можешь переопределить алгоритм,
+     *          например, для тестовых целей.
      */
     Dice getDice();
 
     /**
-     * @return Вовзращает фабрику принтеров, которая создаст
-     * в нужный момент принтер {@see Printer}, который возьмет
+     * @return Возвращает фабрику принтеров, которая создаст
+     * в нужный момент принтер {@link Printer}, который возьмет
      * на себя представление борды в виде строчки.
-     * Если хочешь использовать кастомный принтер - {@see PrinterFactory#get(GraphicPrinter)}
+     * Если хочешь использовать другой принтер - используй
+     * {@link PrinterFactory#get(GraphicPrinter)}}
      */
     PrinterFactory getPrinterFactory();
 }

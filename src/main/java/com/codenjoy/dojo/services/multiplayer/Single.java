@@ -34,10 +34,10 @@ import org.json.JSONObject;
 
 /**
  * Этот малый является фасадом для трех объектов:
- * {@see GamePlayer} игрока, {@see GameField} борды (игры)
- * и {@see Printer} который может отрисовать игру.
+ * {@link GamePlayer} игрока, {@link GameField} борды (игры)
+ * и {@link Printer} который может отрисовать игру.
  * Дальше фреймворк пользуется связкой этих трех объектов
- * инкапсулируя их в понятие Игра {@see Game}.
+ * инкапсулируя их в понятие Игра {@link Game}.
  */
 @Slf4j
 public class Single implements Game {

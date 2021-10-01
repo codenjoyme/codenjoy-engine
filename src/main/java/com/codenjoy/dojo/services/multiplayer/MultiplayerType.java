@@ -32,18 +32,19 @@ import java.util.function.Function;
 
 /**
  * Определяет тип многопользовательский игры.
- * Этот функционал реализует сервис многопользовательской игры {@see MultiplayerService}
+ * Этот функционал реализует сервис
+ * многопользовательской игры {@link MultiplayerService}.
  */
 public class MultiplayerType {
 
     /**
-     * Если комната игры одноразовая, то этот флаг стоит в true
+     * Если комната игры одноразовая, то этот флаг стоит в true.
      */
     public static final boolean DISPOSABLE = true;
 
     /**
      * Если за предпоследним игроком должен уходить
-     * из комнаты так же и последний, то этот флаг стоит в true
+     * из комнаты так же и последний, то этот флаг стоит в true.
      */
     public static final boolean RELOAD_ALONE = true;
 

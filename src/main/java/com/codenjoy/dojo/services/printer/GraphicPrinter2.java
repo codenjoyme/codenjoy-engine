@@ -28,7 +28,7 @@ import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.Printer;
 
 /**
- * Это кастомная версия {@see Printer}
+ * Это кастомная версия {@link Printer}
  */
 @FunctionalInterface
 public interface GraphicPrinter2<T, A, P extends GamePlayer> {
