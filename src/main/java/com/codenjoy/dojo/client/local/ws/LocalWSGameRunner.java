@@ -40,20 +40,20 @@ import static com.codenjoy.dojo.client.WebSocketRunner.BOARD_FORMAT2;
 
 public class LocalWSGameRunner {
 
-    private List<ConnectionStatus> statuses = new LinkedList<>();
+    private List<ConnectionStatus> statuses;
     private LocalGameRunner runner;
     private GameType gameType;
 
-    public static void run(GameType gameType, String host, int port, int timeout) {
-        new LocalWSGameRunner().start(gameType, host, port, timeout);
+    public LocalWSGameRunner() {
+        statuses = new LinkedList<>();
     }
 
-    public void start(GameType gameType, String host, int port, int timeout) {
+    public void run(GameType gameType, String host, int port, int timeout) {
         this.gameType = gameType;
-        LocalGameRunner.timeout = timeout;
-        LocalGameRunner.printBoardOnly = true;
-        LocalGameRunner.printWelcome = true;
-        runner = new LocalGameRunner(gameType);
+        runner = new LocalGameRunner().with(gameType);
+        runner.timeout(timeout);
+        runner.printBoardOnly(true);
+        runner.printWelcome(true);
 
         CompletableFuture.runAsync(() -> startWsServer(host, port));
 
@@ -122,7 +122,7 @@ public class LocalWSGameRunner {
                 if (status != null) {
                     exit(status);
                 }
-                LocalGameRunner.exit = true;
+                runner.exit();
             }
 
             @Override
@@ -133,8 +133,8 @@ public class LocalWSGameRunner {
         try {
             server.run();
         } catch (Exception e) {
-            System.out.println(">>> Staring server error: " + e.toString());
-            LocalGameRunner.exit = true;
+            System.out.println(">>> Staring server error: " + e);
+            runner.exit();
         }
     }
 
@@ -142,5 +142,13 @@ public class LocalWSGameRunner {
         statuses.remove(status);
         status.release();
         runner.remove(status.getSolver());
+    }
+
+    public LocalGameRunner settings() {
+        return runner;
+    }
+
+    public void print(String message) {
+        runner.print(message);
     }
 }

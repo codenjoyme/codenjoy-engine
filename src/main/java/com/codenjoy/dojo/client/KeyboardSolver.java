@@ -25,17 +25,20 @@ package com.codenjoy.dojo.client;
 import com.codenjoy.dojo.services.Direction;
 
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class KeyboardSolver implements Solver {
 
+    private Consumer<String> out;
     private Scanner scanner;
 
     public KeyboardSolver() {
+        out = System.out::println;
         scanner = new Scanner(System.in);
-        System.out.println("To play press char then Enter: " +
-                "'a' - LEFT, 'd' - RIGHT, 'w' - UP, 's' - DOWN, 'f' - ACT. " +
-                "Any other command you must enter explicitly, " +
-                "for example 'ACT(1,2,3)' then pres Enter.");
+        out.accept("\n\n\tTo play press char then Enter: \n" +
+                "\t'a' - LEFT, 'd' - RIGHT, 'w' - UP, 's' - DOWN, 'f' - ACT. \n" +
+                "\tAny other command you must enter explicitly, \n" +
+                "\tfor example 'ACT(1,2,3)' then pres Enter.\n\n");
     }
 
     @Override

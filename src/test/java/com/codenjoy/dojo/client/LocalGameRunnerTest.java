@@ -33,9 +33,7 @@ import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
-import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.Settings;
-import com.codenjoy.dojo.services.settings.SettingsImpl;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import org.junit.Test;
 
@@ -64,11 +62,6 @@ public class LocalGameRunnerTest {
     public void runGame() {
         // given
         List<String> messages = new LinkedList<>();
-
-        LocalGameRunner.timeout = 100;
-        LocalGameRunner.out = (e) -> messages.add(e);
-        LocalGameRunner.countIterations = 3;
-        LocalGameRunner.printWelcome = false;
 
         id = 0;
 
@@ -224,8 +217,18 @@ public class LocalGameRunnerTest {
             }
         };
 
+        LocalGameRunner runner =
+                new LocalGameRunner()
+                        .with(gameType)
+                        .add(solver, board);
+
+        runner.timeout(100);
+        runner.out((e) -> messages.add(e));
+        runner.countIterations(3);
+        runner.printWelcome(false);
+
         // when
-        LocalGameRunner.run(gameType, solver, board);
+        runner.run();
 
         // then
         assertEquals("GET_READER#0\n" +

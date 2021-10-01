@@ -41,7 +41,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.IntStream;
 
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static java.util.stream.Collectors.toList;
@@ -50,81 +49,75 @@ public class LocalGameRunner {
 
     public static final String SEP = "------------------------------------------";
 
-    public static int timeout = 10;
-    public static boolean printScores = true;
-    public static boolean printWelcome = false;
-    public static boolean printBoardOnly = false;
-    public static Consumer<String> out = System.out::println;
-    public static Integer countIterations = null;
-    public static boolean printConversions = false;
-    public static boolean printDice = false;
-    public static boolean printTick = false;
-    public static boolean printSeed = false;
-    public static String showPlayers = null;
-    public static boolean exit = false;
-    public static int waitForPlayers = 1;
-    public static int levelNumber = LevelProgress.levelsStartsFrom1;
+    private int timeout = 10;
+    private boolean printScores = true;
+    private boolean printWelcome = false;
+    private boolean printBoardOnly = false;
+    private Consumer<String> out = System.out::println;
+    private Integer countIterations = null;
+    private boolean printTick = false;
+    private String showPlayers = null;
+    private boolean exit = false;
+    private int waitForPlayers = 1;
+    private final int levelNumber = LevelProgress.levelsStartsFrom1;
+
     /**
      * Будем ли мы удалять (true) игрока с поля, когда он gameover
      * или всего лишь делать ему newGame (false).
      */
-    public static boolean removeWhenGameOver = false;
+    private boolean removeWhenGameOver = false;
+
     /**
      * Будем ли мы удалять (true) игрока с поля, когда он win
      * или ничего предпринимать не будем (false).
      */
-    public static boolean removeWhenWin = false;
+    private boolean removeWhenWin = false;
+
     /**
      * Будем ли мы возобновлять (true) игру всех игроков,
      * если они все покинули игру или нет (false).
      */
-    public static boolean reloadPlayersWhenGameOverAll = false;
+    private boolean reloadPlayersWhenGameOverAll = false;
 
     private Settings settings;
     private GameField field;
     private List<Game> games;
     private GameType gameType;
-    private List<Solver> solvers;
+    private List<Solver<ClientBoard>> solvers;
     private List<ClientBoard> boards;
     private List<PlayerScores> scores;
     private Integer tick;
 
-    {
+    public LocalGameRunner() {
         if (printWelcome) {
-            out.accept(VersionReader.getWelcomeMessage());
-        }
-    }
-
-    public static LocalGameRunner run(GameType gameType, Solver solver, ClientBoard board) {
-        return run(gameType, Arrays.asList(solver), Arrays.asList(board));
-    }
-
-    public static LocalGameRunner run(GameType gameType,
-                           List<Solver> solvers,
-                           List<ClientBoard> boards)
-    {
-        LocalGameRunner runner = new LocalGameRunner(gameType);
-
-        for (int i = 0; i < solvers.size(); i++) {
-            runner.add(solvers.get(i), boards.get(i));
+            print(VersionReader.getWelcomeMessage());
         }
 
-        return runner.run(tick -> {});
-    }
-
-    public LocalGameRunner(GameType gameType) {
-        this.gameType = gameType;
-
-        settings = gameType.getSettings();
         solvers = new LinkedList<>();
         boards = new LinkedList<>();
         games = new LinkedList<>();
         scores = new LinkedList<>();
-
-        field = gameType.createGame(levelNumber, settings);
     }
 
-    public LocalGameRunner run(Consumer<Integer> onTick) {
+    public LocalGameRunner with(GameType gameType) {
+        this.gameType = gameType;
+        settings = gameType.getSettings();
+        field = gameType.createGame(levelNumber, settings);
+        return this;
+    }
+
+    public LocalGameRunner add(List<Solver> solvers, List<ClientBoard> boards) {
+        for (int index = 0; index < solvers.size(); index++) {
+            add(solvers.get(index), boards.get(index));
+        }
+        return this;
+    }
+
+    public void run() {
+        run(tick -> {});
+    }
+
+    public void run(Consumer<Integer> onTick) {
         tick = 0;
         while (!exit && (countIterations == null || this.tick++ < countIterations)) {
             try {
@@ -188,7 +181,7 @@ public class LocalGameRunner {
 
                     field.tick();
 
-                    out.accept(SEP);
+                    print(SEP);
                 }
 
                 if (onTick != null) {
@@ -198,7 +191,6 @@ public class LocalGameRunner {
                 e.printStackTrace();
             }
         }
-        return this;
     }
 
     private List<Game> activeGames() {
@@ -238,7 +230,7 @@ public class LocalGameRunner {
                 || Arrays.asList(showPlayers.split(","))
                         .contains(String.valueOf(index + 1)))
         {
-            out.accept(player(index, message));
+            print(player(index, message));
         }
     }
 
@@ -250,10 +242,11 @@ public class LocalGameRunner {
         return boards.get(index);
     }
 
-    public synchronized void add(Solver solver, ClientBoard board) {
+    public synchronized LocalGameRunner add(Solver solver, ClientBoard board) {
         solvers.add(solver);
         boards.add(board);
         games.add(createGame());
+        return this;
     }
 
     public synchronized void reloadAllGames() {
@@ -273,46 +266,6 @@ public class LocalGameRunner {
 
     private Game game(int index) {
         return games.get(index);
-    }
-
-    public static Dice getDice(String soul, long max, long count) {
-        return LocalGameRunner.getDice(generateXorShift(soul, max, count));
-    }
-
-    public static Dice getDice(int... numbers) {
-        int[] index = {0};
-        return (n) -> {
-            int next = numbers[index[0]];
-            if (printDice) {
-                out.accept("DICE:" + next);
-            }
-            if (next >= n) {
-                next = next % n;
-                if (printConversions) {
-                    out.accept("DICE_CORRECTED < " + n + " :" + next);
-                }
-            }
-            if (++index[0] == numbers.length) {
-                index[0] = 0; // начинать с начала, если мы дошли до конца
-            }
-            return next;
-        };
-    }
-
-    private static int[] generateXorShift(String seed, long max, long count) {
-        long[] current = new long[] { seed.hashCode() };
-        if (printSeed) {
-            out.accept("Seed = " + seed + "\n");
-        }
-        int[] result = IntStream.generate(() -> {
-            long a0 = current[0] % seed.length();
-            int a1 = seed.charAt((int)Math.abs(a0));
-            long a2 = (current[0] << (a1 % 5)) ^ current[0];
-            long a3 = (current[0] >>> (a1 % 6)) ^ (current[0] << (a1 % 2));
-            current[0] = a2 ^ a3;
-            return (int) Math.abs(current[0] % max);
-        }).limit(count).toArray();
-        return result;
     }
 
     private String player(int index, String message) {
@@ -359,4 +312,63 @@ public class LocalGameRunner {
         return RandomStringUtils.randomAlphanumeric(10);
     }
 
+    public void timeout(int input) {
+        this.timeout = input;
+    }
+
+    public void printBoardOnly(boolean input) {
+        printBoardOnly = input;
+    }
+
+    public void printWelcome(boolean input) {
+        printWelcome = input;
+    }
+
+    public void exit() {
+        exit = true;
+    }
+
+    public void out(Consumer<String> input) {
+        out = input;
+    }
+
+    public void print(String message) {
+        out.accept(message);
+    }
+
+    public void waitForPlayers(int input) {
+        waitForPlayers = input;
+    }
+
+    public void showPlayers(String input) {
+        showPlayers = input;
+    }
+
+    public void countIterations(int input) {
+        countIterations = input;
+    }
+
+    public void printTick(boolean input) {
+        printTick = input;
+    }
+
+    public void printScores(boolean input) {
+        printScores = input;
+    }
+
+    public void removeWhenWin(boolean input) {
+        removeWhenWin = input;
+    }
+
+    public void removeWhenGameOver(boolean input) {
+        removeWhenGameOver = input;
+    }
+
+    public void reloadPlayersWhenGameOverAll(boolean input) {
+        reloadPlayersWhenGameOverAll = input;
+    }
+
+    public Consumer<String> out() {
+        return out;
+    }
 }

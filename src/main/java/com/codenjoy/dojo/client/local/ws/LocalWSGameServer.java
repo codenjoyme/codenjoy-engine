@@ -27,7 +27,7 @@ import com.codenjoy.dojo.services.AbstractGameType;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
@@ -38,27 +38,33 @@ import java.util.stream.Collectors;
 
 public class LocalWSGameServer {
 
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
-    public static void startGame(String game, AbstractGameType gameType) {
+    private final LocalWSGameRunner runner;
+
+    public LocalWSGameServer() {
+        runner = new LocalWSGameRunner();
+    }
+
+    public void run(String game, AbstractGameType<?> gameType) {
         String host = System.getProperty("host", "127.0.0.1");
-        int port = Integer.valueOf(System.getProperty("port", "8080"));
-        int timeout = Integer.valueOf(System.getProperty("timeout", "1000"));
-        int waitForPlayers = Integer.valueOf(System.getProperty("waitFor", "0"));
+        int port = Integer.parseInt(System.getProperty("port", "8080"));
+        int timeout = Integer.parseInt(System.getProperty("timeout", "1000"));
+        int waitForPlayers = Integer.parseInt(System.getProperty("waitFor", "0"));
         String log = System.getProperty("log", "output.txt");
         String showPlayers = System.getProperty("showPlayers", null);
-        boolean logTime = Boolean.valueOf(System.getProperty("logTime", "true"));
-        boolean logDisable = Boolean.valueOf(System.getProperty("logDisable", "false"));
+        boolean logTime = Boolean.parseBoolean(System.getProperty("logTime", "true"));
+        boolean logDisable = Boolean.parseBoolean(System.getProperty("logDisable", "false"));
 
         File file = setupLog(log);
-        LocalGameRunner.out = setupOutput(file, logTime, logDisable);
-        LocalGameRunner.out.accept("Log file is here: " + file.getAbsolutePath());
+        runner.settings().out(setupOutput(file, logTime, logDisable));
+        runner.print("Log file is here: " + file.getAbsolutePath());
 
-        LocalGameRunner.out.accept(String.format(
+        runner.print(String.format(
                 "Run local WS server for %s on %s:%s\n",
                 game, host, port));
 
-        LocalGameRunner.out.accept("If you want to change something, please use command:\n" +
+        runner.print("If you want to change something, please use command:\n" +
                 "\twindows\n" +
                 "\t\tjava -jar -Dhost=127.0.0.1 -Dport=8080 -Dtimeout=1000 " +
                 "-DlogDisable=false -Dlog=\"output.txt\" -DlogTime=true -DshowPlayers=\"2,3\" " +
@@ -70,12 +76,17 @@ public class LocalWSGameServer {
                 "--random=\"random-soul-string\" --waitFor=2 " +
                 "--settings=\"{'boardSize':11, 'bombPower':7}\"\n");
 
-        LocalGameRunner.waitForPlayers = waitForPlayers;
-        LocalGameRunner.showPlayers = showPlayers;
-        LocalWSGameRunner.run(gameType, host, port, timeout);
+        runner.settings().waitForPlayers(waitForPlayers);
+        runner.settings().showPlayers(showPlayers);
+
+        runner.run(gameType, host, port, timeout);
+    }
+    
+    public void print(String message) {
+        runner.print(message);
     }
 
-    private static Consumer<String> setupOutput(File file, boolean logTime, boolean logDisable) {
+    private Consumer<String> setupOutput(File file, boolean logTime, boolean logDisable) {
         if (logDisable) {
             return message -> {};
         }
@@ -93,8 +104,8 @@ public class LocalWSGameServer {
 
             System.out.print(message);
             try {
-                Files.write(file.toPath(),
-                        message.getBytes(Charset.forName("UTF8")),
+                Files.writeString(file.toPath(),
+                        message, StandardCharsets.UTF_8,
                         StandardOpenOption.APPEND);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -102,7 +113,7 @@ public class LocalWSGameServer {
         };
     }
 
-    private static File setupLog(String log) {
+    private File setupLog(String log) {
         File file = new File(log);
 
         if (!file.exists()) {
@@ -115,4 +126,7 @@ public class LocalWSGameServer {
         return file;
     }
 
+    public LocalGameRunner settings() {
+        return runner.settings();
+    }
 }

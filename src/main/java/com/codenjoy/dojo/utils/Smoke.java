@@ -24,49 +24,90 @@ package com.codenjoy.dojo.utils;
 
 import com.codenjoy.dojo.client.ClientBoard;
 import com.codenjoy.dojo.client.Solver;
+import com.codenjoy.dojo.client.local.DiceGenerator;
 import com.codenjoy.dojo.client.local.LocalGameRunner;
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.GameType;
-import lombok.experimental.UtilityClass;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
-@UtilityClass
+import static java.util.stream.Collectors.toList;
+
 public class Smoke {
 
-    public static void play(int ticks,
-                            String fileName,
-                            GameType gameRunner,
-                            List<Solver> solvers,
-                            List<ClientBoard> boards)
+    private final List<String> messages;
+    private LocalGameRunner runner;
+    private DiceGenerator dice;
+
+    public Smoke() {
+        messages = new LinkedList<>();
+
+        runner = new LocalGameRunner();
+        runner.timeout(0);
+        runner.out(messages::add);
+
+        dice = new DiceGenerator(messages::add);
+        dice.printConversions(false);
+        dice.printDice(false);
+    }
+
+    public void play(int ticks,
+                     String fileName,
+                     GameType gameRunner,
+                     List<Solver> solvers,
+                     List<ClientBoard> boards)
     {
         play(ticks, fileName, true,
                 gameRunner, solvers, boards);
     }
 
-    public static void play(int ticks,
-                            String fileName,
-                            boolean printBoardOnly,
-                            GameType gameRunner,
-                            List<Solver> solvers,
-                            List<ClientBoard> boards)
+    public void play(int ticks,
+                     String fileName,
+                     GameType gameRunner,
+                     int players,
+                     Supplier<Solver> solver,
+                     Supplier<ClientBoard> board)
+    {
+        play(ticks, fileName, true,
+                gameRunner,
+                Stream.generate(solver)
+                        .limit(players).collect(toList()),
+                Stream.generate(board)
+                        .limit(players).collect(toList()));
+    }
+
+    public void play(int ticks,
+                     String fileName,
+                     boolean printBoardOnly,
+                     GameType gameRunner,
+                     List<Solver> solvers,
+                     List<ClientBoard> boards)
     {
         // given
-        List<String> messages = new LinkedList<>();
-
-        LocalGameRunner.timeout = 0;
-        LocalGameRunner.out = messages::add;
-        LocalGameRunner.countIterations = ticks;
-        LocalGameRunner.printConversions = false;
-        LocalGameRunner.printBoardOnly = printBoardOnly;
-        LocalGameRunner.printDice = false;
-        LocalGameRunner.printTick = true;
+        runner.with(gameRunner).add(solvers, boards);
+        runner.countIterations(ticks);
+        runner.printBoardOnly(printBoardOnly);
+        runner.printTick(true);
 
         // when
-        LocalGameRunner.run(gameRunner, solvers, boards);
+        runner.run();
 
         // then
         TestUtils.assertSmokeFile(fileName, messages);
     }
 
+    public Dice dice(long max, long count) {
+        return dice.getDice(DiceGenerator.SOUL, max, count);
+    }
+
+    public Dice dice() {
+        return dice.getDice();
+    }
+
+    public LocalGameRunner settings() {
+        return runner;
+    }
 }
