@@ -199,7 +199,12 @@ public interface SettingsReader<T extends SettingsReader> {
     default T update(JSONObject json) {
         json.keySet().forEach(name -> {
             String key = nameToKey(allKeys(), name);
-            getParameter(key).update(json.get(name));
+            Object value = json.get(name);
+            if (hasParameter(key)) {
+                getParameter(key).update(value);
+            } else {
+                add(() -> key, value);
+            }
         });
         return (T)this;
     }

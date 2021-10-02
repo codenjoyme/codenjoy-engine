@@ -279,6 +279,35 @@ public class SettingsReaderTest {
     }
 
     @Test
+    public void shouldParseFromJson_updateNotExists_butValidParameters() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when
+        settings.update(new JSONObject("{\n" +
+                "  'PARAMETER4':'updated',\n" +
+                "  'PARAMETER2':false,\n" +
+                "  'PARAMETER1':23,\n" +
+                "  'PARAMETER3':0.1,\n" +
+                "  'ROUNDS_ENABLED':true,\n" +          // not exists but valid Round settings
+                "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +   // not exists but valid Round settings
+                "  'ROUNDS_TIME_FOR_WINNER':10\n" +     // not exists but valid Round settings
+                "}"));
+
+        // then
+        assertEquals("{\n" +
+                        "  'PARAMETER1':23,\n" +
+                        "  'PARAMETER2':false,\n" +
+                        "  'PARAMETER3':0.1,\n" +
+                        "  'PARAMETER4':'updated',\n" +
+                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
+                        "  'ROUNDS_TIME_FOR_WINNER':10\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
     public void shouldParseFromJson_caseRoundSettings() {
         // given
         SettingsReader settings = new SomeRoundSettings();
