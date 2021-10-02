@@ -120,6 +120,22 @@ public interface SettingsReader<T extends SettingsReader> {
 
     // setters
 
+    default Parameter<?> add(SettingsReader.Key key, Object value) {
+        if (value == null) {
+            throw new IllegalArgumentException("Type is not recognized: " + value);
+        } else if (value instanceof Integer) {
+            return add(key, (int) value);
+        } else if (value instanceof Boolean) {
+            return add(key, (boolean) value);
+        } else if (value instanceof String) {
+            return add(key, (String) value);
+        } else if (value instanceof Double) {
+            return add(key, (double) value);
+        } else {
+            throw new IllegalArgumentException("Type is not supported: " + value.getClass());
+        }
+    }
+
     default CheckBox<Boolean> add(SettingsReader.Key key, boolean value) {
         return addCheckBox(key.key()).type(Boolean.class).def(value);
     }

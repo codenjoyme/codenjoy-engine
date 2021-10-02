@@ -27,10 +27,127 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import static com.codenjoy.dojo.utils.TestUtils.split;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class SettingsReaderTest {
+
+    @Test
+    public void shouldAddObject_fail_caseNull() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        try {
+            settings.add(() -> "newKey", (Object) null);
+            fail("Expected exception");
+        } catch (Exception exception) {
+            assertEquals("java.lang.IllegalArgumentException: Type is not recognized: null",
+                    exception.toString());
+        }
+
+        // then
+        assertEquals("Some[Parameter 1=15, \n" +
+                        "Parameter 2=true, \n" +
+                        "Parameter 3=0.5, \n" +
+                        "Parameter 4=string]",
+                split(settings, ", \n"));
+    }
+
+    @Test
+    public void shouldAddObject_fail_caseUnsuppertedType() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        try {
+            settings.add(() -> "newKey", (Object) Long.valueOf(1));
+            fail("Expected exception");
+        } catch (Exception exception) {
+            assertEquals("java.lang.IllegalArgumentException: Type is not supported: class java.lang.Long",
+                    exception.toString());
+        }
+
+        // then
+        assertEquals("Some[Parameter 1=15, \n" +
+                        "Parameter 2=true, \n" +
+                        "Parameter 3=0.5, \n" +
+                        "Parameter 4=string]",
+                split(settings, ", \n"));
+    }
+
+
+    @Test
+    public void shouldAddObject_success_caseInteger() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        assertEquals("[newKey:Integer = multiline[false] def[24] val[null]]",
+                settings.add(() -> "newKey", (Object) Integer.valueOf(24)).toString());
+
+        // then
+        assertEquals("Some[Parameter 1=15, \n" +
+                        "Parameter 2=true, \n" +
+                        "Parameter 3=0.5, \n" +
+                        "Parameter 4=string, \n" +
+                        "newKey=24]",
+                split(settings, ", \n"));
+    }
+
+    @Test
+    public void shouldAddObject_success_caseBoolean() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        assertEquals("[newKey:Boolean = def[true] val[null]]",
+                settings.add(() -> "newKey", (Object) Boolean.valueOf(true)).toString());
+
+        // then
+        assertEquals("Some[Parameter 1=15, \n" +
+                        "Parameter 2=true, \n" +
+                        "Parameter 3=0.5, \n" +
+                        "Parameter 4=string, \n" +
+                        "newKey=true]",
+                split(settings, ", \n"));
+    }
+
+    @Test
+    public void shouldAddObject_success_caseDouble() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        assertEquals("[newKey:Double = multiline[false] def[0.24] val[null]]",
+                settings.add(() -> "newKey", (Object) Double.valueOf(0.24)).toString());
+
+        // then
+        assertEquals("Some[Parameter 1=15, \n" +
+                        "Parameter 2=true, \n" +
+                        "Parameter 3=0.5, \n" +
+                        "Parameter 4=string, \n" +
+                        "newKey=0.24]",
+                split(settings, ", \n"));
+    }
+
+    @Test
+    public void shouldAddObject_success_caseString() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        assertEquals("[newKey:String = multiline[false] def[someString] val[null]]",
+                settings.add(() -> "newKey", (Object) "someString").toString());
+        // then
+        assertEquals("Some[Parameter 1=15, \n" +
+                        "Parameter 2=true, \n" +
+                        "Parameter 3=0.5, \n" +
+                        "Parameter 4=string, \n" +
+                        "newKey=someString]",
+                split(settings, ", \n"));
+    }
 
     @Test
     public void shouldConvertToJson() {
