@@ -26,7 +26,7 @@ import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.settings.*;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.utils.TestUtils.split;
+import static com.codenjoy.dojo.client.Utils.split;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;

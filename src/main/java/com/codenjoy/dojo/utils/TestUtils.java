@@ -49,6 +49,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 
@@ -275,11 +276,6 @@ public class TestUtils {
             TESTING = new MockitoJunitTesting();
         }
         TESTING.assertEquals(o1, o2);
-    }
-
-    public static String split(Object object, String split) {
-        return object.toString()
-                .replace(split.replace("\n", ""), split);
     }
 
     public static void assertSmokeFile(String fileName, List<String> messages) {

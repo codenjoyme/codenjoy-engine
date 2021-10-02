@@ -27,7 +27,7 @@ import com.codenjoy.dojo.services.settings.SomeInactivitySettings;
 import com.codenjoy.dojo.services.settings.SomeRoundSettings;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.utils.TestUtils.split;
+import static com.codenjoy.dojo.client.Utils.split;
 import static org.junit.Assert.*;
 
 public class InactivitySettingsTest {

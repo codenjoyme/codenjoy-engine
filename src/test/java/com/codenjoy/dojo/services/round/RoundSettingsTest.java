@@ -27,7 +27,7 @@ import com.codenjoy.dojo.services.settings.SomeRoundSettings;
 import com.codenjoy.dojo.services.settings.SomeSemifinalSettings;
 import org.junit.Test;
 
-import static com.codenjoy.dojo.utils.TestUtils.split;
+import static com.codenjoy.dojo.client.Utils.split;
 import static org.junit.Assert.assertEquals;
 
 public class RoundSettingsTest {

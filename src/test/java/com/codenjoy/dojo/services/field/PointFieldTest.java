@@ -35,6 +35,7 @@ import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
+import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -1336,10 +1337,11 @@ public class PointFieldTest {
         List<Collection<Point>> all = new LinkedList<>();
         Consumer<Collection<Point>> processor = list -> all.add(list);
         reader.addAll(player, processor);
-        assertEquals("[[one1(1,1), one2(1,1), one3(1,2)],\n" +
-                        "[two4(1,2)],\n" +
+        assertEquals("[[one1(1,1), one2(1,1), one3(1,2)], \n" +
+                        "[two4(1,2)], \n" +
                         "[three5(2,2)]]",
-                all.toString().replace("], [", "],\n["));
+                split(all,
+                        "], \n["));
 
         // then
         assert_severalElements_mixed();
