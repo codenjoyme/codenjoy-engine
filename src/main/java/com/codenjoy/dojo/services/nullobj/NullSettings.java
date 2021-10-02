@@ -62,6 +62,11 @@ public final class NullSettings implements Settings {
     }
 
     @Override
+    public boolean hasParameterPrefix(String name) {
+        return false;
+    }
+
+    @Override
     public void removeParameter(String name) {
         // do nothing
     }
