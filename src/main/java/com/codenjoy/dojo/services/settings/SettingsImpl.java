@@ -74,6 +74,12 @@ public class SettingsImpl implements Settings {
     }
 
     @Override
+    public boolean hasParameterPrefix(String name) {
+        return map.keySet().stream()
+                .anyMatch(key -> key.startsWith(name));
+    }
+
+    @Override
     public Parameter<?> getParameter(String name) {
         if (map.containsKey(name)) {
             return map.get(name);

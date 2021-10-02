@@ -241,6 +241,28 @@ public class SettingsTest {
     }
 
     @Test
+    public void shouldHasParameterPrefix() {
+        // given
+        Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class).def(5);
+        Parameter<String> select = settings.addSelect("select", Arrays.asList("option1", "option2", "option3")).type(String.class).def("option3");
+        Parameter<Boolean> check = settings.addCheckBox("check").def(true);
+
+        // when then
+        assertEquals(true, settings.hasParameterPrefix("edit"));
+        assertEquals(true, settings.hasParameterPrefix("ed"));
+        assertEquals(true, settings.hasParameterPrefix("select"));
+        assertEquals(true, settings.hasParameterPrefix("sel"));
+        assertEquals(true, settings.hasParameterPrefix("check"));
+        assertEquals(true, settings.hasParameterPrefix("che"));
+
+        assertEquals(false, settings.hasParameterPrefix("not-exists"));
+        assertEquals(false, settings.hasParameterPrefix("Edit"));
+        assertEquals(false, settings.hasParameterPrefix("Ed"));
+        assertEquals(false, settings.hasParameterPrefix("Check"));
+        assertEquals(false, settings.hasParameterPrefix("Che"));
+    }
+
+    @Test
     public void shouldCanSetDefaultValue() {
         // given
         Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class);

@@ -50,6 +50,8 @@ public interface Settings {
 
     boolean hasParameter(String name);
 
+    boolean hasParameterPrefix(String name);
+
     void removeParameter(String name);
 
     /**
