@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.settings;
  * #L%
  */
 
+import com.codenjoy.dojo.services.level.LevelsSettingsImpl;
 import com.codenjoy.dojo.utils.JsonUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -410,6 +411,114 @@ public class SettingsReaderTest {
                         "  'SEMIFINAL_RESET_BOARD':true,\n" +
                         "  'SEMIFINAL_SHUFFLE_BOARD':true,\n" +
                         "  'SEMIFINAL_TIMEOUT':900\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldParseFromJson_caseLevelsSettings_usedClassImpl() {
+        // given
+        SettingsReader settings = new LevelsSettingsImpl();
+
+        // when
+        settings.update(new JSONObject("{\n" +
+                "  'LEVELS_MAP_2':'updatedMap4',\n" +   // will update PARAMETER4 because of synonym
+                "  'LEVELS_MAP_1_2':'updatedMap2',\n" + // will update PARAMETER2 because of synonym
+                "  'LEVELS_MAP_1_1':'updatedMap1',\n" + // will update PARAMETER1 because of synonym
+                "  'LEVELS_MAP_1_3':'updatedMap3',\n" + // will update PARAMETER3 because of synonym
+                "}"));
+
+        // then
+        assertEquals("{\n" +
+                        "  'LEVELS_MAP_1_1':'updatedMap1',\n" +
+                        "  'LEVELS_MAP_1_2':'updatedMap2',\n" +
+                        "  'LEVELS_MAP_1_3':'updatedMap3',\n" +
+                        "  'LEVELS_MAP_2':'updatedMap4'\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldParseFromJson_caseLevelsSettings_namesAreEqualsToParameters() {
+        // given
+        SettingsReader settings = new SomeLevelsSettings();
+
+        // when
+        settings.update(new JSONObject("{\n" +
+                "  'PARAMETER4':'updatedMap4',\n" +
+                "  'PARAMETER2':'updatedMap2',\n" +
+                "  'PARAMETER1':'updatedMap1',\n" +
+                "  'PARAMETER3':'updatedMap3',\n" +
+                "}"));
+
+        // then
+        assertEquals("{\n" +
+                        "  'PARAMETER1':'updatedMap1',\n" +
+                        "  'PARAMETER2':'updatedMap2',\n" +
+                        "  'PARAMETER3':'updatedMap3',\n" +
+                        "  'PARAMETER4':'updatedMap4',\n" +
+                        "  'PARAMETER5':'map5',\n" +
+                        "  'PARAMETER6':'map6',\n" +
+                        "  'PARAMETER7':'map7',\n" +
+                        "  'PARAMETER8':'map8'\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldParseFromJson_caseLevelsSettings_namesAreNotEqualsToParameters_butSynonyms() {
+        // given
+        SettingsReader settings = new SomeLevelsSettings();
+
+        // when
+        settings.update(new JSONObject("{\n" +
+                "  'LEVELS_MAP_2':'updatedMap4',\n" +   // will update PARAMETER4 because of synonym
+                "  'LEVELS_MAP_1_2':'updatedMap2',\n" + // will update PARAMETER2 because of synonym
+                "  'LEVELS_MAP_1_1':'updatedMap1',\n" + // will update PARAMETER1 because of synonym
+                "  'LEVELS_MAP_1_3':'updatedMap3',\n" + // will update PARAMETER3 because of synonym
+                "}"));
+
+        // then
+        assertEquals("{\n" +
+                        "  'PARAMETER1':'updatedMap1',\n" +
+                        "  'PARAMETER2':'updatedMap2',\n" +
+                        "  'PARAMETER3':'updatedMap3',\n" +
+                        "  'PARAMETER4':'updatedMap4',\n" +
+                        "  'PARAMETER5':'map5',\n" +
+                        "  'PARAMETER6':'map6',\n" +
+                        "  'PARAMETER7':'map7',\n" +
+                        "  'PARAMETER8':'map8'\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldParseFromJson_caseLevelsSettings_namesAreNotEqualsToParameters_andNotSynonyms() {
+        // given
+        SettingsReader settings = new SomeLevelsSettings();
+
+        // when
+        settings.update(new JSONObject("{\n" +
+                "  'LEVELS_MAP_1_4':'newMap9',\n" +
+                "  'LEVELS_MAP_3_3':'newMap10',\n" +
+                "  'LEVELS_MAP_4_2':'newMap11',\n" +
+                "  'LEVELS_MAP_6':'newMap12'\n" +
+                "}"));
+
+        // then
+        assertEquals("{\n" +
+                        "  'LEVELS_MAP_1_4':'newMap9',\n" +
+                        "  'LEVELS_MAP_3_3':'newMap10',\n" +
+                        "  'LEVELS_MAP_4_2':'newMap11',\n" +
+                        "  'LEVELS_MAP_6':'newMap12',\n" +
+                        "  'PARAMETER1':'map1',\n" +
+                        "  'PARAMETER2':'map2',\n" +
+                        "  'PARAMETER3':'map3',\n" +
+                        "  'PARAMETER4':'map4',\n" +
+                        "  'PARAMETER5':'map5',\n" +
+                        "  'PARAMETER6':'map6',\n" +
+                        "  'PARAMETER7':'map7',\n" +
+                        "  'PARAMETER8':'map8'\n" +
                         "}",
                 JsonUtils.prettyPrint(settings.asJson()));
     }

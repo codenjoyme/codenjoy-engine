@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.settings;
  */
 
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
+import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import org.json.JSONObject;
@@ -55,6 +56,7 @@ public interface SettingsReader<T extends SettingsReader> {
                 .or(() -> RoundSettings.keyToName(RoundSettings.allRoundsKeys(), value))
                 .or(() -> SemifinalSettings.keyToName(SemifinalSettings.allSemifinalKeys(), value))
                 .or(() -> InactivitySettings.keyToName(InactivitySettings.allInactivityKeys(), value))
+                .or(() -> LevelsSettings.keyToName(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
     }
 
@@ -63,6 +65,7 @@ public interface SettingsReader<T extends SettingsReader> {
                 .or(() -> RoundSettings.nameToKey(RoundSettings.allRoundsKeys(), value))
                 .or(() -> SemifinalSettings.nameToKey(SemifinalSettings.allSemifinalKeys(), value))
                 .or(() -> InactivitySettings.nameToKey(InactivitySettings.allInactivityKeys(), value))
+                .or(() -> LevelsSettings.nameToKey(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
     }
 
@@ -79,6 +82,8 @@ public interface SettingsReader<T extends SettingsReader> {
     SelectBox<?> addSelect(String name, List<Object> strings);
 
     CheckBox<Boolean> addCheckBox(String name);
+
+    void removeParameter(String name);
 
     // getters
 
