@@ -59,10 +59,6 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         }
     }
 
-    static boolean isSemifinal(List<Key> values) {
-        return values.contains(SEMIFINAL_ENABLED);
-    }
-
     static boolean is(Settings settings) {
         if (settings == null) return false;
 
@@ -82,20 +78,6 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
 
     static List<SettingsReader.Key> allSemifinalKeys() {
         return Arrays.asList(Keys.values());
-    }
-
-    static Optional<? extends String> keyToName(List<Key> values, String value) {
-        return Optional.ofNullable(
-                isSemifinal(values)
-                        ? SettingsReader.Key.keyToName(values, value).orElse(null)
-                        : null);
-    }
-
-    static Optional<? extends String> nameToKey(List<Key> values, String value) {
-        return Optional.ofNullable(
-                isSemifinal(values)
-                        ? SettingsReader.Key.nameToKey(values, value).orElse(null)
-                        : null);
     }
 
     default void initSemifinal() {

@@ -55,10 +55,6 @@ public interface InactivitySettings<T extends SettingsReader> extends SettingsRe
         }
     }
 
-    static boolean isInactivity(List<Key> values) {
-        return values.contains(INACTIVITY_TIMEOUT);
-    }
-
     static boolean is(Settings settings) {
         if (settings == null) return false;
 
@@ -78,20 +74,6 @@ public interface InactivitySettings<T extends SettingsReader> extends SettingsRe
 
     static List<SettingsReader.Key> allInactivityKeys() {
         return Arrays.asList(Keys.values());
-    }
-
-    static Optional<? extends String> keyToName(List<Key> values, String value) {
-        return Optional.ofNullable(
-                isInactivity(values)
-                        ? SettingsReader.Key.keyToName(values, value).orElse(null)
-                        : null);
-    }
-
-    static Optional<? extends String> nameToKey(List<Key> values, String value) {
-        return Optional.ofNullable(
-                isInactivity(values)
-                        ? SettingsReader.Key.nameToKey(values, value).orElse(null)
-                        : null);
     }
 
     default void initInactivity() {

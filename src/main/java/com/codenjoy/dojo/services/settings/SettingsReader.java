@@ -53,18 +53,18 @@ public interface SettingsReader<T extends SettingsReader> {
 
     static String keyToName(List<Key> values, String value) {
         return Key.keyToName(values, value)
-                .or(() -> RoundSettings.keyToName(RoundSettings.allRoundsKeys(), value))
-                .or(() -> SemifinalSettings.keyToName(SemifinalSettings.allSemifinalKeys(), value))
-                .or(() -> InactivitySettings.keyToName(InactivitySettings.allInactivityKeys(), value))
+                .or(() -> Key.keyToName(RoundSettings.allRoundsKeys(), value))
+                .or(() -> Key.keyToName(SemifinalSettings.allSemifinalKeys(), value))
+                .or(() -> Key.keyToName(InactivitySettings.allInactivityKeys(), value))
                 .or(() -> LevelsSettings.keyToName(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
     }
 
     static String nameToKey(List<Key> values, String value) {
         return Key.nameToKey(values, value)
-                .or(() -> RoundSettings.nameToKey(RoundSettings.allRoundsKeys(), value))
-                .or(() -> SemifinalSettings.nameToKey(SemifinalSettings.allSemifinalKeys(), value))
-                .or(() -> InactivitySettings.nameToKey(InactivitySettings.allInactivityKeys(), value))
+                .or(() -> Key.nameToKey(RoundSettings.allRoundsKeys(), value))
+                .or(() -> Key.nameToKey(SemifinalSettings.allSemifinalKeys(), value))
+                .or(() -> Key.nameToKey(InactivitySettings.allInactivityKeys(), value))
                 .or(() -> LevelsSettings.nameToKey(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
     }

@@ -60,10 +60,6 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         }
     }
 
-    static boolean isRounds(List<Key> values) {
-        return values.contains(ROUNDS_ENABLED);
-    }
-
     static boolean is(Settings settings) {
         if (settings == null) return false;
 
@@ -83,20 +79,6 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     static List<SettingsReader.Key> allRoundsKeys() {
         return Arrays.asList(Keys.values());
-    }
-
-    static Optional<? extends String> keyToName(List<Key> values, String value) {
-        return Optional.ofNullable(
-                isRounds(values)
-                        ? SettingsReader.Key.keyToName(values, value).orElse(null)
-                        : null);
-    }
-
-    static Optional<? extends String> nameToKey(List<Key> values, String value) {
-        return Optional.ofNullable(
-                isRounds(values)
-                        ? SettingsReader.Key.nameToKey(values, value).orElse(null)
-                        : null);
     }
 
     default void initRound() {
