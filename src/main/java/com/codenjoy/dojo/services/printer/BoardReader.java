@@ -28,7 +28,7 @@ import com.codenjoy.dojo.services.Point;
 import java.util.function.Consumer;
 
 /**
- * Этот абстракция над доской для Printer
+ * Абстракция над доской для Printer.
  */
 public interface BoardReader<P> {
 
