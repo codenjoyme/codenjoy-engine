@@ -186,7 +186,7 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     }
 
     public void resetAllPlayers() {
-        new LinkedList<>(players()).forEach(p -> newGame(p));
+        new LinkedList<>(players()).forEach(this::newGame);
     }
 
     @Override
