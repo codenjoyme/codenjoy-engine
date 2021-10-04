@@ -187,6 +187,10 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         return roundsEnabled().getValue();
     }
 
+    default boolean isRoundsDisabled() {
+        return !isRoundsEnabled();
+    }
+
     default int getPlayersPerRoom() {
         return playersPerRoom().getValue();
     }
