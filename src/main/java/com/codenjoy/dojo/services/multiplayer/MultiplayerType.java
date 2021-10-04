@@ -31,9 +31,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * Определяет тип многопользовательский игры.
- * Этот функционал реализует сервис
- * многопользовательской игры {@link MultiplayerService}.
+ * Определяет тип многопользовательской игры.
  */
 public class MultiplayerType {
 
@@ -161,7 +159,6 @@ public class MultiplayerType {
      * разделен на комнаты по N участников.
      */
     public static final BiFunction<Integer, Integer, MultiplayerType> MULTIPLE_LEVELS_MULTIROOM = MultipleLevelsMultiroomType::new;
-
 
     protected int roomSize;
     protected int levelsCount;
@@ -320,10 +317,21 @@ public class MultiplayerType {
 
     /**
      * Иногда случается так, что предпоследний игрок уходит с поля,
-     * так вот этот флаг говорит стоит ли уходить так же и последнему
-     * @return true если стоит уходить последнему игроку с карты
+     * так вот этот флаг говорит, стоит ли уходить так же и последнему.
+     * @return true если стоит уходить последнему игроку с карты.
      */
     public boolean shouldReloadAlone() {
         return shouldReloadAlone;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s{roomSize=%s, levelsCount=%s, " +
+                "disposable=%s, shouldReloadAlone=%s}",
+                getClass().getSimpleName(),
+                roomSize,
+                levelsCount,
+                disposable,
+                shouldReloadAlone);
     }
 }

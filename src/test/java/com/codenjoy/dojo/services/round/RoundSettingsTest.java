@@ -137,4 +137,50 @@ public class RoundSettingsTest {
         assertEquals("SettingsImpl(map={})",
                 RoundSettings.get(settings).toString());
     }
+
+    @Test
+    public void testGetters(){
+        // given
+        RoundSettings settings = new SomeRoundSettings();
+
+        // when
+        settings.setRoundsEnabled(false);
+        settings.setPlayersPerRoom(7);
+        settings.setTeamsPerRoom(3);
+        settings.setTimePerRound(150);
+        settings.setTimeForWinner(30);
+        settings.setTimeBeforeStart(6);
+        settings.setRoundsPerMatch(4);
+        settings.setMinTicksForWin(50);
+
+        // when then
+        assertEquals(false, settings.isRoundsEnabled());
+        assertEquals(true, settings.isRoundsDisabled());
+        assertEquals(7, settings.getPlayersPerRoom());
+        assertEquals(3, settings.getTeamsPerRoom());
+        assertEquals(150, settings.getTimePerRound());
+        assertEquals(30, settings.getTimeForWinner());
+        assertEquals(6, settings.getTimeBeforeStart());
+        assertEquals(4, settings.getRoundsPerMatch());
+        assertEquals(50, settings.getMinTicksForWin());
+    }
+
+    @Test
+    public void testRoundMultiplayerType(){
+        // given
+        RoundSettings settings = new SomeRoundSettings();
+
+        // when then
+        assertEquals("TeamType{roomSize=5, levelsCount=1, " +
+                        "disposable=true, shouldReloadAlone=true}",
+                settings.getRoundsMultiplayerType().toString());
+
+        // when
+        settings.setRoundsEnabled(false);
+
+        // when then
+        assertEquals("MultipleType{roomSize=2147483647, levelsCount=1, " +
+                        "disposable=false, shouldReloadAlone=false}",
+                settings.getRoundsMultiplayerType().toString());
+    }
 }
