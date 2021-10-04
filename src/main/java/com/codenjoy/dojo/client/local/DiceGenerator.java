@@ -35,6 +35,10 @@ public class DiceGenerator {
     private boolean printDice = false;
     private boolean printSeed = false;
 
+    public DiceGenerator() {
+        this(System.out::println);
+    }
+
     public DiceGenerator(Consumer<String> out) {
         this.out = out;
     }
