@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.round;
  * #L%
  */
 
+import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
 import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.services.settings.SettingsReader;
@@ -217,6 +218,16 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     default int getMinTicksForWin() {
         return minTicksForWin().getValue();
+    }
+
+    default MultiplayerType getRoundsMultiplayerType() {
+        if (!bool(ROUNDS_ENABLED)) {
+            return MultiplayerType.MULTIPLE;
+        }
+
+        return MultiplayerType.TEAM.apply(
+                integer(ROUNDS_PLAYERS_PER_ROOM),
+                MultiplayerType.DISPOSABLE);
     }
 
     // setters
