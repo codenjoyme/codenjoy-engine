@@ -40,14 +40,15 @@ import com.codenjoy.dojo.utils.events.Testing;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
@@ -305,6 +306,7 @@ public class TestUtils {
             if (!folder.exists()) {
                 folder.mkdirs();
             }
+
             Files.writeString(actualFile.toPath(), data);
         } catch (IOException e) {
             e.printStackTrace();
@@ -313,8 +315,7 @@ public class TestUtils {
 
     private static String load(File file) {
         try {
-            return Files.lines(file.toPath())
-                    .collect(Collectors.joining("\n"));
+            return Files.readString(file.toPath());
         } catch (IOException e) {
             e.printStackTrace();
             return StringUtils.EMPTY;
