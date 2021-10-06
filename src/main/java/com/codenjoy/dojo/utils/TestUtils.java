@@ -40,9 +40,7 @@ import com.codenjoy.dojo.utils.events.Testing;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
@@ -66,6 +64,14 @@ public class TestUtils {
 
     // если потребуется дополнительна проверка финального результата, использу это чудо
     public static Consumer<String> recheck;
+
+    private static Testing testing() {
+        if (TESTING == null) {
+            // это тут потому что статика пытается сразу загрузить классы, которых нет
+            TESTING = new MockitoJunitTesting();
+        }
+        return TESTING;
+    }
 
     public static String injectN(String expected) {
         int size = (int) Math.sqrt(expected.length());
@@ -272,11 +278,7 @@ public class TestUtils {
     }
 
     private static void assertEquals(Object o1, Object o2) {
-        if (TESTING == null) {
-            // это тут потому что статика пытается сразу загрузить классы, которых нет
-            TESTING = new MockitoJunitTesting();
-        }
-        TESTING.assertEquals(o1, o2);
+        testing().assertEquals(o1, o2);
     }
 
     public static void assertSmokeFile(String fileName, List<String> messages) {
