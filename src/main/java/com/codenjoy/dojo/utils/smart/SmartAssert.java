@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
+import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 
 /**
  * Где стоит использовать этот способ проверки?

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.utils;
+package com.codenjoy.dojo.utils.core;
 
 /*-
  * #%L
@@ -22,7 +22,6 @@ package com.codenjoy.dojo.utils;
  * #L%
  */
 
-import com.codenjoy.dojo.utils.events.Testing;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationTargetException;

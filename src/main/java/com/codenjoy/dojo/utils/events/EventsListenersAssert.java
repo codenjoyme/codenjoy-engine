@@ -23,6 +23,7 @@ package com.codenjoy.dojo.utils.events;
  */
 
 import com.codenjoy.dojo.services.EventListener;
+import com.codenjoy.dojo.utils.core.Testing;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
+import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.toList;
 
 public class EventsListenersAssert {

@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.utils.events;
+package com.codenjoy.dojo.utils.core;
 
 /*-
  * #%L

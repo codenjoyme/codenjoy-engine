@@ -49,7 +49,7 @@ import java.util.function.Supplier;
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
-import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
+import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 
 @UtilityClass
 public class TestUtils {

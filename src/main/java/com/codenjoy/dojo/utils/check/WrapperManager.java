@@ -14,7 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
+import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
