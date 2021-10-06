@@ -99,6 +99,13 @@ public class MockitoJunitTesting implements Testing {
     }
 
     @Override
+    public <T> T mock(Class<T> clazz) {
+        return (T) callStatic(Mockito, "mock",
+                new Class[]{clazz.getClass()},
+                new Object[]{clazz});
+    }
+
+    @Override
     public <T> T verify(T mock, Object mode) {
         return (T) callStatic(Mockito, "verify",
                 new Class[]{Object.class, VerificationMode},

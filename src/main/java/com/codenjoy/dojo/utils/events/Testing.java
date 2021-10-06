@@ -28,6 +28,8 @@ public interface Testing {
 
     void assertEquals(Object o1, Object o2);
 
+    <T> T mock(Class<T> clazz);
+
     <T> T verify(T mock, Object mode);
 
     <T> void reset(T... mocks);
