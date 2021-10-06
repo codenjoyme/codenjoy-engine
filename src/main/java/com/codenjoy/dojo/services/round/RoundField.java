@@ -41,7 +41,7 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     private Object loseEvent;
 
     public RoundField() {
-        // do nothing
+        // do nothing, for testing only
     }
 
     public RoundField(Object startRoundEvent, Object winEvent, Object loseEvent, RoundSettings settings) {

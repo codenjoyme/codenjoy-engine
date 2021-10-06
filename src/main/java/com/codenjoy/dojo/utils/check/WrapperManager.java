@@ -156,7 +156,7 @@ public class WrapperManager {
         }
     }
 
-    public <T> T objectSpy(T delegate, boolean include, String... methods) {
+    public <T> T objectSpy(T delegate, String... methods) {
         if (wrappers.containsValue(delegate)) {
             return (T) wrappers.getKey(delegate);
         }
@@ -165,15 +165,19 @@ public class WrapperManager {
         List<String> excluded = new LinkedList<>();
         List<String> included = new LinkedList<>();
         excluded.addAll(Arrays.asList("equals", "hashCode", "toString"));
-        (include ? included : excluded)
-                .addAll(Arrays.asList(methods));
+        Arrays.stream(methods).forEach(method ->
+                (method.startsWith("[-]") ? excluded : included).add(method));
 
         // default constructor parameters fake
         Constructor<?> constructor = delegate.getClass().getDeclaredConstructors()[0];
         Class<?>[] types = constructor.getParameterTypes();
         Object[] typesValues = new Object[types.length];
         for (int index = 0; index < types.length; index++) {
-            typesValues[index] = testing.mock(types[index]);
+            try {
+                typesValues[index] = testing.mock(types[index]);
+            } catch (Exception exception) {
+                typesValues[index] = null;
+            }
         }
 
         // setup proxy
