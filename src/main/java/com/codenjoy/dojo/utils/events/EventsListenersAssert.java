@@ -30,18 +30,17 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
+import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.toList;
 
 public class EventsListenersAssert {
 
     private Supplier<List<EventListener>> listeners;
     private Class eventsClass;
-    private Testing testing;
 
     public EventsListenersAssert(Supplier<List<EventListener>> listeners, Class eventsClass) {
         this.listeners = listeners;
         this.eventsClass = eventsClass;
-        this.testing = new MockitoJunitTesting();
     }
 
     private List<EventListener> listeners() {
@@ -56,12 +55,12 @@ public class EventsListenersAssert {
     public String getEvents(EventListener events) {
         String result = tryCatch(
                 () -> {
-                    Testing.Captor captor = testing.captorForClass(eventsClass);
-                    testing.verify(events, testing.atLeast(1)).event(captor.capture());
+                    Testing.Captor captor = testing().captorForClass(eventsClass);
+                    testing().verify(events, testing().atLeast(1)).event(captor.capture());
                     return captor.getAllValues().toString();
                 },
                 "WantedButNotInvoked", () -> "[]");
-        testing.reset(events);
+        testing().reset(events);
         return result;
     }
 
@@ -87,7 +86,7 @@ public class EventsListenersAssert {
                           Function<Integer, String> function)
     {
         String actual = collectAll(size, indexes, function);
-        testing.assertEquals(expected, actual);
+        testing().assertEquals(expected, actual);
     }
 
     public String collectAll(int size, Integer[] indexes,
@@ -120,7 +119,7 @@ public class EventsListenersAssert {
                 () -> {
                     for (int i = 0; i < listeners().size(); i++) {
                         if (indexes.length == 0 || Arrays.asList(indexes).contains(i)) {
-                            testing.verifyNoMoreInteractions(listeners().get(i));
+                            testing().verifyNoMoreInteractions(listeners().get(i));
                         }
                     }
                     return null;
@@ -135,17 +134,17 @@ public class EventsListenersAssert {
         if (expected.equals("[]")) {
             tryCatch(
                     () -> {
-                        testing.verify(events, testing.never()).event(testing.anyObject());
+                        testing().verify(events, testing().never()).event(testing().anyObject());
                         return null;
                     },
                     "NeverWantedButInvoked", () -> {
-                        testing.assertEquals(expected, getEvents(events));
+                        testing().assertEquals(expected, getEvents(events));
                         return null;
                     });
         } else {
-            testing.assertEquals(expected, getEvents(events));
+            testing().assertEquals(expected, getEvents(events));
         }
-        testing.reset(events);
+        testing().reset(events);
     }
 
     public void verifyAllEvents(String expected, Integer... indexes) {

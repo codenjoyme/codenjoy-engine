@@ -1,7 +1,5 @@
 package com.codenjoy.dojo.utils.check;
 
-import com.codenjoy.dojo.utils.events.MockitoJunitTesting;
-import com.codenjoy.dojo.utils.events.Testing;
 import javassist.util.proxy.MethodHandler;
 import javassist.util.proxy.ProxyFactory;
 import org.apache.commons.collections4.BidiMap;
@@ -16,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
@@ -26,14 +25,12 @@ public class WrapperManager {
     private BidiMap<Object, Object> wrappers;
     private Caller caller;
     private List<String> messages;
-    private Testing testing;
 
     public WrapperManager() {
         messages = new LinkedList<>();
         wrappers = new DualHashBidiMap<>();
         deep = 0;
         pending = new Pending();
-        testing = new MockitoJunitTesting();
     }
 
     public String messages() {
@@ -174,7 +171,7 @@ public class WrapperManager {
         Object[] typesValues = new Object[types.length];
         for (int index = 0; index < types.length; index++) {
             try {
-                typesValues[index] = testing.mock(types[index]);
+                typesValues[index] = testing().mock(types[index]);
             } catch (Exception exception) {
                 typesValues[index] = null;
             }

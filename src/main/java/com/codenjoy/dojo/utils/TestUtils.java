@@ -35,8 +35,6 @@ import com.codenjoy.dojo.services.multiplayer.Single;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.settings.Settings;
-import com.codenjoy.dojo.utils.events.MockitoJunitTesting;
-import com.codenjoy.dojo.utils.events.Testing;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
@@ -51,27 +49,18 @@ import java.util.function.Supplier;
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
+import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
 
 @UtilityClass
 public class TestUtils {
 
     public static final int COUNT_NUMBERS = 3;
 
-    private static Testing TESTING = null;
-
     public static final String SOURCE_FOLDER = "src/test/resources/";
     public static final String TARGET_FOLDER = "target/";
 
     // если потребуется дополнительна проверка финального результата, использу это чудо
     public static Consumer<String> recheck;
-
-    private static Testing testing() {
-        if (TESTING == null) {
-            // это тут потому что статика пытается сразу загрузить классы, которых нет
-            TESTING = new MockitoJunitTesting();
-        }
-        return TESTING;
-    }
 
     public static String injectN(String expected) {
         int size = (int) Math.sqrt(expected.length());

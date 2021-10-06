@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.utils.events;
+package com.codenjoy.dojo.utils;
 
 /*-
  * #%L
@@ -22,6 +22,7 @@ package com.codenjoy.dojo.utils.events;
  * #L%
  */
 
+import com.codenjoy.dojo.utils.events.Testing;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,13 +38,20 @@ import java.util.List;
  */
 public class MockitoJunitTesting implements Testing {
 
+    private static Testing TESTING = null;
+
+    public static Testing testing() {
+        // это тут потому что статика пытается сразу загрузить классы, которых нет
+        return TESTING = (TESTING != null) ? TESTING : new MockitoJunitTesting();
+    }
+
     private Class<?> Assert;
     private Class<?> Mockito;
     private Class<?> VerificationMode;
     private Class<?> ArgumentCaptor;
     private Class<?> MultipleFailureException;
 
-    public MockitoJunitTesting() {
+    private MockitoJunitTesting() {
         try {
             ClassLoader classLoader = this.getClass().getClassLoader();
             Assert = classLoader.loadClass("org.junit.Assert");

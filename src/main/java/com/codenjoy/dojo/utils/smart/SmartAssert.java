@@ -22,14 +22,14 @@ package com.codenjoy.dojo.utils.smart;
  * #L%
  */
 
-import com.codenjoy.dojo.utils.events.MockitoJunitTesting;
-import com.codenjoy.dojo.utils.events.Testing;
 import lombok.SneakyThrows;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static com.codenjoy.dojo.utils.MockitoJunitTesting.testing;
 
 /**
  * Где стоит использовать этот способ проверки?
@@ -50,17 +50,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SmartAssert {
 
-    private static Testing TESTING = null;
-
     private static Map<String, List<AssertionError>> failures = new ConcurrentHashMap<>();
-
-    private static Testing testing() {
-        if (TESTING == null) {
-            // это тут потому что статика пытается сразу загрузить классы, которых нет
-            TESTING = new MockitoJunitTesting();
-        }
-        return TESTING;
-    }
 
     private static StackTraceElement[] stackTrace() {
         Exception exception = new Exception();
