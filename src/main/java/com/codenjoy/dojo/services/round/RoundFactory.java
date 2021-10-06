@@ -27,7 +27,7 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 public class RoundFactory {
 
     public static Round get(RoundSettings<SettingsReader> settings) {
-        if (settings.roundsEnabled().getValue()) {
+        if (settings.isRoundsEnabled()) {
             return new RoundImpl(settings);
         } else {
             return new NullRound();

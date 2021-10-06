@@ -40,6 +40,10 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     private Object startRoundEvent;
     private Object loseEvent;
 
+    public RoundField() {
+        // do nothing
+    }
+
     public RoundField(Object startRoundEvent, Object winEvent, Object loseEvent, RoundSettings settings) {
         this.round = RoundFactory.get(settings);
         round.init(this, winEvent);
