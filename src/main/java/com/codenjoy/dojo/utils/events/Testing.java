@@ -26,7 +26,13 @@ import java.util.List;
 
 public interface Testing {
 
+    void assertSame(Object o1, Object o2);
+
+    void assertNotEquals(Object o1, Object o2);
+
     void assertEquals(Object o1, Object o2);
+
+    void assertEquals(String message, Object o1, Object o2);
 
     <T> T mock(Class<T> clazz);
 
@@ -43,6 +49,8 @@ public interface Testing {
     Object atLeast(int minNumberOfInvocations);
 
     <T, S extends T> Captor<T> captorForClass(Class<S> clazz);
+
+    Exception multipleFailureException(List<Throwable> errors);
 
     interface Captor<T> {
         T capture();

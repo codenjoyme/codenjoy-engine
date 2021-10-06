@@ -22,6 +22,8 @@ package com.codenjoy.dojo.utils.events;
  * #L%
  */
 
+import lombok.SneakyThrows;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -39,6 +41,7 @@ public class MockitoJunitTesting implements Testing {
     private Class<?> Mockito;
     private Class<?> VerificationMode;
     private Class<?> ArgumentCaptor;
+    private Class<?> MultipleFailureException;
 
     public MockitoJunitTesting() {
         try {
@@ -47,6 +50,7 @@ public class MockitoJunitTesting implements Testing {
             Mockito = classLoader.loadClass("org.mockito.Mockito");
             VerificationMode = classLoader.loadClass("org.mockito.verification.VerificationMode");
             ArgumentCaptor = classLoader.loadClass("org.mockito.ArgumentCaptor");
+            MultipleFailureException = classLoader.loadClass("org.junit.internal.runners.model.MultipleFailureException");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -94,6 +98,27 @@ public class MockitoJunitTesting implements Testing {
     @Override
     public void assertEquals(Object o1, Object o2) {
         callStatic(Assert, "assertEquals",
+                new Class[]{Object.class, Object.class},
+                new Object[]{o1, o2});
+    }
+
+    @Override
+    public void assertEquals(String message, Object o1, Object o2) {
+        callStatic(Assert, "assertEquals",
+                new Class[]{String.class, Object.class, Object.class},
+                new Object[]{message, o1, o2});
+    }
+
+    @Override
+    public void assertNotEquals(Object o1, Object o2) {
+        callStatic(Assert, "assertNotEquals",
+                new Class[]{Object.class, Object.class},
+                new Object[]{o1, o2});
+    }
+
+    @Override
+    public void assertSame(Object o1, Object o2) {
+        callStatic(Assert, "assertSame",
                 new Class[]{Object.class, Object.class},
                 new Object[]{o1, o2});
     }
@@ -171,5 +196,13 @@ public class MockitoJunitTesting implements Testing {
                         captor, new Object[]{});
             }
         };
+    }
+
+    @SneakyThrows
+    @Override
+    public Exception multipleFailureException(List<Throwable> errors) {
+        return (Exception) MultipleFailureException
+                .getConstructor(List.class)
+                .newInstance(errors);
     }
 }
