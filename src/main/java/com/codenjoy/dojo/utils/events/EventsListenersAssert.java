@@ -25,7 +25,6 @@ package com.codenjoy.dojo.utils.events;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.utils.core.Testing;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -53,7 +52,7 @@ public class EventsListenersAssert {
         return collectAll(size, indexes, index -> getEventsFormatted(size, index));
     }
 
-    public String getEvents(EventListener events) {
+    private String getEvents(EventListener events) {
         String result = tryCatch(
                 () -> {
                     Testing.Captor captor = testing().captorForClass(eventsClass);
@@ -90,16 +89,19 @@ public class EventsListenersAssert {
         testing().assertEquals(expected, actual);
     }
 
-    public String collectAll(int size, Integer[] indexes,
+    private String collectAll(int size, Integer[] indexes,
                              Function<Integer, String> function)
     {
         indexes = range(size, indexes);
 
-        String actual = "";
-        for (int i = 0; i < indexes.length; i++) {
-            actual += function.apply(indexes[i]);
+        String result = "";
+        for (Integer integer : indexes) {
+            String line = function.apply(integer);
+            if (line != null) {
+                result += line;
+            }
         }
-        return actual;
+        return result;
     }
 
     private static <A> A tryCatch(Supplier<A> tryCode,
@@ -116,19 +118,7 @@ public class EventsListenersAssert {
     }
 
     public void verifyNoEvents(Integer... indexes) {
-        tryCatch(
-                () -> {
-                    for (int i = 0; i < listeners().size(); i++) {
-                        if (indexes.length == 0 || Arrays.asList(indexes).contains(i)) {
-                            testing().verifyNoMoreInteractions(listeners().get(i));
-                        }
-                    }
-                    return null;
-                },
-                "AssertionError", () -> {
-                    verifyAllEvents("", indexes);
-                    return null;
-                });
+        verifyAllEvents("", indexes);
     }
 
     public void verifyEvents(EventListener events, String expected) {
@@ -153,12 +143,15 @@ public class EventsListenersAssert {
         assertAll(expected, size, indexes, index -> getEventsFormatted(size, index));
     }
 
-    public String getEventsFormatted(int size, Integer index) {
-        Object actual = getEvents(listeners().get(index));
-        if (size == 1) {
-            return actual.toString();
-        } else {
-            return String.format("listener(%s) => %s\n", index, actual);
+    private String getEventsFormatted(int size, Integer index) {
+        String actual = getEvents(listeners().get(index));
+        if ("[]".equals(actual)) {
+            return null;
         }
+        if (size == 1) {
+            return actual;
+        }
+
+        return String.format("listener(%s) => %s\n", index, actual);
     }
 }
