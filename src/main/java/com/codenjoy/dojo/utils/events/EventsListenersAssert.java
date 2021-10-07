@@ -70,11 +70,6 @@ public class EventsListenersAssert {
                 || is(e.getSuperclass(), exception);
     }
 
-    public void assertAll(String expected, Function<Integer, String> function) {
-        String actual = collectAll(listeners(), function);
-        testing().assertEquals(expected, actual);
-    }
-
     public static String collectAll(List<?> list, Function<Integer, String> function)
     {
         String result = "";
@@ -97,10 +92,6 @@ public class EventsListenersAssert {
                 throw e;
             }
         }
-    }
-
-    public void verifyAllEvents(String expected) {
-        assertAll(expected, index -> getEventsFormatted(index));
     }
 
     private String getEventsFormatted(Integer index) {
