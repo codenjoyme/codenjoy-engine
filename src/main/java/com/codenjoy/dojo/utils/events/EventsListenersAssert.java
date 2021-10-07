@@ -28,10 +28,8 @@ import com.codenjoy.dojo.utils.core.Testing;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
-import static java.util.stream.Collectors.toList;
 
 public class EventsListenersAssert {
 
@@ -47,9 +45,8 @@ public class EventsListenersAssert {
         return listeners.get();
     }
 
-    public String getEvents(Integer... indexes) {
-        int size = listeners().size();
-        return collectAll(size, indexes, index -> getEventsFormatted(size, index));
+    public String getEvents() {
+        return collectAll(listeners(), index -> getEventsFormatted(index));
     }
 
     private String getEvents(EventListener events) {
@@ -73,30 +70,16 @@ public class EventsListenersAssert {
                 || is(e.getSuperclass(), exception);
     }
 
-    private Integer[] range(int size, Integer[] indexes) {
-        if (indexes.length == 0) {
-            indexes = IntStream.range(0, size)
-                    .boxed()
-                    .collect(toList()).toArray(new Integer[0]);
-        }
-        return indexes;
-    }
-
-    public void assertAll(String expected, int size, Integer[] indexes,
-                          Function<Integer, String> function)
-    {
-        String actual = collectAll(size, indexes, function);
+    public void assertAll(String expected, Function<Integer, String> function) {
+        String actual = collectAll(listeners(), function);
         testing().assertEquals(expected, actual);
     }
 
-    private String collectAll(int size, Integer[] indexes,
-                             Function<Integer, String> function)
+    public static String collectAll(List<?> list, Function<Integer, String> function)
     {
-        indexes = range(size, indexes);
-
         String result = "";
-        for (Integer integer : indexes) {
-            String line = function.apply(integer);
+        for (int index = 0; index < list.size(); index++) {
+            String line = function.apply(index);
             if (line != null) {
                 result += line;
             }
@@ -104,8 +87,7 @@ public class EventsListenersAssert {
         return result;
     }
 
-    private static <A> A tryCatch(Supplier<A> tryCode,
-                                  String exception, Supplier<A> failureCode) {
+    private static <A> A tryCatch(Supplier<A> tryCode, String exception, Supplier<A> failureCode) {
         try {
             return tryCode.get();
         } catch (Throwable e) {
@@ -117,17 +99,17 @@ public class EventsListenersAssert {
         }
     }
 
-    public void verifyAllEvents(String expected, Integer... indexes) {
-        int size = listeners().size();
-        assertAll(expected, size, indexes, index -> getEventsFormatted(size, index));
+    public void verifyAllEvents(String expected) {
+        assertAll(expected, index -> getEventsFormatted(index));
     }
 
-    private String getEventsFormatted(int size, Integer index) {
-        String actual = getEvents(listeners().get(index));
+    private String getEventsFormatted(Integer index) {
+        List<EventListener> listeners = listeners();
+        String actual = getEvents(listeners.get(index));
         if ("[]".equals(actual)) {
             return null;
         }
-        if (size == 1) {
+        if (listeners.size() == 1) {
             return actual;
         }
 
