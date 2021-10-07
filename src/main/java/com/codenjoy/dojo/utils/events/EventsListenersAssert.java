@@ -117,10 +117,6 @@ public class EventsListenersAssert {
         }
     }
 
-    public void verifyNoEvents(Integer... indexes) {
-        verifyAllEvents("", indexes);
-    }
-
     public void verifyEvents(EventListener events, String expected) {
         if (expected.equals("[]")) {
             tryCatch(
