@@ -28,6 +28,7 @@ import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.utils.LevelUtils;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +86,9 @@ public abstract class AbstractLevel implements Level {
     protected <T, E extends CharElement> List<T> find(
             Map<E, Function<Point, T>> conversions)
     {
+        if (!(conversions instanceof LinkedHashMap)) {
+            throw new IllegalArgumentException("Expected LinkedHashMap because of HashMap will affect tests");
+        }
         return conversions.entrySet().stream()
                 .flatMap(entry -> find(entry.getValue(), entry.getKey()).stream())
                 .collect(toList());
