@@ -30,6 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import static java.util.stream.Collectors.toList;
 
 @ToString
@@ -39,6 +40,7 @@ public class SettingsImpl implements Settings {
 
     @Override
     public List<Parameter> getParameters() {
+        // TODO это вызывается очень много раз при любом чихе, надо потимизировать
         return new LinkedList<>(map.values());
     }
 
