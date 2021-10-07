@@ -63,7 +63,7 @@ public class SmartAssert {
             StackTraceElement element = elements[i];
             String className = element.getClassName();
 
-            if (className.contains("Abstract")
+            if (className.contains(".Abstract")
                 || className.equals(SmartAssert.class.getName())
                 || className.contains(SmartAssert.class.getSimpleName() + "$")
                 || className.contains("dojo.services.helper"))

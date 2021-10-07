@@ -79,20 +79,18 @@ public class WrapperManager {
             deep++;
         }
         List<String> params = Arrays.stream(parameters)
-                .map(param -> asString(param))
-                .map(string -> string.replaceAll("\n$", ""))
+                .map(this::asString)
+                .map(this::removeLastN)
                 .collect(toList());
-        boolean multiline = params.stream()
-                .anyMatch(param -> param.contains("\n"));
-        String data = params.stream()
-                .collect(joining(multiline ? ",\n" : ", "));
-        data = (data.contains("\n") ? "\n" : "") + data;
-        data = data.replace("\n", "\n" + leftPad() + leftPad());
+        String delimiter = isMultiline(params) ? ",\n" : ", ";
+        String data = String.join(delimiter, params);
+        String methodPadding = (!append) ? leftPad() : "";
+        String methodNewLine = (!append && deep == 1) ? "\n" : "";
         String message = String.format("%s%s%s(%s)",
-                (!append && deep == 1) ? "\n" : "",
-                (!append) ? leftPad() : "",
+                methodNewLine,
+                methodPadding,
                 method,
-                data);
+                padding(data));
 
         if (pending.enabled()) {
             pending.value(message);
@@ -106,13 +104,31 @@ public class WrapperManager {
         }
     }
 
+    private boolean isMultiline(List<String> params) {
+        return params.stream()
+                .anyMatch(param -> param.contains("\n"));
+    }
+
+    private String padding(String data) {
+        data = (data.contains("\n") ? "\n" : "") + data;
+        data = removeLastN(data);
+        data = data.replace("\n", "\n" + leftPad() + leftPad());
+        return data;
+    }
+
+    private String removeLastN(String data) {
+        return data.replaceAll("\n$", "");
+    }
+
     private void append(String message) {
         int index = messages.size() - 1;
         messages.set(index, messages.get(index) + message);
     }
 
-    private void appendResult(Object data) {
-        append(String.format(" = %s", data.toString()));
+    private void appendResult(Object object) {
+        String data = object.toString();
+        data = padding(data);
+        append(String.format(" = %s", data));
     }
 
     private String asString(Object object) {
@@ -221,7 +237,7 @@ public class WrapperManager {
                     boolean showResult = true;
                     Optional<String> pattern = findFirst(method, included);
                     if (pattern.isPresent()) {
-                        showResult &= !pattern.get().contains("[-R]");
+                        showResult = !pattern.get().contains("[-R]");
                     }
                     if (showResult) {
                         appendResult(result);
