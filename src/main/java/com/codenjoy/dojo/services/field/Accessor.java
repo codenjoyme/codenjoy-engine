@@ -181,4 +181,6 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      *         from > to})
      */
     void remove(int from, int to);
+
+    String toString();
 }

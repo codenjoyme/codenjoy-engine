@@ -28,12 +28,15 @@ import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Квадратное поле заданного размера. В каждой ячейке которого содержится
@@ -246,6 +249,11 @@ public class PointField {
                 for (int index = to - 1; index >= from; index--) {
                     removeExact((E) list.get(index));
                 }
+            }
+
+            @Override
+            public String toString() {
+                return all().toString();
             }
         };
     }
