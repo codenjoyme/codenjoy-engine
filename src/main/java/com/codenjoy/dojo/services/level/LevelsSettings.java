@@ -146,26 +146,23 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
                 .collect(toList());
     }
 
-    default T updateLevels(Settings settings) {
-        if (settings != null) {
-            settings.getParameters().stream()
-                        .filter(parameter -> isLevelsMap(parameter.getName()))
-                        .forEach(parameter -> {
-                            String key = parameter.getName();
-                            Parameter<String> source = settings.getParameter(key).type(String.class);
-                            String def = source.getDefault();
-                            String value = source.getValue();
-                            if (hasParameter(key)) {
-                                getParameter(key).update(value);
-                            } else {
-                                EditBox<String> box = add(() -> key, def);
-                                if (!def.equals(value)) {
-                                    box.update(value);
-                                }
-                            }
-                        });
-        }
-        return (T) this;
+    default void updateFrom(List<Parameter> parameters) {
+        parameters.stream()
+                .filter(parameter -> isLevelsMap(parameter.getName()))
+                .forEach(parameter -> {
+                    String key = parameter.getName();
+                    Parameter<String> source = parameter.type(String.class);
+                    String def = source.getDefault();
+                    String value = source.getValue();
+                    if (hasParameter(key)) {
+                        getParameter(key).update(value);
+                    } else {
+                        EditBox<String> box = add(() -> key, def);
+                        if (!def.equals(value)) {
+                            box.update(value);
+                        }
+                    }
+                });
     }
 
     // getters
@@ -267,7 +264,7 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
     default T setLevelMap(int levelNumber, Integer mapNumber, String map) {
         String name = getKey(levelNumber, mapNumber);
         if (!hasParameter(name)) {
-            add(() -> name, map);
+            multiline(() -> name, map);
         } else {
             stringValue(() -> name).update(map);
         }

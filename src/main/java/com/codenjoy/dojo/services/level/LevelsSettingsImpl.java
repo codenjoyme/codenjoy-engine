@@ -46,7 +46,7 @@ public class LevelsSettingsImpl extends SettingsImpl
         } else {
             // инициализируем и копируем
             initLevels();
-            updateLevels(settings);
+            updateFrom(settings.getParameters());
         }
     }
 
