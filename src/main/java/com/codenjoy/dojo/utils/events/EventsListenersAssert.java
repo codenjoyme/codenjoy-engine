@@ -117,23 +117,6 @@ public class EventsListenersAssert {
         }
     }
 
-    public void verifyEvents(EventListener events, String expected) {
-        if (expected.equals("[]")) {
-            tryCatch(
-                    () -> {
-                        testing().verify(events, testing().never()).event(testing().anyObject());
-                        return null;
-                    },
-                    "NeverWantedButInvoked", () -> {
-                        testing().assertEquals(expected, getEvents(events));
-                        return null;
-                    });
-        } else {
-            testing().assertEquals(expected, getEvents(events));
-        }
-        testing().reset(events);
-    }
-
     public void verifyAllEvents(String expected, Integer... indexes) {
         int size = listeners().size();
         assertAll(expected, size, indexes, index -> getEventsFormatted(size, index));
