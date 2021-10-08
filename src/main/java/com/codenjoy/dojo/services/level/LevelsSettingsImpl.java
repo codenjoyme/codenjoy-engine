@@ -22,55 +22,29 @@ package com.codenjoy.dojo.services.level;
  * #L%
  */
 
-import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.services.settings.SettingsImpl;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class LevelsSettingsImpl extends SettingsImpl
         implements SettingsReader<LevelsSettingsImpl>,
                    LevelsSettings<LevelsSettingsImpl> {
-
-    private LevelsSettings settings;
 
     public LevelsSettingsImpl() {
         initLevels();
     }
 
     public LevelsSettingsImpl(Settings settings) {
-        if (settings == null || settings instanceof LevelsSettings) {
-            // используем как декоратор
-            this.settings = (LevelsSettings) settings;
-        } else {
-            // инициализируем и копируем
-            initLevels();
-            updateFrom(settings.getParameters());
-        }
-    }
-
-    @Override
-    public Parameter<?> getParameter(String name) {
+        initLevels();
         if (settings != null) {
-            return settings.getParameter(name);
-        } else {
-            return super.getParameter(name);
+            copyFrom(settings.getParameters().stream()
+                    .filter(parameter -> parameter.getName().startsWith(LEVELS))
+                    .collect(toList()));
         }
-    }
-
-    @Override
-    public List<Parameter> getParameters() {
-        if (settings != null) {
-            return settings.getParameters();
-        } else {
-            return super.getParameters();
-        }
-    }
-
-    @Override
-    public String toString() {
-        return (settings != null) ? settings.toString() : super.toString();
     }
 
     @Override

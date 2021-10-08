@@ -35,112 +35,153 @@ import static org.mockito.Mockito.when;
 public class LevelsSettingsTest {
     
     @Test
-    public void testIf_caseNull() {
+    public void testIs_caseNull() {
         assertEquals(false, LevelsSettings.is(null));
     }
 
     @Test
-    public void testIf_caseNotLevelsInstance() {
+    public void testIs_caseNotLevelsInstance() {
         assertEquals(false, LevelsSettings.is(new SettingsImpl()));
     }
 
     @Test
-    public void testIf_caseLevelsInstance() {
+    public void testIs_caseLevelsInstance() {
         assertEquals(true, LevelsSettings.is(new LevelsSettingsImpl()));
     }
 
     @Test
-    public void testIf_caseAllPropertiesCopied() {
-        // given when
+    public void testIs_caseAllPropertiesCopied() {
+        // given
         SettingsImpl settings = givenAllPropertiesCopied();
 
-        // then
+        // when then
         assertEquals(true, LevelsSettings.is(settings));
     }
 
     @Test
-    public void testIf_caseNotAllPropertiesCopied() {
-        // given when
+    public void testIs_caseNotAllPropertiesCopied() {
+        // given
         SettingsImpl settings = givenAllPropertiesCopied();
 
         settings.removeParameter(settings.getParameters().iterator().next().getName());
 
-        // then
+        // when then
         assertEquals(true, LevelsSettings.is(settings));
     }
 
     @Test
     public void testGet_caseAllPropertiesCopied() {
-        // given when
+        // given 
         SettingsImpl settings = givenAllPropertiesCopied();
 
-        // then
-        assertEquals("SettingsImpl(map={[Level] Map[1,1]=[[Level] Map[1,1]:String = multiline[false] def[map1] val[null]], \n" +
-                        "[Level] Map[1,2]=[[Level] Map[1,2]:String = multiline[false] def[map2] val[null]], \n" +
-                        "[Level] Map[1,3]=[[Level] Map[1,3]:String = multiline[false] def[map3] val[null]], \n" +
-                        "[Level] Map[2]=[[Level] Map[2]:String = multiline[false] def[map4] val[null]], \n" +
-                        "[Level] Map[3,1]=[[Level] Map[3,1]:String = multiline[false] def[map5] val[null]], \n" +
-                        "[Level] Map[3,2]=[[Level] Map[3,2]:String = multiline[false] def[map6] val[null]], \n" +
-                        "[Level] Map[4,1]=[[Level] Map[4,1]:String = multiline[false] def[map7] val[null]], \n" +
-                        "[Level] Map[5]=[[Level] Map[5]:String = multiline[false] def[map8] val[null]]})",
+        // when then
+        assertEquals("SettingsImpl(map={[Level] Map[1,1]=[[Level] Map[1,1]:String = multiline[false] def[map1] val[map1]], \n" +
+                        "[Level] Map[1,2]=[[Level] Map[1,2]:String = multiline[false] def[map2] val[map2]], \n" +
+                        "[Level] Map[1,3]=[[Level] Map[1,3]:String = multiline[false] def[map3] val[map3]], \n" +
+                        "[Level] Map[2]=[[Level] Map[2]:String = multiline[false] def[map4] val[map4]], \n" +
+                        "[Level] Map[3,1]=[[Level] Map[3,1]:String = multiline[false] def[map5] val[map5]], \n" +
+                        "[Level] Map[3,2]=[[Level] Map[3,2]:String = multiline[false] def[map6] val[map6]], \n" +
+                        "[Level] Map[4,1]=[[Level] Map[4,1]:String = multiline[false] def[map7] val[map7]], \n" +
+                        "[Level] Map[5]=[[Level] Map[5]:String = multiline[false] def[map8] val[map8]]})",
                 split(LevelsSettings.get(settings), "], \n["));
     }
 
     @Test
-    public void testGet_caseOtherPropertiesCopied() {
-        // given when
-        SettingsImpl settings = new SomeInactivitySettings();
+    public void testCopyFrom_updateInBothPlace() {
+        // given
+        SomeLevelsSettings source = new SomeLevelsSettings();
+        
+        assertEquals("Some[[Level] Map[1,1]=map1, \n" +
+                        "[Level] Map[1,2]=map2, \n" +
+                        "[Level] Map[1,3]=map3, \n" +
+                        "[Level] Map[2]=map4, \n" +
+                        "[Level] Map[3,1]=map5, \n" +
+                        "[Level] Map[3,2]=map6, \n" +
+                        "[Level] Map[4,1]=map7, \n" +
+                        "[Level] Map[5]=map8]",
+                split(source, ", \n["));
+
+        // when
+        LevelsSettingsImpl wrapper = LevelsSettings.get(source);
+
+        wrapper.setLevelMap(1, 2, "updatedMap");
 
         // then
+        assertEquals("Some[[Level] Map[1,1]=map1, \n" +
+                        "[Level] Map[1,2]=updatedMap, \n" +
+                        "[Level] Map[1,3]=map3, \n" +
+                        "[Level] Map[2]=map4, \n" +
+                        "[Level] Map[3,1]=map5, \n" +
+                        "[Level] Map[3,2]=map6, \n" +
+                        "[Level] Map[4,1]=map7, \n" +
+                        "[Level] Map[5]=map8]",
+                split(source, ", \n["));
+    }
+
+    @Test
+    public void testGet_caseOtherPropertiesCopied() {
+        // given
+        SettingsImpl settings = new SomeInactivitySettings();
+
+        // when then
         assertEquals("SettingsImpl(map={})",
                 split(LevelsSettings.get(settings), "], \n["));
     }
 
     private SettingsImpl givenAllPropertiesCopied() {
-        return new SettingsImpl(){{
-            new SomeLevelsSettings().getLevelsParams()
-                    .forEach(param -> map.put(param.getName(), param));
-        }};
+        SettingsImpl result = new SettingsImpl();
+        result.copyFrom(new SomeLevelsSettings().getLevelsParams());
+        return result;
     }
 
     @Test
     public void testGet_caseLevelsInstance() {
-        // given when
+        // given
         SettingsImpl settings = new SomeLevelsSettings();
 
-        // then
         assertAll(settings,
                 "Some[[Level] Map[1,1]=map1, \n" +
-                    "[Level] Map[1,2]=map2, \n" +
-                    "[Level] Map[1,3]=map3, \n" +
-                    "[Level] Map[2]=map4, \n" +
-                    "[Level] Map[3,1]=map5, \n" +
-                    "[Level] Map[3,2]=map6, \n" +
-                    "[Level] Map[4,1]=map7, \n" +
-                    "[Level] Map[5]=map8]");
+                "[Level] Map[1,2]=map2, \n" +
+                "[Level] Map[1,3]=map3, \n" +
+                "[Level] Map[2]=map4, \n" +
+                "[Level] Map[3,1]=map5, \n" +
+                "[Level] Map[3,2]=map6, \n" +
+                "[Level] Map[4,1]=map7, \n" +
+                "[Level] Map[5]=map8]");
+
+        // when then
+        assertAll(LevelsSettings.get(settings),
+                "SettingsImpl(map={[Level] Map[1,1]=[[Level] Map[1,1]:String = multiline[false] def[map1] val[map1]], \n" +
+                "[Level] Map[1,2]=[[Level] Map[1,2]:String = multiline[false] def[map2] val[map2]], \n" +
+                "[Level] Map[1,3]=[[Level] Map[1,3]:String = multiline[false] def[map3] val[map3]], \n" +
+                "[Level] Map[2]=[[Level] Map[2]:String = multiline[false] def[map4] val[map4]], \n" +
+                "[Level] Map[3,1]=[[Level] Map[3,1]:String = multiline[false] def[map5] val[map5]], \n" +
+                "[Level] Map[3,2]=[[Level] Map[3,2]:String = multiline[false] def[map6] val[map6]], \n" +
+                "[Level] Map[4,1]=[[Level] Map[4,1]:String = multiline[false] def[map7] val[map7]], \n" +
+                "[Level] Map[5]=[[Level] Map[5]:String = multiline[false] def[map8] val[map8]]})");
     }
 
     private void assertAll(Settings settings, String expected) {
         assertEquals(expected,
-                split(LevelsSettings.get(settings), ", \n"));
+                split(settings, ", \n"));
     }
 
     @Test
     public void testGet_caseNotLevelsInstance() {
-        // given when
+        // given
         SettingsImpl settings = new SomeRoundSettings();
 
-        // then
+        // when then
         assertEquals("SettingsImpl(map={})",
                 LevelsSettings.get(settings).toString());
     }
 
     @Test
     public void testGet_caseNull() {
-        // given when
+        // given
         SettingsImpl settings = null;
 
-        // then
+        // when then
         assertEquals("SettingsImpl(map={})",
                 LevelsSettings.get(settings).toString());
     }
