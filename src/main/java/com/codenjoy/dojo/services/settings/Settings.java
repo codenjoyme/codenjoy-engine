@@ -54,6 +54,8 @@ public interface Settings {
 
     void removeParameter(String name);
 
+    void replaceParameter(Parameter parameter);
+
     /**
      * @return true - если были изменения настроек
      */
@@ -72,6 +74,8 @@ public interface Settings {
     void clear();
 
     void updateAll(List<Parameter> parameters);
+
+    void copyFrom(List<Parameter> parameters);
 
     void reset();
 }

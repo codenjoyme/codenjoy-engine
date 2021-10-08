@@ -95,6 +95,11 @@ public class SettingsImpl implements Settings {
     }
 
     @Override
+    public void replaceParameter(Parameter parameter) {
+        map.put(parameter.getName(), parameter);
+    }
+
+    @Override
     public boolean changed() {
         return map.values().stream()
                 .anyMatch(Parameter::changed);
@@ -126,9 +131,14 @@ public class SettingsImpl implements Settings {
             if (map.containsKey(name)) {
                 ((Parameter<Object>) map.get(name)).update(parameter.getValue());
             } else {
-                map.put(name, parameter);
+                replaceParameter(parameter);
             }
         });
+    }
+
+    @Override
+    public void copyFrom(List<Parameter> parameters) {
+        parameters.forEach(parameter -> replaceParameter(parameter));
     }
 
     @Override

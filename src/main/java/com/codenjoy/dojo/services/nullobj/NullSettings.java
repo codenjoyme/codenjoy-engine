@@ -72,6 +72,11 @@ public final class NullSettings implements Settings {
     }
 
     @Override
+    public void replaceParameter(Parameter parameter) {
+        // do nothing
+    }
+
+    @Override
     public Parameter<?> getParameter(String name) {
         return null;
     }
@@ -98,6 +103,11 @@ public final class NullSettings implements Settings {
 
     @Override
     public void updateAll(List<Parameter> parameters) {
+        // do nothing
+    }
+
+    @Override
+    public void copyFrom(List<Parameter> parameters) {
         // do nothing
     }
 

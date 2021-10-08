@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import static com.codenjoy.dojo.client.Utils.split;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -1262,6 +1263,7 @@ public class SettingsTest {
                         "[select:String = options[option1, option2, option3] def[0] val[1]], " +
                         "[check:Boolean = def[true] val[false]]]",
                 Arrays.asList(editClone, selectClone, checkClone).toString());
+        // TODO to use Utils.split here
 
         assertEquals("[key:String = val[other]]",
                 simpleClone.toString());
@@ -1294,5 +1296,155 @@ public class SettingsTest {
         select.select(3);
         assertEquals(null, select.getValue());
         assertEquals(-1, select.index());
+    }
+
+    @Test
+    public void shouldReplaceParameter_caseEditBox() {
+        // given
+        Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class);
+        Parameter<Integer> select = settings.addSelect("select", Arrays.asList("option1")).type(Integer.class);
+        Parameter<Integer> check = settings.addCheckBox("check").type(Integer.class);
+        
+        // when
+        settings.replaceParameter(
+                new EditBox("edit")
+                        .type(String.class)
+                        .def("defaultValue")
+                        .update("updatedValue"));
+
+        // then
+        String expected = "[[edit:String = multiline[false] def[defaultValue] val[updatedValue]], \n" +
+                "[select:String = options[option1] def[null] val[null]], \n" +
+                "[check:Integer = def[null] val[null]]]";
+
+        assertEquals(expected,
+                split(settings.getParameters(), "], \n["));
+
+        // when
+        edit.update(2);
+
+        // then
+        // original parameter will only change
+        assertEquals("[edit:Integer = multiline[false] def[null] val[2]]", edit.toString());
+        assertEquals(expected,
+                split(settings.getParameters(), "], \n["));
+    }
+
+    @Test
+    public void shouldReplaceParameter_caseSelect() {
+        // given
+        Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class);
+        Parameter<Integer> select = settings.addSelect("select", Arrays.asList(1, 2, 3)).type(Integer.class);
+        Parameter<Integer> check = settings.addCheckBox("check").type(Integer.class);
+
+        // when
+        settings.replaceParameter(
+                new SelectBox("select", Arrays.asList("option1", "option2"))
+                        .type(String.class)
+                        .def("option2")
+                        .update("option1"));
+
+        // then
+        String expected = "[[edit:Integer = multiline[false] def[null] val[null]], \n" +
+                "[select:String = options[option1, option2] def[1] val[0]], \n" +
+                "[check:Integer = def[null] val[null]]]";
+
+        assertEquals(expected,
+                split(settings.getParameters(), "], \n["));
+
+        // when
+        select.update(2);
+
+        // then
+        // original parameter will only change
+        assertEquals("[select:String = options[1, 2, 3] def[null] val[1]]", select.toString());
+        assertEquals(expected,
+                split(settings.getParameters(), "], \n["));
+    }
+
+    @Test
+    public void shouldReplaceParameter_caseCheckBox() {
+        // given
+        Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class);
+        Parameter<Integer> select = settings.addSelect("select", Arrays.asList(1, 2, 3)).type(Integer.class);
+        Parameter<Integer> check = settings.addCheckBox("check").type(Integer.class);
+
+        // when
+        settings.replaceParameter(
+                new CheckBox("check")
+                        .type(Boolean.class)
+                        .def(true)
+                        .update(false));
+
+        // then
+        String expected = "[[edit:Integer = multiline[false] def[null] val[null]], \n" +
+                "[select:String = options[1, 2, 3] def[null] val[null]], \n" +
+                "[check:Boolean = def[true] val[false]]]";
+
+        assertEquals(expected, split(settings.getParameters(), "], \n["));
+
+        // when
+        check.update(true);
+
+        // then
+        // original parameter will only change
+        assertEquals("[check:Integer = def[null] val[1]]", check.toString());
+        assertEquals(expected, split(settings.getParameters(), "], \n["));
+    }
+
+    @Test
+    public void shouldCopyFrom() {
+        // given
+        Parameter<Integer> edit1 = settings.addEditBox("edit").type(Integer.class);
+        Parameter<Integer> select1 = settings.addSelect("select", Arrays.asList(1, 2, 3)).type(Integer.class);
+        Parameter<Integer> check1 = settings.addCheckBox("check").type(Integer.class);
+        Parameter<String> edit2 = settings.addEditBox("edit2").type(String.class);
+        Parameter<String> select2 = settings.addSelect("select2", Arrays.asList("option1", "option2")).type(String.class);
+        Parameter<Boolean> check2 = settings.addCheckBox("check2").type(Boolean.class);
+
+        // when
+        settings.copyFrom(Arrays.asList(
+                new CheckBox("check")
+                        .type(Boolean.class)
+                        .def(true)
+                        .update(false),
+                new SelectBox("select", Arrays.asList("option1", "option2"))
+                        .type(String.class)
+                        .def("option2")
+                        .update("option1"),
+                new EditBox("edit")
+                        .type(String.class)
+                        .def("defaultValue")
+                        .update("updatedValue")
+        ));
+
+        // then
+
+        assertEquals("[[edit:String = multiline[false] def[defaultValue] val[updatedValue]], \n" +
+                "[select:String = options[option1, option2] def[1] val[0]], \n" +
+                "[check:Boolean = def[true] val[false]], \n" +
+                "[edit2:String = multiline[false] def[null] val[null]], \n" +
+                "[select2:String = options[option1, option2] def[null] val[null]], \n" +
+                "[check2:Boolean = def[null] val[null]]]",
+                split(settings.getParameters(), "], \n["));
+
+        // when
+        edit2.update("text");
+        select2.update("option2");
+        check2.update(false);
+
+        // then
+        // original parameter will only change
+        assertEquals("[edit2:String = multiline[false] def[null] val[text]]", edit2.toString());
+        assertEquals("[select2:String = options[option1, option2] def[null] val[1]]", select2.toString());
+        assertEquals("[check2:Boolean = def[null] val[false]]", check2.toString());
+
+        assertEquals("[[edit:String = multiline[false] def[defaultValue] val[updatedValue]], \n" +
+                "[select:String = options[option1, option2] def[1] val[0]], \n" +
+                "[check:Boolean = def[true] val[false]], \n" +
+                "[edit2:String = multiline[false] def[null] val[text]], \n" +
+                "[select2:String = options[option1, option2] def[null] val[1]], \n" +
+                "[check2:Boolean = def[null] val[false]]]",
+                split(settings.getParameters(), "], \n["));
     }
 }
