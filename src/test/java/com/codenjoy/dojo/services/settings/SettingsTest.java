@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 
 import static com.codenjoy.dojo.client.Utils.split;
 import static org.junit.Assert.*;
@@ -1572,6 +1573,52 @@ public class SettingsTest {
                         "[check2:Boolean = def[null] val[false]], \n" +
                         "[check:Boolean = def[true] val[false]], \n" +
                         "[editWithKeyUpdated:String = multiline[false] def[defaultValue] val[updatedValue]]]",
+                split(settings.getParameters(), "], \n["));
+    }
+
+    @Test
+    public void shouldUpdateAllFiltered() {
+        // given
+        Parameter<String> edit1 = settings.addEditBox("otherEdit1").type(String.class).def("default1").update("value1");
+        Parameter<String> edit2 = settings.addEditBox("edit2").type(String.class).def("default2").update("value2");
+        Parameter<String> edit3 = settings.addEditBox("edit3").type(String.class).def("default3").update("value3");
+        Parameter<String> edit4 = settings.addEditBox("edit4").type(String.class).def("default4").update("value4");
+        Parameter<String> edit5 = settings.addEditBox("edit5").type(String.class).def("default5").update("value5");
+        Parameter<String> edit6 = settings.addEditBox("edit6").type(String.class).def("default6").update("value6");
+        Parameter<String> edit7 = settings.addEditBox("edit7").type(String.class).def("default7").update("value7");
+        Parameter<String> edit8 = settings.addEditBox("edit8").type(String.class).def("default8").update("value8");
+        Parameter<String> edit9 = settings.addEditBox("edit9").type(String.class).def("default9").update("value9");
+        Parameter<String> edit10 = settings.addEditBox("otherEdit10").type(String.class).def("default10").update("value10");
+
+        assertEquals("[[otherEdit1:String = multiline[false] def[default1] val[value1]], \n" +
+                        "[edit2:String = multiline[false] def[default2] val[value2]], \n" +
+                        "[edit3:String = multiline[false] def[default3] val[value3]], \n" +
+                        "[edit4:String = multiline[false] def[default4] val[value4]], \n" +
+                        "[edit5:String = multiline[false] def[default5] val[value5]], \n" +
+                        "[edit6:String = multiline[false] def[default6] val[value6]], \n" +
+                        "[edit7:String = multiline[false] def[default7] val[value7]], \n" +
+                        "[edit8:String = multiline[false] def[default8] val[value8]], \n" +
+                        "[edit9:String = multiline[false] def[default9] val[value9]], \n" +
+                        "[otherEdit10:String = multiline[false] def[default10] val[value10]]]",
+                split(settings.getParameters(), "], \n["));
+
+        // when
+        Predicate<Parameter> filter = parameter -> parameter.getName().startsWith("edit");
+        settings.updateAll(filter,
+                Arrays.asList("edit2",     "edit3"   ,  "edit4",  "edit5",  "edit6",    "edit7", "edit8",    "edit9"),
+                Arrays.asList("edit2",     "newEdit3",  "edit4",  "",       "newEdit6", "edit7", "edit9",    "edit8"),
+                Arrays.asList("newValue2", "newValue3", "value4", "value5", "value6",   "",      "newEdit9", "edit9"));
+
+        // then
+        assertEquals("[[otherEdit1:String = multiline[false] def[default1] val[value1]], \n" +
+                        "[otherEdit10:String = multiline[false] def[default10] val[value10]], \n" +
+                        "[edit2:String = multiline[false] def[default2] val[newValue2]], \n" +
+                        "[edit4:String = multiline[false] def[default4] val[value4]], \n" +
+                        "[edit7:String = multiline[false] def[default7] val[]], \n" +
+                        "[edit8:String = multiline[false] def[default9] val[edit9]], \n" +
+                        "[edit9:String = multiline[false] def[default8] val[newEdit9]], \n" +
+                        "[newEdit3:String = multiline[false] def[default3] val[newValue3]], \n" +
+                        "[newEdit6:String = multiline[false] def[default6] val[value6]]]",
                 split(settings.getParameters(), "], \n["));
     }
 }
