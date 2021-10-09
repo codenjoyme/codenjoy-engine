@@ -60,5 +60,5 @@ public abstract class TypeUpdatable<T> extends Updatable<T> implements Parameter
     }
 
     @Override
-    public abstract Parameter<T> clone();
+    public abstract Parameter<T> clone(String newName);
 }

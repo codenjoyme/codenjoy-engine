@@ -129,8 +129,8 @@ public class ConsumerSupplierParameter<T> implements Parameter<T> {
     }
 
     @Override
-    public Parameter<T> clone() {
-        return new ConsumerSupplierParameter<T>(set, get);
+    public Parameter<T> clone(String newName) {
+        return new ConsumerSupplierParameter<>(set, get);
     }
 
     @Override

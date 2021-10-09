@@ -136,8 +136,9 @@ public class CheckBox<T> extends TypeUpdatable<T> implements Parameter<T> {
     }
 
     @Override
-    public Parameter<T> clone() {
-        CheckBox<T> result = new CheckBox<>(name);
+    public Parameter<T> clone(String newName) {
+        newName = (newName == null) ? name : newName;
+        CheckBox<T> result = new CheckBox<>(newName);
         result.def = def;
         result.value = value;
         result.parser = parser;

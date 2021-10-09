@@ -25,7 +25,6 @@ package com.codenjoy.dojo.services.settings;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class SelectBox<T> extends Updatable<Integer> implements Parameter<T> {
@@ -144,8 +143,9 @@ public class SelectBox<T> extends Updatable<Integer> implements Parameter<T> {
     }
 
     @Override
-    public Parameter<T> clone() {
-        SelectBox<T> result = new SelectBox<>(name, new LinkedList<>(options));
+    public Parameter<T> clone(String newName) {
+        newName = (newName == null) ? name : newName;
+        SelectBox<T> result = new SelectBox<>(newName, new LinkedList<>(options));
         result.def = def;
         result.value = value;
         result.changed = changed;

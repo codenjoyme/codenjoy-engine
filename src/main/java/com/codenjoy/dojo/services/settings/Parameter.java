@@ -86,5 +86,5 @@ public interface Parameter<T> extends Cloneable {
 
     void reset();
 
-    Parameter<T> clone();
+    Parameter<T> clone(String newName);
 }

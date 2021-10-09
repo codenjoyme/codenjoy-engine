@@ -120,8 +120,9 @@ public class SimpleParameter<T> implements Parameter<T> {
     }
 
     @Override
-    public Parameter<T> clone() {
-        return new SimpleParameter<T>(name, value);
+    public Parameter<T> clone(String newName) {
+        newName = (newName == null) ? name : newName;
+        return new SimpleParameter<>(newName, value);
     }
 
     @Override

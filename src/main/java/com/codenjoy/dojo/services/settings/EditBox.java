@@ -60,8 +60,9 @@ public class EditBox<T> extends TypeUpdatable<T> implements Parameter<T> {
     }
 
     @Override
-    public Parameter<T> clone() {
-        EditBox<T> result = new EditBox<>(name);
+    public Parameter<T> clone(String newName) {
+        newName = (newName == null) ? name : newName;
+        EditBox<T> result = new EditBox<>(newName);
         result.def = def;
         result.multiline = multiline;
         result.value = value;

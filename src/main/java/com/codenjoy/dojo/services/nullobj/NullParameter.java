@@ -141,7 +141,7 @@ public final class NullParameter<T> implements Parameter<T> {
     }
 
     @Override
-    public Parameter<T> clone() {
+    public Parameter<T> clone(String newName) {
         warn();
         return this;
     }
