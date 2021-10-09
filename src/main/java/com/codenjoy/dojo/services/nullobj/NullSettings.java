@@ -115,4 +115,9 @@ public final class NullSettings implements Settings {
     public void reset() {
         // do nothing
     }
+
+    @Override
+    public void replaceAll(List<String> keysToRemove, List<Parameter> parameters) {
+        // do nothing
+    }
 }

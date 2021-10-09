@@ -142,6 +142,13 @@ public class SettingsImpl implements Settings {
     }
 
     @Override
+    public void replaceAll(List<String> keysToRemove, List<Parameter> parameters) {
+        // TODO make this synchronized
+        keysToRemove.forEach(this::removeParameter);
+        parameters.forEach(this::replaceParameter);
+    }
+
+    @Override
     public void reset() {
         map.values().forEach(parameter -> parameter.reset());
     }

@@ -1479,7 +1479,6 @@ public class SettingsTest {
         ));
 
         // then
-
         assertEquals("[[edit:String = multiline[false] def[defaultValue] val[updatedValue]], \n" +
                 "[select:String = options[option1, option2] def[1] val[0]], \n" +
                 "[check:Boolean = def[true] val[false]], \n" +
@@ -1505,6 +1504,74 @@ public class SettingsTest {
                 "[edit2:String = multiline[false] def[null] val[text]], \n" +
                 "[select2:String = options[option1, option2] def[null] val[1]], \n" +
                 "[check2:Boolean = def[null] val[false]]]",
+                split(settings.getParameters(), "], \n["));
+    }
+
+    @Test
+    public void shouldReplaceAll() {
+        // given
+        Parameter<Integer> edit1 = settings.addEditBox("edit").type(Integer.class);
+        Parameter<Integer> select1 = settings.addSelect("select", Arrays.asList(1, 2, 3)).type(Integer.class);
+        Parameter<Integer> check1 = settings.addCheckBox("check").type(Integer.class);
+        Parameter<String> edit2 = settings.addEditBox("edit2").type(String.class);
+        Parameter<String> select2 = settings.addSelect("select2", Arrays.asList("option1", "option2")).type(String.class);
+        Parameter<Boolean> check2 = settings.addCheckBox("check2").type(Boolean.class);
+
+        // when
+        settings.replaceAll(Arrays.asList("edit", "check"),
+                Arrays.asList(
+                        // был удален потому что указан выше
+                        new CheckBox("check")
+                                .type(Boolean.class)
+                                .def(true)
+                                .update(false),
+
+                        // не был удален, но все равно перезапишется
+                        new SelectBox("select", Arrays.asList("option1", "option2"))
+                                .type(String.class)
+                                .def("option2")
+                                .update("option1"),
+
+                        // оригинал был удален, а этот просто допишется
+                        new EditBox("editWithKeyUpdated")
+                                .type(String.class)
+                                .def("defaultValue")
+                                .update("updatedValue")));
+
+        // then
+        assertEquals("[[select:String = options[option1, option2] def[1] val[0]], \n" +
+                        "[edit2:String = multiline[false] def[null] val[null]], \n" +
+                        "[select2:String = options[option1, option2] def[null] val[null]], \n" +
+                        "[check2:Boolean = def[null] val[null]], \n" +
+                        "[check:Boolean = def[true] val[false]], \n" +
+                        "[editWithKeyUpdated:String = multiline[false] def[defaultValue] val[updatedValue]]]",
+                split(settings.getParameters(), "], \n["));
+
+        // when
+        edit1.update(12);
+        select1.update(3);
+        check1.update(false);
+
+        edit2.update("text");
+        select2.update("option2");
+        check2.update(false);
+
+        // then
+        // original parameter will only change
+        assertEquals("[edit:Integer = multiline[false] def[null] val[12]]", edit1.toString());
+        assertEquals("[select:String = options[1, 2, 3] def[null] val[2]]", select1.toString());
+        assertEquals("[check:Integer = def[null] val[0]]", check1.toString());
+
+        assertEquals("[edit2:String = multiline[false] def[null] val[text]]", edit2.toString());
+        assertEquals("[select2:String = options[option1, option2] def[null] val[1]]", select2.toString());
+        assertEquals("[check2:Boolean = def[null] val[false]]", check2.toString());
+
+        assertEquals("[[select:String = options[option1, option2] def[1] val[0]], \n" +
+                        "[edit2:String = multiline[false] def[null] val[text]], \n" +
+                        "[select2:String = options[option1, option2] def[null] val[1]], \n" +
+                        "[check2:Boolean = def[null] val[false]], \n" +
+                        "[check:Boolean = def[true] val[false]], \n" +
+                        "[editWithKeyUpdated:String = multiline[false] def[defaultValue] val[updatedValue]]]",
                 split(settings.getParameters(), "], \n["));
     }
 }

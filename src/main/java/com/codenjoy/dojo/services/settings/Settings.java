@@ -46,6 +46,7 @@ public interface Settings {
 
     CheckBox<Boolean> addCheckBox(String name);
 
+    // TODO remove word 'Parameter' from every methods
     Parameter<?> getParameter(String name);
 
     boolean hasParameter(String name);
@@ -76,6 +77,9 @@ public interface Settings {
     void updateAll(List<Parameter> parameters);
 
     void copyFrom(List<Parameter> parameters);
+
+    void replaceAll(List<String> keysToRemove,
+                              List<Parameter> parameters);
 
     void reset();
 }
