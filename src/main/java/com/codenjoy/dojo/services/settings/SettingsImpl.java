@@ -24,14 +24,18 @@ package com.codenjoy.dojo.services.settings;
 
 
 import com.codenjoy.dojo.services.nullobj.NullParameter;
+import com.google.common.collect.Lists;
 import lombok.ToString;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Predicate;
 
+import static java.util.Comparator.comparing;
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 @ToString
 public class SettingsImpl implements Settings {
@@ -159,5 +163,64 @@ public class SettingsImpl implements Settings {
                         parameter.getName(), parameter.getValue()))
                 .collect(toList())
                 .toString();
+    }
+
+    @Override
+    public void updateAll(Predicate<Parameter> filter,
+                          List<Object> keys,
+                          List<Object> newKeys,
+                          List<Object> values)
+    {
+        // исходные параметры, мы их сохраняем потому как там есть default
+        // и другие базовые настройки
+        Map<String, Parameter> source = getParameters().stream()
+                .filter(filter)
+                .collect(toMap(Parameter::getName, identity()));
+
+        // валидация, мало ли придет с фронта несвязанные списки
+        if (keys.size() != newKeys.size() || keys.size() != values.size()) {
+            throw new IllegalStateException(String.format(
+                    "Found inconsistent Levels settings state. " +
+                            "There are three lists with different size: " +
+                            "keys:%s, new-keys:%s, values:%s",
+                    keys.size(), newKeys.size(), values.size()));
+        }
+
+        // карта превращений
+        Map<String, Pair<String, String>> transform = new HashMap<>();
+        for (int index = 0; index < keys.size(); index++) {
+            String key = (String) keys.get(index);
+            String newKey = (String) newKeys.get(index);
+            String value = (String) values.get(index);
+
+            transform.put(key, Pair.of(newKey, value));
+        }
+
+        // создаем список новых (клонированных) параметров
+        // с уже измененными именами и значениями
+        List<Parameter> destination = transform.entrySet().stream()
+                .filter(entry -> StringUtils.isNotEmpty(entry.getValue().getKey()))
+                .map(entry -> {
+                    String key = entry.getKey();
+                    Pair<String, String> pair = entry.getValue();
+                    String newKey = pair.getKey();
+                    String value = pair.getValue();
+
+                    Parameter from = source.get(key);
+                    if (from == null) {
+                        return new EditBox(newKey)
+                                .type(String.class)
+                                .multiline()
+                                .def(value);
+                    }
+
+                    return from.clone(newKey)
+                            .update(value);
+                })
+                .sorted(comparing(Parameter::getName))
+                .collect(toList());
+
+        // удаляем старые параметры и добавляем новые
+        replaceAll(Lists.newArrayList(source.keySet()), destination);
     }
 }

@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.settings.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public final class NullSettings implements Settings {
 
@@ -113,6 +114,15 @@ public final class NullSettings implements Settings {
 
     @Override
     public void reset() {
+        // do nothing
+    }
+
+    @Override
+    public void updateAll(Predicate<Parameter> filter,
+                          List<Object> keys,
+                          List<Object> newKeys,
+                          List<Object> values)
+    {
         // do nothing
     }
 

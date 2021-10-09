@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.settings;
 
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Все то, что ты прошил бы в константы в своей игре
@@ -82,4 +83,9 @@ public interface Settings {
                               List<Parameter> parameters);
 
     void reset();
+
+    void updateAll(Predicate<Parameter> filter,
+                   List<Object> keys,
+                   List<Object> newKeys,
+                   List<Object> values);
 }
