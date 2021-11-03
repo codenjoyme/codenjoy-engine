@@ -23,6 +23,7 @@ package com.codenjoy.dojo.client.generator;
  */
 
 import com.codenjoy.dojo.services.printer.CharElement;
+import lombok.SneakyThrows;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -35,15 +36,11 @@ public class ElementGenerator {
         return language(language).apply(elements(game));
     }
 
+    @SneakyThrows
     private CharElement[] elements(String game) {
-        switch (game) {
-            case "a2048" :
-                return com.codenjoy.dojo.games.a2048.Element.values();
-            case "sample" :
-                return com.codenjoy.dojo.games.sample.Element.values();
-            default:
-                throw new UnsupportedOperationException("Unknown game:" + game);
-        }
+        return (CharElement[]) getClass().getClassLoader().loadClass(
+                        String.format("com.codenjoy.dojo.games.%s.Element", game))
+                .getEnumConstants();
     }
 
     private Function<CharElement[], String> language(String language) {
