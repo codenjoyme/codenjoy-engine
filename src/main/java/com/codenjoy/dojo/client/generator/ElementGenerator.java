@@ -24,11 +24,14 @@ package com.codenjoy.dojo.client.generator;
 
 import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
-import static java.util.stream.Collectors.joining;
+import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 public class ElementGenerator {
 
@@ -39,27 +42,45 @@ public class ElementGenerator {
     @SneakyThrows
     private CharElement[] elements(String game) {
         return (CharElement[]) getClass().getClassLoader().loadClass(
-                        String.format("com.codenjoy.dojo.games.%s.Element", game))
+                        format("com.codenjoy.dojo.games.%s.Element", game))
                 .getEnumConstants();
     }
 
     private Function<CharElement[], String> language(String language) {
         switch (language) {
             case "go" :
-                return elements -> String.format(
-                            "package %s\n" +
-                            "\n" +
-                            "var Elements = map[string]rune{\n" +
-                            "%s" +
-                            "}\n",
-                            language,
-                        Arrays.stream(elements)
-                                .map(element ->
-                                        String.format("    \"%s\": '%s', // %s\n",
-                                                element.name(),
-                                                element.ch(),
-                                                element.info()))
-                                .collect(joining()));
+                Template template = new Go();
+                return elements -> {
+                    String header = format(template.header(), language);
+
+                    List<String> lines = Arrays.stream(elements)
+                                    .map(el -> format(template.line(), el.name(), el.ch()))
+                                    .collect(toList());
+
+                    List<String> infos = Arrays.stream(elements)
+                            .map(el -> format(template.info(), el.info()))
+                            .collect(toList());
+
+                    int maxLength = lines.stream()
+                            .mapToInt(String::length)
+                            .max()
+                            .getAsInt() + 3;
+
+                    StringBuilder middle = new StringBuilder();
+                    for (int index = 0; index < lines.size(); index++) {
+                        String line = lines.get(index);
+                        middle.append(line)
+                                .append(StringUtils.rightPad("", maxLength - line.length()))
+                                .append(infos.get(index));
+                    }
+
+                    String footer = template.footer();
+
+                    return header
+                            + middle
+                            + footer;
+                };
+
             default:
                 throw new UnsupportedOperationException("Unknown language:" + language);
         }
