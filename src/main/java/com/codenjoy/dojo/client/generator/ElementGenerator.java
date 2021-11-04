@@ -86,14 +86,16 @@ public class ElementGenerator {
                     .append(rightPad("", maxLength - line.length()));
 
             List<String> comments = infos.get(index);
-            middle.append(template.comment())
-                    .append(comments.remove(0))
-                    .append('\n');
-            comments.forEach(comment ->
-                    middle.append(rightPad("", maxLength))
-                            .append(template.comment())
-                            .append(comment)
-                            .append('\n'));
+            if (!comments.isEmpty()) {
+                middle.append(template.comment())
+                        .append(comments.remove(0));
+                comments.forEach(comment ->
+                        middle.append('\n')
+                                .append(rightPad("", maxLength))
+                                .append(template.comment())
+                                .append(comment));
+            }
+            middle.append('\n');
         }
 
         String footer = template.footer();

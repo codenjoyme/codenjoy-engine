@@ -22,6 +22,7 @@ package com.codenjoy.dojo.client.generator;
  * #L%
  */
 
+import com.codenjoy.dojo.utils.JsonUtils;
 import com.codenjoy.dojo.utils.smart.SmartAssert;
 import org.junit.After;
 import org.junit.Test;
@@ -37,20 +38,20 @@ public class ElementGeneratorTest {
 
     @Test
     public void shouldGenerate_go_sample() {
-        String data = new ElementGenerator().generate("sample", "go");
+        String actual = new ElementGenerator().generate("test", "go");
 
         assertEquals("package go\n" +
                 "\n" +
                 "var Elements = map[string]rune{\n" +
-                "    \"NONE\": ' ',              // Empty place where the hero can go.\n" +
-                "    \"WALL\": '☼',              // Wall you can't walk through.\n" +
-                "    \"HERO\": '☺',              // My hero.\n" +
-                "    \"OTHER_HERO\": '☻',        // Heroes of other players.\n" +
-                "    \"DEAD_HERO\": 'X',         // My hero died. His body will disappear in the next tick.\n" +
-                "    \"OTHER_DEAD_HERO\": 'Y',   // Another player's hero died.\n" +
-                "    \"GOLD\": '$',              // Gold. It must be picked up.\n" +
-                "    \"BOMB\": 'x',              // Bomb planted by the hero. You can blow up on it.\n" +
-                "}\n", data);
+                "    'NONE': ' ',                                       // Short comment.\n" +
+                "    'WALL': '☼',                                       // Long long long long long long long long long long long longl\n" +
+                "                                                       // ong long long long long long long long long long comment.\n" +
+                "    'HERO': '☺',                                       // Another short comment.\n" +
+                "    'OTHER_HERO': '☻',                                 // One more time.\n" +
+                "    'DEAD_HERO': 'X',                                  \n" +
+                "    'OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG': 'Y',   // Long name.\n" +
+                "    'G': '$',                                          // Short name.\n" +
+                "}\n", JsonUtils.clean(actual));
     }
 
 }
