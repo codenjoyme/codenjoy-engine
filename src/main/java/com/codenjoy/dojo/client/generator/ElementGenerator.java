@@ -48,52 +48,56 @@ public class ElementGenerator {
     }
 
     private Function<CharElement[], String> language(String language) {
+        return elements -> build(language, template(language), elements);
+    }
+
+    private Template template(String language) {
         switch (language) {
             case "go" :
-                Template template = new Go();
-                return elements -> {
-                    String header = format(template.header(), language);
-
-                    List<String> lines = Arrays.stream(elements)
-                                    .map(el -> format(template.line(), el.name(), el.ch()))
-                                    .collect(toList());
-
-                    List<List<String>> infos = Arrays.stream(elements)
-                            .map(el -> splitLength(el.info(), 60))
-                            .collect(toList());
-
-                    int maxLength = lines.stream()
-                            .mapToInt(String::length)
-                            .max()
-                            .getAsInt() + 3;
-
-                    StringBuilder middle = new StringBuilder();
-                    for (int index = 0; index < lines.size(); index++) {
-                        String line = lines.get(index);
-                        middle.append(line)
-                                .append(rightPad("", maxLength - line.length()));
-
-                        List<String> comments = infos.get(index);
-                        middle.append(template.comment())
-                                .append(comments.remove(0))
-                                .append('\n');
-                        comments.forEach(comment ->
-                                middle.append(rightPad("", maxLength))
-                                        .append(template.comment())
-                                        .append(comment)
-                                        .append('\n'));
-                    }
-
-                    String footer = template.footer();
-
-                    return header
-                            + middle
-                            + footer;
-                };
-
+                return new Go();
             default:
                 throw new UnsupportedOperationException("Unknown language:" + language);
         }
+    }
+
+    private String build(String language, Template template, CharElement[] elements) {
+        String header = format(template.header(), language);
+
+        List<String> lines = Arrays.stream(elements)
+                .map(el -> format(template.line(), el.name(), el.ch()))
+                .collect(toList());
+
+        List<List<String>> infos = Arrays.stream(elements)
+                .map(el -> splitLength(el.info(), 60))
+                .collect(toList());
+
+        int maxLength = lines.stream()
+                .mapToInt(String::length)
+                .max()
+                .getAsInt() + 3;
+
+        StringBuilder middle = new StringBuilder();
+        for (int index = 0; index < lines.size(); index++) {
+            String line = lines.get(index);
+            middle.append(line)
+                    .append(rightPad("", maxLength - line.length()));
+
+            List<String> comments = infos.get(index);
+            middle.append(template.comment())
+                    .append(comments.remove(0))
+                    .append('\n');
+            comments.forEach(comment ->
+                    middle.append(rightPad("", maxLength))
+                            .append(template.comment())
+                            .append(comment)
+                            .append('\n'));
+        }
+
+        String footer = template.footer();
+
+        return header
+                + middle
+                + footer;
     }
 
     private List<String> splitLength(String text, int length) {
