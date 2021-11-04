@@ -15,8 +15,8 @@ public class Go implements Template {
     }
 
     @Override
-    public String info() {
-        return "// %s\n";
+    public String comment() {
+        return "// ";
     }
 
     @Override

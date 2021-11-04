@@ -6,7 +6,7 @@ public interface Template {
 
     String line();
 
-    String info();
+    String comment();
 
     String footer();
 }

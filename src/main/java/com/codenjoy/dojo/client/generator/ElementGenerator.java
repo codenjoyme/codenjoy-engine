@@ -24,7 +24,6 @@ package com.codenjoy.dojo.client.generator;
 
 import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,10 +31,11 @@ import java.util.function.Function;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.rightPad;
 
 public class ElementGenerator {
 
-    private String generate(String game, String language) {
+    public String generate(String game, String language) {
         return language(language).apply(elements(game));
     }
 
@@ -58,7 +58,7 @@ public class ElementGenerator {
                                     .collect(toList());
 
                     List<String> infos = Arrays.stream(elements)
-                            .map(el -> format(template.info(), el.info()))
+                            .map(el -> template.comment() + el.info() + "\n")
                             .collect(toList());
 
                     int maxLength = lines.stream()
@@ -70,7 +70,7 @@ public class ElementGenerator {
                     for (int index = 0; index < lines.size(); index++) {
                         String line = lines.get(index);
                         middle.append(line)
-                                .append(StringUtils.rightPad("", maxLength - line.length()))
+                                .append(rightPad("", maxLength - line.length()))
                                 .append(infos.get(index));
                     }
 
@@ -84,10 +84,5 @@ public class ElementGenerator {
             default:
                 throw new UnsupportedOperationException("Unknown language:" + language);
         }
-    }
-
-    public static void main(String[] args) {
-        String data = new ElementGenerator().generate("a2048", "go");
-        System.out.println(data);
     }
 }
