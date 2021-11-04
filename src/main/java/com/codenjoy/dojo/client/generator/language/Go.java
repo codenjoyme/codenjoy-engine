@@ -61,12 +61,18 @@ public class Go implements Template {
     }
 
     @Override
+    public String lastDelimiter() {
+        return "";
+    }
+
+    @Override
     public String comment() {
         return "        // ";
     }
 
     @Override
     public String footer() {
-        return "}\n";
+        return "\n" +
+                "}\n";
     }
 }

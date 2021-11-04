@@ -64,6 +64,11 @@ public class Java implements Template {
     }
 
     @Override
+    public String lastDelimiter() {
+        return ";";
+    }
+
+    @Override
     public String comment() {
         return "        // ";
     }
@@ -71,6 +76,7 @@ public class Java implements Template {
     @Override
     public String footer() {
         return "\n" +
+                "\n" +
                 "    private final char ch;\n" +
                 "\n" +
                 "    Element(char ch) {\n" +

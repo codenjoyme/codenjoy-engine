@@ -50,7 +50,7 @@ elements = dict(
 
         # Short name.
 
-    G='$',
+    G='$'
 )
 
 if __name__ == '__main__':

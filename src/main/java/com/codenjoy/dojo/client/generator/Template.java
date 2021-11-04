@@ -49,4 +49,8 @@ public interface Template {
     default boolean printNewLine() {
         return true;
     }
+
+    default String lastDelimiter() {
+        return null;
+    }
 }

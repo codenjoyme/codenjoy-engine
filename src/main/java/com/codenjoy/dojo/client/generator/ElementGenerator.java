@@ -93,9 +93,14 @@ public class ElementGenerator {
                 }
             }
 
-            String line = lines.get(index);
             if (template.printNewLine()) {
                 middle.append('\n');
+            }
+            String line = lines.get(index);
+            if (template.lastDelimiter() != null && index == lines.size() - 1) {
+                int count = (line.charAt(line.length() - 1) == '\n') ? 2 : 1;
+                line = line.substring(0, line.length() - count)
+                        + template.lastDelimiter();
             }
             middle.append(line);
         }

@@ -61,13 +61,19 @@ public class Python implements Template {
     }
 
     @Override
+    public String lastDelimiter() {
+        return "";
+    }
+
+    @Override
     public String comment() {
         return "        # ";
     }
 
     @Override
     public String footer() {
-        return ")\n" +
+        return "\n" +
+                ")\n" +
                 "\n" +
                 "if __name__ == '__main__':\n" +
                 "    raise RuntimeError(\"This module is not intended to be ran from CLI\")\n";

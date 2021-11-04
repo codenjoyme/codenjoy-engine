@@ -48,5 +48,5 @@ var TestElement = module.exports = {
 
         // Short name.
 
-    G : '$',
+    G : '$'
 }

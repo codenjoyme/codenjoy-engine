@@ -54,6 +54,6 @@ abstract class Element
 
             # Short name.
 
-        "G" => '$',
+        "G" => '$'
     );
 }
