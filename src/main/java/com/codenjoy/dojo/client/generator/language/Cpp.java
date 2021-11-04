@@ -90,7 +90,7 @@ public class Cpp implements Template {
     }
 
     @Override
-    public String line() {
+    public String line(boolean subrepo) {
         return "    result[LL(\"${element}\")] = LL('${char}');\n";
     }
 

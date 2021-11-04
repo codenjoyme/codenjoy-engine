@@ -30,7 +30,7 @@ public interface Template {
         return StringUtils.EMPTY;
     }
 
-    default String line() {
+    default String line(boolean subrepo) {
         return StringUtils.EMPTY;
     }
 

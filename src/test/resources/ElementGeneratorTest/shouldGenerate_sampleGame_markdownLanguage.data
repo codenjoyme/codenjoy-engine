@@ -1,11 +1,11 @@
 ## Symbol breakdown
 | Sprite | Code | Description |
 | -------- | -------- | -------- |
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/none.png" style="width:30px;height:30px;" /> | `NONE(' ')` | Empty place where the hero can go. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/wall.png" style="width:30px;height:30px;" /> | `WALL('☼')` | Wall you can't walk through. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/hero.png" style="width:30px;height:30px;" /> | `HERO('☺')` | My hero. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/other_hero.png" style="width:30px;height:30px;" /> | `OTHER_HERO('☻')` | Heroes of other players. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/dead_hero.png" style="width:30px;height:30px;" /> | `DEAD_HERO('X')` | My hero died. His body will disappear in the next tick. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/other_dead_hero.png" style="width:30px;height:30px;" /> | `OTHER_DEAD_HERO('Y')` | Another player's hero died. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/gold.png" style="width:30px;height:30px;" /> | `GOLD('$')` | Gold. It must be picked up. | 
-|<img src="https://github.com/codenjoyme/codenjoy-sample/raw/master/src/main/webapp/resources/sprite/sample/bomb.png" style="width:30px;height:30px;" /> | `BOMB('x')` | Bomb planted by the hero. You can blow up on it. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/none.png" style="width:30px;height:30px;" /> | `NONE(' ')` | Empty place where the hero can go. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/wall.png" style="width:30px;height:30px;" /> | `WALL('☼')` | Wall you can't walk through. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/hero.png" style="width:30px;height:30px;" /> | `HERO('☺')` | My hero. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/other_hero.png" style="width:30px;height:30px;" /> | `OTHER_HERO('☻')` | Heroes of other players. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/dead_hero.png" style="width:30px;height:30px;" /> | `DEAD_HERO('X')` | My hero died. His body will disappear in the next tick. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/other_dead_hero.png" style="width:30px;height:30px;" /> | `OTHER_DEAD_HERO('Y')` | Another player's hero died. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/gold.png" style="width:30px;height:30px;" /> | `GOLD('$')` | Gold. It must be picked up. | 
+|<img src="https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/sample/src/main/webapp/resources/sprite/sample/bomb.png" style="width:30px;height:30px;" /> | `BOMB('x')` | Bomb planted by the hero. You can blow up on it. | 

@@ -34,8 +34,12 @@ public class Md implements Template {
     }
 
     @Override
-    public String line() {
-        return "|<img src=\"https://github.com/codenjoyme/codenjoy-${game}/raw/master/src/main/webapp/resources/sprite/${game}/${element-lower}.png\" style=\"width:30px;height:30px;\" /> | `${element}('${char}')` | ${info} | \n";
+    public String line(boolean subrepo) {
+        if (subrepo) {
+            return "|<img src=\"https://github.com/codenjoyme/codenjoy-${game}/raw/master/src/main/webapp/resources/sprite/${game}/${element-lower}.png\" style=\"width:30px;height:30px;\" /> | `${element}('${char}')` | ${info} | \n";
+        } else {
+            return "|<img src=\"https://github.com/codenjoyme/codenjoy/raw/master/CodingDojo/games/${game}/src/main/webapp/resources/sprite/${game}/${element-lower}.png\" style=\"width:30px;height:30px;\" /> | `${element}('${char}')` | ${info} | \n";
+        }
     }
 
     @Override

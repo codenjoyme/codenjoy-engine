@@ -25,7 +25,6 @@ package com.codenjoy.dojo.client.generator;
 import com.codenjoy.dojo.client.generator.language.Go;
 import com.codenjoy.dojo.games.sample.Element;
 import com.codenjoy.dojo.services.printer.CharElement;
-import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
@@ -35,13 +34,22 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
-@AllArgsConstructor
 public class ElementGenerator {
 
     public static final int COMMENT_MAX_LENGTH = 60;
 
     private final String game;
+    private final boolean subrepo;
     private final String language;
+
+    public ElementGenerator(String game, String language) {
+        this.game = game;
+        this.language = language;
+        subrepo = Arrays.asList(
+                "chess", "clifford", "excitebike",
+                "japanese", "mollymage", "selfdefense",
+                "vacuum", "xonix").contains(game);
+    }
 
     public String generate() {
         return build(elements());
@@ -70,7 +78,7 @@ public class ElementGenerator {
         String header = replace(template.header());
 
         List<String> lines = Arrays.stream(elements)
-                .map(el -> replace(template.line(), el))
+                .map(el -> replace(template.line(subrepo), el))
                 .collect(toList());
 
         List<List<String>> infos = Arrays.stream(elements)

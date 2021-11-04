@@ -1,0 +1,30 @@
+## Symbol breakdown
+| Sprite | Code | Description |
+| -------- | -------- | -------- |
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_timer_5.png" style="width:30px;height:30px;" /> | `POTION_TIMER_5('5')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_timer_4.png" style="width:30px;height:30px;" /> | `POTION_TIMER_4('4')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_timer_3.png" style="width:30px;height:30px;" /> | `POTION_TIMER_3('3')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_timer_2.png" style="width:30px;height:30px;" /> | `POTION_TIMER_2('2')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_timer_1.png" style="width:30px;height:30px;" /> | `POTION_TIMER_1('1')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/boom.png" style="width:30px;height:30px;" /> | `BOOM('҉')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/wall.png" style="width:30px;height:30px;" /> | `WALL('☼')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/treasure_box.png" style="width:30px;height:30px;" /> | `TREASURE_BOX('#')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/opening_treasure_box.png" style="width:30px;height:30px;" /> | `OPENING_TREASURE_BOX('H')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/ghost.png" style="width:30px;height:30px;" /> | `GHOST('&')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/dead_ghost.png" style="width:30px;height:30px;" /> | `DEAD_GHOST('x')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_blast_radius_increase.png" style="width:30px;height:30px;" /> | `POTION_BLAST_RADIUS_INCREASE('+')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_count_increase.png" style="width:30px;height:30px;" /> | `POTION_COUNT_INCREASE('c')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_remote_control.png" style="width:30px;height:30px;" /> | `POTION_REMOTE_CONTROL('r')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_immune.png" style="width:30px;height:30px;" /> | `POTION_IMMUNE('i')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/poison_thrower.png" style="width:30px;height:30px;" /> | `POISON_THROWER('T')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_exploder.png" style="width:30px;height:30px;" /> | `POTION_EXPLODER('A')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/none.png" style="width:30px;height:30px;" /> | `NONE(' ')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/hero.png" style="width:30px;height:30px;" /> | `HERO('☺')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/potion_hero.png" style="width:30px;height:30px;" /> | `POTION_HERO('☻')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/dead_hero.png" style="width:30px;height:30px;" /> | `DEAD_HERO('Ѡ')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/other_hero.png" style="width:30px;height:30px;" /> | `OTHER_HERO('♥')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/other_potion_hero.png" style="width:30px;height:30px;" /> | `OTHER_POTION_HERO('♠')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/other_dead_hero.png" style="width:30px;height:30px;" /> | `OTHER_DEAD_HERO('♣')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/enemy_hero.png" style="width:30px;height:30px;" /> | `ENEMY_HERO('ö')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/enemy_potion_hero.png" style="width:30px;height:30px;" /> | `ENEMY_POTION_HERO('Ö')` |  | 
+|<img src="https://github.com/codenjoyme/codenjoy-mollymage/raw/master/src/main/webapp/resources/sprite/mollymage/enemy_dead_hero.png" style="width:30px;height:30px;" /> | `ENEMY_DEAD_HERO('ø')` |  | 

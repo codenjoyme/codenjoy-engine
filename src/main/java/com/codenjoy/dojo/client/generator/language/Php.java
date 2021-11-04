@@ -60,7 +60,7 @@ public class Php implements Template {
     }
 
     @Override
-    public String line() {
+    public String line(boolean subrepo) {
         return "        \"${element}\" => '${char}',\n";
     }
 
