@@ -35,56 +35,49 @@ public class ElementGeneratorTest {
     @Rule
     public TestName test = new TestName();
 
-    private ElementGenerator generator;
-
-    @Before
-    public void before() throws Exception {
-        generator = new ElementGenerator();
-    }
-
     @Test
     public void shouldGenerate_sampleGame_goLanguage() {
-        assertEquals(generator.generate("sample", "go"));
+        assertEquals(new ElementGenerator("sample", "go").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_goLanguage() {
-        assertEquals(generator.generate("test", "go"));
+        assertEquals(new ElementGenerator("test", "go").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_cppLanguage() {
-        assertEquals(generator.generate("test", "cpp"));
+        assertEquals(new ElementGenerator("test", "cpp").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_jsLanguage() {
-        assertEquals(generator.generate("test", "js"));
+        assertEquals(new ElementGenerator("test", "js").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_phpLanguage() {
-        assertEquals(generator.generate("test", "php"));
+        assertEquals(new ElementGenerator("test", "php").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_javaLanguage() {
-        assertEquals(generator.generate("test", "java"));
+        assertEquals(new ElementGenerator("test", "java").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_pythonLanguage() {
-        assertEquals(generator.generate("test", "python"));
+        assertEquals(new ElementGenerator("test", "python").generate());
     }
 
     @Test
     public void shouldGenerate_testGame_markdownLanguage() {
-        assertEquals(generator.generate("test", "md"));
+        assertEquals(new ElementGenerator("test", "md").generate());
     }
 
     @Test
     public void shouldGenerate_sampleGame_markdownLanguage() {
-        assertEquals(generator.generate("sample", "md"));
+        assertEquals(new ElementGenerator("sample", "md").generate());
     }
 
     private void assertEquals(String actual) {

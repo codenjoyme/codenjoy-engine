@@ -25,6 +25,7 @@ package com.codenjoy.dojo.client.generator;
 import com.codenjoy.dojo.client.generator.language.Go;
 import com.codenjoy.dojo.games.sample.Element;
 import com.codenjoy.dojo.services.printer.CharElement;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
@@ -35,28 +36,28 @@ import java.util.function.Function;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
+@AllArgsConstructor
 public class ElementGenerator {
 
     public static final int COMMENT_MAX_LENGTH = 60;
 
-    public String generate(String game, String language) {
-        return language(game, language).apply(elements(game));
+    private final String game;
+    private final String language;
+
+    public String generate() {
+        return build(elements());
     }
 
     @SneakyThrows
-    private CharElement[] elements(String game) {
+    private CharElement[] elements() {
         String className = Element.class.getCanonicalName().replace("sample", game);
 
         return (CharElement[]) getClass().getClassLoader().loadClass(className)
                 .getEnumConstants();
     }
 
-    private Function<CharElement[], String> language(String game, String language) {
-        return elements -> build(game, template(language), elements);
-    }
-
     @SneakyThrows
-    private Template template(String language) {
+    private Template template() {
         String className = Go.class.getPackageName() + "."
                 + capitalize(language);
 
@@ -64,20 +65,13 @@ public class ElementGenerator {
         return (Template) clazz.getConstructor().newInstance();
     }
 
-    private String build(String game, Template template, CharElement[] elements) {
+    private String build(CharElement[] elements) {
+        Template template = template();
 
-        String header = template.header()
-                .replace("${game}", game)
-                .replace("${game-capitalize}", capitalize(game));
+        String header = replace(template.header());
 
         List<String> lines = Arrays.stream(elements)
-                .map(el -> template.line()
-                                .replace("${game}", game)
-                                .replace("${game-capitalize}", capitalize(game))
-                                .replace("${element-lower}", el.name().toLowerCase())
-                                .replace("${element}", el.name())
-                                .replace("${char}", String.valueOf(el.ch()))
-                                .replace("${info}", el.info()))
+                .map(el -> replace(template.line(), el))
                 .collect(toList());
 
         List<List<String>> infos = Arrays.stream(elements)
@@ -106,11 +100,26 @@ public class ElementGenerator {
             middle.append(line);
         }
 
-        String footer = template.footer();
+        String footer = replace(template.footer());
 
         return header
                 + middle
                 + footer;
+    }
+
+    private String replace(String template, CharElement element) {
+        return replace(template)
+                .replace("${element-lower}", element.name().toLowerCase())
+                .replace("${element}", element.name())
+                .replace("${char}", String.valueOf(element.ch()))
+                .replace("${info}", element.info());
+    }
+
+    private String replace(String template) {
+        return template
+                .replace("${language}", language)
+                .replace("${game}", game)
+                .replace("${game-capitalize}", capitalize(game));
     }
 
     private List<String> splitLength(String text, int length) {
