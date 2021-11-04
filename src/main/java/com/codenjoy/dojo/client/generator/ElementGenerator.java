@@ -35,12 +35,10 @@ import java.util.function.Function;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.capitalize;
-import static org.apache.commons.lang3.StringUtils.rightPad;
 
 public class ElementGenerator {
 
     public static final int COMMENT_MAX_LENGTH = 60;
-    public static final int SPACES_BEFORE_COMMENT = 8;
 
     public String generate(String game, String language) {
         return language(game, language).apply(elements(game));
@@ -87,7 +85,6 @@ public class ElementGenerator {
             if (!comments.isEmpty()) {
                 comments.forEach(comment ->
                         middle.append('\n')
-                                .append(rightPad("", SPACES_BEFORE_COMMENT))
                                 .append(template.comment())
                                 .append(comment));
             }

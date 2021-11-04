@@ -44,7 +44,7 @@ public class Php implements Template {
 
     @Override
     public String comment() {
-        return "# ";
+        return "            # ";
     }
 
     @Override

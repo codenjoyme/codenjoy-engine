@@ -40,7 +40,7 @@ public class Go implements Template {
 
     @Override
     public String comment() {
-        return "// ";
+        return "        // ";
     }
 
     @Override

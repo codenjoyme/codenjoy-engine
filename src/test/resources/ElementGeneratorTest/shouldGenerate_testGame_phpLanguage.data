@@ -6,31 +6,31 @@ abstract class Element
 {
     static array $elements = array(
 
-        # Short comment.
+            # Short comment.
 
         "NONE" => ' ',
 
-        # Long long long long long long long long long long long longl
-        # ong long long long long long long long long long comment.
+            # Long long long long long long long long long long long longl
+            # ong long long long long long long long long long comment.
 
         "WALL" => '☼',
 
-        # Another short comment.
+            # Another short comment.
 
         "HERO" => '☺',
 
-        # One more time.
+            # One more time.
 
         "OTHER_HERO" => '☻',
 
 
         "DEAD_HERO" => 'X',
 
-        # Long name.
+            # Long name.
 
         "OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG" => 'Y',
 
-        # Short name.
+            # Short name.
 
         "G" => '$',
     );
