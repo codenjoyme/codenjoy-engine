@@ -39,7 +39,9 @@ import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.function.Consumer;
@@ -292,13 +294,13 @@ public class TestUtils {
     }
 
     public static void saveToFile(File actualFile, String data) {
-        try {
-            File folder = actualFile.getParentFile();
-            if (!folder.exists()) {
-                folder.mkdirs();
-            }
+        File folder = actualFile.getParentFile();
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
 
-            Files.writeString(actualFile.toPath(), data);
+        try (FileWriter writer = new FileWriter(actualFile.getAbsolutePath(), StandardCharsets.UTF_8)) {
+            writer.write(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
