@@ -22,6 +22,7 @@ package com.codenjoy.dojo.client.generator;
  * #L%
  */
 
+import com.codenjoy.dojo.client.generator.language.Go;
 import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
 

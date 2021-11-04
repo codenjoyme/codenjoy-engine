@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.client.generator;
+package com.codenjoy.dojo.client.generator.language;
 
 /*-
  * #%L
@@ -21,6 +21,8 @@ package com.codenjoy.dojo.client.generator;
  * <http://www.gnu.org/licenses/gpl-3.0.html>.
  * #L%
  */
+
+import com.codenjoy.dojo.client.generator.Template;
 
 public class Go implements Template {
 
