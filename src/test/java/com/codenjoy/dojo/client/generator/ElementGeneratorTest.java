@@ -72,6 +72,11 @@ public class ElementGeneratorTest {
         assertEquals(generator.generate("test", "java"));
     }
 
+    @Test
+    public void shouldGenerate_testGame_pythonLanguage() {
+        assertEquals(generator.generate("test", "python"));
+    }
+
     private void assertEquals(String actual) {
         TestUtils.assertSmokeFile(this.getClass().getSimpleName()
                 + "/" + test.getMethodName() +  ".data",
