@@ -42,7 +42,7 @@ public class ElementGenerator {
     public static final int SPACES_BEFORE_COMMENT = 3;
 
     public String generate(String game, String language) {
-        return language(language).apply(elements(game));
+        return language(game, language).apply(elements(game));
     }
 
     @SneakyThrows
@@ -52,8 +52,8 @@ public class ElementGenerator {
                 .getEnumConstants();
     }
 
-    private Function<CharElement[], String> language(String language) {
-        return elements -> build(language, template(language), elements);
+    private Function<CharElement[], String> language(String game, String language) {
+        return elements -> build(game, template(language), elements);
     }
 
     private Template template(String language) {
@@ -67,8 +67,8 @@ public class ElementGenerator {
         }
     }
 
-    private String build(String language, Template template, CharElement[] elements) {
-        String header = format(template.header(), language);
+    private String build(String game, Template template, CharElement[] elements) {
+        String header = format(template.header(), game);
 
         List<String> lines = Arrays.stream(elements)
                 .map(el -> format(template.line(), el.name(), el.ch()))

@@ -1,4 +1,4 @@
-package go
+package test
 
 var Elements = map[string]rune{
 
