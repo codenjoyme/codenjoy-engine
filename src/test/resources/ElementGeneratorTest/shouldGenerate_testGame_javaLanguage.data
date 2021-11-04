@@ -54,6 +54,7 @@ public enum Element implements CharElement {
         // Short name.
 
     G('$'),
+
     private final char ch;
 
     Element(char ch) {

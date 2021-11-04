@@ -70,7 +70,8 @@ public class Java implements Template {
 
     @Override
     public String footer() {
-        return "    private final char ch;\n" +
+        return "\n" +
+                "    private final char ch;\n" +
                 "\n" +
                 "    Element(char ch) {\n" +
                 "        this.ch = ch;\n" +
