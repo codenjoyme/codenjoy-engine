@@ -43,13 +43,20 @@ public class ElementGeneratorTest {
         assertEquals("package go\n" +
                 "\n" +
                 "var Elements = map[string]rune{\n" +
+                "\n" +
                 "    'NONE': ' ',                                       // Short comment.\n" +
+                "\n" +
                 "    'WALL': '☼',                                       // Long long long long long long long long long long long longl\n" +
                 "                                                       // ong long long long long long long long long long comment.\n" +
+                "\n" +
                 "    'HERO': '☺',                                       // Another short comment.\n" +
+                "\n" +
                 "    'OTHER_HERO': '☻',                                 // One more time.\n" +
+                "\n" +
                 "    'DEAD_HERO': 'X',                                  \n" +
+                "\n" +
                 "    'OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG': 'Y',   // Long name.\n" +
+                "\n" +
                 "    'G': '$',                                          // Short name.\n" +
                 "}\n", JsonUtils.clean(actual));
     }
@@ -95,13 +102,20 @@ public class ElementGeneratorTest {
                 "\n" +
                 "ElementMap Element::initialiseElements() {\n" +
                 "    ElementMap mapOfElements;\n" +
+                "\n" +
                 "    mapOfElements[LL('NONE')] = LL(' ');                                       // Short comment.\n" +
+                "\n" +
                 "    mapOfElements[LL('WALL')] = LL('☼');                                       // Long long long long long long long long long long long longl\n" +
                 "                                                                               // ong long long long long long long long long long comment.\n" +
+                "\n" +
                 "    mapOfElements[LL('HERO')] = LL('☺');                                       // Another short comment.\n" +
+                "\n" +
                 "    mapOfElements[LL('OTHER_HERO')] = LL('☻');                                 // One more time.\n" +
+                "\n" +
                 "    mapOfElements[LL('DEAD_HERO')] = LL('X');                                  \n" +
+                "\n" +
                 "    mapOfElements[LL('OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG')] = LL('Y');   // Long name.\n" +
+                "\n" +
                 "    mapOfElements[LL('G')] = LL('$');                                          // Short name.\n" +
                 "\n" +
                 "    return mapOfElements;\n" +

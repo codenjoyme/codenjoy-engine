@@ -86,7 +86,8 @@ public class ElementGenerator {
         StringBuilder middle = new StringBuilder();
         for (int index = 0; index < lines.size(); index++) {
             String line = lines.get(index);
-            middle.append(line)
+            middle.append('\n')
+                    .append(line)
                     .append(rightPad("", maxLength - line.length()));
 
             List<String> comments = infos.get(index);
