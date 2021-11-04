@@ -84,6 +84,11 @@ public class ElementGeneratorTest {
         assertEquals(new ElementGenerator("mollymage", "md").generate());
     }
 
+    @Test
+    public void shouldGenerate_mollymageGame_javaLanguage() {
+        assertEquals(new ElementGenerator("mollymage", "java").generate());
+    }
+
     private void assertEquals(String actual) {
         TestUtils.assertSmokeFile(this.getClass().getSimpleName()
                 + "/" + test.getMethodName() +  ".data",
