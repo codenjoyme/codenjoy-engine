@@ -31,7 +31,6 @@ import lombok.SneakyThrows;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.capitalize;
@@ -78,23 +77,23 @@ public class ElementGenerator {
                 .map(el -> splitLength(el.info(), COMMENT_MAX_LENGTH))
                 .collect(toList());
 
-        StringBuilder middle = new StringBuilder();
+        StringBuilder body = new StringBuilder();
         for (int index = 0; index < lines.size(); index++) {
             if (template.printComment()) {
                 List<String> comments = infos.get(index);
                 if (!comments.isEmpty()) {
                     comments.forEach(comment ->
-                            middle.append('\n')
+                            body.append('\n')
                                     .append(template.comment())
                                     .append(comment));
                 }
                 if (template.printNewLine()) {
-                    middle.append('\n');
+                    body.append('\n');
                 }
             }
 
             if (template.printNewLine()) {
-                middle.append('\n');
+                body.append('\n');
             }
             String line = lines.get(index);
             if (template.lastDelimiter() != null && index == lines.size() - 1) {
@@ -102,13 +101,13 @@ public class ElementGenerator {
                 line = line.substring(0, line.length() - count)
                         + template.lastDelimiter();
             }
-            middle.append(line);
+            body.append(line);
         }
 
         String footer = replace(template.footer());
 
         return header
-                + middle
+                + body
                 + footer;
     }
 
