@@ -36,6 +36,9 @@ import static org.apache.commons.lang3.StringUtils.rightPad;
 
 public class ElementGenerator {
 
+    public static final int COMMENT_MAX_LENGTH = 60;
+    public static final int SPACES_BEFORE_COMMENT = 3;
+
     public String generate(String game, String language) {
         return language(language).apply(elements(game));
     }
@@ -68,13 +71,13 @@ public class ElementGenerator {
                 .collect(toList());
 
         List<List<String>> infos = Arrays.stream(elements)
-                .map(el -> splitLength(el.info(), 60))
+                .map(el -> splitLength(el.info(), COMMENT_MAX_LENGTH))
                 .collect(toList());
 
         int maxLength = lines.stream()
                 .mapToInt(String::length)
                 .max()
-                .getAsInt() + 3;
+                .getAsInt() + SPACES_BEFORE_COMMENT;
 
         StringBuilder middle = new StringBuilder();
         for (int index = 0; index < lines.size(); index++) {
