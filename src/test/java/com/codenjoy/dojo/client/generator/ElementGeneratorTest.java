@@ -67,6 +67,11 @@ public class ElementGeneratorTest {
         assertEquals(generator.generate("test", "php"));
     }
 
+    @Test
+    public void shouldGenerate_testGame_javaLanguage() {
+        assertEquals(generator.generate("test", "java"));
+    }
+
     private void assertEquals(String actual) {
         TestUtils.assertSmokeFile(this.getClass().getSimpleName()
                 + "/" + test.getMethodName() +  ".data",
