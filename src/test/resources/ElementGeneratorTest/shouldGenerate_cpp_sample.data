@@ -1,0 +1,57 @@
+//include "Element.h"
+
+Element::Element(Char el) {
+    elem.first = valueOf(el);
+    elem.second = el;
+}
+
+Element::Element(String name) {
+    elem.second = Elements.at(name);
+    elem.first = name;
+}
+
+Char Element::ch() {
+    return elem.second;
+}
+
+String Element::name() {
+    return elem.first;
+}
+
+Char Element::getChar() const {
+    return elem.second;
+}
+
+String Element::valueOf(Char ch) const {
+    for (auto i : Elements) {
+        if (i.second == ch) return i.first;
+    }
+    throw std::invalid_argument("Element::valueOf(Char ch): No such Element for " + ch);
+}
+
+bool Element::operator==(const Element& el) const {
+    return elem == el.elem;
+}
+
+ElementMap Element::initialiseElements() {
+    ElementMap mapOfElements;
+
+    mapOfElements[LL("NONE")] = LL(' ');                                       // Short comment.
+
+    mapOfElements[LL("WALL")] = LL('☼');                                       // Long long long long long long long long long long long longl
+                                                                               // ong long long long long long long long long long comment.
+
+    mapOfElements[LL("HERO")] = LL('☺');                                       // Another short comment.
+
+    mapOfElements[LL("OTHER_HERO")] = LL('☻');                                 // One more time.
+
+    mapOfElements[LL("DEAD_HERO")] = LL('X');                                  
+
+    mapOfElements[LL("OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG")] = LL('Y');   // Long name.
+
+    mapOfElements[LL("G")] = LL('$');                                          // Short name.
+
+    return mapOfElements;
+};
+
+const ElementMap Element::Elements = Element::initialiseElements();

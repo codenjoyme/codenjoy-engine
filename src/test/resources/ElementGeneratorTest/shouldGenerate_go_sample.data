@@ -1,0 +1,19 @@
+package go
+
+var Elements = map[string]rune{
+
+    "NONE": ' ',                                       // Short comment.
+
+    "WALL": '☼',                                       // Long long long long long long long long long long long longl
+                                                       // ong long long long long long long long long long comment.
+
+    "HERO": '☺',                                       // Another short comment.
+
+    "OTHER_HERO": '☻',                                 // One more time.
+
+    "DEAD_HERO": 'X',                                  
+
+    "OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG": 'Y',   // Long name.
+
+    "G": '$',                                          // Short name.
+}

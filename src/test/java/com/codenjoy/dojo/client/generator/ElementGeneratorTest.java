@@ -22,106 +22,35 @@ package com.codenjoy.dojo.client.generator;
  * #L%
  */
 
-import com.codenjoy.dojo.utils.JsonUtils;
-import com.codenjoy.dojo.utils.smart.SmartAssert;
-import org.junit.After;
+import com.codenjoy.dojo.utils.TestUtils;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
-import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
+import java.util.Arrays;
 
 public class ElementGeneratorTest {
 
-    @After
-    public void after() {
-        SmartAssert.checkResult();
-    }
+    @Rule
+    public TestName test = new TestName();
 
     @Test
     public void shouldGenerate_go_sample() {
         String actual = new ElementGenerator().generate("test", "go");
-
-        assertEquals("package go\n" +
-                "\n" +
-                "var Elements = map[string]rune{\n" +
-                "\n" +
-                "    'NONE': ' ',                                       // Short comment.\n" +
-                "\n" +
-                "    'WALL': '☼',                                       // Long long long long long long long long long long long longl\n" +
-                "                                                       // ong long long long long long long long long long comment.\n" +
-                "\n" +
-                "    'HERO': '☺',                                       // Another short comment.\n" +
-                "\n" +
-                "    'OTHER_HERO': '☻',                                 // One more time.\n" +
-                "\n" +
-                "    'DEAD_HERO': 'X',                                  \n" +
-                "\n" +
-                "    'OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG': 'Y',   // Long name.\n" +
-                "\n" +
-                "    'G': '$',                                          // Short name.\n" +
-                "}\n", JsonUtils.clean(actual));
+        assertEquals(actual);
     }
 
     @Test
     public void shouldGenerate_cpp_sample() {
         String actual = new ElementGenerator().generate("test", "cpp");
 
-        assertEquals("//include 'Element.h'\n" +
-                "\n" +
-                "Element::Element(Char el) {\n" +
-                "    elem.first = valueOf(el);\n" +
-                "    elem.second = el;\n" +
-                "}\n" +
-                "\n" +
-                "Element::Element(String name) {\n" +
-                "    elem.second = Elements.at(name);\n" +
-                "    elem.first = name;\n" +
-                "}\n" +
-                "\n" +
-                "Char Element::ch() {\n" +
-                "    return elem.second;\n" +
-                "}\n" +
-                "\n" +
-                "String Element::name() {\n" +
-                "    return elem.first;\n" +
-                "}\n" +
-                "\n" +
-                "Char Element::getChar() const {\n" +
-                "    return elem.second;\n" +
-                "}\n" +
-                "\n" +
-                "String Element::valueOf(Char ch) const {\n" +
-                "    for (auto i : Elements) {\n" +
-                "        if (i.second == ch) return i.first;\n" +
-                "    }\n" +
-                "    throw std::invalid_argument('Element::valueOf(Char ch): No such Element for ' + ch);\n" +
-                "}\n" +
-                "\n" +
-                "bool Element::operator==(const Element& el) const {\n" +
-                "    return elem == el.elem;\n" +
-                "}\n" +
-                "\n" +
-                "ElementMap Element::initialiseElements() {\n" +
-                "    ElementMap mapOfElements;\n" +
-                "\n" +
-                "    mapOfElements[LL('NONE')] = LL(' ');                                       // Short comment.\n" +
-                "\n" +
-                "    mapOfElements[LL('WALL')] = LL('☼');                                       // Long long long long long long long long long long long longl\n" +
-                "                                                                               // ong long long long long long long long long long comment.\n" +
-                "\n" +
-                "    mapOfElements[LL('HERO')] = LL('☺');                                       // Another short comment.\n" +
-                "\n" +
-                "    mapOfElements[LL('OTHER_HERO')] = LL('☻');                                 // One more time.\n" +
-                "\n" +
-                "    mapOfElements[LL('DEAD_HERO')] = LL('X');                                  \n" +
-                "\n" +
-                "    mapOfElements[LL('OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG')] = LL('Y');   // Long name.\n" +
-                "\n" +
-                "    mapOfElements[LL('G')] = LL('$');                                          // Short name.\n" +
-                "\n" +
-                "    return mapOfElements;\n" +
-                "};\n" +
-                "\n" +
-                "const ElementMap Element::Elements = Element::initialiseElements();\n", JsonUtils.clean(actual));
+        assertEquals(actual);
+    }
+
+    private void assertEquals(String actual) {
+        TestUtils.assertSmokeFile(this.getClass().getSimpleName()
+                + "/" + test.getMethodName() +  ".data",
+                Arrays.asList(actual.split("\n")));
     }
 
 }
