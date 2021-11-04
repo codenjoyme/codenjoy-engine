@@ -22,7 +22,6 @@ package com.codenjoy.dojo.client.generator;
  * #L%
  */
 
-import com.codenjoy.dojo.client.generator.language.Cpp;
 import com.codenjoy.dojo.client.generator.language.Go;
 import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
@@ -56,15 +55,14 @@ public class ElementGenerator {
         return elements -> build(game, template(language), elements);
     }
 
+    @SneakyThrows
     private Template template(String language) {
-        switch (language) {
-            case "go" :
-                return new Go();
-            case "cpp" :
-                return new Cpp();
-            default:
-                throw new UnsupportedOperationException("Unknown language:" + language);
-        }
+        String className = Go.class.getPackageName() + "."
+                + language.substring(0, 1).toUpperCase()
+                + language.substring(1);
+
+        Class<?> clazz = getClass().getClassLoader().loadClass(className);
+        return (Template) clazz.getConstructor().newInstance();
     }
 
     private String build(String game, Template template, CharElement[] elements) {
