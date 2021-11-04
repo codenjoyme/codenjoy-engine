@@ -34,6 +34,7 @@ import java.util.function.Function;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.apache.commons.lang3.StringUtils.rightPad;
 
 public class ElementGenerator {
@@ -60,15 +61,17 @@ public class ElementGenerator {
     @SneakyThrows
     private Template template(String language) {
         String className = Go.class.getPackageName() + "."
-                + language.substring(0, 1).toUpperCase()
-                + language.substring(1);
+                + capitalize(language);
 
         Class<?> clazz = getClass().getClassLoader().loadClass(className);
         return (Template) clazz.getConstructor().newInstance();
     }
 
     private String build(String game, Template template, CharElement[] elements) {
-        String header = format(template.header(), game);
+
+        String header = template.header()
+                .replace("%s", game)
+                .replace("%S", capitalize(game));
 
         List<String> lines = Arrays.stream(elements)
                 .map(el -> format(template.line(), el.name(), el.ch()))

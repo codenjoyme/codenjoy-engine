@@ -1,4 +1,4 @@
-var testElement = module.exports = {
+var TestElement = module.exports = {
 
         // Short comment.
 

@@ -28,7 +28,7 @@ public class Js implements Template {
 
     @Override
     public String header() {
-        return "var %sElement = module.exports = {\n";
+        return "var %SElement = module.exports = {\n";
     }
 
     @Override
