@@ -1,0 +1,30 @@
+var testElement = module.exports = {
+
+        // Short comment.
+
+    NONE : ' ',
+
+        // Long long long long long long long long long long long longl
+        // ong long long long long long long long long long comment.
+
+    WALL : '☼',
+
+        // Another short comment.
+
+    HERO : '☺',
+
+        // One more time.
+
+    OTHER_HERO : '☻',
+
+
+    DEAD_HERO : 'X',
+
+        // Long name.
+
+    OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG : 'Y',
+
+        // Short name.
+
+    G : '$',
+}

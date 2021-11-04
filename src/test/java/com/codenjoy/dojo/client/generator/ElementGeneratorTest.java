@@ -57,6 +57,11 @@ public class ElementGeneratorTest {
         assertEquals(generator.generate("test", "cpp"));
     }
 
+    @Test
+    public void shouldGenerate_testGame_jsLanguage() {
+        assertEquals(generator.generate("test", "js"));
+    }
+
     private void assertEquals(String actual) {
         TestUtils.assertSmokeFile(this.getClass().getSimpleName()
                 + "/" + test.getMethodName() +  ".data",
