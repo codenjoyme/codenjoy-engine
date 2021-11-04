@@ -81,11 +81,6 @@ public class ElementGenerator {
                 .map(el -> splitLength(el.info(), COMMENT_MAX_LENGTH))
                 .collect(toList());
 
-        int maxLength = lines.stream()
-                .mapToInt(String::length)
-                .max()
-                .getAsInt();
-
         StringBuilder middle = new StringBuilder();
         for (int index = 0; index < lines.size(); index++) {
             List<String> comments = infos.get(index);
@@ -111,12 +106,12 @@ public class ElementGenerator {
     }
 
     private List<String> splitLength(String text, int length) {
-        List<String> strings = new LinkedList<>();
-        int index = 0;
-        while (index < text.length()) {
-            strings.add(text.substring(index, Math.min(index + length, text.length())));
-            index += length;
-        }
-        return strings;
+        return new LinkedList<>(){{
+            int index = 0;
+            while (index < text.length()) {
+                add(text.substring(index, Math.min(index + length, text.length())));
+                index += length;
+            }
+        }};
     }
 }
