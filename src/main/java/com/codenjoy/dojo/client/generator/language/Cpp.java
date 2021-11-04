@@ -86,12 +86,12 @@ public class Cpp implements Template {
                 "}\n" +
                 "\n" +
                 "ElementMap Element::initialiseElements() {\n" +
-                "    ElementMap mapOfElements;\n";
+                "    ElementMap result;\n";
     }
 
     @Override
     public String line() {
-        return "    mapOfElements[LL(\"%s\")] = LL('%s');\n";
+        return "    result[LL(\"%s\")] = LL('%s');\n";
     }
 
     @Override
@@ -102,7 +102,7 @@ public class Cpp implements Template {
     @Override
     public String footer() {
         return "\n" +
-                "    return mapOfElements;\n" +
+                "    return result;\n" +
                 "};\n" +
                 "\n" +
                 "const ElementMap Element::Elements = Element::initialiseElements();\n";

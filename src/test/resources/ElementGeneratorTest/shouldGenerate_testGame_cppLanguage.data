@@ -56,37 +56,37 @@ bool Element::operator==(const Element& el) const {
 }
 
 ElementMap Element::initialiseElements() {
-    ElementMap mapOfElements;
+    ElementMap result;
 
         // Short comment.
 
-    mapOfElements[LL("NONE")] = LL(' ');
+    result[LL("NONE")] = LL(' ');
 
         // Long long long long long long long long long long long longl
         // ong long long long long long long long long long comment.
 
-    mapOfElements[LL("WALL")] = LL('☼');
+    result[LL("WALL")] = LL('☼');
 
         // Another short comment.
 
-    mapOfElements[LL("HERO")] = LL('☺');
+    result[LL("HERO")] = LL('☺');
 
         // One more time.
 
-    mapOfElements[LL("OTHER_HERO")] = LL('☻');
+    result[LL("OTHER_HERO")] = LL('☻');
 
 
-    mapOfElements[LL("DEAD_HERO")] = LL('X');
+    result[LL("DEAD_HERO")] = LL('X');
 
         // Long name.
 
-    mapOfElements[LL("OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG")] = LL('Y');
+    result[LL("OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG")] = LL('Y');
 
         // Short name.
 
-    mapOfElements[LL("G")] = LL('$');
+    result[LL("G")] = LL('$');
 
-    return mapOfElements;
+    return result;
 };
 
 const ElementMap Element::Elements = Element::initialiseElements();
