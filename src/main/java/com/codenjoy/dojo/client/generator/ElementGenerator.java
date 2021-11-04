@@ -39,7 +39,7 @@ import static org.apache.commons.lang3.StringUtils.rightPad;
 public class ElementGenerator {
 
     public static final int COMMENT_MAX_LENGTH = 60;
-    public static final int SPACES_BEFORE_COMMENT = 3;
+    public static final int SPACES_BEFORE_COMMENT = 8;
 
     public String generate(String game, String language) {
         return language(game, language).apply(elements(game));
@@ -81,26 +81,25 @@ public class ElementGenerator {
         int maxLength = lines.stream()
                 .mapToInt(String::length)
                 .max()
-                .getAsInt() + SPACES_BEFORE_COMMENT;
+                .getAsInt();
 
         StringBuilder middle = new StringBuilder();
         for (int index = 0; index < lines.size(); index++) {
-            String line = lines.get(index);
-            middle.append('\n')
-                    .append(line)
-                    .append(rightPad("", maxLength - line.length()));
-
             List<String> comments = infos.get(index);
             if (!comments.isEmpty()) {
-                middle.append(template.comment())
-                        .append(comments.remove(0));
                 comments.forEach(comment ->
                         middle.append('\n')
-                                .append(rightPad("", maxLength))
+                                .append(rightPad("", SPACES_BEFORE_COMMENT))
                                 .append(template.comment())
                                 .append(comment));
             }
             middle.append('\n');
+
+            String line = lines.get(index);
+            middle.append('\n')
+                    .append(line)
+                    .append(rightPad("", maxLength - line.length()))
+                    .append('\n');
         }
 
         String footer = template.footer();

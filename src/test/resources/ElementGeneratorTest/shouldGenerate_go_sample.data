@@ -2,18 +2,31 @@ package test
 
 var Elements = map[string]rune{
 
-    "NONE": ' ',                                       // Short comment.
+        // Short comment.
 
-    "WALL": '☼',                                       // Long long long long long long long long long long long longl
-                                                       // ong long long long long long long long long long comment.
+    "NONE": ' ',                                    
 
-    "HERO": '☺',                                       // Another short comment.
+        // Long long long long long long long long long long long longl
+        // ong long long long long long long long long long comment.
 
-    "OTHER_HERO": '☻',                                 // One more time.
+    "WALL": '☼',                                    
 
-    "DEAD_HERO": 'X',                                  
+        // Another short comment.
 
-    "OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG": 'Y',   // Long name.
+    "HERO": '☺',                                    
 
-    "G": '$',                                          // Short name.
+        // One more time.
+
+    "OTHER_HERO": '☻',                              
+
+
+    "DEAD_HERO": 'X',                               
+
+        // Long name.
+
+    "OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG": 'Y',
+
+        // Short name.
+
+    "G": '$',                                       
 }
