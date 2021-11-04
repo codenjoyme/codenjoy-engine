@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.client.generator;
+package com.codenjoy.dojo.client.generator.language;
 
 /*-
  * #%L
@@ -22,31 +22,29 @@ package com.codenjoy.dojo.client.generator;
  * #L%
  */
 
-import org.apache.commons.lang3.StringUtils;
+import com.codenjoy.dojo.client.generator.Template;
 
-public interface Template {
+public class Md implements Template {
 
-    default String header() {
-        return StringUtils.EMPTY;
+    @Override
+    public String header() {
+        return "## Symbol breakdown\n" +
+                "| Sprite | Code | Description |\n" +
+                "| -------- | -------- | -------- |\n";
     }
 
-    default String line() {
-        return StringUtils.EMPTY;
+    @Override
+    public String line() {
+        return "|<img src=\"https://github.com/codenjoyme/codenjoy-${game}/raw/master/src/main/webapp/resources/sprite/${game}/${element-lower}.png\" style=\"width:30px;height:30px;\" /> | `${element}('${char}')` | ${info} | \n";
     }
 
-    default String comment() {
-        return StringUtils.EMPTY;
+    @Override
+    public boolean printComment() {
+        return false;
     }
 
-    default String footer() {
-        return StringUtils.EMPTY;
-    }
-
-    default boolean printComment() {
-        return true;
-    }
-
-    default boolean printNewLine() {
-        return true;
+    @Override
+    public boolean printNewLine() {
+        return false;
     }
 }

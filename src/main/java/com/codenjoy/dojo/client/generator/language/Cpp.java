@@ -91,7 +91,7 @@ public class Cpp implements Template {
 
     @Override
     public String line() {
-        return "    result[LL(\"%s\")] = LL('%s');\n";
+        return "    result[LL(\"${element}\")] = LL('${char}');\n";
     }
 
     @Override

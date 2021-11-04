@@ -28,7 +28,7 @@ public class Go implements Template {
 
     @Override
     public String header() {
-        return "package %s\n" +
+        return "package ${game}\n" +
                 "\n" +
                 "/*-\n" +
                 " * #%L\n" +
@@ -57,7 +57,7 @@ public class Go implements Template {
 
     @Override
     public String line() {
-        return "    \"%s\": '%s',\n";
+        return "    \"${element}\": '${char}',\n";
     }
 
     @Override

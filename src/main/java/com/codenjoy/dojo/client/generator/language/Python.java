@@ -57,7 +57,7 @@ public class Python implements Template {
 
     @Override
     public String line() {
-        return "    %s='%s',\n";
+        return "    ${element}='${char}',\n";
     }
 
     @Override

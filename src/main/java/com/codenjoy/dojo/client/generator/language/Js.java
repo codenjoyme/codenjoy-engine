@@ -50,12 +50,12 @@ public class Js implements Template {
                 " * #L%\n" +
                 " */\n" +
                 "\n" +
-                "var %SElement = module.exports = {\n";
+                "var ${game-capitalize}Element = module.exports = {\n";
     }
 
     @Override
     public String line() {
-        return "    %s : '%s',\n";
+        return "    ${element} : '${char}',\n";
     }
 
     @Override

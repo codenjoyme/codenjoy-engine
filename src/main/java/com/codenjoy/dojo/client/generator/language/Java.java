@@ -28,7 +28,7 @@ public class Java implements Template {
 
     @Override
     public String header() {
-        return "package com.codenjoy.dojo.games.%s;\n" +
+        return "package com.codenjoy.dojo.games.${game};\n" +
                 "\n" +
                 "/*-\n" +
                 " * #%L\n" +
@@ -60,7 +60,7 @@ public class Java implements Template {
 
     @Override
     public String line() {
-        return "    %s('%s'),\n";
+        return "    ${element}('${char}'),\n";
     }
 
     @Override

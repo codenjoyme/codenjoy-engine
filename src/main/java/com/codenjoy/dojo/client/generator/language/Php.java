@@ -52,7 +52,7 @@ public class Php implements Template {
                 "# #L%\n" +
                 "###\n" +
                 "\n" +
-                "namespace %S;\n" +
+                "namespace ${game-capitalize};\n" +
                 "\n" +
                 "abstract class Element\n" +
                 "{\n" +
@@ -61,7 +61,7 @@ public class Php implements Template {
 
     @Override
     public String line() {
-        return "        \"%s\" => '%s',\n";
+        return "        \"${element}\" => '${char}',\n";
     }
 
     @Override

@@ -32,7 +32,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
-import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
@@ -68,11 +67,17 @@ public class ElementGenerator {
     private String build(String game, Template template, CharElement[] elements) {
 
         String header = template.header()
-                .replace("%s", game)
-                .replace("%S", capitalize(game));
+                .replace("${game}", game)
+                .replace("${game-capitalize}", capitalize(game));
 
         List<String> lines = Arrays.stream(elements)
-                .map(el -> format(template.line(), el.name(), el.ch()))
+                .map(el -> template.line()
+                                .replace("${game}", game)
+                                .replace("${game-capitalize}", capitalize(game))
+                                .replace("${element-lower}", el.name().toLowerCase())
+                                .replace("${element}", el.name())
+                                .replace("${char}", String.valueOf(el.ch()))
+                                .replace("${info}", el.info()))
                 .collect(toList());
 
         List<List<String>> infos = Arrays.stream(elements)
@@ -81,18 +86,24 @@ public class ElementGenerator {
 
         StringBuilder middle = new StringBuilder();
         for (int index = 0; index < lines.size(); index++) {
-            List<String> comments = infos.get(index);
-            if (!comments.isEmpty()) {
-                comments.forEach(comment ->
-                        middle.append('\n')
-                                .append(template.comment())
-                                .append(comment));
+            if (template.printComment()) {
+                List<String> comments = infos.get(index);
+                if (!comments.isEmpty()) {
+                    comments.forEach(comment ->
+                            middle.append('\n')
+                                    .append(template.comment())
+                                    .append(comment));
+                }
+                if (template.printNewLine()) {
+                    middle.append('\n');
+                }
             }
-            middle.append('\n');
 
             String line = lines.get(index);
-            middle.append('\n')
-                    .append(line);
+            if (template.printNewLine()) {
+                middle.append('\n');
+            }
+            middle.append(line);
         }
 
         String footer = template.footer();
