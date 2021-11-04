@@ -43,16 +43,18 @@ public class ElementGeneratorTest {
     }
 
     @Test
-    public void shouldGenerate_go_sample() {
-        String actual = generator.generate("test", "go");
-        assertEquals(actual);
+    public void shouldGenerate_sampleGame_goLanguage() {
+        assertEquals(generator.generate("sample", "go"));
     }
 
     @Test
-    public void shouldGenerate_cpp_sample() {
-        String actual = generator.generate("test", "cpp");
+    public void shouldGenerate_testGame_goLanguage() {
+        assertEquals(generator.generate("test", "go"));
+    }
 
-        assertEquals(actual);
+    @Test
+    public void shouldGenerate_testGame_cppLanguage() {
+        assertEquals(generator.generate("test", "cpp"));
     }
 
     private void assertEquals(String actual) {
