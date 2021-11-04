@@ -23,6 +23,7 @@ package com.codenjoy.dojo.client.generator;
  */
 
 import com.codenjoy.dojo.utils.TestUtils;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -34,15 +35,22 @@ public class ElementGeneratorTest {
     @Rule
     public TestName test = new TestName();
 
+    private ElementGenerator generator;
+
+    @Before
+    public void before() throws Exception {
+        generator = new ElementGenerator();
+    }
+
     @Test
     public void shouldGenerate_go_sample() {
-        String actual = new ElementGenerator().generate("test", "go");
+        String actual = generator.generate("test", "go");
         assertEquals(actual);
     }
 
     @Test
     public void shouldGenerate_cpp_sample() {
-        String actual = new ElementGenerator().generate("test", "cpp");
+        String actual = generator.generate("test", "cpp");
 
         assertEquals(actual);
     }
@@ -52,5 +60,4 @@ public class ElementGeneratorTest {
                 + "/" + test.getMethodName() +  ".data",
                 Arrays.asList(actual.split("\n")));
     }
-
 }
