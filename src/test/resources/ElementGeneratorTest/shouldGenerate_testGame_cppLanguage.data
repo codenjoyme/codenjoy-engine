@@ -38,23 +38,23 @@ ElementMap Element::initialiseElements() {
 
         // Short comment.
 
-    mapOfElements[LL("NONE")] = LL(' ');                                    
+    mapOfElements[LL("NONE")] = LL(' ');
 
         // Long long long long long long long long long long long longl
         // ong long long long long long long long long long comment.
 
-    mapOfElements[LL("WALL")] = LL('☼');                                    
+    mapOfElements[LL("WALL")] = LL('☼');
 
         // Another short comment.
 
-    mapOfElements[LL("HERO")] = LL('☺');                                    
+    mapOfElements[LL("HERO")] = LL('☺');
 
         // One more time.
 
-    mapOfElements[LL("OTHER_HERO")] = LL('☻');                              
+    mapOfElements[LL("OTHER_HERO")] = LL('☻');
 
 
-    mapOfElements[LL("DEAD_HERO")] = LL('X');                               
+    mapOfElements[LL("DEAD_HERO")] = LL('X');
 
         // Long name.
 
@@ -62,7 +62,7 @@ ElementMap Element::initialiseElements() {
 
         // Short name.
 
-    mapOfElements[LL("G")] = LL('$');                                       
+    mapOfElements[LL("G")] = LL('$');
 
     return mapOfElements;
 };

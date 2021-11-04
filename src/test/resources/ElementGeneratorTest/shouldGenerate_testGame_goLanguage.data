@@ -4,23 +4,23 @@ var Elements = map[string]rune{
 
         // Short comment.
 
-    "NONE": ' ',                                    
+    "NONE": ' ',
 
         // Long long long long long long long long long long long longl
         // ong long long long long long long long long long comment.
 
-    "WALL": '☼',                                    
+    "WALL": '☼',
 
         // Another short comment.
 
-    "HERO": '☺',                                    
+    "HERO": '☺',
 
         // One more time.
 
-    "OTHER_HERO": '☻',                              
+    "OTHER_HERO": '☻',
 
 
-    "DEAD_HERO": 'X',                               
+    "DEAD_HERO": 'X',
 
         // Long name.
 
@@ -28,5 +28,5 @@ var Elements = map[string]rune{
 
         // Short name.
 
-    "G": '$',                                       
+    "G": '$',
 }

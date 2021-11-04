@@ -97,9 +97,7 @@ public class ElementGenerator {
 
             String line = lines.get(index);
             middle.append('\n')
-                    .append(line)
-                    .append(rightPad("", maxLength - line.length()))
-                    .append('\n');
+                    .append(line);
         }
 
         String footer = template.footer();

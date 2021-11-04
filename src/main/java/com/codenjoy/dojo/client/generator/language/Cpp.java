@@ -69,7 +69,7 @@ public class Cpp implements Template {
 
     @Override
     public String line() {
-        return "    mapOfElements[LL(\"%s\")] = LL('%s');";
+        return "    mapOfElements[LL(\"%s\")] = LL('%s');\n";
     }
 
     @Override

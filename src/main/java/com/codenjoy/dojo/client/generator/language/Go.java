@@ -35,7 +35,7 @@ public class Go implements Template {
 
     @Override
     public String line() {
-        return "    \"%s\": '%s',";
+        return "    \"%s\": '%s',\n";
     }
 
     @Override
