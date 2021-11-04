@@ -26,6 +26,7 @@ import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -57,8 +58,8 @@ public class ElementGenerator {
                                     .map(el -> format(template.line(), el.name(), el.ch()))
                                     .collect(toList());
 
-                    List<String> infos = Arrays.stream(elements)
-                            .map(el -> template.comment() + el.info() + "\n")
+                    List<List<String>> infos = Arrays.stream(elements)
+                            .map(el -> splitLength(el.info(), 60))
                             .collect(toList());
 
                     int maxLength = lines.stream()
@@ -70,8 +71,17 @@ public class ElementGenerator {
                     for (int index = 0; index < lines.size(); index++) {
                         String line = lines.get(index);
                         middle.append(line)
-                                .append(rightPad("", maxLength - line.length()))
-                                .append(infos.get(index));
+                                .append(rightPad("", maxLength - line.length()));
+
+                        List<String> comments = infos.get(index);
+                        middle.append(template.comment())
+                                .append(comments.remove(0))
+                                .append('\n');
+                        comments.forEach(comment ->
+                                middle.append(rightPad("", maxLength))
+                                        .append(template.comment())
+                                        .append(comment)
+                                        .append('\n'));
                     }
 
                     String footer = template.footer();
@@ -84,5 +94,15 @@ public class ElementGenerator {
             default:
                 throw new UnsupportedOperationException("Unknown language:" + language);
         }
+    }
+
+    private List<String> splitLength(String text, int length) {
+        List<String> strings = new LinkedList<>();
+        int index = 0;
+        while (index < text.length()) {
+            strings.add(text.substring(index, Math.min(index + length, text.length())));
+            index += length;
+        }
+        return strings;
     }
 }
