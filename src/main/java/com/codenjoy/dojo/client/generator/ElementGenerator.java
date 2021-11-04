@@ -23,6 +23,7 @@ package com.codenjoy.dojo.client.generator;
  */
 
 import com.codenjoy.dojo.client.generator.language.Go;
+import com.codenjoy.dojo.games.sample.Element;
 import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
 
@@ -46,8 +47,9 @@ public class ElementGenerator {
 
     @SneakyThrows
     private CharElement[] elements(String game) {
-        return (CharElement[]) getClass().getClassLoader().loadClass(
-                        format("com.codenjoy.dojo.games.%s.Element", game))
+        String className = Element.class.getCanonicalName().replace("sample", game);
+
+        return (CharElement[]) getClass().getClassLoader().loadClass(className)
                 .getEnumConstants();
     }
 
