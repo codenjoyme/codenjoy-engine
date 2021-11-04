@@ -54,4 +54,60 @@ public class ElementGeneratorTest {
                 "}\n", JsonUtils.clean(actual));
     }
 
+    @Test
+    public void shouldGenerate_cpp_sample() {
+        String actual = new ElementGenerator().generate("test", "cpp");
+
+        assertEquals("//include 'Element.h'\n" +
+                "\n" +
+                "Element::Element(Char el) {\n" +
+                "    elem.first = valueOf(el);\n" +
+                "    elem.second = el;\n" +
+                "}\n" +
+                "\n" +
+                "Element::Element(String name) {\n" +
+                "    elem.second = Elements.at(name);\n" +
+                "    elem.first = name;\n" +
+                "}\n" +
+                "\n" +
+                "Char Element::ch() {\n" +
+                "    return elem.second;\n" +
+                "}\n" +
+                "\n" +
+                "String Element::name() {\n" +
+                "    return elem.first;\n" +
+                "}\n" +
+                "\n" +
+                "Char Element::getChar() const {\n" +
+                "    return elem.second;\n" +
+                "}\n" +
+                "\n" +
+                "String Element::valueOf(Char ch) const {\n" +
+                "    for (auto i : Elements) {\n" +
+                "        if (i.second == ch) return i.first;\n" +
+                "    }\n" +
+                "    throw std::invalid_argument('Element::valueOf(Char ch): No such Element for ' + ch);\n" +
+                "}\n" +
+                "\n" +
+                "bool Element::operator==(const Element& el) const {\n" +
+                "    return elem == el.elem;\n" +
+                "}\n" +
+                "\n" +
+                "ElementMap Element::initialiseElements() {\n" +
+                "    ElementMap mapOfElements;\n" +
+                "    mapOfElements[LL('NONE')] = LL(' ');                                       // Short comment.\n" +
+                "    mapOfElements[LL('WALL')] = LL('☼');                                       // Long long long long long long long long long long long longl\n" +
+                "                                                                               // ong long long long long long long long long long comment.\n" +
+                "    mapOfElements[LL('HERO')] = LL('☺');                                       // Another short comment.\n" +
+                "    mapOfElements[LL('OTHER_HERO')] = LL('☻');                                 // One more time.\n" +
+                "    mapOfElements[LL('DEAD_HERO')] = LL('X');                                  \n" +
+                "    mapOfElements[LL('OTHER_DEAD_HERO_LONG_LONG_LONG_LONG_LONG')] = LL('Y');   // Long name.\n" +
+                "    mapOfElements[LL('G')] = LL('$');                                          // Short name.\n" +
+                "\n" +
+                "    return mapOfElements;\n" +
+                "};\n" +
+                "\n" +
+                "const ElementMap Element::Elements = Element::initialiseElements();\n", JsonUtils.clean(actual));
+    }
+
 }

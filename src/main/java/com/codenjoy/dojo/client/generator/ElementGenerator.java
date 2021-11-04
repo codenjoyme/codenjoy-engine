@@ -22,6 +22,7 @@ package com.codenjoy.dojo.client.generator;
  * #L%
  */
 
+import com.codenjoy.dojo.client.generator.language.Cpp;
 import com.codenjoy.dojo.client.generator.language.Go;
 import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.SneakyThrows;
@@ -59,6 +60,8 @@ public class ElementGenerator {
         switch (language) {
             case "go" :
                 return new Go();
+            case "cpp" :
+                return new Cpp();
             default:
                 throw new UnsupportedOperationException("Unknown language:" + language);
         }
