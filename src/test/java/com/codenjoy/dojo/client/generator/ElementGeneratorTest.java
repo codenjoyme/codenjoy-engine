@@ -89,6 +89,16 @@ public class ElementGeneratorTest {
         assertEquals(new ElementGenerator("mollymage", "java").generate());
     }
 
+    @Test
+    public void shouldGenerate_cliffordGame_markdownLanguage() {
+        assertEquals(new ElementGenerator("clifford", "md").generate());
+    }
+
+    @Test
+    public void shouldGenerate_cliffordGame_javaLanguage() {
+        assertEquals(new ElementGenerator("clifford", "java").generate());
+    }
+
     private void assertEquals(String actual) {
         TestUtils.assertSmokeFile(this.getClass().getSimpleName()
                 + "/" + test.getMethodName() +  ".data",
