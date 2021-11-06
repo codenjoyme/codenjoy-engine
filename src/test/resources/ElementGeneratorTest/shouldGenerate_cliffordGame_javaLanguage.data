@@ -83,14 +83,6 @@ public enum Element implements CharElement {
 
     HERO_DIE('Ѡ'),
 
-        // Your hero shoots to the left at his feet.
-
-    HERO_CRACK_LEFT('Я'),
-
-        // Your hero shoots to the right at his feet.
-
-    HERO_CRACK_RIGHT('R'),
-
         // Your hero is climbing the ladder.
 
     HERO_LADDER('Y'),
@@ -107,30 +99,18 @@ public enum Element implements CharElement {
 
     HERO_FALL(']'),
 
-        // Your hero is crawling along the pipe to the left.
+        // Your hero is crawling along the pipe.
 
-    HERO_PIPE_LEFT('{'),
-
-        // Your hero is crawling along the pipe to the right.
-
-    HERO_PIPE_RIGHT('}'),
+    HERO_PIPE('{'),
 
         // Your hero in the pit.
 
     HERO_PIT('⍃'),
 
-        // Your shadow-heroe is dead. In the next tick, it will disappe
-        // ar and appear in a new location.
+        // Your shadow-hero is dead. In the next tick, it will disappea
+        // r and appear in a new location.
 
     HERO_MASK_DIE('x'),
-
-        // Your shadow-hero shoots to the left at his feet.
-
-    HERO_MASK_CRACK_LEFT('⊰'),
-
-        // Your shadow-hero shoots to the right at his feet.
-
-    HERO_MASK_CRACK_RIGHT('⊱'),
 
         // Your shadow-hero is climbing the ladder.
 
@@ -148,13 +128,9 @@ public enum Element implements CharElement {
 
     HERO_MASK_FALL('⊅'),
 
-        // Your shadow-hero is crawling along the pipe to the left.
+        // Your shadow-hero is crawling along the pipe.
 
-    HERO_MASK_PIPE_LEFT('⋜'),
-
-        // Your shadow-hero is crawling along the pipe to the right.
-
-    HERO_MASK_PIPE_RIGHT('⋝'),
+    HERO_MASK_PIPE('⋜'),
 
         // Your shadow-hero in the pit.
 
@@ -164,14 +140,6 @@ public enum Element implements CharElement {
         // appear in a new location.
 
     OTHER_HERO_DIE('Z'),
-
-        // Other hero shoots to the left at his feet.
-
-    OTHER_HERO_CRACK_LEFT('⌋'),
-
-        // Other hero shoots to the right at his feet.
-
-    OTHER_HERO_CRACK_RIGHT('⌊'),
 
         // Other hero is climbing the ladder.
 
@@ -189,13 +157,9 @@ public enum Element implements CharElement {
 
     OTHER_HERO_FALL('⊐'),
 
-        // Other hero is crawling along the pipe to the left.
+        // Other hero is crawling along the pipe.
 
-    OTHER_HERO_PIPE_LEFT('Э'),
-
-        // Other hero is crawling along the pipe to the right.
-
-    OTHER_HERO_PIPE_RIGHT('Є'),
+    OTHER_HERO_PIPE('Э'),
 
         // Other hero in the pit.
 
@@ -206,37 +170,25 @@ public enum Element implements CharElement {
 
     OTHER_HERO_MASK_DIE('⋈'),
 
-        // Other shadow-hero shoots to the left at his feet.
-
-    OTHER_HERO_MASK_CRACK_LEFT('⋰'),
-
-        // Other shadow-hero shoots to the right at his feet.
-
-    OTHER_HERO_MASK_CRACK_RIGHT('⋱'),
-
         // Other shadow-hero is climbing the ladder.
 
-    OTHER_HERO_MASK_LEFT('⋊'),
+    OTHER_HERO_MASK_LADDER('⋕'),
 
         // Other shadow-hero runs to the left.
 
-    OTHER_HERO_MASK_RIGHT('⋉'),
+    OTHER_HERO_MASK_LEFT('⋊'),
 
         // Other shadow-hero runs to the right.
 
-    OTHER_HERO_MASK_LADDER('⋕'),
+    OTHER_HERO_MASK_RIGHT('⋉'),
 
         // Other shadow-hero is falling.
 
     OTHER_HERO_MASK_FALL('⋣'),
 
-        // Other shadow-hero is crawling along the pipe to the left.
+        // Other shadow-hero is crawling along the pipe.
 
-    OTHER_HERO_MASK_PIPE_LEFT('⊣'),
-
-        // Other shadow-hero is crawling along the pipe to the right.
-
-    OTHER_HERO_MASK_PIPE_RIGHT('⊢'),
+    OTHER_HERO_MASK_PIPE('⊣'),
 
         // Other shadow-hero in the pit.
 
@@ -246,14 +198,6 @@ public enum Element implements CharElement {
         // appear in a new location.
 
     ENEMY_HERO_DIE('Ž'),
-
-        // Enemy hero shoots to the left at his feet.
-
-    ENEMY_HERO_CRACK_LEFT('⟧'),
-
-        // Enemy hero shoots to the right at his feet.
-
-    ENEMY_HERO_CRACK_RIGHT('⟦'),
 
         // Enemy hero is climbing the ladder.
 
@@ -271,13 +215,9 @@ public enum Element implements CharElement {
 
     ENEMY_HERO_FALL('⋥'),
 
-        // Enemy hero is crawling along the pipe to the left.
+        // Enemy hero is crawling along the pipe.
 
-    ENEMY_HERO_PIPE_LEFT('Ǯ'),
-
-        // Enemy hero is crawling along the pipe to the right.
-
-    ENEMY_HERO_PIPE_RIGHT('Ě'),
+    ENEMY_HERO_PIPE('Ǯ'),
 
         // Enemy hero in the pit.
 
@@ -288,37 +228,25 @@ public enum Element implements CharElement {
 
     ENEMY_HERO_MASK_DIE('⧓'),
 
-        // Enemy shadow-hero shoots to the left at his feet.
-
-    ENEMY_HERO_MASK_CRACK_LEFT('⇢'),
-
-        // Enemy shadow-hero shoots to the right at his feet.
-
-    ENEMY_HERO_MASK_CRACK_RIGHT('⇠'),
-
         // Enemy shadow-hero is climbing the ladder.
 
-    ENEMY_HERO_MASK_LEFT('⧒'),
+    ENEMY_HERO_MASK_LADDER('≠'),
 
         // Enemy shadow-hero runs to the left.
 
-    ENEMY_HERO_MASK_RIGHT('⧑'),
+    ENEMY_HERO_MASK_LEFT('⧒'),
 
         // Enemy shadow-hero runs to the right.
 
-    ENEMY_HERO_MASK_LADDER('≠'),
+    ENEMY_HERO_MASK_RIGHT('⧑'),
 
         // Enemy shadow-hero is falling.
 
     ENEMY_HERO_MASK_FALL('⌫'),
 
-        // Enemy shadow-hero is crawling along the pipe to the left.
+        // Enemy shadow-hero is crawling along the pipe.
 
-    ENEMY_HERO_MASK_PIPE_LEFT('❵'),
-
-        // Enemy shadow-hero is crawling along the pipe to the right.
-
-    ENEMY_HERO_MASK_PIPE_RIGHT('❴'),
+    ENEMY_HERO_MASK_PIPE('❵'),
 
         // Enemy shadow-hero in the pit.
 
@@ -342,13 +270,9 @@ public enum Element implements CharElement {
 
     ROBBER_FALL('‹'),
 
-        // Robber is crawling along the pipe to the left.
+        // Robber is crawling along the pipe.
 
-    ROBBER_PIPE_LEFT('<'),
-
-        // Robber is crawling along the pipe to the right.
-
-    ROBBER_PIPE_RIGHT('>'),
+    ROBBER_PIPE('<'),
 
         // Robber in the pit.
 
