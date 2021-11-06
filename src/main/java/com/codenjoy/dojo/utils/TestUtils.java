@@ -24,7 +24,6 @@ package com.codenjoy.dojo.utils;
 
 
 import com.codenjoy.dojo.client.AbstractBoard;
-import com.codenjoy.dojo.client.local.LocalGameRunner;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
@@ -36,13 +35,7 @@ import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.settings.Settings;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -51,18 +44,11 @@ import java.util.function.Supplier;
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 
 @UtilityClass
 public class TestUtils {
 
     public static final int COUNT_NUMBERS = 3;
-
-    public static final String SOURCE_FOLDER = "src/test/resources/";
-    public static final String TARGET_FOLDER = "target/";
-
-    // если потребуется дополнительна проверка финального результата, использу это чудо
-    public static Consumer<String> recheck;
 
     public static String injectN(String expected) {
         int size = (int) Math.sqrt(expected.length());
@@ -243,75 +229,4 @@ public class TestUtils {
         return board.boardAsString();
     }
 
-    /**
-     * проверяем порционно, потому что в 'mvn test'
-     * не видно на больших данных, где именно отличие и это проблема в отладке
-     * @param allFirst true - если проверяем все сразу, false - если сперва порционно тик за тиком
-     * @param expectedAll что должно быть
-     * @param actualAll что реально пришло
-     */
-    public static void assertSmoke(boolean allFirst, String expectedAll, String actualAll) {
-        String[] expected = expectedAll.split(LocalGameRunner.SEP);
-        String[] actual = actualAll.split(LocalGameRunner.SEP);
-
-        if (allFirst) {
-            assertEquals(expectedAll, actualAll);
-        }
-
-        for (int i = 0; i < Math.min(expected.length, actual.length); i++) {
-            assertEquals(expected[i], actual[i]);
-        }
-        assertEquals(expected.length, actual.length);
-
-        if (!allFirst) {
-            assertEquals(expectedAll, actualAll);
-        }
-    }
-
-    private static void assertEquals(Object o1, Object o2) {
-        testing().assertEquals(o1, o2);
-    }
-
-    public static void assertSmokeFile(String fileName, List<String> messages) {
-        String actual = String.join("\n", messages);
-        String expected;
-        File expectedFile = new File(SOURCE_FOLDER + fileName);
-        File actualFile = new File(TARGET_FOLDER + fileName);
-        System.out.println("Expected data is here: " + expectedFile.getAbsolutePath());
-        System.out.println("Actual data is here:   " + actualFile.getAbsolutePath());
-        if (expectedFile.exists()) {
-            expected = load(expectedFile);
-            saveToFile(actualFile, actual);
-        } else {
-            expected = StringUtils.EMPTY;
-            saveToFile(expectedFile, actual);
-        }
-
-        TestUtils.assertSmoke(true, expected, actual);
-        if (recheck != null) {
-            recheck.accept(actual);
-        }
-    }
-
-    public static void saveToFile(File actualFile, String data) {
-        File folder = actualFile.getParentFile();
-        if (!folder.exists()) {
-            folder.mkdirs();
-        }
-
-        try (FileWriter writer = new FileWriter(actualFile.getAbsolutePath(), StandardCharsets.UTF_8)) {
-            writer.write(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String load(File file) {
-        try {
-            return Files.readString(file.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return StringUtils.EMPTY;
-        }
-    }
 }

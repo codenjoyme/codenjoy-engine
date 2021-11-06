@@ -96,7 +96,7 @@ public class Smoke {
         runner.run();
 
         // then
-        TestUtils.assertSmokeFile(fileName, messages);
+        SmokeUtils.assertSmokeFile(fileName, messages);
     }
 
     public Dice dice(long max, long count) {
