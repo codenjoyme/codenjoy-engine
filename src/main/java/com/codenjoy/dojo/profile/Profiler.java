@@ -4,7 +4,7 @@ package com.codenjoy.dojo.profile;
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 Codenjoy
+ * Copyright (C) 2021 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -24,21 +24,23 @@ package com.codenjoy.dojo.profile;
 
 
 import lombok.Getter;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.io.PrintStream;
+import java.util.*;
+import java.util.function.Supplier;
 
-import static com.codenjoy.dojo.client.Utils.split;
+import static java.util.stream.Collectors.joining;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 
 @Slf4j
 public class Profiler {
 
+    public static PrintStream OUT = System.out;
     public static boolean PRINT_SOUT = false;
 
     @Getter
-    @ToString
     public static class AverageTime {
 
         private int count;
@@ -50,10 +52,21 @@ public class Profiler {
             count++;
             average = ((double)time)/count;
         }
+
+        @Override
+        public String toString() {
+            return String.format("AVG{count:%s, time:%s, average: %.2f}",
+                    leftPad(String.valueOf(count), 7),
+                    leftPad(String.valueOf(time), 7),
+                    average);
+        }
     }
 
-    private Map<String, AverageTime> phasesAll = new ConcurrentHashMap<>();
-    private Map<String, Long> phases = new ConcurrentHashMap<String, Long>();
+    protected Supplier<Long> getTime =
+            () -> Calendar.getInstance().getTimeInMillis();
+
+    private Map<String, AverageTime> phasesAll = Collections.synchronizedMap(new LinkedHashMap<>());
+    private Map<String, Long> phases = Collections.synchronizedMap(new LinkedHashMap<>());
     private long time;
 
     public synchronized void start() {
@@ -61,7 +74,7 @@ public class Profiler {
     }
 
     private long now() {
-        return System.currentTimeMillis();
+        return getTime.get();
     }
 
     public synchronized void done(String phase) {
@@ -79,7 +92,16 @@ public class Profiler {
 
     @Override
     public String toString() {
-        return split(phasesAll, "), \n");
+        int maxLength = phasesAll.keySet().stream()
+                .map(String::length)
+                .max(Comparator.naturalOrder())
+                .orElse(0);
+
+        return phasesAll.entrySet().stream()
+                .map(entry ->
+                        StringUtils.rightPad(entry.getKey(), maxLength, " ") + " = " +
+                        entry.getValue().toString())
+                .collect(joining("\n"));
     }
 
     public void print() {
@@ -95,7 +117,7 @@ public class Profiler {
 
     public void debug(String message) {
         if (PRINT_SOUT) {
-            System.out.println(message);
+            OUT.println(message);
         } else {
             log.debug(message);
         }
