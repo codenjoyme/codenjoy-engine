@@ -44,6 +44,7 @@ public class Profiler {
     private long time;
     private boolean cycle = false;
     private List<String> appendedInCycle = new CopyOnWriteArrayList<>();
+    private String cyclePreffix;
 
     public synchronized void start() {
         time = now();
@@ -53,7 +54,8 @@ public class Profiler {
         return getTime.get();
     }
 
-    public void beginCycle() {
+    public void beginCycle(String preffix) {
+        cyclePreffix = preffix;
         cycle = true;
     }
 
@@ -64,6 +66,10 @@ public class Profiler {
 
     public synchronized void done(String phase) {
         long delta = now() - time;
+
+        if (cycle) {
+            phase = cyclePreffix + "." + phase;
+        }
 
         boolean append = cycle;
         if (!phases.containsKey(phase)) {

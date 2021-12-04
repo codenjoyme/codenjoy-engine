@@ -138,7 +138,7 @@ public class ProfilerTest {
         // when
         P.start();
 
-        P.beginCycle();
+        P.beginCycle("preffix");
 
         tick();
         P.done("phase1");
@@ -157,8 +157,8 @@ public class ProfilerTest {
         // then
         P.print();
         assertOutput(
-                "phase1 = AVG{count:      1, time:   4000, average: 4000.00}\n" +
-                "phase2 = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "preffix.phase1 = AVG{count:      1, time:   4000, average: 4000.00}\n" +
+                "preffix.phase2 = AVG{count:      1, time:   2000, average: 2000.00}\n" +
                 "--------------------------------------------------\n");
     }
 
@@ -171,7 +171,7 @@ public class ProfilerTest {
         P.done("phase1");
 
         for (int outer = 0; outer < 2; outer++) {
-            P.beginCycle();
+            P.beginCycle("preffix");
             for (int inner = 0; inner < 10; inner++) {
                 tick();
                 P.done("phase2");
@@ -185,8 +185,9 @@ public class ProfilerTest {
         // then
         P.print();
         assertOutput(
-                "phase1 = AVG{count:      3, time:  21000, average: 7000.00}\n" +
-                "phase2 = AVG{count:      2, time:  20000, average: 10000.00}\n" +
+                "phase1         = AVG{count:      1, time:   1000, average: 1000.00}\n" +
+                "preffix.phase2 = AVG{count:      2, time:  20000, average: 10000.00}\n" +
+                "preffix.phase1 = AVG{count:      2, time:  20000, average: 10000.00}\n" +
                 "--------------------------------------------------\n");
     }
 
@@ -198,7 +199,7 @@ public class ProfilerTest {
         tick();
         P.done("start");
 
-        P.beginCycle();
+        P.beginCycle("preffix");
         for (int outer = 0; outer < 2; outer++) {
             tick();
             P.done("before");
@@ -219,11 +220,44 @@ public class ProfilerTest {
         // then
         P.print();
         assertOutput(
-                "start  = AVG{count:      1, time:   1000, average: 1000.00}\n" +
-                "before = AVG{count:      1, time:   2000, average: 2000.00}\n" +
-                "phase2 = AVG{count:      1, time:  20000, average: 20000.00}\n" +
-                "phase1 = AVG{count:      1, time:  20000, average: 20000.00}\n" +
-                "after  = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "start          = AVG{count:      1, time:   1000, average: 1000.00}\n" +
+                "preffix.before = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "preffix.phase2 = AVG{count:      1, time:  20000, average: 20000.00}\n" +
+                "preffix.phase1 = AVG{count:      1, time:  20000, average: 20000.00}\n" +
+                "preffix.after  = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "--------------------------------------------------\n");
+    }
+
+    @Test
+    public void testRepeatOneInterval_appendInCycle_case3() {
+        // when
+        P.start();
+
+        tick();
+        P.done("start");
+
+        for (int outer = 0; outer < 2; outer++) {
+            P.beginCycle("preffix" + (outer + 1));
+
+            for (int inner = 0; inner < 10; inner++) {
+                tick();
+                P.done("phase2");
+
+                tick();
+                P.done("phase1");
+            }
+
+            P.endCycle();
+        }
+
+        // then
+        P.print();
+        assertOutput(
+                "start           = AVG{count:      1, time:   1000, average: 1000.00}\n" +
+                "preffix1.phase2 = AVG{count:      1, time:  10000, average: 10000.00}\n" +
+                "preffix1.phase1 = AVG{count:      1, time:  10000, average: 10000.00}\n" +
+                "preffix2.phase2 = AVG{count:      1, time:  10000, average: 10000.00}\n" +
+                "preffix2.phase1 = AVG{count:      1, time:  10000, average: 10000.00}\n" +
                 "--------------------------------------------------\n");
     }
 

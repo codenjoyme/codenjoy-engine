@@ -44,8 +44,8 @@ public class P {
         p.done(phase);
     }
 
-    public static synchronized void beginCycle() {
-        p.beginCycle();
+    public static synchronized void beginCycle(String preffix) {
+        p.beginCycle(preffix);
     }
 
     public static synchronized void endCycle() {
