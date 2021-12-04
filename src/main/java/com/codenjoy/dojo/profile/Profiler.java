@@ -53,10 +53,6 @@ public class Profiler {
         return getTime.get();
     }
 
-    public synchronized void done(String phase) {
-        done(phase, cycle);
-    }
-
     public void beginCycle() {
         cycle = true;
     }
@@ -66,12 +62,12 @@ public class Profiler {
         appendedInCycle.clear();
     }
 
-    private void done(String phase, boolean append) {
+    public synchronized void done(String phase) {
         long delta = now() - time;
 
+        boolean append = cycle;
         if (!phases.containsKey(phase)) {
             phases.put(phase, new AverageTime());
-            append = false;
         }
         if (cycle) {
             if (!appendedInCycle.contains(phase)) {

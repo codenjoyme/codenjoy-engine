@@ -191,6 +191,43 @@ public class ProfilerTest {
     }
 
     @Test
+    public void testRepeatOneInterval_appendInCycle_case2() {
+        // when
+        P.start();
+
+        tick();
+        P.done("start");
+
+        P.beginCycle();
+        for (int outer = 0; outer < 2; outer++) {
+            tick();
+            P.done("before");
+
+            for (int inner = 0; inner < 10; inner++) {
+                tick();
+                P.done("phase2");
+
+                tick();
+                P.done("phase1");
+            }
+
+            tick();
+            P.done("after");
+        }
+        P.endCycle();
+
+        // then
+        P.print();
+        assertOutput(
+                "start  = AVG{count:      1, time:   1000, average: 1000.00}\n" +
+                "before = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "phase2 = AVG{count:      1, time:  20000, average: 20000.00}\n" +
+                "phase1 = AVG{count:      1, time:  20000, average: 20000.00}\n" +
+                "after  = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "--------------------------------------------------\n");
+    }
+
+    @Test
     public void testPadPhaseName() {
         // when
         P.start();
