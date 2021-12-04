@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 
 public class LocalWSGameServer {
 
-    private static final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    private static final SimpleDateFormat DAY_TIME_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
     private final LocalWSGameRunner runner;
 
@@ -92,7 +92,7 @@ public class LocalWSGameServer {
         }
 
         return message -> {
-            String time = format.format(Calendar.getInstance().getTime());
+            String time = DAY_TIME_FORMATTER.format(Calendar.getInstance().getTime());
 
             if (logTime) {
                 message = Arrays.stream(message.split("\n"))
