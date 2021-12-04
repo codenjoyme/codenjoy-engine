@@ -67,8 +67,7 @@ public class Profiler {
     protected Supplier<Long> getTime =
             () -> Calendar.getInstance().getTimeInMillis();
 
-    private Map<String, AverageTime> phasesAll = Collections.synchronizedMap(new LinkedHashMap<>());
-    private Map<String, Long> phases = Collections.synchronizedMap(new LinkedHashMap<>());
+    private Map<String, AverageTime> phases = Collections.synchronizedMap(new LinkedHashMap<>());
     private long time;
 
     public synchronized void start() {
@@ -90,24 +89,23 @@ public class Profiler {
     private void done(String phase, boolean append) {
         long delta = now() - time;
 
-        phases.put(phase, delta);
-
-        if (!phasesAll.containsKey(phase)) {
-            phasesAll.put(phase, new AverageTime());
+        if (!phases.containsKey(phase)) {
+            phases.put(phase, new AverageTime());
+            append = false;
         }
-        phasesAll.get(phase).add(delta, append);
+        phases.get(phase).add(delta, append);
 
         start();
     }
 
     @Override
     public String toString() {
-        int maxLength = phasesAll.keySet().stream()
+        int maxLength = phases.keySet().stream()
                 .map(String::length)
                 .max(Comparator.naturalOrder())
                 .orElse(0);
 
-        return phasesAll.entrySet().stream()
+        return phases.entrySet().stream()
                 .map(entry ->
                         StringUtils.rightPad(entry.getKey(), maxLength, " ") + " = " +
                         entry.getValue().toString())
@@ -133,14 +131,6 @@ public class Profiler {
         }
     }
 
-    public void print(String phase) {
-        if (isDebugEnabled()) {
-            debug("--------------------------------------------------");
-            debug(phase + " = " + phases.get(phase));
-            debug("--------------------------------------------------");
-        }
-    }
-
     public String get(String phase) {
         AverageTime info = info(phase);
         if (info == null) {
@@ -150,9 +140,9 @@ public class Profiler {
     }
 
     public AverageTime info(String phase) {
-        if (!phasesAll.containsKey(phase)) {
+        if (!phases.containsKey(phase)) {
             return null;
         }
-        return phasesAll.get(phase);
+        return phases.get(phase);
     }
 }
