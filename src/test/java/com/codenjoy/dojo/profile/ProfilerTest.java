@@ -65,15 +65,12 @@ public class ProfilerTest {
         P.start();
 
         tick();
-
         P.done("phase1");
 
         tick();
-
         P.done("phase2");
 
         tick();
-
         P.done("phase3");
 
         // then
@@ -91,18 +88,15 @@ public class ProfilerTest {
         P.start();
 
         tick();
-
         P.done("phase1");
 
         tick();
         tick();
-
         P.done("phase2");
 
         tick();
         tick();
         tick();
-
         P.done("phase3");
 
         // then
@@ -120,18 +114,15 @@ public class ProfilerTest {
         P.start();
 
         tick();
-
         P.done("phase1");
 
         tick();
         tick();
-
         P.done("phase2");
 
         tick();
         tick();
         tick();
-
         P.done("phase1");
 
         // then
@@ -148,18 +139,15 @@ public class ProfilerTest {
         P.start();
 
         tick();
-
         P.done("phase1");
 
         tick();
         tick();
-
         P.done("phase2");
 
         tick();
         tick();
         tick();
-
         P.doneAppend("phase1");
 
         // then
@@ -176,18 +164,15 @@ public class ProfilerTest {
         P.start();
 
         tick();
-
         P.doneAppend("phase1");
 
         tick();
         tick();
-
         P.doneAppend("phase2");
 
         tick();
         tick();
         tick();
-
         P.doneAppend("phase1");
 
         // then
@@ -199,20 +184,46 @@ public class ProfilerTest {
     }
 
     @Test
+    public void testRepeatOneInterval_appendInCycle() {
+        // when
+        P.start();
+
+        tick();
+        P.done("phase1");
+
+        for (int outer = 0; outer < 2; outer++) {
+            P.done("phase1");
+            P.done("phase2");
+
+            for (int inner = 0; inner < 10; inner++) {
+                tick();
+                P.doneAppend("phase2");
+
+                tick();
+                P.doneAppend("phase1");
+            }
+        }
+
+        // then
+        P.print();
+        assertOutput(
+                "phase1 = AVG{count:      3, time:  21000, average: 7000.00}\n" +
+                "phase2 = AVG{count:      2, time:  20000, average: 10000.00}\n" +
+                "--------------------------------------------------\n");
+    }
+
+    @Test
     public void testPadPhaseName() {
         // when
         P.start();
 
         tick();
-
         P.done("1");
 
         tick();
-
         P.done("phase2");
 
         tick();
-
         P.done("phase3-long-string");
 
         // then
@@ -230,7 +241,6 @@ public class ProfilerTest {
         P.start();
 
         tick();
-
         P.done("phase1");
 
         // then
