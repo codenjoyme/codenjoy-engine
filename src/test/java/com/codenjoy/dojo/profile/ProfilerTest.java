@@ -138,6 +138,8 @@ public class ProfilerTest {
         // when
         P.start();
 
+        P.beginCycle();
+
         tick();
         P.done("phase1");
 
@@ -148,32 +150,9 @@ public class ProfilerTest {
         tick();
         tick();
         tick();
-        P.doneAppend("phase1");
+        P.done("phase1");
 
-        // then
-        P.print();
-        assertOutput(
-                "phase1 = AVG{count:      1, time:   4000, average: 4000.00}\n" +
-                "phase2 = AVG{count:      1, time:   2000, average: 2000.00}\n" +
-                "--------------------------------------------------\n");
-    }
-
-    @Test
-    public void testRepeatOneInterval_appendOnly() {
-        // when
-        P.start();
-
-        tick();
-        P.doneAppend("phase1");
-
-        tick();
-        tick();
-        P.doneAppend("phase2");
-
-        tick();
-        tick();
-        tick();
-        P.doneAppend("phase1");
+        P.endCycle();
 
         // then
         P.print();
@@ -192,16 +171,15 @@ public class ProfilerTest {
         P.done("phase1");
 
         for (int outer = 0; outer < 2; outer++) {
-            P.done("phase1");
-            P.done("phase2");
-
+            P.beginCycle();
             for (int inner = 0; inner < 10; inner++) {
                 tick();
-                P.doneAppend("phase2");
+                P.done("phase2");
 
                 tick();
-                P.doneAppend("phase1");
+                P.done("phase1");
             }
+            P.endCycle();
         }
 
         // then

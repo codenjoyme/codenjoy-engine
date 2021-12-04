@@ -22,37 +22,30 @@ package com.codenjoy.dojo.profile;
  * #L%
  */
 
-public class P {
+import lombok.Getter;
 
-    protected static Profiler p;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 
-    static {
-        P.reset();
+@Getter
+public class AverageTime {
+
+    private int count;
+    private long time;
+    private double average;
+
+    public void add(long delta, boolean append) {
+        time += delta;
+        if (!append) {
+            count++;
+        }
+        average = ((double) time) / count;
     }
 
-    public static synchronized void reset() {
-        p = new Profiler(){{
-            PRINT_SOUT = true;
-        }};
-    }
-
-    public static synchronized void start() {
-        p.start();
-    }
-
-    public static synchronized void done(String phase) {
-        p.done(phase);
-    }
-
-    public static synchronized void beginCycle() {
-        p.beginCycle();
-    }
-
-    public static synchronized void endCycle() {
-        p.endCycle();
-    }
-
-    public static synchronized void print() {
-        p.print();
+    @Override
+    public String toString() {
+        return String.format("AVG{count:%s, time:%s, average: %.2f}",
+                leftPad(String.valueOf(count), 7),
+                leftPad(String.valueOf(time), 7),
+                average);
     }
 }

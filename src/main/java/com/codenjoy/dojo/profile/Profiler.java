@@ -23,52 +23,27 @@ package com.codenjoy.dojo.profile;
  */
 
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.PrintStream;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
 
 import static java.util.stream.Collectors.joining;
-import static org.apache.commons.lang3.StringUtils.leftPad;
 
 @Slf4j
 public class Profiler {
 
     public static PrintStream OUT = System.out;
     public static boolean PRINT_SOUT = false;
-
-    @Getter
-    public static class AverageTime {
-
-        private int count;
-        private long time;
-        private double average;
-
-        public void add(long delta, boolean append) {
-            time += delta;
-            if (!append) {
-                count++;
-            }
-            average = ((double)time)/count;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("AVG{count:%s, time:%s, average: %.2f}",
-                    leftPad(String.valueOf(count), 7),
-                    leftPad(String.valueOf(time), 7),
-                    average);
-        }
-    }
-
     protected Supplier<Long> getTime =
             () -> Calendar.getInstance().getTimeInMillis();
-
     private Map<String, AverageTime> phases = Collections.synchronizedMap(new LinkedHashMap<>());
     private long time;
+    private boolean cycle = false;
+    private List<String> appendedInCycle = new CopyOnWriteArrayList<>();
 
     public synchronized void start() {
         time = now();
@@ -79,11 +54,16 @@ public class Profiler {
     }
 
     public synchronized void done(String phase) {
-        done(phase, false);
+        done(phase, cycle);
     }
 
-    public synchronized void doneAppend(String phase) {
-        done(phase, true);
+    public void beginCycle() {
+        cycle = true;
+    }
+
+    public void endCycle() {
+        cycle = false;
+        appendedInCycle.clear();
     }
 
     private void done(String phase, boolean append) {
@@ -92,6 +72,12 @@ public class Profiler {
         if (!phases.containsKey(phase)) {
             phases.put(phase, new AverageTime());
             append = false;
+        }
+        if (cycle) {
+            if (!appendedInCycle.contains(phase)) {
+                append = false;
+            }
+            appendedInCycle.add(phase);
         }
         phases.get(phase).add(delta, append);
 
