@@ -47,9 +47,11 @@ public class Profiler {
         private long time;
         private double average;
 
-        public void add(long delta) {
+        public void add(long delta, boolean append) {
             time += delta;
-            count++;
+            if (!append) {
+                count++;
+            }
             average = ((double)time)/count;
         }
 
@@ -78,6 +80,14 @@ public class Profiler {
     }
 
     public synchronized void done(String phase) {
+        done(phase, false);
+    }
+
+    public synchronized void doneAppend(String phase) {
+        done(phase, true);
+    }
+
+    private void done(String phase, boolean append) {
         long delta = now() - time;
 
         phases.put(phase, delta);
@@ -85,7 +95,7 @@ public class Profiler {
         if (!phasesAll.containsKey(phase)) {
             phasesAll.put(phase, new AverageTime());
         }
-        phasesAll.get(phase).add(delta);
+        phasesAll.get(phase).add(delta, append);
 
         start();
     }

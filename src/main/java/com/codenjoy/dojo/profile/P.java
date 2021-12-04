@@ -44,6 +44,10 @@ public class P {
         p.done(phase);
     }
 
+    public static synchronized void doneAppend(String phase) {
+        p.doneAppend(phase);
+    }
+
     public static synchronized void print() {
         p.print();
     }

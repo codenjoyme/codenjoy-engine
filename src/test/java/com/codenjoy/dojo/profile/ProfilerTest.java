@@ -143,6 +143,34 @@ public class ProfilerTest {
     }
 
     @Test
+    public void testRepeatOneInterval_append() {
+        // when
+        P.start();
+
+        tick();
+
+        P.done("phase1");
+
+        tick();
+        tick();
+
+        P.done("phase2");
+
+        tick();
+        tick();
+        tick();
+
+        P.doneAppend("phase1");
+
+        // then
+        P.print();
+        assertOutput(
+                "phase1 = AVG{count:      1, time:   4000, average: 4000.00}\n" +
+                "phase2 = AVG{count:      1, time:   2000, average: 2000.00}\n" +
+                "--------------------------------------------------\n");
+    }
+
+    @Test
     public void testPadPhaseName() {
         // when
         P.start();
