@@ -97,6 +97,21 @@ public class DebugServiceTest {
                 "org.junit:DEBUG");
     }
 
+    @Test
+    public void shouldIsWorking() {
+        // given
+        shouldCheckDefaultLoggers_debugDisabled_severalLoggers();
+
+        // then
+        assertEquals(false, service.isWorking());
+
+        // when
+        service.setDebugEnable(true);
+
+        // then
+        assertEquals(true, service.isWorking());
+    }
+
     private void assertLoggers(String expected) {
         assertEquals(expected,
                 String.join("\n", service.getLoggersLevels()));
