@@ -25,10 +25,10 @@ package com.codenjoy.dojo.services.log;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import com.google.common.collect.Lists;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -105,22 +105,36 @@ public class DebugService extends Suspendable {
     }
 
     public void setLoggersLevels(String input) {
-        setActive(false);
-
         List<String> lines = Arrays.asList(clean(input).split("\n"));
 
         lines = lines.stream()
                 .filter(this::validate)
                 .collect(toList());
 
-        filter = lines.stream()
-                .map(line -> line.split(LEVEL_SEPARATOR)[NAME])
-                .collect(toList());
-
-        for (int index = 0; index < filter.size(); index++) {
-            Level level = Level.toLevel(lines.get(index).split(LEVEL_SEPARATOR)[LEVEL]);
-            setLevel(filter.get(index), level);
+        List<String> updated = new LinkedList<>();
+        for (int index = 0; index < lines.size(); index++) {
+            String[] split = lines.get(index).split(LEVEL_SEPARATOR);
+            Level level = Level.toLevel(split[LEVEL]);
+            String name = split[NAME];
+            updated.add(name);
+            setLevel(name, level);
         }
+
+        defaultLevelForRemoved(updated);
+
+        merge(updated);
+    }
+
+    private void defaultLevelForRemoved(List<String> updated) {
+        List<String> copy = new LinkedList<>(filter);
+        copy.removeAll(updated);
+        copy.forEach(name -> setLevel(name, DEFAULT_LEVEL));
+    }
+
+    private void merge(List<String> lines) {
+        Set<String> set = new LinkedHashSet<>(filter);
+        set.addAll(lines);
+        filter = new ArrayList<>(set);
     }
 
     private boolean validate(String line) {

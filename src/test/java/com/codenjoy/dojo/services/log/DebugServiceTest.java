@@ -22,15 +22,22 @@ package com.codenjoy.dojo.services.log;
  * #L%
  */
 
+import com.codenjoy.dojo.utils.smart.SmartAssert;
+import org.junit.After;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
+import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
 
 public class DebugServiceTest {
 
     private DebugService service;
+
+    @After
+    public void after() {
+        SmartAssert.checkResult();
+    }
 
     @Test
     public void shouldCheckDefaultLoggers_debugDisabled_oneLogger() {
@@ -202,7 +209,7 @@ public class DebugServiceTest {
         service.setLoggersLevels(
                 "com.codenjoy:ERROR\n" +  // old, will update
                 "java.util:ERROR\n" +     // old, will update
-                // "org.junit:DEBUG\n" +  // exclude, will set to default INFO
+                // "org.junit:DEBUG\n" +  // skip, will set to default INFO
                 "org.mockito:ERROR");     // new, will set
 
         // then
@@ -210,6 +217,7 @@ public class DebugServiceTest {
         assertLoggers(
                 "com.codenjoy:ERROR\n" +
                 "java.util:ERROR\n" +
+                "org.junit:INFO\n" +
                 "org.mockito:ERROR");
 
         assertLevel("org.junit", "INFO");
@@ -235,9 +243,10 @@ public class DebugServiceTest {
 
         // then
         assertEquals(false, service.isWorking());
-        assertLevel("com.codenjoy", "INFO");
-        assertLevel("java.util", "INFO");
-        assertLevel("org.junit", "INFO");
+        assertLoggers(
+                "com.codenjoy:INFO\n" + // set to default, because removed in request
+                "java.util:INFO\n" +    // ...
+                "org.junit:INFO");      // ...
     }
 
     @Test
@@ -248,7 +257,8 @@ public class DebugServiceTest {
 
         // then
         assertEquals(true, service.isWorking());
-        assertLoggers("com.codenjoy:DEBUG");
+        assertLoggers(
+                "com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -257,7 +267,9 @@ public class DebugServiceTest {
 
         // then
         assertEquals(false, service.isWorking());
-        assertLoggers("org.mockito:ERROR");
+        assertLoggers(
+                "com.codenjoy:INFO\n" +   // set to default, because removed in request
+                "org.mockito:ERROR");
     }
 
     @Test
@@ -268,7 +280,8 @@ public class DebugServiceTest {
 
         // then
         assertEquals(true, service.isWorking());
-        assertLoggers("com.codenjoy:DEBUG");
+        assertLoggers(
+                "com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -277,7 +290,9 @@ public class DebugServiceTest {
 
         // then
         assertEquals(false, service.isWorking());
-        assertLoggers("org.mockito:ERROR");
+        assertLoggers(
+                "com.codenjoy:INFO\n" +  // set to default, because removed in request
+                "org.mockito:ERROR");
     }
 
     @Test
@@ -297,7 +312,9 @@ public class DebugServiceTest {
 
         // then
         assertEquals(false, service.isWorking());
-        assertLoggers("org.mockito:ERROR");
+        assertLoggers(
+                "com.codenjoy:INFO\n" +   // set to default, because removed in request
+                "org.mockito:ERROR");
     }
 
     @Test
@@ -308,7 +325,8 @@ public class DebugServiceTest {
 
         // then
         assertEquals(true, service.isWorking());
-        assertLoggers("com.codenjoy:DEBUG");
+        assertLoggers(
+                "com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -317,7 +335,9 @@ public class DebugServiceTest {
 
         // then
         assertEquals(false, service.isWorking());
-        assertLoggers("org.mockito:ERROR");
+        assertLoggers(
+                "com.codenjoy:INFO\n" +  // set to default, because removed in request
+                "org.mockito:ERROR");
     }
 
     private void assertLevel(String name, String expectedLevel) {
