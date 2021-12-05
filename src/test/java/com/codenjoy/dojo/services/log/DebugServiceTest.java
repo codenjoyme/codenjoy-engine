@@ -212,7 +212,32 @@ public class DebugServiceTest {
                 "java.util:ERROR\n" +
                 "org.mockito:ERROR");
 
-        assertLevel("INFO", "org.junit");
+        assertLevel("org.junit", "OFF");
+    }
+
+    @Test
+    public void shouldSetLoggersLevels_disableAll() {
+        // given
+        service = new DebugService(true,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:DEBUG\n" +
+                "java.util:DEBUG\n" +
+                "org.junit:DEBUG");
+
+        // when
+        service.setLoggersLevels("");
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLevel("com.codenjoy", "OFF");
+        assertLevel("java.util", "OFF");
+        assertLevel("org.junit", "OFF");
     }
 
     @Test
@@ -295,7 +320,7 @@ public class DebugServiceTest {
         assertLoggers("org.mockito:ERROR");
     }
 
-    private void assertLevel(String expectedLevel, String name) {
+    private void assertLevel(String name, String expectedLevel) {
         assertEquals(expectedLevel,
                 DebugService.getLevel(name).levelStr);
     }

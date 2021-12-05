@@ -104,7 +104,8 @@ public class DebugService extends Suspendable {
     }
 
     public void setLoggersLevels(String input) {
-        setDebugEnable(false);
+        active = false;
+        changePackageLoggingLevels(Level.OFF);
 
         List<String> lines = Arrays.asList(clean(input).split("\n"));
 
