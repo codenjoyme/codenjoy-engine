@@ -22,7 +22,9 @@ package com.codenjoy.dojo.services.log;
  * #L%
  */
 
+import ch.qos.logback.classic.Logger;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
@@ -211,6 +213,13 @@ public class DebugServiceTest {
                 "com.codenjoy:ERROR\n" +
                 "java.util:ERROR\n" +
                 "org.mockito:ERROR");
+
+        assertLevel("INFO", "org.junit");
+    }
+
+    private void assertLevel(String expectedLevel, String name) {
+        assertEquals(expectedLevel,
+                ((Logger) LoggerFactory.getLogger(name)).getLevel().levelStr);
     }
 
     private void assertLoggers(String expected) {
