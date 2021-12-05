@@ -154,6 +154,36 @@ public class DebugServiceTest {
                 "org.junit:DEBUG");
     }
 
+    @Test
+    public void shouldSetLoggersLevels_canChangeAllLoggers_inParallelWillDisableDebugMode() {
+        // given
+        service = new DebugService(true,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:DEBUG\n" +
+                "java.util:DEBUG\n" +
+                "org.junit:DEBUG");
+
+        // when
+        service.setLoggersLevels(Arrays.asList(
+                "com.codenjoy:INFO",
+                "java.util:INFO",
+                "org.junit:INFO"));
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:INFO\n" +
+                "java.util:INFO\n" +
+                "org.junit:INFO");
+
+    }
+
     private void assertLoggers(String expected) {
         assertEquals(expected,
                 String.join("\n", service.getLoggersLevels()));
