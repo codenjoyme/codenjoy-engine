@@ -218,11 +218,12 @@ public class DebugServiceTest {
     @Test
     public void shouldSetLoggersLevels_validate_failIfNotAPackage() {
         // given
-        service = new DebugService(false,
+        service = new DebugService(true,
                 Arrays.asList("com.codenjoy"));
 
         // then
-        assertLoggers("com.codenjoy:INFO");
+        assertEquals(true, service.isWorking());
+        assertLoggers("com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -230,17 +231,19 @@ public class DebugServiceTest {
                 "org.mockito:ERROR");     // valid
 
         // then
+        assertEquals(false, service.isWorking());
         assertLoggers("org.mockito:ERROR");
     }
 
     @Test
     public void shouldSetLoggersLevels_validate_failIfTwoSeparators() {
         // given
-        service = new DebugService(false,
+        service = new DebugService(true,
                 Arrays.asList("com.codenjoy"));
 
         // then
-        assertLoggers("com.codenjoy:INFO");
+        assertEquals(true, service.isWorking());
+        assertLoggers("com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -248,17 +251,19 @@ public class DebugServiceTest {
                 "org.mockito:ERROR");     // valid
 
         // then
+        assertEquals(false, service.isWorking());
         assertLoggers("org.mockito:ERROR");
     }
 
     @Test
     public void shouldSetLoggersLevels_validate_failIfNoSeparator() {
         // given
-        service = new DebugService(false,
+        service = new DebugService(true,
                 Arrays.asList("com.codenjoy"));
 
         // then
-        assertLoggers("com.codenjoy:INFO");
+        assertEquals(true, service.isWorking());
+        assertLoggers("com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -266,17 +271,19 @@ public class DebugServiceTest {
                 "org.mockito:ERROR");   // valid
 
         // then
+        assertEquals(false, service.isWorking());
         assertLoggers("org.mockito:ERROR");
     }
 
     @Test
     public void shouldSetLoggersLevels_validate_failIfBadLevel() {
         // given
-        service = new DebugService(false,
+        service = new DebugService(true,
                 Arrays.asList("com.codenjoy"));
 
         // then
-        assertLoggers("com.codenjoy:INFO");
+        assertEquals(true, service.isWorking());
+        assertLoggers("com.codenjoy:DEBUG");
 
         // when
         service.setLoggersLevels(
@@ -284,6 +291,7 @@ public class DebugServiceTest {
                 "org.mockito:ERROR");  // valid
 
         // then
+        assertEquals(false, service.isWorking());
         assertLoggers("org.mockito:ERROR");
     }
 
