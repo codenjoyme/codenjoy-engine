@@ -27,9 +27,12 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static com.codenjoy.dojo.client.Utils.clean;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class DebugService extends Suspendable {
@@ -73,12 +76,12 @@ public class DebugService extends Suspendable {
         loggers().forEach(logger -> logger.setLevel(level));
     }
 
-    public List<String> getLoggersLevels() {
+    public String getLoggersLevels() {
         return loggers()
                 .map(logger -> String.format("%s:%s",
                         logger.getName(),
                         levelName(logger)))
-                .collect(toList());
+                .collect(joining("\n"));
     }
 
     private String levelName(Logger logger) {
@@ -87,15 +90,17 @@ public class DebugService extends Suspendable {
                 : Level.INFO.levelStr;
     }
 
-    public void setLoggersLevels(List<String> input) {
+    public void setLoggersLevels(String input) {
         setDebugEnable(false);
 
-        filter = input.stream()
+        List<String> lines = Arrays.asList(clean(input).split("\n"));
+
+        filter = lines.stream()
                 .map(line -> line.split(":")[0])
                 .collect(toList());
 
         for (int index = 0; index < filter.size(); index++) {
-            Level level = Level.toLevel(input.get(index).split(":")[1]);
+            Level level = Level.toLevel(lines.get(index).split(":")[1]);
             setLevel(filter.get(index), level);
         }
     }

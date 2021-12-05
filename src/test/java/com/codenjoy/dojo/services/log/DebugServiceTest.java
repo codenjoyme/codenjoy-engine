@@ -170,10 +170,10 @@ public class DebugServiceTest {
                 "org.junit:DEBUG");
 
         // when
-        service.setLoggersLevels(Arrays.asList(
-                "com.codenjoy:INFO",
-                "java.util:INFO",
-                "org.junit:INFO"));
+        service.setLoggersLevels(
+                "com.codenjoy:INFO\n" +
+                "java.util:INFO\n" +
+                "org.junit:INFO");
 
         // then
         assertEquals(false, service.isWorking());
@@ -199,11 +199,11 @@ public class DebugServiceTest {
                 "org.junit:DEBUG");
 
         // when
-        service.setLoggersLevels(Arrays.asList(
-                "com.codenjoy:ERROR",  // old, will update
-                "java.util:ERROR",     // old, will update
-                // "org.junit:DEBUG",  // exclude, will set to default INFO
-                "org.mockito:ERROR")); // new, will set
+        service.setLoggersLevels(
+                "com.codenjoy:ERROR\n" +  // old, will update
+                "java.util:ERROR\n" +     // old, will update
+                // "org.junit:DEBUG\n" +  // exclude, will set to default INFO
+                "org.mockito:ERROR");     // new, will set
 
         // then
         assertEquals(false, service.isWorking());
