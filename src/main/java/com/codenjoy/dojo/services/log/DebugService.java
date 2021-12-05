@@ -73,7 +73,7 @@ public class DebugService extends Suspendable {
         loggers().forEach(logger -> logger.setLevel(level));
     }
 
-    public List<String> getLoggers() {
+    public List<String> getLoggersLevels() {
         return loggers()
                 .map(logger -> String.format("%s:%s",
                         logger.getName(),
@@ -87,7 +87,7 @@ public class DebugService extends Suspendable {
                 : Level.INFO.levelStr;
     }
 
-    public void setLoggers(List<String> input) {
+    public void setLoggersLevels(List<String> input) {
         setDebugEnable(false);
 
         filter = input.stream()
