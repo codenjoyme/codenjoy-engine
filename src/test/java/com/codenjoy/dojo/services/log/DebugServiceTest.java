@@ -362,6 +362,31 @@ public class DebugServiceTest {
     }
 
     @Test
+    public void shouldSetLoggersLevels_removedDuplicate() {
+        // given
+        service = new DebugService(false, Arrays.asList());
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers("");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy: ALL\n" +
+                "com.codenjoy: TRACE\n" +
+                "com.codenjoy: DEBUG\n" +
+                "com.codenjoy: INFO\n" +
+                "com.codenjoy: WARN\n" +
+                "com.codenjoy: ERROR\n" +
+                "com.codenjoy: OFF");      // leave the last one
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers(
+                "com.codenjoy: OFF");
+    }
+
+    @Test
     public void shouldSetLoggersLevels_disableAll() {
         // given
         service = new DebugService(true,
