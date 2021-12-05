@@ -36,6 +36,7 @@ import static ch.qos.logback.classic.Level.*;
 import static com.codenjoy.dojo.client.Utils.clean;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 public class DebugService extends Suspendable {
 
@@ -90,8 +91,9 @@ public class DebugService extends Suspendable {
 
     public String getLoggersLevels() {
         return loggers()
-                .map(logger -> String.format("%s:%s",
+                .map(logger -> String.format("%s%s %s",
                         logger.getName(),
+                        LEVEL_SEPARATOR,
                         levelName(logger)))
                 .collect(joining("\n"));
     }
@@ -114,10 +116,9 @@ public class DebugService extends Suspendable {
         List<String> updated = new LinkedList<>();
         for (int index = 0; index < lines.size(); index++) {
             String[] split = lines.get(index).split(LEVEL_SEPARATOR);
-            Level level = Level.toLevel(split[LEVEL]);
-            String name = split[NAME];
-            updated.add(name);
-            setLevel(name, level);
+            Level level = Level.toLevel(level(split));
+            updated.add(name(split));
+            setLevel(name(split), level);
         }
 
         defaultLevelForRemoved(updated);
@@ -143,15 +144,23 @@ public class DebugService extends Suspendable {
             return false;
         }
 
-        if (!javaClassWithPackage.matcher(split[NAME]).matches()) {
+        if (!javaClassWithPackage.matcher(name(split)).matches()) {
             return false;
         }
 
-        if (!LEVELS.contains(Level.toLevel(split[LEVEL], null))) {
+        if (!LEVELS.contains(Level.toLevel(level(split), null))) {
             return false;
         }
 
         return true;
+    }
+
+    private String name(String[] split) {
+        return split[NAME];
+    }
+
+    private String level(String[] split) {
+        return trim(split[LEVEL]);
     }
 
     public static void setLevel(String name, Level level) {

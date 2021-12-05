@@ -46,7 +46,7 @@ public class DebugServiceTest {
                 Arrays.asList("com.codenjoy"));
 
         // then
-        assertLoggers("com.codenjoy:INFO");
+        assertLoggers("com.codenjoy: INFO");
     }
 
     @Test
@@ -59,9 +59,9 @@ public class DebugServiceTest {
 
         // then
         assertLoggers(
-                "com.codenjoy:INFO\n" +
-                "java.util:INFO\n" +
-                "org.junit:INFO");
+                "com.codenjoy: INFO\n" +
+                "java.util: INFO\n" +
+                "org.junit: INFO");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class DebugServiceTest {
                 Arrays.asList("com.codenjoy"));
 
         // then
-        assertLoggers("com.codenjoy:DEBUG");
+        assertLoggers("com.codenjoy: DEBUG");
     }
 
     @Test
@@ -84,9 +84,9 @@ public class DebugServiceTest {
 
         // then
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
     }
 
     @Test
@@ -102,9 +102,9 @@ public class DebugServiceTest {
 
         // then
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
     }
 
     @Test
@@ -136,9 +136,9 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
 
         // when
         service.pause();
@@ -146,9 +146,9 @@ public class DebugServiceTest {
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" +
-                "java.util:INFO\n" +
-                "org.junit:INFO");
+                "com.codenjoy: INFO\n" +
+                "java.util: INFO\n" +
+                "org.junit: INFO");
 
         // when
         service.resume();
@@ -156,9 +156,9 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
     }
 
     @Test
@@ -172,22 +172,22 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
 
         // when
         service.setLoggersLevels(
-                "com.codenjoy:INFO\n" +
-                "java.util:INFO\n" +
-                "org.junit:INFO");
+                "com.codenjoy: INFO\n" +
+                "java.util: INFO\n" +
+                "org.junit: INFO");
 
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" +
-                "java.util:INFO\n" +
-                "org.junit:INFO");
+                "com.codenjoy: INFO\n" +
+                "java.util: INFO\n" +
+                "org.junit: INFO");
     }
 
     @Test
@@ -201,24 +201,24 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
 
         // when
         service.setLoggersLevels(
-                "com.codenjoy:ERROR\n" +  // old, will update
-                "java.util:ERROR\n" +     // old, will update
-                // "org.junit:DEBUG\n" +  // skip, will set to default INFO
-                "org.mockito:ERROR");     // new, will set
+                "com.codenjoy: ERROR\n" +  // old, will update
+                "java.util: ERROR\n" +     // old, will update
+                // "org.junit: DEBUG\n" +  // skip, will set to default INFO
+                "org.mockito: ERROR");     // new, will set
 
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:ERROR\n" +
-                "java.util:ERROR\n" +
-                "org.junit:INFO\n" +
-                "org.mockito:ERROR");
+                "com.codenjoy: ERROR\n" +
+                "java.util: ERROR\n" +
+                "org.junit: INFO\n" +
+                "org.mockito: ERROR");
 
         assertLevel("org.junit", "INFO");
     }
@@ -234,9 +234,9 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG\n" +
-                "java.util:DEBUG\n" +
-                "org.junit:DEBUG");
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
 
         // when
         service.setLoggersLevels("");
@@ -244,9 +244,9 @@ public class DebugServiceTest {
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" + // set to default, because removed in request
-                "java.util:INFO\n" +    // ...
-                "org.junit:INFO");      // ...
+                "com.codenjoy: INFO\n" + // set to default, because removed in request
+                "java.util: INFO\n" +    // ...
+                "org.junit: INFO");      // ...
     }
 
     @Test
@@ -258,18 +258,18 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG");
+                "com.codenjoy: DEBUG");
 
         // when
         service.setLoggersLevels(
-                "Not@A@Package:ERROR\n" + // not a package, ignored
-                "org.mockito:ERROR");     // valid
+                "Not@A@Package: ERROR\n" + // not a package, ignored
+                "org.mockito: ERROR");     // valid
 
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" +   // set to default, because removed in request
-                "org.mockito:ERROR");
+                "com.codenjoy: INFO\n" +   // set to default, because removed in request
+                "org.mockito: ERROR");
     }
 
     @Test
@@ -281,18 +281,18 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG");
+                "com.codenjoy: DEBUG");
 
         // when
         service.setLoggersLevels(
-                "com.codenjoy::ERROR\n" + // two ':' separators, ignored
-                "org.mockito:ERROR");     // valid
+                "com.codenjoy: : ERROR\n" + // two ':' separators, ignored
+                "org.mockito: ERROR");      // valid
 
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" +  // set to default, because removed in request
-                "org.mockito:ERROR");
+                "com.codenjoy: INFO\n" +    // set to default, because removed in request
+                "org.mockito: ERROR");
     }
 
     @Test
@@ -303,18 +303,18 @@ public class DebugServiceTest {
 
         // then
         assertEquals(true, service.isWorking());
-        assertLoggers("com.codenjoy:DEBUG");
+        assertLoggers("com.codenjoy: DEBUG");
 
         // when
         service.setLoggersLevels(
-                "com.codenjoyERROR\n" + // no ':' separator, ignored
-                "org.mockito:ERROR");   // valid
+                "com.codenjoyERROR\n" +  // no ':' separator, ignored
+                "org.mockito: ERROR");   // valid
 
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" +   // set to default, because removed in request
-                "org.mockito:ERROR");
+                "com.codenjoy: INFO\n" +   // set to default, because removed in request
+                "org.mockito: ERROR");
     }
 
     @Test
@@ -326,18 +326,18 @@ public class DebugServiceTest {
         // then
         assertEquals(true, service.isWorking());
         assertLoggers(
-                "com.codenjoy:DEBUG");
+                "com.codenjoy: DEBUG");
 
         // when
         service.setLoggersLevels(
-                "com.codenjoy:BAD\n" + // bad level, ignored
-                "org.mockito:ERROR");  // valid
+                "com.codenjoy: BAD\n" + // bad level, ignored
+                "org.mockito: ERROR");  // valid
 
         // then
         assertEquals(false, service.isWorking());
         assertLoggers(
-                "com.codenjoy:INFO\n" +  // set to default, because removed in request
-                "org.mockito:ERROR");
+                "com.codenjoy: INFO\n" +  // set to default, because removed in request
+                "org.mockito: ERROR");
     }
 
     private void assertLevel(String name, String expectedLevel) {
