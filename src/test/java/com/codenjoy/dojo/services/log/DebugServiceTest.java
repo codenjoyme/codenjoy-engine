@@ -22,9 +22,7 @@ package com.codenjoy.dojo.services.log;
  * #L%
  */
 
-import ch.qos.logback.classic.Logger;
 import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
@@ -219,7 +217,7 @@ public class DebugServiceTest {
 
     private void assertLevel(String expectedLevel, String name) {
         assertEquals(expectedLevel,
-                ((Logger) LoggerFactory.getLogger(name)).getLevel().levelStr);
+                DebugService.getLevel(name).levelStr);
     }
 
     private void assertLoggers(String expected) {

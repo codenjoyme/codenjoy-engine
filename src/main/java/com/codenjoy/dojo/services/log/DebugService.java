@@ -100,7 +100,15 @@ public class DebugService extends Suspendable {
         }
     }
 
-    private void setLevel(String key, Level level) {
-        ((Logger) LoggerFactory.getLogger(key)).setLevel(level);
+    public static void setLevel(String name, Level level) {
+        logger(name).setLevel(level);
+    }
+
+    public static Level getLevel(String name) {
+        return logger(name).getLevel();
+    }
+
+    public static Logger logger(String name) {
+        return (Logger) LoggerFactory.getLogger(name);
     }
 }
