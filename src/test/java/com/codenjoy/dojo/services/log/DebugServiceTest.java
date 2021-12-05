@@ -112,6 +112,39 @@ public class DebugServiceTest {
         assertEquals(true, service.isWorking());
     }
 
+    @Test
+    public void shouldPauseResume() {
+        // given
+        shouldCheckDefaultLoggers_debugEnabled_severalLoggers();
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:DEBUG\n" +
+                "java.util:DEBUG\n" +
+                "org.junit:DEBUG");
+
+        // when
+        service.pause();
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:INFO\n" +
+                "java.util:INFO\n" +
+                "org.junit:INFO");
+
+        // when
+        service.resume();
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:DEBUG\n" +
+                "java.util:DEBUG\n" +
+                "org.junit:DEBUG");
+    }
+
     private void assertLoggers(String expected) {
         assertEquals(expected,
                 String.join("\n", service.getLoggersLevels()));
