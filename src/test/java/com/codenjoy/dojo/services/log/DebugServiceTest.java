@@ -286,6 +286,51 @@ public class DebugServiceTest {
     }
 
     @Test
+    public void shouldSetLoggersLevels_setForClass() {
+        // given
+        service = new DebugService(false, Arrays.asList());
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers("");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy.dojo.services.Welcome: DEBUG");
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy.dojo.services.Welcome: DEBUG");
+    }
+
+    @Test
+    public void shouldSetLoggersLevels_ignoredEmptyLines() {
+        // given
+        service = new DebugService(false, Arrays.asList());
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers("");
+
+        // when
+        service.setLoggersLevels(
+                "\n" +
+                "\n" +
+                "\n" +
+                "com.codenjoy: DEBUG\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "\n");
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy: DEBUG");
+    }
+
+    @Test
     public void shouldSetLoggersLevels_disableAll() {
         // given
         service = new DebugService(true,
