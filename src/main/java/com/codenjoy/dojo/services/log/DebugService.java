@@ -25,7 +25,7 @@ package com.codenjoy.dojo.services.log;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import com.google.common.collect.Lists;
+import com.codenjoy.dojo.client.Encoding;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
@@ -33,7 +33,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static ch.qos.logback.classic.Level.*;
-import static com.codenjoy.dojo.client.Utils.clean;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.trim;
@@ -107,7 +106,7 @@ public class DebugService extends Suspendable {
     }
 
     public void setLoggersLevels(String input) {
-        List<String> lines = Arrays.asList(clean(input).split("\n"));
+        List<String> lines = Arrays.asList(Encoding.replaceN(input).split("\n"));
 
         lines = lines.stream()
                 .filter(this::validate)

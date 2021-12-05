@@ -331,6 +331,37 @@ public class DebugServiceTest {
     }
 
     @Test
+    public void shouldSetLoggersLevels_anyNewLineSymbolsIsOk() {
+        // given
+        service = new DebugService(false, Arrays.asList());
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers("");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy: DEBUG\n\r" +
+                "java.util: DEBUG\r\n" +
+                "org.junit: DEBUG\r" +
+                "org.mockito: DEBUG\n" +
+                "org.eclipse.jetty: DEBUG\n\n" +
+                "org.springframework.mvc: DEBUG\r\r" +
+                "javax: DEBUG\n");
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG\n" +
+                "org.mockito: DEBUG\n" +
+                "org.eclipse.jetty: DEBUG\n" +
+                "org.springframework.mvc: DEBUG\n" +
+                "javax: DEBUG");
+    }
+
+    @Test
     public void shouldSetLoggersLevels_disableAll() {
         // given
         service = new DebugService(true,
