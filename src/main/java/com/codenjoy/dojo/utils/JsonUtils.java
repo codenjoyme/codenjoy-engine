@@ -24,6 +24,7 @@ package com.codenjoy.dojo.utils;
 
 
 import com.cedarsoftware.util.io.JsonWriter;
+import com.codenjoy.dojo.client.Utils;
 import lombok.experimental.UtilityClass;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,8 +48,9 @@ public class JsonUtils {
         return clean(JsonWriter.formatJson(json));
     }
 
+    // TODO inline this method
     public static String clean(String json) {
-        return json.replace('\"', '\'').replaceAll("\\r\\n", "\n");
+        return Utils.clean(json);
     }
 
     // TODO почему-то этот малый слетает в MVN при билде из консоли для символов борды expansion
