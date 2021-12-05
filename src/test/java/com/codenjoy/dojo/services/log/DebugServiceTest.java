@@ -212,7 +212,7 @@ public class DebugServiceTest {
                 "java.util:ERROR\n" +
                 "org.mockito:ERROR");
 
-        assertLevel("org.junit", "OFF");
+        assertLevel("org.junit", "INFO");
     }
 
     @Test
@@ -235,9 +235,9 @@ public class DebugServiceTest {
 
         // then
         assertEquals(false, service.isWorking());
-        assertLevel("com.codenjoy", "OFF");
-        assertLevel("java.util", "OFF");
-        assertLevel("org.junit", "OFF");
+        assertLevel("com.codenjoy", "INFO");
+        assertLevel("java.util", "INFO");
+        assertLevel("org.junit", "INFO");
     }
 
     @Test

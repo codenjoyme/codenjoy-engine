@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import static ch.qos.logback.classic.Level.*;
 import static com.codenjoy.dojo.client.Utils.clean;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -39,9 +40,9 @@ import static java.util.stream.Collectors.toList;
 public class DebugService extends Suspendable {
 
     private static final String JAVA_CLASS_WITH_PACKAGE = "^(?:\\w+|\\w+\\.\\w+)+$";
+    public static final Level DEFAULT_LEVEL = INFO;
     public static final List<Level> LEVELS =
-            Arrays.asList(Level.DEBUG, Level.INFO, Level.ALL,
-                    Level.ERROR, Level.OFF, Level.TRACE, Level.WARN);
+            Arrays.asList(ALL, TRACE, DEBUG, INFO, WARN, ERROR, OFF);
     public static final String LEVEL_SEPARATOR = ":";
     public static final int NAME = 0;
     public static final int LEVEL = 1;
@@ -62,14 +63,14 @@ public class DebugService extends Suspendable {
 
     @Override
     public void pause() {
-        changePackageLoggingLevels(Level.INFO);
+        changePackageLoggingLevels(DEFAULT_LEVEL);
     }
 
     @Override
     public boolean isWorking() {
         return loggers()
                 .map(Logger::getLevel)
-                .anyMatch(Level.DEBUG::equals);
+                .anyMatch(DEBUG::equals);
     }
 
     private Stream<Logger> loggers() {
@@ -80,7 +81,7 @@ public class DebugService extends Suspendable {
 
     @Override
     public void resume() {
-        changePackageLoggingLevels(Level.DEBUG);
+        changePackageLoggingLevels(DEBUG);
     }
 
     private void changePackageLoggingLevels(Level level) {
@@ -97,15 +98,14 @@ public class DebugService extends Suspendable {
 
     private String levelName(Logger logger) {
         if (logger.getLevel() == null) {
-            return Level.OFF.levelStr;
+            return DEFAULT_LEVEL.levelStr;
         }
 
         return logger.getLevel().levelStr;
     }
 
     public void setLoggersLevels(String input) {
-        active = false;
-        changePackageLoggingLevels(Level.OFF);
+        setActive(false);
 
         List<String> lines = Arrays.asList(clean(input).split("\n"));
 
