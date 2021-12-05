@@ -224,6 +224,37 @@ public class DebugServiceTest {
     }
 
     @Test
+    public void shouldSetLoggersLevels_severalSpacesBeforeLevelAreAllowed() {
+        // given
+        service = new DebugService(true,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy:DEBUG\n" +     // no spaces
+                "java.util: DEBUG\n" +       // one space
+                "org.junit:  DEBUG\n" +      // two spaces
+                "org.mockito:       DEBUG"); // a lot of spaces
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy: DEBUG\n" +
+                "java.util: DEBUG\n" +
+                "org.junit: DEBUG\n" +
+                "org.mockito: DEBUG");
+    }
+
+    @Test
     public void shouldSetLoggersLevels_disableAll() {
         // given
         service = new DebugService(true,
