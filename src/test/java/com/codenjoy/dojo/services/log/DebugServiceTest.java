@@ -181,7 +181,36 @@ public class DebugServiceTest {
                 "com.codenjoy:INFO\n" +
                 "java.util:INFO\n" +
                 "org.junit:INFO");
+    }
 
+    @Test
+    public void shouldSetLoggersLevels_disableAllPreviousLoggers_andSetNew() {
+        // given
+        service = new DebugService(true,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:DEBUG\n" +
+                "java.util:DEBUG\n" +
+                "org.junit:DEBUG");
+
+        // when
+        service.setLoggersLevels(Arrays.asList(
+                "com.codenjoy:ERROR",  // old, will update
+                "java.util:ERROR",     // old, will update
+                // "org.junit:DEBUG",  // exclude, will set to default INFO
+                "org.mockito:ERROR")); // new, will set
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers(
+                "com.codenjoy:ERROR\n" +
+                "java.util:ERROR\n" +
+                "org.mockito:ERROR");
     }
 
     private void assertLoggers(String expected) {
