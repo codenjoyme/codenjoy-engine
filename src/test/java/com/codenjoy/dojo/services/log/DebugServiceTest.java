@@ -85,7 +85,10 @@ public class DebugServiceTest {
     @Test
     public void shouldSetDebugEnabled() {
         // given
-        shouldCheckDefaultLoggers_debugDisabled_severalLoggers();
+        service = new DebugService(false,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
 
         // when
         service.setDebugEnable(true);
@@ -100,7 +103,10 @@ public class DebugServiceTest {
     @Test
     public void shouldIsWorking() {
         // given
-        shouldCheckDefaultLoggers_debugDisabled_severalLoggers();
+        service = new DebugService(false,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
 
         // then
         assertEquals(false, service.isWorking());
@@ -115,7 +121,10 @@ public class DebugServiceTest {
     @Test
     public void shouldPauseResume() {
         // given
-        shouldCheckDefaultLoggers_debugEnabled_severalLoggers();
+        service = new DebugService(true,
+                Arrays.asList("com.codenjoy",
+                        "java.util",
+                        "org.junit"));
 
         // then
         assertEquals(true, service.isWorking());
