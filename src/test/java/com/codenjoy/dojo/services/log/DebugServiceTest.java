@@ -215,6 +215,78 @@ public class DebugServiceTest {
         assertLevel("INFO", "org.junit");
     }
 
+    @Test
+    public void shouldSetLoggersLevels_validate_failIfNotAPackage() {
+        // given
+        service = new DebugService(false,
+                Arrays.asList("com.codenjoy"));
+
+        // then
+        assertLoggers("com.codenjoy:INFO");
+
+        // when
+        service.setLoggersLevels(
+                "Not@A@Package:ERROR\n" + // not a package, ignored
+                "org.mockito:ERROR");     // valid
+
+        // then
+        assertLoggers("org.mockito:ERROR");
+    }
+
+    @Test
+    public void shouldSetLoggersLevels_validate_failIfTwoSeparators() {
+        // given
+        service = new DebugService(false,
+                Arrays.asList("com.codenjoy"));
+
+        // then
+        assertLoggers("com.codenjoy:INFO");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy::ERROR\n" + // two ':' separators, ignored
+                "org.mockito:ERROR");     // valid
+
+        // then
+        assertLoggers("org.mockito:ERROR");
+    }
+
+    @Test
+    public void shouldSetLoggersLevels_validate_failIfNoSeparator() {
+        // given
+        service = new DebugService(false,
+                Arrays.asList("com.codenjoy"));
+
+        // then
+        assertLoggers("com.codenjoy:INFO");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoyERROR\n" + // no ':' separator, ignored
+                "org.mockito:ERROR");   // valid
+
+        // then
+        assertLoggers("org.mockito:ERROR");
+    }
+
+    @Test
+    public void shouldSetLoggersLevels_validate_failIfBadLevel() {
+        // given
+        service = new DebugService(false,
+                Arrays.asList("com.codenjoy"));
+
+        // then
+        assertLoggers("com.codenjoy:INFO");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy:BAD\n" + // bad level, ignored
+                "org.mockito:ERROR");  // valid
+
+        // then
+        assertLoggers("org.mockito:ERROR");
+    }
+
     private void assertLevel(String expectedLevel, String name) {
         assertEquals(expectedLevel,
                 DebugService.getLevel(name).levelStr);
