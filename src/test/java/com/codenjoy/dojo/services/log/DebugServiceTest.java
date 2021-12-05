@@ -255,6 +255,37 @@ public class DebugServiceTest {
     }
 
     @Test
+    public void shouldSetLoggersLevels_checkAllLevels() {
+        // given
+        service = new DebugService(false, Arrays.asList());
+
+        // then
+        assertEquals(false, service.isWorking());
+        assertLoggers("");
+
+        // when
+        service.setLoggersLevels(
+                "com.codenjoy: ALL\n" +
+                "java.util: TRACE\n" +
+                "org.junit: DEBUG\n" +
+                "org.mockito: INFO\n" +
+                "org.eclipse.jetty: WARN\n" +
+                "org.springframework.mvc: ERROR\n" +
+                "javax: OFF");
+
+        // then
+        assertEquals(true, service.isWorking());
+        assertLoggers(
+                "com.codenjoy: ALL\n" +
+                "java.util: TRACE\n" +
+                "org.junit: DEBUG\n" +
+                "org.mockito: INFO\n" +
+                "org.eclipse.jetty: WARN\n" +
+                "org.springframework.mvc: ERROR\n" +
+                "javax: OFF");
+    }
+
+    @Test
     public void shouldSetLoggersLevels_disableAll() {
         // given
         service = new DebugService(true,
