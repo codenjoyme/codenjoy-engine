@@ -1,4 +1,5 @@
-SET MVNW=%cd%\mvnw
+cd ..
+set MVNW=%cd%\mvnw
 
 call %MVNW% clean install -DskipTests=true
 

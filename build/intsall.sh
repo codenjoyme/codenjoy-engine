@@ -8,7 +8,10 @@ eval_echo() {
     eval $command
 }
 
-eval_echo "./mvnw clean install -DskipTests=true"
+eval_echo "cd .."
+eval_echo "MVNW=./mvnw"
+
+eval_echo "$MVNW clean install -DskipTests=true"
 
 echo Press Enter to continue
 read
