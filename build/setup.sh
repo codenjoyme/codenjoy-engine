@@ -29,6 +29,21 @@ build_games() {
     read
 }
 
+build_java_client() {
+    echo "[93mBuild java client[0m"
+
+    eval_echo "$MVNW install:install-file -Dfile=client-java-$VERSION.jar -Dsources=client-java-$VERSION-sources.jar -DpomFile=client-java-$VERSION.pom -DgroupId=com.codenjoy -DartifactId=client-java -Dversion=$VERSION -Dpackaging=jar"
+
+    echo "[93m"
+    echo "       +--------------------------------------------------+"
+    echo "       !         Check that BUILD was SUCCESS             !"
+    echo "       +--------------------------------------------------+"
+    echo "[0m"
+    if [ "x$DEBUG" = "xtrue" ]; then
+        read
+    fi
+}
+
 build_engine_from_zip() {
     echo "[93mBuild engine from zip[0m"
 
@@ -71,6 +86,7 @@ build_engine_from_sources() {
 
 if [ -f "./engine-$VERSION-pom.xml" ]; then
    eval_echo "build_engine_from_zip"
+   eval_echo "build_java_client"
 elif [ -d "./../build" ]; then
    eval_echo "build_engine_from_sources"
 fi

@@ -2,7 +2,10 @@ if "%VERSION%"=="" set VERSION=1.1.1
 
 echo VERSION=%VERSION%
 
-if exist ".\engine-%VERSION%-pom.xml" call :build_engine_from_zip
+if exist ".\engine-%VERSION%-pom.xml" (
+    call :build_engine_from_zip
+    call :build_java_client
+)
 if exist ".\..\build" call :build_engine_from_sources
 call :build_games
 goto :eof
@@ -22,6 +25,23 @@ goto :eof
     echo on
 
     pause >nul
+    goto :eof
+
+:build_java_client
+    echo Build games
+
+    call %MVNW% install:install-file -Dfile=client-java-%VERSION%.jar -Dsources=client-java-%VERSION%-sources.jar -DpomFile=client-java-%VERSION%.pom -DgroupId=com.codenjoy -DartifactId=client-java -Dversion=%VERSION% -Dpackaging=jar
+
+    echo off
+    echo [44;93m
+    echo        +--------------------------------------------------+
+    echo        !         Check that BUILD was SUCCESS             !
+    echo        +--------------------------------------------------+
+    echo [0m
+    echo on
+    if "%DEBUG%"=="true" (
+        pause >nul
+    )
     goto :eof
 
 :build_engine_from_zip
