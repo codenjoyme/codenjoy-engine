@@ -297,6 +297,7 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- TODO вместо двух плагиров ниже использовать https://stackoverflow.com/a/37149396 -->
             <!-- плагин вытягивает в пропертю com.codenjoy:client-java:jar путь к либе -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
