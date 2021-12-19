@@ -41,6 +41,7 @@
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-buildnumber-plugin.version>1.4</maven-buildnumber-plugin.version>
         <maven-scm-jgit.version>1.11.2</maven-scm-jgit.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
 
         <user.resources>src/main/webapp/resources/user</user.resources>
         <engine.libs>${user.resources}/engine-libs.zip</engine.libs>
@@ -217,6 +218,7 @@
                 <version>${maven-buildnumber-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>generate-git-commit-hash</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>create</goal>
@@ -295,12 +297,54 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- плагин вытягивает в пропертю com.codenjoy:client-java:jar путь к либе -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven-dependency-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- плагин из проперти com.codenjoy:client-java:jar создает
+                 две подобные с sources и pom -->
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>run-groovy</id>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <source>
+                                String jar = project.properties.getProperty('com.codenjoy:client-java:jar')
+                                project.properties.setProperty('com.codenjoy:client-java:sources',
+                                        jar.replace('.jar', '-sources.jar'))
+                                project.properties.setProperty('com.codenjoy:client-java:pom',
+                                        jar.replace('.jar', '.pom'))
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>${maven-antrun.version}</version>
                 <executions>
                     <execution>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                         <phase>verify</phase>
                         <configuration>
                             <target>
@@ -313,6 +357,9 @@
                                         <file file="mvnw.cmd"/>
                                         <file file="${project.build.directory}/engine-${project.version}.jar"/>
                                         <file file="${project.build.directory}/engine-${project.version}-sources.jar"/>
+                                        <file file="${com.codenjoy:client-java:jar}"/>
+                                        <file file="${com.codenjoy:client-java:sources}"/>
+                                        <file file="${com.codenjoy:client-java:pom}"/>
                                     </resources>
                                 </copy>
                                 <copy todir="${engine.packs}/.mvn" >
@@ -337,9 +384,6 @@
                                      update="true"/>
                             </target>
                         </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
