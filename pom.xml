@@ -307,8 +307,8 @@
                                 <mkdir dir="${engine.packs}" />
                                 <copy todir="${engine.packs}">
                                     <resources>
-                                        <file file="setup.bat"/>
-                                        <file file="setup.sh"/>
+                                        <file file="build/setup.bat"/>
+                                        <file file="build/setup.sh"/>
                                         <file file="mvnw"/>
                                         <file file="mvnw.cmd"/>
                                         <file file="${project.build.directory}/engine-${project.version}.jar"/>

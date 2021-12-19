@@ -1,52 +1,70 @@
-IF "%CODENJOY_VERSION%"=="" SET CODENJOY_VERSION=1.1.1
+if "%VERSION%"=="" set VERSION=1.1.1
 
-echo CODENJOY_VERSION=%CODENJOY_VERSION%
+echo VERSION=%VERSION%
 
-mkdir .\.mvn
-mkdir .\.mvn\wrapper
+if exist ".\engine-%VERSION%-pom.xml" call :build_engine_from_zip
+if exist ".\..\build" call :build_engine_from_sources
+call :build_games
+goto :eof
 
-SET MVNW=%cd%\mvnw
+:build_games
+    echo Build games
 
-IF NOT EXIST ".\engine-$CODENJOY_VERSION-pom.xml" (
-    mkdir .\target
-    copy .\engine-%CODENJOY_VERSION%-pom.xml .\target\engine-%CODENJOY_VERSION%-pom.xml
-    copy .\games-%CODENJOY_VERSION%-pom.xml .\target\games-%CODENJOY_VERSION%-pom.xml
-    copy .\*.jar .\target\*.jar
-) else (
-    IF NOT EXIST ".\target" (
-        call %MVNW% clean install -DskipTests=true
-        copy .\pom.xml .\target\engine-%CODENJOY_VERSION%-pom.xml
-        copy ..\pom.xml .\target\games-%CODENJOY_VERSION%-pom.xml
+    call %MVNW% install:install-file -Dfile=games-%VERSION%-pom.xml -DpomFile=games-%VERSION%-pom.xml -DgroupId=com.codenjoy -DartifactId=games -Dversion=%VERSION% -Dpackaging=pom
+
+    echo off
+    echo [44;93m
+    echo        +--------------------------------------------------+
+    echo        !         Check that BUILD was SUCCESS             !
+    echo        !           Then press Enter to exit               !
+    echo        +--------------------------------------------------+
+    echo [0m
+    echo on
+
+    pause >nul
+    goto :eof
+
+:build_engine_from_zip
+    echo Build engine from zip
+
+    set ROOT=%cd%
+    set MVNW=%ROOT%\mvnw
+
+    call %MVNW% install:install-file -Dfile=engine-%VERSION%.jar -Dsources=engine-%VERSION%-sources.jar -DpomFile=engine-%VERSION%-pom.xml -DgroupId=com.codenjoy -DartifactId=engine -Dversion=%VERSION% -Dpackaging=jar
+
+    echo off
+    echo [44;93m
+    echo        +--------------------------------------------------+
+    echo        !           Check that BUILD was SUCCESS           !
+    echo        +--------------------------------------------------+
+    echo [0m
+    echo on
+    if "%DEBUG%"=="true" (
+        pause >nul
     )
-)
 
-cd .\target
+    goto :eof
 
-call %MVNW% install:install-file -Dfile=engine-%CODENJOY_VERSION%.jar -Dsources=engine-%CODENJOY_VERSION%-sources.jar -DpomFile=engine-%CODENJOY_VERSION%-pom.xml -DgroupId=com.codenjoy -DartifactId=engine -Dversion=%CODENJOY_VERSION% -Dpackaging=jar
+:build_engine_from_sources
+    echo Build engine from sources
 
-echo off
-echo [44;93m
-echo        +--------------------------------------------------+        
-echo        !           Check that BUILD was [102;30mSUCCESS[44;93m           !        
-echo        !      Then press Enter to continue (and wait      !        
-echo        !   until the next step installation is complete)  !        
-echo        +--------------------------------------------------+        
-echo [0m
-echo on
-IF "%DEBUG%"=="true" (
-    pause >nul
-)
+    cd ..
+    set ROOT=%cd%
+    set MVNW=%ROOT%\mvnw
 
-call %MVNW% install:install-file -Dfile=games-%CODENJOY_VERSION%-pom.xml -DpomFile=games-%CODENJOY_VERSION%-pom.xml -DgroupId=com.codenjoy -DartifactId=games -Dversion=%CODENJOY_VERSION% -Dpackaging=pom
-echo off
-echo [44;93m
-echo        +--------------------------------------------------+        
-echo        !         Check that BUILD was [102;30mSUCCESS[44;93m             !        
-echo        !           Then press Enter to exit               !        
-echo        +--------------------------------------------------+        
-echo [0m
-echo on
-IF "%DEBUG%"=="true" (
-    pause >nul
-)
-pause >nul
+    call %MVNW% clean install -DskipTests=true
+
+    echo off
+    echo [44;93m
+    echo        +--------------------------------------------------+
+    echo        !           Check that BUILD was SUCCESS           !
+    echo        +--------------------------------------------------+
+    echo [0m
+    echo on
+    if "%DEBUG%"=="true" (
+        pause >nul
+    )
+
+    copy ..\pom.xml .\target\games-%VERSION%-pom.xml
+    cd .\target
+    goto :eof

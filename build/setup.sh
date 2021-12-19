@@ -1,47 +1,77 @@
 #!/usr/bin/env bash
 
-if [ "x$CODENJOY_VERSION" = "x" ]; then
-    CODENJOY_VERSION=1.1.1
+eval_echo() {
+    command=$1
+    color=94 # blue
+    echo "[${color}m$command[0m"
+    echo
+    eval $command
+}
+
+if [ "x$VERSION" = "x" ]; then
+    VERSION=1.1.1
 fi
 
-mkdir .\.mvn
-mkdir .\.mvn\wrapper
+echo VERSION=$VERSION
 
-MVNW=$(pwd)\mvnw
+build_games() {
+    echo "[93mBuild games[0m"
 
-if [ -f ".\engine-$CODENJOY_VERSION-pom.xml" ]; then
-    mkdir .\target
-    cp .\pom.xml .\target\engine-$CODENJOY_VERSION-pom.xml
-    cp .\games-pom.xml .\target\games-$CODENJOY_VERSION-pom.xml
-elif [ ! -d ".\target" ]; then
-        $MVNW clean install -DskipTests=true
-        cp .\pom.xml .\target\engine-$CODENJOY_VERSION-pom.xml
-        cp ..\pom.xml .\target\games-$CODENJOY_VERSION-pom.xml
+    eval_echo "$MVNW install:install-file -Dfile=games-$VERSION-pom.xml -DpomFile=games-$VERSION-pom.xml -DgroupId=com.codenjoy -DartifactId=games -Dversion=$VERSION -Dpackaging=pom"
+
+    echo "[93m"
+    echo "       +--------------------------------------------------+"
+    echo "       !         Check that BUILD was SUCCESS             !"
+    echo "       !           Then press Enter to exit               !"
+    echo "       +--------------------------------------------------+"
+    echo "[0m"
+
+    read
+}
+
+build_engine_from_zip() {
+    echo "[93mBuild engine from zip[0m"
+
+    eval_echo "ROOT=$(pwd)"
+    eval_echo "MVNW=$ROOT/mvnw"
+
+    eval_echo "$MVNW install:install-file -Dfile=engine-$VERSION.jar -Dsources=engine-$VERSION-sources.jar -DpomFile=engine-$VERSION-pom.xml -DgroupId=com.codenjoy -DartifactId=engine -Dversion=$VERSION -Dpackaging=jar"
+
+    echo "[93m"
+    echo "       +--------------------------------------------------+"
+    echo "       !           Check that BUILD was SUCCESS           !"
+    echo "       +--------------------------------------------------+"
+    echo "[0m"
+    if [ "x$DEBUG" = "xtrue" ]; then
+        read
     fi
+}
+
+build_engine_from_sources() {
+    echo "[93mBuild engine from sources[0m"
+
+    eval_echo "cd .."
+    eval_echo "ROOT=$(pwd)"
+    eval_echo "MVNW=$ROOT/mvnw"
+
+    eval_echo "$MVNW clean install -DskipTests=true"
+
+    echo "[93m"
+    echo "       +--------------------------------------------------+"
+    echo "       !           Check that BUILD was SUCCESS           !"
+    echo "       +--------------------------------------------------+"
+    echo "[0m"
+    if [ "x$DEBUG" = "xtrue" ]; then
+        read
+    fi
+
+    eval_echo "cp ../pom.xml ./target/games-$VERSION-pom.xml"
+    cd ./target
+}
+
+if [ -f "./engine-$VERSION-pom.xml" ]; then
+   eval_echo "build_engine_from_zip"
+elif [ -d "./../build" ]; then
+   eval_echo "build_engine_from_sources"
 fi
-
-cd .\target
-
-$MVNW install:install-file -Dfile=engine-$CODENJOY_VERSION.jar -Dsources=engine-$CODENJOY_VERSION-sources.jar -DpomFile=engine-$CODENJOY_VERSION-pom.xml -DgroupId=com.codenjoy -DartifactId=engine -Dversion=$CODENJOY_VERSION -Dpackaging=jar
-
-echo "[93m"
-echo "       +--------------------------------------------------+"
-echo "       !           Check that BUILD was SUCCESS           !"
-echo "       !      Then press Enter to continue (and wait      !"
-echo "       !   until the next step installation is complete)  !"
-echo "       +--------------------------------------------------+"
-echo "[0m"
-if [ "x$DEBUG" = "xtrue" ]; then
-    read
-fi
-
-$MVNW install:install-file -Dfile=games-$CODENJOY_VERSION-pom.xml -DpomFile=games-$CODENJOY_VERSION-pom.xml -DgroupId=com.codenjoy -DartifactId=games -Dversion=$CODENJOY_VERSION -Dpackaging=pom
-echo "[93m"
-echo "       +--------------------------------------------------+"
-echo "       !         Check that BUILD was SUCCESS             !"
-echo "       !           Then press Enter to exit               !"
-echo "       +--------------------------------------------------+"
-echo "[0m"
-if [ "x$DEBUG" = "xtrue" ]; then
-    read
-fi
+eval_echo "build_games"
