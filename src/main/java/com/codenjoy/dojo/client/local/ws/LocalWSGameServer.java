@@ -65,16 +65,15 @@ public class LocalWSGameServer {
                 game, host, port));
 
         runner.print("If you want to change something, please use command:\n" +
-                "\twindows\n" +
                 "\t\tjava -jar -Dhost=127.0.0.1 -Dport=8080 -Dtimeout=1000 " +
                 "-DlogDisable=false -Dlog=\"output.txt\" -DlogTime=true -DshowPlayers=\"2,3\" " +
                 "-Drandom=\"random-soul-string\" -DwaitFor=2 " +
-                "-Dsettings=\"{'boardSize':11, 'bombPower':7}\"\n" +
+                "-Dsettings=\"{'SETTINGS1_NAME':11,'SETTINGS2_NAME':true}\" game-engine.jar\n" +
                 "\tlinux\n" +
                 "\t\tjava -jar --host=127.0.0.1 --port=8080 --timeout=1000 " +
                 "--logDisable=false --log=\"output.txt\" --logTime=true --showPlayers=\"2,3\" " +
                 "--random=\"random-soul-string\" --waitFor=2 " +
-                "--settings=\"{'boardSize':11, 'bombPower':7}\"\n");
+                "--settings=\"{'SETTINGS1_NAME':11,'SETTINGS2_NAME':true}\" game-engine.jar\n");
 
         runner.settings().waitForPlayers(waitForPlayers);
         runner.settings().showPlayers(showPlayers);
