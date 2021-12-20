@@ -46,11 +46,12 @@ public class LocalWSGameRunner {
 
     public LocalWSGameRunner() {
         statuses = new LinkedList<>();
+        runner = new LocalGameRunner();
     }
 
     public void run(GameType gameType, String host, int port, int timeout) {
         this.gameType = gameType;
-        runner = new LocalGameRunner().with(gameType);
+        runner.with(gameType);
         runner.timeout(timeout);
         runner.printBoardOnly(true);
         runner.printWelcome(true);
