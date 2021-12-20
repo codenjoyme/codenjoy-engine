@@ -56,8 +56,8 @@ public abstract class PlayerHero<F extends GameField> extends PointImpl implemen
         super(-1, -1);
     }
 
-    public PlayerHero(Point point) {
-        super(point);
+    public PlayerHero(Point pt) {
+        super(pt);
     }
 
     public PlayerHero(JSONObject json) {
