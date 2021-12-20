@@ -23,48 +23,96 @@ package com.codenjoy.dojo.client;
  */
 
 import com.codenjoy.dojo.services.Direction;
+import org.apache.commons.lang3.StringUtils;
 
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class KeyboardSolver implements Solver {
 
+    public static final String WELCOME_MESSAGE = "\n\n\tTo play press char then Enter:\n" +
+            "\t'a' - LEFT, 'd' - RIGHT, 'w' - UP, 's' - DOWN, 'f' - ACT.\n" +
+            "\tYou can combine commands together, for example:\n" +
+            "\t'af' - LEFT,ACT, 'fa' - ACT,LEFT, 'wf' - UP,ACT.\n" +
+            "\tYou can also call ACT with parameters:\n" +
+            "\t'f12' - ACT(1,2), 'f0' - ACT(0), f123a - ACT(1,2,3),LEFT.\n" +
+            "\tAny other command you must enter explicitly,\n" +
+            "\tfor example 'LEFT,ACT(1,2,3)' then pres Enter.\n\n";
+
     private Consumer<String> out;
     private Scanner scanner;
 
     public KeyboardSolver() {
-        out = System.out::println;
-        scanner = new Scanner(System.in);
-        out.accept("\n\n\tTo play press char then Enter: \n" +
-                "\t'a' - LEFT, 'd' - RIGHT, 'w' - UP, 's' - DOWN, 'f' - ACT. \n" +
-                "\tAny other command you must enter explicitly, \n" +
-                "\tfor example 'ACT(1,2,3)' then pres Enter.\n\n");
+        out = out()::println;
+        scanner = new Scanner(in());
+        out.accept(WELCOME_MESSAGE);
+    }
+
+    protected InputStream in() {
+        return System.in;
+    }
+
+    protected PrintStream out() {
+        return System.out;
     }
 
     @Override
     public String get(ClientBoard board) {
-        String line = scanner.nextLine();
-
-        if (line.equalsIgnoreCase("w")) {
-            return Direction.UP.name();
+        String line;
+        try {
+            line = scanner.nextLine();
+        } catch (NoSuchElementException exception) {
+            return StringUtils.EMPTY;
         }
 
-        if (line.equalsIgnoreCase("s")) {
-            return Direction.DOWN.name();
+        line = line.toLowerCase();
+
+        List<String> commands = new LinkedList<>();
+        int index = 0;
+        while (index < line.length()) {
+            Character ch = line.charAt(index);
+            if (ch.equals('f')) {
+                List<Integer> parameters = new LinkedList<>();
+                boolean isNumber;
+                do {
+                    index++;
+                    if (index >= line.length()) break;
+                    ch = line.charAt(index);
+                    isNumber = ch >= '0' && ch <= '9';
+                    if (isNumber) {
+                        parameters.add(Integer.valueOf(String.valueOf(ch)));
+                    }
+                } while (isNumber);
+                commands.add(Direction.ACT(
+                        parameters.stream()
+                                .mapToInt(i -> i)
+                                .toArray()));
+                continue;
+            }
+
+            if (ch.equals('w')) {
+                commands.add(Direction.UP.toString());
+            }
+
+            if (ch.equals('s')) {
+                commands.add(Direction.DOWN.toString());
+            }
+
+            if (ch.equals('a')) {
+                commands.add(Direction.LEFT.toString());
+            }
+
+            if (ch.equals('d')) {
+                commands.add(Direction.RIGHT.toString());
+            }
+            index++;
         }
 
-        if (line.equalsIgnoreCase("a")) {
-            return Direction.LEFT.name();
-        }
-
-        if (line.equalsIgnoreCase("d")) {
-            return Direction.RIGHT.name();
-        }
-
-        if (line.equalsIgnoreCase("f")) {
-            return Direction.ACT.name();
-        }
-
-        return line;
+        return String.join(",", commands);
     }
 }
