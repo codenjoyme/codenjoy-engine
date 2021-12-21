@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.multiplayer;
 
 
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.field.Fieldable;
 import com.codenjoy.dojo.services.joystick.NoMessageJoystick;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ import org.json.JSONObject;
  *           Герой пользуется этим полем, чтобы уточнить что-то про игру во время своих телодвижений.
  *           Связь циклическая (герой знает про поле, а поле про героя) но так и задумано
  */
-public abstract class PlayerHero<F extends GameField> extends PointImpl implements Joystick, NoMessageJoystick, Tickable {
+public abstract class PlayerHero<F extends GameField> extends PointImpl implements Fieldable<F>, Joystick, NoMessageJoystick, Tickable {
 
     protected F field;
 
@@ -64,6 +65,7 @@ public abstract class PlayerHero<F extends GameField> extends PointImpl implemen
         super(json);
     }
 
+    @Override
     public void init(F field) {
         this.field = field;
     }
