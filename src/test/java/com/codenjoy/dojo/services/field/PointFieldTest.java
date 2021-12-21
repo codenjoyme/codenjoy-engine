@@ -1413,6 +1413,45 @@ public class PointFieldTest {
                 toString(field.of(Four.class).stream()));
     }
 
+    @Test
+    public void testOf_filter_severalElements_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("[one1(1,1), one2(1,1)]",
+                field.of(One.class).filter(it -> it.getY() == 1).toString());
+
+        assertEquals("[two4(1,2)]",
+                field.of(Two.class).filter(it -> it.getY() == 2).toString());
+
+        assertEquals("[]",
+                field.of(Three.class).filter(it -> it.getY() == 3).toString());
+
+        assertEquals("[]",
+                field.of(Four.class).filter(it -> it.getY() == 4).toString());
+
+        // then
+        assert_severalElements_mixed();
+
+        // when
+        get(One.class, 1, 1).move(2, 2);
+        get(Two.class, 1, 2).move(1, 1);
+
+        // when then
+        assertEquals("[one2(1,1)]",
+                field.of(One.class).filter(it -> it.getY() == 1).toString());
+
+        assertEquals("[]",
+                field.of(Two.class).filter(it -> it.getY() == 2).toString());
+
+        assertEquals("[three5(2,2)]",
+                field.of(Three.class).filter(it -> it.getY() == 2).toString());
+
+        assertEquals("[]",
+                field.of(Four.class).filter(it -> it.getY() == 4).toString());
+    }
+
     private String toString(Stream stream) {
         return stream.collect(toList()).toString();
     }

@@ -26,6 +26,7 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.Tickable;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
@@ -181,6 +182,13 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      *         from > to})
      */
     void remove(int from, int to);
+
+    /**
+     * Метод-синтаксический сахар над this.stream().filter().collect(toList()).
+     * @param filter Фильтр для извлечения коллекции.
+     * @return Отфильтрованная коллекция.
+     */
+    List<E> filter(Predicate<E> filter);
 
     String toString();
 }

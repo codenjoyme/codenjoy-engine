@@ -34,6 +34,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -249,6 +250,12 @@ public class PointField {
                 for (int index = to - 1; index >= from; index--) {
                     removeExact((E) list.get(index));
                 }
+            }
+
+            public List<E> filter(Predicate<E> filter) {
+                return stream()
+                        .filter(filter)
+                        .collect(toList());
             }
 
             @Override
