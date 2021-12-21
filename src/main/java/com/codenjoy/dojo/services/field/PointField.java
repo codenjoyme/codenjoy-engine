@@ -28,13 +28,8 @@ import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.function.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -66,16 +61,26 @@ public class PointField {
      * @return BoardReader для отрисовки элементов на поле в заданном порядке.
      */
     public BoardReader<?> reader(Class<? extends Point>... classes) {
+        return reader(player -> classes);
+    }
+
+    /**
+     * Метод позволяет грузить разные списки в зависимости от состояния player.
+     * @param function функция преобразования плеера в массив классов упорядоченных
+     *                 по порядку отрисовки.
+     * @return BoardReader для отрисовки элементов на поле в заданном порядке.
+     */
+    public BoardReader<?> reader(Function<Object, Class<? extends Point>[]> function) {
         return new BoardReader<>() {
+
             @Override
             public int size() {
                 return PointField.this.size();
             }
 
             @Override
-            @PerformanceOptimized
             public void addAll(Object player, Consumer<Iterable<? extends Point>> processor) {
-                for (Class clazz : classes) {
+                for (Class clazz : function.apply(player)) {
                     processor.accept(PointField.this.of(clazz).all());
                 }
             }
