@@ -28,6 +28,7 @@ import com.codenjoy.dojo.client.AbstractTextBoard;
 import com.codenjoy.dojo.client.ClientBoard;
 import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
@@ -59,7 +60,13 @@ public class LocalGameRunner {
     private String showPlayers = null;
     private boolean exit = false;
     private int waitForPlayers = 1;
-    private final int levelNumber = LevelProgress.levelsStartsFrom1;
+    private int levelNumber = LevelProgress.levelsStartsFrom1;
+
+    /**
+     * Будем ли мы увеличивать (true) номер уровня после каждого reload
+     * или нет (false).
+     */
+    private boolean increaseLevelAfterReload = false;
 
     /**
      * Будем ли мы удалять (true) игрока с поля, когда он gameover
@@ -130,6 +137,11 @@ public class LocalGameRunner {
                 }
 
                 if (reloadPlayersWhenGameOverAll && activeGames().isEmpty()) {
+                    if (increaseLevelAfterReload) {
+                        if (levelNumber < LevelsSettings.get(settings).getLevelsCount()) {
+                            levelNumber++;
+                        }
+                    }
                     reloadAllGames();
                 }
 
@@ -200,7 +212,7 @@ public class LocalGameRunner {
     }
 
     private void debugAt(int tick) {
-        // breakpoint here
+        // break point here
     }
 
     private String askAnswer(int index) {
@@ -366,6 +378,10 @@ public class LocalGameRunner {
 
     public void reloadPlayersWhenGameOverAll(boolean input) {
         reloadPlayersWhenGameOverAll = input;
+    }
+
+    public void increaseLevelAfterReload(boolean input) {
+        increaseLevelAfterReload = input;
     }
 
     public Consumer<String> out() {
