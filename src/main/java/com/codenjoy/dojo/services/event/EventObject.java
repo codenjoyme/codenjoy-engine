@@ -22,9 +22,9 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-public interface EventObject<T extends Enum<T>, V> {
+public interface EventObject<T, V> {
 
-    Enum<T> type();
+    T type();
 
     V value();
 }

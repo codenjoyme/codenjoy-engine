@@ -63,24 +63,37 @@ public abstract class AbstractScores<V> implements PlayerScores {
     public static <V> int scoreFor(Map<Object, Function<V, Integer>> map, Object input) {
         Map.Entry<Object, Object> entry = parseEvent(input);
 
-        if (!map.containsKey(entry.getKey())) {
+        Function<V, Integer> function = getValue(map, entry);
+        if (function == null) {
             return 0;
         }
 
-        return map.get(entry.getKey()).apply((V) entry.getValue());
+        return function.apply((V) entry.getValue());
+    }
+
+    private static <V> Function<V, Integer> getValue(Map<Object, Function<V, Integer>> map, Map.Entry<Object, Object> entry) {
+        if (map.containsKey(entry.getKey())) {
+            return map.get(entry.getKey());
+        }
+
+        if (map.containsKey(null)) {
+            return map.get(null);
+        }
+
+        return null;
     }
 
     private static Map.Entry<Object, Object> parseEvent(Object input) {
-        if (input instanceof Enum) {
-            Enum event = (Enum) input;
-            return new AbstractMap.SimpleEntry<>(
-                    event, null);
-        }
-
         if (input instanceof EventObject) {
             EventObject event = (EventObject) input;
             return new AbstractMap.SimpleEntry<>(
                     event.type(), event.value());
+        }
+
+        if (input instanceof Enum) {
+            Enum event = (Enum) input;
+            return new AbstractMap.SimpleEntry<>(
+                    event, null);
         }
 
         if (input instanceof JSONObject) {
@@ -92,11 +105,11 @@ public abstract class AbstractScores<V> implements PlayerScores {
         if (input instanceof CustomMessage) {
             CustomMessage event = (CustomMessage) input;
             return new AbstractMap.SimpleEntry<>(
-                    event, event.getMessage());
+                    event.getMessage(), event.value());
         }
 
         return new AbstractMap.SimpleEntry<>(
-                null, null);
+                input, null);
     }
 
     @Override

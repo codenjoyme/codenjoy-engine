@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services;
  * #L%
  */
 
+import com.codenjoy.dojo.services.event.EventObject;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,12 +30,22 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class CustomMessage {
+public class CustomMessage implements EventObject<String, CustomMessage> {
 
     private String message;
 
     @Override
     public String toString() {
         return "[" + message + "]";
+    }
+
+    @Override
+    public String type() {
+        return message;
+    }
+
+    @Override
+    public CustomMessage value() {
+        return this;
     }
 }
