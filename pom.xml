@@ -305,10 +305,11 @@
                 <version>${maven-dependency-plugin.version}</version>
                 <executions>
                     <execution>
+                        <id>write-dependencies-properties</id>
                         <goals>
                             <goal>properties</goal>
                         </goals>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -324,7 +325,7 @@
                         <goals>
                             <goal>execute</goal>
                         </goals>
-                        <phase>verify</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <source>
                                 String jar = project.properties.getProperty('com.codenjoy:client-java:jar')
@@ -337,16 +338,33 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Плагин добавлет jar с сырцами engine в target -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-engine-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <phase>compile</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Плагин собирает engine-libs.zip со всеми артефактами -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>${maven-antrun.version}</version>
                 <executions>
                     <execution>
+                        <id>run-ant</id>
                         <goals>
                             <goal>run</goal>
                         </goals>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <configuration>
                             <target>
                                 <mkdir dir="${engine.packs}" />
@@ -385,19 +403,6 @@
                                      update="true"/>
                             </target>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
