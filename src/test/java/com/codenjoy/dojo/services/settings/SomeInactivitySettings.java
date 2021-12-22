@@ -23,7 +23,6 @@ package com.codenjoy.dojo.services.settings;
  */
 
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
-import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 
 import java.util.Arrays;
 import java.util.List;
