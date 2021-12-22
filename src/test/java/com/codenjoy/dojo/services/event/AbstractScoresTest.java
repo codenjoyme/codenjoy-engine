@@ -25,22 +25,31 @@ package com.codenjoy.dojo.services.event;
 import com.codenjoy.dojo.client.TestGameSettings;
 import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
+import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.ToString;
 import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.LinkedList;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AbstractScoresTest {
+
+    private SettingsReader settings;
+
+    @Before
+    public void setup() {
+        settings = new TestGameSettings();
+        ScoresImpl.setup(settings, ScoresImpl.CUMULATIVELY);
+    }
 
     @Test
     public void shouldProcess_customMessage() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<CustomMessage>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<CustomMessage>(settings){{
             put("message1",
                     value -> {
                         assertEquals("[message1]", value.toString());
@@ -70,7 +79,7 @@ public class AbstractScoresTest {
     @Test
     public void shouldProcess_jsonObject() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<JSONObject>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<JSONObject>(settings){{
             put("type1",
                     value -> {
                         assertEquals("{\"type\":\"type1\",\"value\":\"value1\"}",
@@ -128,7 +137,7 @@ public class AbstractScoresTest {
     @Test
     public void shouldProcess_eventObject() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
             put(SomeEventObject.Type.TYPE1,
                     value -> {
                         assertEquals("11", value.toString());
@@ -181,7 +190,7 @@ public class AbstractScoresTest {
     @Test
     public void shouldProcess_valuedEventEnum() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
             put(SomeValuedEvent.TYPE1,
                     value -> {
                         assertEquals("11", value.toString());
@@ -218,7 +227,7 @@ public class AbstractScoresTest {
     @Test
     public void shouldProcess_eventEnum() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<SomeEvent>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<SomeEvent>(settings){{
             put(SomeEvent.TYPE1,
                     value -> {
                         assertEquals(null, value);
@@ -248,22 +257,22 @@ public class AbstractScoresTest {
     @Test
     public void shouldProcess_object() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put("string1",
                     value -> {
-                        assertEquals(null, value);
+                        assertEquals("string1", value);
                         return 1;
                     });
 
             put(2,
                     value -> {
-                        assertEquals(null, value);
+                        assertEquals(2, value);
                         return 2;
                     });
 
             put(true,
                     value -> {
-                        assertEquals(null, value);
+                        assertEquals(true, value);
                         return 3;
                     });
         }});
@@ -288,9 +297,44 @@ public class AbstractScoresTest {
     }
 
     @Test
+    public void shouldProcess_object_caseAllInOne() {
+        // given
+        List<String> actual = new LinkedList<>();
+
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
+            put(PROCESS_ALL_KEYS,
+                    value -> {
+                        actual.add(value.toString());
+                        return 1;
+                    });
+        }});
+
+        // when
+        scores.event("string1");
+
+        // then
+        assertEquals(101, scores.getScore());
+        assertEquals("[string1]", actual.toString());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(102, scores.getScore());
+        assertEquals("[string1, 2]", actual.toString());
+
+        // when
+        scores.event(true);
+
+        // then
+        assertEquals(103, scores.getScore());
+        assertEquals("[string1, 2, true]", actual.toString());
+    }
+
+    @Test
     public void shouldProcess_whenNoKey() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put(SomeEvent.TYPE1,
                     value -> {
                         assertEquals(null, value);
@@ -314,14 +358,14 @@ public class AbstractScoresTest {
     @Test
     public void shouldProcess_whenNullKey() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(){{
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put(SomeEvent.TYPE1,
                     value -> {
                         assertEquals(null, value);
                         return 1;
                     });
 
-            put(null,  // default processor
+            put(PROCESS_ALL_KEYS,  // default processor
                     value -> {
                         assertEquals(null, value);
                         return 2;
@@ -345,5 +389,51 @@ public class AbstractScoresTest {
 
         // then
         assertEquals(105, scores.getScore());
+    }
+
+    @Test
+    public void shouldProcess_maxScore() {
+        // given
+        ScoresImpl.setup(settings, ScoresImpl.MAX_VALUE);
+
+        PlayerScores scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
+            put(PROCESS_ALL_KEYS, value -> (int)value);
+        }});
+
+        // when
+        scores.event(1);
+
+        // then
+        assertEquals(2, scores.getScore());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(2, scores.getScore());
+
+        // when
+        scores.event(3);
+
+        // then
+        assertEquals(3, scores.getScore());
+
+        // when
+        scores.event(101);
+
+        // then
+        assertEquals(101, scores.getScore());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(101, scores.getScore());
+
+        // when
+        scores.event(102);
+
+        // then
+        assertEquals(102, scores.getScore());
     }
 }

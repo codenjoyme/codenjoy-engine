@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.settings;
  * #L%
  */
 
+import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
@@ -67,6 +68,13 @@ public interface SettingsReader<T extends SettingsReader> {
                 .or(() -> Key.nameToKey(InactivitySettings.allInactivityKeys(), value))
                 .or(() -> LevelsSettings.nameToKey(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
+    }
+
+    // init
+
+    // TODO убрать в ScoresSettings когда он появится
+    default void initScore(boolean mode) {
+        ScoresImpl.setup(this, mode);
     }
 
     // methods from Settings

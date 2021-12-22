@@ -23,13 +23,22 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
+import com.codenjoy.dojo.services.settings.SettingsReader;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 public class ScoresMap<V> {
 
+    public static Object PROCESS_ALL_KEYS = null;
+
     private Map<Object, Function<V, Integer>> map = new HashMap<>();
+    private SettingsReader settings;
+
+    public ScoresMap(SettingsReader settings) {
+        this.settings = settings;
+    }
 
     boolean containsKey(Object key) {
         return map.containsKey(key);
@@ -41,5 +50,9 @@ public class ScoresMap<V> {
     
     protected void put(Object key, Function<V, Integer> value) {
         map.put(key, value);
+    }
+
+    public SettingsReader settings() {
+        return settings;
     }
 }

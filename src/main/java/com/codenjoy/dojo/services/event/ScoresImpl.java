@@ -24,18 +24,40 @@ package com.codenjoy.dojo.services.event;
 
 import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
+import com.codenjoy.dojo.services.settings.SettingsReader;
 import org.json.JSONObject;
 
 import java.util.function.Function;
 
 public class ScoresImpl<V> implements PlayerScores {
 
+    // TODO выделить полноценный блок настроек подсчета очков в settings как Rounds/Semifinal/Inactivity
+    public static final String SCORE_COUNTING_TYPE =
+            "[Score] Count score cumulatively or take into account the maximum value";
+
+    public static final boolean MAX_VALUE = false;
+    public static final boolean CUMULATIVELY = !MAX_VALUE;
+
+    protected boolean countingType;
     protected volatile int score;
     protected ScoresMap<V> map;
+
+    public static void setup(SettingsReader settings, boolean mode) {
+        settings.bool(() -> SCORE_COUNTING_TYPE, mode);
+    }
 
     public ScoresImpl(int score, ScoresMap<V> map) {
         this.score = score;
         this.map = map;
+        init(map.settings());
+    }
+
+    private void init(SettingsReader settings) {
+        if (settings.hasParameter(SCORE_COUNTING_TYPE)) {
+            countingType = settings.bool(() -> SCORE_COUNTING_TYPE);
+        } else {
+            countingType = CUMULATIVELY;
+        }
     }
 
     @Override
@@ -50,7 +72,12 @@ public class ScoresImpl<V> implements PlayerScores {
 
     @Override
     public void event(Object event) {
-        score += scoreFor(map, event);
+        int amount = scoreFor(map, event);
+        if (countingType) {
+            score += amount;
+        } else {
+            score = Math.max(score, amount);
+        }
         score = Math.max(0, score);
     }
 
@@ -98,7 +125,7 @@ public class ScoresImpl<V> implements PlayerScores {
             return new Pair(event.getMessage(), event.value());
         }
 
-        return new Pair(input, null);
+        return new Pair(input, input);
     }
 
     @Override
