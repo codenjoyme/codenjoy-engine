@@ -22,9 +22,21 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-public interface EventObject<T, V> {
+public class Pair {
 
-    T type();
+    private Object key;
+    private Object value;
 
-    V value();
+    public Pair(Object key, Object value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public Object key() {
+        return key;
+    }
+
+    public Object value() {
+        return value;
+    }
 }

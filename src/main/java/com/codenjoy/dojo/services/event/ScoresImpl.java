@@ -22,24 +22,20 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-
 import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
-import com.codenjoy.dojo.services.settings.SettingsReader;
 import org.json.JSONObject;
 
-import java.util.AbstractMap;
-import java.util.Map;
 import java.util.function.Function;
 
-public abstract class AbstractScores<V> implements PlayerScores {
+public class ScoresImpl<V> implements PlayerScores {
 
     protected volatile int score;
-    protected SettingsReader settings;
+    protected ScoresMap<V> map;
 
-    public AbstractScores(int score, SettingsReader settings) {
+    public ScoresImpl(int score, ScoresMap<V> map) {
         this.score = score;
-        this.settings = settings;
+        this.map = map;
     }
 
     @Override
@@ -54,26 +50,24 @@ public abstract class AbstractScores<V> implements PlayerScores {
 
     @Override
     public void event(Object event) {
-        score += scoreFor(eventToScore(), event);
+        score += scoreFor(map, event);
         score = Math.max(0, score);
     }
 
-    protected abstract Map<Object, Function<V, Integer>> eventToScore();
+    public static <V> int scoreFor(ScoresMap<V> map, Object input) {
+        Pair pair = parseEvent(input);
 
-    public static <V> int scoreFor(Map<Object, Function<V, Integer>> map, Object input) {
-        Map.Entry<Object, Object> entry = parseEvent(input);
-
-        Function<V, Integer> function = getValue(map, entry);
+        Function<V, Integer> function = getValue(map, pair);
         if (function == null) {
             return 0;
         }
 
-        return function.apply((V) entry.getValue());
+        return function.apply((V) pair.value());
     }
 
-    private static <V> Function<V, Integer> getValue(Map<Object, Function<V, Integer>> map, Map.Entry<Object, Object> entry) {
-        if (map.containsKey(entry.getKey())) {
-            return map.get(entry.getKey());
+    private static <V> Function<V, Integer> getValue(ScoresMap<V> map, Pair pair) {
+        if (map.containsKey(pair.key())) {
+            return map.get(pair.key());
         }
 
         if (map.containsKey(null)) {
@@ -83,33 +77,28 @@ public abstract class AbstractScores<V> implements PlayerScores {
         return null;
     }
 
-    private static Map.Entry<Object, Object> parseEvent(Object input) {
+    private static Pair parseEvent(Object input) {
         if (input instanceof EventObject) {
             EventObject event = (EventObject) input;
-            return new AbstractMap.SimpleEntry<>(
-                    event.type(), event.value());
+            return new Pair(event.type(), event.value());
         }
 
         if (input instanceof Enum) {
             Enum event = (Enum) input;
-            return new AbstractMap.SimpleEntry<>(
-                    event, null);
+            return new Pair(event, null);
         }
 
         if (input instanceof JSONObject) {
             JSONObject event = (JSONObject) input;
-            return new AbstractMap.SimpleEntry<>(
-                    event.getString("type"), event);
+            return new Pair(event.getString("type"), event);
         }
 
         if (input instanceof CustomMessage) {
             CustomMessage event = (CustomMessage) input;
-            return new AbstractMap.SimpleEntry<>(
-                    event.getMessage(), event.value());
+            return new Pair(event.getMessage(), event.value());
         }
 
-        return new AbstractMap.SimpleEntry<>(
-                input, null);
+        return new Pair(input, null);
     }
 
     @Override

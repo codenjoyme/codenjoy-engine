@@ -1,5 +1,6 @@
 package com.codenjoy.dojo.services.event;
 
+
 /*-
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
@@ -22,9 +23,23 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-public interface EventObject<T, V> {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
-    T type();
+public class ScoresMap<V> {
 
-    V value();
+    private Map<Object, Function<V, Integer>> map = new HashMap<>();
+
+    boolean containsKey(Object key) {
+        return map.containsKey(key);
+    }
+
+    Function<V, Integer> get(Object key) {
+        return map.get(key);
+    }
+    
+    protected void put(Object key, Function<V, Integer> value) {
+        map.put(key, value);
+    }
 }
