@@ -228,6 +228,15 @@ public class PointField {
             }
 
             @Override
+            public E getFirstAt(Point point) {
+                List<Point> list = get(point).get(filter);
+                if (list.isEmpty()) {
+                    return null;
+                }
+                return (E) list.get(0);
+            }
+
+            @Override
             @PerformanceOptimized
             public List<E> copy() {
                 return new ArrayList(points());

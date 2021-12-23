@@ -4160,6 +4160,40 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_getFirstAt_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("one1(1,1)",
+                field.of(One.class).getFirstAt(pt(1, 1)).toString());
+
+        assertEquals("one3(1,2)",
+                field.of(One.class).getFirstAt(pt(1, 2)).toString());
+
+        assertEquals(null,
+                field.of(One.class).getFirstAt(pt(2, 2)));
+
+        assertEquals(null,
+                field.of(Two.class).getFirstAt(pt(1, 1)));
+
+        assertEquals("two4(1,2)",
+                field.of(Two.class).getFirstAt(pt(1, 2)).toString());
+
+        assertEquals(null,
+                field.of(Two.class).getFirstAt(pt(1, 1)));
+
+        assertEquals("three5(2,2)",
+                field.of(Three.class).getFirstAt(pt(2, 2)).toString());
+
+        assertEquals(null,
+                field.of(Four.class).getFirstAt(pt(1, 1)));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
     public void testSameOf_getAt_mixed() {
         // given
         testAdd_severalElements_mixed();
