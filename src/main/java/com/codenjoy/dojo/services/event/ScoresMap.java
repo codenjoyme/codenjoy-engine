@@ -34,7 +34,7 @@ public class ScoresMap<V> {
     public static Object PROCESS_ALL_KEYS = null;
 
     private Map<Object, Function<V, Integer>> map = new HashMap<>();
-    private SettingsReader settings;
+    protected SettingsReader settings;
 
     public ScoresMap(SettingsReader settings) {
         this.settings = settings;

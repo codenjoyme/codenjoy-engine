@@ -32,6 +32,8 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Optional;
 
+import static com.codenjoy.dojo.services.event.ScoresImpl.SCORE_COUNTING_TYPE;
+
 public interface SettingsReader<T extends SettingsReader> {
 
     interface Key {
@@ -73,7 +75,16 @@ public interface SettingsReader<T extends SettingsReader> {
     // init
 
     // TODO убрать в ScoresSettings когда он появится
-    default void initScore(boolean mode) {
+    default void initScore(ScoresImpl.Mode mode) {
+        if (allKeys().stream()
+                .noneMatch(key -> key.key().equals(SCORE_COUNTING_TYPE.key())))
+        {
+            throw new IllegalArgumentException(
+                    "\n\n\tSCORE_COUNTING_TYPE key not found in this " +
+                            "settings, please add line: \n" +
+                            "\t\tSCORE_COUNTING_TYPE(ScoresImpl.SCORE_COUNTING_TYPE.key())");
+        }
+
         ScoresImpl.setup(this, mode);
     }
 

@@ -33,8 +33,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.codenjoy.dojo.services.event.ScoresImpl.Mode.*;
 import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
 
 public class ScoresImplTest {
@@ -43,8 +46,16 @@ public class ScoresImplTest {
 
     @Before
     public void setup() {
-        settings = new TestGameSettings();
-        ScoresImpl.setup(settings, ScoresImpl.CUMULATIVELY);
+        settings = new TestGameSettings(){
+            @Override
+            public List<Key> allKeys() {
+                return new LinkedList<>(super.allKeys()) {{
+                    // to pass validation
+                    add(ScoresImpl.SCORE_COUNTING_TYPE);
+                }};
+            }
+        };
+        settings.initScore(CUMULATIVELY);
     }
 
     @After
@@ -512,11 +523,11 @@ public class ScoresImplTest {
     }
 
     @Test
-    public void shouldProcess_maxScoreMode() {
+    public void shouldCounting_maxScoreMode() {
         // given
-        ScoresImpl.setup(settings, ScoresImpl.MAX_VALUE);
+        settings.initScore(MAX_VALUE);
 
-        PlayerScores scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
+        ScoresImpl scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
             put(PROCESS_ALL_KEYS, value -> (int)value);
         }});
 
@@ -525,35 +536,169 @@ public class ScoresImplTest {
 
         // then
         assertEquals(2, scores.getScore());
+        assertEquals(2, scores.getSeries());
 
         // when
         scores.event(2);
 
         // then
         assertEquals(2, scores.getScore());
+        assertEquals(2, scores.getSeries());
 
         // when
         scores.event(3);
 
         // then
         assertEquals(3, scores.getScore());
+        assertEquals(3, scores.getSeries());
 
         // when
         scores.event(101);
 
         // then
         assertEquals(101, scores.getScore());
+        assertEquals(101, scores.getSeries());
 
         // when
         scores.event(2);
 
         // then
         assertEquals(101, scores.getScore());
+        assertEquals(101, scores.getSeries());
 
         // when
         scores.event(102);
 
         // then
         assertEquals(102, scores.getScore());
+        assertEquals(102, scores.getSeries());
+    }
+
+    @Test
+    public void shouldCounting_cumulativelyMode() {
+        // given
+        settings.initScore(CUMULATIVELY);
+
+        ScoresImpl scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
+            put(PROCESS_ALL_KEYS, value -> (int)value);
+        }});
+
+        // when
+        scores.event(1);
+
+        // then
+        assertEquals(3, scores.getScore());
+        assertEquals(3, scores.getSeries());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(5, scores.getScore());
+        assertEquals(5, scores.getSeries());
+
+        // when
+        scores.event(3);
+
+        // then
+        assertEquals(8, scores.getScore());
+        assertEquals(8, scores.getSeries());
+
+        // when
+        scores.event(101);
+
+        // then
+        assertEquals(109, scores.getScore());
+        assertEquals(109, scores.getSeries());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(111, scores.getScore());
+        assertEquals(111, scores.getSeries());
+
+        // when
+        scores.event(102);
+
+        // then
+        assertEquals(213, scores.getScore());
+        assertEquals(213, scores.getSeries());
+    }
+
+    @Test
+    public void shouldCounting_seriesMaxValueMode() {
+        // given
+        settings.initScore(SERIES_MAX_VALUE);
+        String clearSeries = "CLEAN";
+
+        ScoresImpl scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
+            put(clearSeries, value -> null); // return null to clean series
+
+            put(PROCESS_ALL_KEYS, value -> (int)value);
+        }});
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(4, scores.getScore());
+        assertEquals(4, scores.getSeries());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(6, scores.getScore());
+        assertEquals(6, scores.getSeries());
+
+        // when
+        scores.event(clearSeries); // clean only series
+
+        // then
+        assertEquals(6, scores.getScore());
+        assertEquals(0, scores.getSeries());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(6, scores.getScore());
+        assertEquals(2, scores.getSeries());
+
+        // when
+        scores.event(4);
+
+        // then
+        assertEquals(6, scores.getScore());
+        assertEquals(6, scores.getSeries());
+
+        // when
+        scores.event(4);
+
+        // then
+        assertEquals(10, scores.getScore());
+        assertEquals(10, scores.getSeries());
+
+        // when
+        scores.clear(); // clean all scores and series
+
+        // then
+        assertEquals(0, scores.getScore());
+        assertEquals(0, scores.getSeries());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(2, scores.getScore());
+        assertEquals(2, scores.getSeries());
+
+        // when
+        scores.event(4);
+
+        // then
+        assertEquals(6, scores.getScore());
+        assertEquals(6, scores.getSeries());
     }
 }

@@ -24,46 +24,91 @@ package com.codenjoy.dojo.services.event;
 
 import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
+import com.codenjoy.dojo.services.settings.SelectBox;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
+
+import static java.util.stream.Collectors.toList;
 
 public class ScoresImpl<V> implements PlayerScores {
 
     // TODO выделить полноценный блок настроек подсчета очков в settings как Rounds/Semifinal/Inactivity
-    public static final String SCORE_COUNTING_TYPE =
-            "[Score] Count score cumulatively or take into account the maximum value";
+    public static final SettingsReader.Key SCORE_COUNTING_TYPE = () -> "[Score] Counting score mode";
 
-    public static final boolean MAX_VALUE = false;
-    public static final boolean CUMULATIVELY = !MAX_VALUE;
+    public enum Mode implements SettingsReader.Key {
 
-    protected boolean countingType;
+        CUMULATIVELY(0, "Accumulate points consistently"),
+        MAX_VALUE(1, "Maximum points from the event"),
+        SERIES_MAX_VALUE(2, "Maximum points from the series");
+
+        private int value;
+        private String key;
+
+        Mode(int value, String key) {
+            this.value = value;
+            this.key = key;
+        }
+
+        public static List<String> keys() {
+            return Arrays.stream(values())
+                    .map(Mode::key)
+                    .collect(toList());
+        }
+
+        public int value() {
+            return value;
+        }
+
+        @Override
+        public String key() {
+            return key;
+        }
+    }
+
+    protected Mode counting;
     protected volatile int score;
+    protected volatile int series;
     protected ScoresMap<V> map;
 
-    public static void setup(SettingsReader settings, boolean mode) {
-        settings.bool(() -> SCORE_COUNTING_TYPE, mode);
+    // метод для инициализации настроек select'ом с заданным default Mode
+    // либо если это уже произошло, то обновление значения настройки
+    public static void setup(SettingsReader settings, Mode mode) {
+        if (settings.hasParameter(SCORE_COUNTING_TYPE.key())) {
+            mode(settings).select(mode.value());
+        } else {
+            settings.options(SCORE_COUNTING_TYPE,
+                    Mode.keys(),
+                    mode.key());
+        }
+    }
+
+    // метод для получения enum Mode из настроек
+    public static Mode modeValue(SettingsReader<SettingsReader> settings) {
+        if (!settings.hasParameter(SCORE_COUNTING_TYPE.key())) {
+            return Mode.CUMULATIVELY;
+        }
+        return Mode.values()[mode(settings).index()];
+    }
+
+    // метод для получения parameter Mode из настроек
+    private static SelectBox mode(SettingsReader<SettingsReader> settings) {
+        return settings.parameter(SCORE_COUNTING_TYPE, SelectBox.class);
     }
 
     public ScoresImpl(int score, ScoresMap<V> map) {
         this.score = score;
+        this.series = score;
         this.map = map;
-        init(map.settings());
-    }
-
-    public static boolean mode(SettingsReader settings) {
-        return settings.bool(() -> SCORE_COUNTING_TYPE);
-    }
-
-    private void init(SettingsReader settings) {
-        countingType = settings.hasParameter(SCORE_COUNTING_TYPE)
-                ? mode(settings)
-                : CUMULATIVELY;
+        this.counting = modeValue(map.settings());
     }
 
     @Override
     public int clear() {
+        series = 0;
         return score = 0;
     }
 
@@ -72,18 +117,35 @@ public class ScoresImpl<V> implements PlayerScores {
         return score;
     }
 
-    @Override
-    public void event(Object event) {
-        int amount = scoreFor(map, event);
-        if (countingType) {
-            score += amount;
-        } else {
-            score = Math.max(score, amount);
-        }
-        score = Math.max(0, score);
+    public Integer getSeries() {
+        return series;
     }
 
-    public static <V> int scoreFor(ScoresMap<V> map, Object input) {
+    @Override
+    public void event(Object event) {
+        Integer amount = scoreFor(map, event);
+        if (counting == Mode.CUMULATIVELY) {
+            if (amount == null) amount = 0;
+            score += amount;
+        } else if (counting == Mode.MAX_VALUE) {
+            if (amount == null) amount = 0;
+            score = Math.max(score, amount);
+        } else if (counting == Mode.SERIES_MAX_VALUE) {
+            if (amount == null) {
+                series = 0;
+            } else {
+                series += amount;
+                series = Math.max(0, series);
+            }
+            score = Math.max(score, series);
+        }
+        score = Math.max(0, score);
+        if (counting != Mode.SERIES_MAX_VALUE) {
+            series = score;
+        }
+    }
+
+    public static <V> Integer scoreFor(ScoresMap<V> map, Object input) {
         Pair pair = parseEvent(input);
 
         Function<V, Integer> function = getValue(map, pair);
@@ -137,5 +199,6 @@ public class ScoresImpl<V> implements PlayerScores {
     @Override
     public void update(Object score) {
         this.score = Integer.parseInt(score.toString());
+        this.series = this.score;
     }
 }
