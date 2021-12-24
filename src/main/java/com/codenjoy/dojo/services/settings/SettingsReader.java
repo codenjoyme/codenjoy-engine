@@ -75,7 +75,7 @@ public interface SettingsReader<T extends SettingsReader> {
     // init
 
     // TODO убрать в ScoresSettings когда он появится
-    default void initScore(ScoresImpl.Mode mode) {
+    default T initScore(ScoresImpl.Mode mode) {
         if (allKeys().stream()
                 .noneMatch(key -> key.key().equals(SCORE_COUNTING_TYPE.key())))
         {
@@ -86,6 +86,7 @@ public interface SettingsReader<T extends SettingsReader> {
         }
 
         ScoresImpl.setup(this, mode);
+        return (T)this;
     }
 
     // methods from Settings
