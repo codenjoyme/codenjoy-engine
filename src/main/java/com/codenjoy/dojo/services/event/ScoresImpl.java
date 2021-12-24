@@ -101,7 +101,7 @@ public class ScoresImpl<V> implements PlayerScores {
 
     public ScoresImpl(int score, ScoresMap<V> map) {
         this.score = score;
-        this.series = score;
+        this.series = 0;
         this.map = map;
         this.counting = modeValue(map.settings());
     }
@@ -109,7 +109,9 @@ public class ScoresImpl<V> implements PlayerScores {
     @Override
     public int clear() {
         series = 0;
-        return score = 0;
+        int result = score;
+        score = 0;
+        return result;
     }
 
     @Override

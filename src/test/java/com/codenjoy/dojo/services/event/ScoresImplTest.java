@@ -642,6 +642,14 @@ public class ScoresImplTest {
         scores.event(2);
 
         // then
+        // при загрузке очков, серия все равно == 0, потому тут 2, а не 4
+        assertEquals(2, scores.getScore());
+        assertEquals(2, scores.getSeries());
+
+        // when
+        scores.event(2);
+
+        // then
         assertEquals(4, scores.getScore());
         assertEquals(4, scores.getSeries());
 
@@ -681,7 +689,7 @@ public class ScoresImplTest {
         assertEquals(10, scores.getSeries());
 
         // when
-        scores.clear(); // clean all scores and series
+        assertEquals(10, scores.clear()); // clean all scores and series
 
         // then
         assertEquals(0, scores.getScore());
