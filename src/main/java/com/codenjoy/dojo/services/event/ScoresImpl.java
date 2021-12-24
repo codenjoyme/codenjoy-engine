@@ -95,7 +95,7 @@ public class ScoresImpl<V> implements PlayerScores {
     }
 
     private static <V> Function<V, Integer> getValue(ScoresMap<V> map, Pair pair) {
-        if (map.containsKey(pair.key().getClass())) {
+        if (pair.key() != null && map.containsKey(pair.key().getClass())) {
             return map.get(pair.key().getClass());
         }
 

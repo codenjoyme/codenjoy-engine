@@ -33,12 +33,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
 
-public class AbstractScoresTest {
+public class ScoresImplTest {
 
     private SettingsReader settings;
 
@@ -116,7 +115,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_eventObject_value() {
+    public void shouldProcess_valueEvent() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
             put(ValueEvent.Type.TYPE1,
@@ -146,7 +145,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_eventObject_wholeEvent() {
+    public void shouldProcess_multiValueEvent() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<MultiValuesEvent>(settings){{
             put(MultiValuesEvent.Type.TYPE1,
@@ -212,7 +211,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_valuedEventEnum() {
+    public void shouldProcess_enumValueEvent() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
             put(EnumValueEvent.TYPE1,
@@ -242,7 +241,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_eventEnum() {
+    public void shouldProcess_enumEvent() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<EnumEvent>(settings){{
             put(EnumEvent.TYPE1,
@@ -272,7 +271,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_object_byValue() {
+    public void shouldProcess_primitiveObject_byValue() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put("string1",
@@ -314,7 +313,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_object_byClass() {
+    public void shouldProcess_primitiveObject_byClass() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put(String.class,
@@ -356,14 +355,14 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_object_caseAllInOne() {
+    public void shouldProcess_object_defaultProcessor() {
         // given
-        List<String> actual = new LinkedList<>();
+        AtomicReference<String> actual = new AtomicReference<>("");
 
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put(PROCESS_ALL_KEYS,
                     value -> {
-                        actual.add(value.toString());
+                        actual.set(String.format("%s", value));
                         return 1;
                     });
         }});
@@ -373,21 +372,83 @@ public class AbstractScoresTest {
 
         // then
         assertEquals(101, scores.getScore());
-        assertEquals("[string1]", actual.toString());
+        assertEquals("string1", actual.toString());
 
         // when
         scores.event(2);
 
         // then
         assertEquals(102, scores.getScore());
-        assertEquals("[string1, 2]", actual.toString());
+        assertEquals("2", actual.toString());
 
         // when
         scores.event(true);
 
         // then
         assertEquals(103, scores.getScore());
-        assertEquals("[string1, 2, true]", actual.toString());
+        assertEquals("true", actual.toString());
+
+        // when
+        scores.event(new ObjectEvent1(11));
+
+        // then
+        assertEquals(104, scores.getScore());
+        assertEquals("ObjectEvent1(value=11)", actual.toString());
+
+        // when
+        scores.event(new ObjectEvent2("11", false));
+
+        // then
+        assertEquals(105, scores.getScore());
+        assertEquals("ObjectEvent2(value1=11, value2=false)", actual.toString());
+
+        // when
+        scores.event(EnumEvent.TYPE1);
+        // then
+        assertEquals(106, scores.getScore());
+        assertEquals("null", actual.toString());
+
+        // when
+        scores.event(EnumValueEvent.TYPE2);
+
+        // then
+        assertEquals(107, scores.getScore());
+        assertEquals("22", actual.toString());
+
+        // when
+        scores.event(new CustomMessage("message2"));
+
+        // then
+        assertEquals(108, scores.getScore());
+        assertEquals("[message2]", actual.toString());
+
+        // when
+        scores.event(new JSONObject("{'type':'type2','value':'value2'}"));
+
+        // then
+        assertEquals(109, scores.getScore());
+        assertEquals("{\"type\":\"type2\",\"value\":\"value2\"}", actual.toString());
+
+        // when
+        scores.event(new ValueEvent(ValueEvent.Type.TYPE2, 22));
+
+        // then
+        assertEquals(110, scores.getScore());
+        assertEquals("22", actual.toString());
+
+        // when
+        scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE2, 22, 23));
+
+        // then
+        assertEquals(111, scores.getScore());
+        assertEquals("MultiValuesEvent(type=TYPE2, value1=22, value2=23)", actual.toString());
+
+        // when
+        scores.event(null);
+
+        // then
+        assertEquals(112, scores.getScore());
+        assertEquals("null", actual.toString());
     }
 
     @Test
@@ -408,7 +469,7 @@ public class AbstractScoresTest {
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(EnumEvent.TYPE2); // no key
+        scores.event(EnumEvent.TYPE2); // no key, no processing
 
         // then
         assertEquals(101, scores.getScore());
@@ -438,20 +499,20 @@ public class AbstractScoresTest {
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(EnumEvent.TYPE2); // no key, but null
+        scores.event(EnumEvent.TYPE2); // no key, but PROCESS_ALL_KEYS will process it
 
         // then
         assertEquals(103, scores.getScore());
 
         // when
-        scores.event(EnumEvent.TYPE3); // no key, but null
+        scores.event(EnumEvent.TYPE3); // no key, but PROCESS_ALL_KEYS will process it
 
         // then
         assertEquals(105, scores.getScore());
     }
 
     @Test
-    public void shouldProcess_maxScore() {
+    public void shouldProcess_maxScoreMode() {
         // given
         ScoresImpl.setup(settings, ScoresImpl.MAX_VALUE);
 
