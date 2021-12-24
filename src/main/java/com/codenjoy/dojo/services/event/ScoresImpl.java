@@ -52,12 +52,14 @@ public class ScoresImpl<V> implements PlayerScores {
         init(map.settings());
     }
 
+    public static boolean mode(SettingsReader settings) {
+        return settings.bool(() -> SCORE_COUNTING_TYPE);
+    }
+
     private void init(SettingsReader settings) {
-        if (settings.hasParameter(SCORE_COUNTING_TYPE)) {
-            countingType = settings.bool(() -> SCORE_COUNTING_TYPE);
-        } else {
-            countingType = CUMULATIVELY;
-        }
+        countingType = settings.hasParameter(SCORE_COUNTING_TYPE)
+                ? mode(settings)
+                : CUMULATIVELY;
     }
 
     @Override
