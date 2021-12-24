@@ -40,12 +40,20 @@ public class ScoresMap<V> {
         this.settings = settings;
     }
 
-    boolean containsKey(Object key) {
-        return map.containsKey(key);
-    }
+    Function<V, Integer> getValue(Pair pair) {
+        if (pair.key() != null && map.containsKey(pair.key().getClass())) {
+            return map.get(pair.key().getClass());
+        }
 
-    Function<V, Integer> get(Object key) {
-        return map.get(key);
+        if (map.containsKey(pair.key())) {
+            return map.get(pair.key());
+        }
+
+        if (map.containsKey(null)) {
+            return map.get(null);
+        }
+
+        return null;
     }
     
     protected void put(Object key, Function<V, Integer> value) {

@@ -150,28 +150,12 @@ public class ScoresImpl<V> implements PlayerScores {
     public static <V> Integer scoreFor(ScoresMap<V> map, Object input) {
         Pair pair = parseEvent(input);
 
-        Function<V, Integer> function = getValue(map, pair);
+        Function<V, Integer> function = map.getValue(pair);
         if (function == null) {
             return 0;
         }
 
         return function.apply((V) pair.value());
-    }
-
-    private static <V> Function<V, Integer> getValue(ScoresMap<V> map, Pair pair) {
-        if (pair.key() != null && map.containsKey(pair.key().getClass())) {
-            return map.get(pair.key().getClass());
-        }
-
-        if (map.containsKey(pair.key())) {
-            return map.get(pair.key());
-        }
-
-        if (map.containsKey(null)) {
-            return map.get(null);
-        }
-
-        return null;
     }
 
     private static Pair parseEvent(Object input) {
