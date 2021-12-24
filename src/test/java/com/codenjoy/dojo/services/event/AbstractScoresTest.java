@@ -25,19 +25,18 @@ package com.codenjoy.dojo.services.event;
 import com.codenjoy.dojo.client.TestGameSettings;
 import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
-import com.codenjoy.dojo.services.event.cases.EnumEvent;
-import com.codenjoy.dojo.services.event.cases.EnumValueEvent;
-import com.codenjoy.dojo.services.event.cases.MultiValuesEvent;
-import com.codenjoy.dojo.services.event.cases.ValueEvent;
+import com.codenjoy.dojo.services.event.cases.*;
 import com.codenjoy.dojo.services.settings.SettingsReader;
+import com.codenjoy.dojo.utils.smart.SmartAssert;
 import org.json.JSONObject;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
 
 public class AbstractScoresTest {
 
@@ -47,6 +46,11 @@ public class AbstractScoresTest {
     public void setup() {
         settings = new TestGameSettings();
         ScoresImpl.setup(settings, ScoresImpl.CUMULATIVELY);
+    }
+
+    @After
+    public void after() {
+        SmartAssert.checkResult();
     }
 
     @Test
@@ -148,14 +152,16 @@ public class AbstractScoresTest {
             put(MultiValuesEvent.Type.TYPE1,
                     event -> {
                         assertEquals("MultiValuesEvent" +
-                                "(type=TYPE1, value1=11, value2=12)", event.toString());
+                                "(type=TYPE1, value1=11, value2=12)",
+                                event.toString());
                         return 1;
                     });
 
             put(MultiValuesEvent.Type.TYPE2,
                     event -> {
                         assertEquals("MultiValuesEvent" +
-                                "(type=TYPE2, value1=22, value2=23)", event.toString());
+                                "(type=TYPE2, value1=22, value2=23)",
+                                event.toString());
                         return 2;
                     });
         }});
@@ -168,6 +174,38 @@ public class AbstractScoresTest {
 
         // when
         scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE2, 22, 23));
+
+        // then
+        assertEquals(103, scores.getScore());
+    }
+
+    @Test
+    public void shouldProcess_objectEvent_byClass() {
+        // given
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
+            put(ObjectEvent1.class,
+                    event -> {
+                        assertEquals("ObjectEvent1(value=11)",
+                                ((ObjectEvent1)event).toString());
+                        return 1;
+                    });
+
+            put(ObjectEvent2.class,
+                    event -> {
+                        assertEquals("ObjectEvent2(value1=22, value2=true)",
+                                ((ObjectEvent2)event).toString());
+                        return 2;
+                    });
+        }});
+
+        // when
+        scores.event(new ObjectEvent1(11));
+
+        // then
+        assertEquals(101, scores.getScore());
+
+        // when
+        scores.event(new ObjectEvent2("22", true));
 
         // then
         assertEquals(103, scores.getScore());

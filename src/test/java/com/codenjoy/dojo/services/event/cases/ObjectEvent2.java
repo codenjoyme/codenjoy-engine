@@ -22,28 +22,13 @@ package com.codenjoy.dojo.services.event.cases;
  * #L%
  */
 
-import com.codenjoy.dojo.services.event.EventObject;
+import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 @ToString
-public enum EnumValueEvent implements EventObject<EnumValueEvent, Integer> {
+@AllArgsConstructor
+public class ObjectEvent2 {
 
-    TYPE1(11),
-    TYPE2(22);
-
-    private final int value;
-
-    EnumValueEvent(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public EnumValueEvent type() {
-        return this;
-    }
-
-    @Override
-    public Integer value() {
-        return value;
-    }
+    private String value1;
+    private boolean value2;
 }
