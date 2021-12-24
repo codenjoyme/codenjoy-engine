@@ -135,7 +135,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_eventObject() {
+    public void shouldProcess_eventObject_value() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
             put(SomeEventObject.Type.TYPE1,
@@ -159,6 +159,62 @@ public class AbstractScoresTest {
 
         // when
         scores.event(new SomeEventObject(SomeEventObject.Type.TYPE2, 22));
+
+        // then
+        assertEquals(103, scores.getScore());
+    }
+
+    @ToString
+    static class SomeEventValuesObject implements EventObject<SomeEventValuesObject.Type, SomeEventValuesObject> {
+
+        private Type type;
+        private Integer value1;
+        private Integer value2;
+
+        SomeEventValuesObject(Type type, Integer value1, Integer value2) {
+            this.type = type;
+            this.value1 = value1;
+            this.value2 = value2;
+        }
+
+        enum Type {
+            TYPE1,
+            TYPE2;
+        }
+
+        @Override
+        public Type type() {
+            return type;
+        }
+    }
+
+    @Test
+    public void shouldProcess_eventObject_wholeEvent() {
+        // given
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<SomeEventValuesObject>(settings){{
+            put(SomeEventValuesObject.Type.TYPE1,
+                    event -> {
+                        assertEquals("AbstractScoresTest.SomeEventValuesObject" +
+                                "(type=TYPE1, value1=11, value2=12)", event.toString());
+                        return 1;
+                    });
+
+            put(SomeEventValuesObject.Type.TYPE2,
+                    event -> {
+                        assertEquals("AbstractScoresTest.SomeEventValuesObject" +
+                                "(type=TYPE2, value1=22, value2=23)", event.toString());
+                        return 2;
+                    });
+        }});
+
+        // when
+        scores.event(new SomeEventValuesObject(SomeEventValuesObject.Type.TYPE1, 11, 12));
+
+        // then
+        assertEquals(101, scores.getScore());
+
+        // when
+        scores.event(new SomeEventValuesObject(SomeEventValuesObject.Type.TYPE2, 22, 23));
 
         // then
         assertEquals(103, scores.getScore());

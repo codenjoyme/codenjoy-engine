@@ -26,5 +26,7 @@ public interface EventObject<T, V> {
 
     T type();
 
-    V value();
+    default V value() {
+        return (V) this;
+    }
 }
