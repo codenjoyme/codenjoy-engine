@@ -272,7 +272,7 @@ public class AbstractScoresTest {
     }
 
     @Test
-    public void shouldProcess_object() {
+    public void shouldProcess_object_byValue() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
             put("string1",
@@ -288,6 +288,48 @@ public class AbstractScoresTest {
                     });
 
             put(true,
+                    value -> {
+                        assertEquals(true, value);
+                        return 3;
+                    });
+        }});
+
+        // when
+        scores.event("string1");
+
+        // then
+        assertEquals(101, scores.getScore());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(103, scores.getScore());
+
+        // when
+        scores.event(true);
+
+        // then
+        assertEquals(106, scores.getScore());
+    }
+
+    @Test
+    public void shouldProcess_object_byClass() {
+        // given
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
+            put(String.class,
+                    value -> {
+                        assertEquals("string1", value);
+                        return 1;
+                    });
+
+            put(Integer.class,
+                    value -> {
+                        assertEquals(2, value);
+                        return 2;
+                    });
+
+            put(Boolean.class,
                     value -> {
                         assertEquals(true, value);
                         return 3;
