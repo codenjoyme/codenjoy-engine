@@ -22,21 +22,21 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-public class Pair {
+public class Pair<K, V> {
 
-    private Object key;
-    private Object value;
+    private K key;
+    private V value;
 
-    public Pair(Object key, Object value) {
+    public Pair(K key, V value) {
         this.key = key;
         this.value = value;
     }
 
-    public Object key() {
+    public K key() {
         return key;
     }
 
-    public Object value() {
+    public V value() {
         return value;
     }
 }
