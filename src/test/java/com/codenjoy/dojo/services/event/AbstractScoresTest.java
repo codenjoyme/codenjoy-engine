@@ -4,7 +4,7 @@ package com.codenjoy.dojo.services.event;
  * #%L
  * Codenjoy - it's a dojo-like platform from developers to developers.
  * %%
- * Copyright (C) 2018 - 2019 Codenjoy
+ * Copyright (C) 2021 Codenjoy
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -25,8 +25,11 @@ package com.codenjoy.dojo.services.event;
 import com.codenjoy.dojo.client.TestGameSettings;
 import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
+import com.codenjoy.dojo.services.event.cases.EnumEvent;
+import com.codenjoy.dojo.services.event.cases.EnumValueEvent;
+import com.codenjoy.dojo.services.event.cases.MultiValuesEvent;
+import com.codenjoy.dojo.services.event.cases.ValueEvent;
 import com.codenjoy.dojo.services.settings.SettingsReader;
-import lombok.ToString;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -108,43 +111,17 @@ public class AbstractScoresTest {
         assertEquals(103, scores.getScore());
     }
 
-    @ToString
-    static class SomeEventObject implements EventObject<SomeEventObject.Type, Integer> {
-
-        private Type type;
-        private Integer value;
-
-        SomeEventObject(Type type, Integer value) {
-            this.type = type;
-            this.value = value;
-        }
-
-        enum Type {
-            TYPE1, TYPE2;
-        }
-
-        @Override
-        public Type type() {
-            return type;
-        }
-
-        @Override
-        public Integer value() {
-            return value;
-        }
-    }
-
     @Test
     public void shouldProcess_eventObject_value() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
-            put(SomeEventObject.Type.TYPE1,
+            put(ValueEvent.Type.TYPE1,
                     value -> {
                         assertEquals("11", value.toString());
                         return 1;
                     });
 
-            put(SomeEventObject.Type.TYPE2,
+            put(ValueEvent.Type.TYPE2,
                     value -> {
                         assertEquals("22", value.toString());
                         return 2;
@@ -152,108 +129,61 @@ public class AbstractScoresTest {
         }});
 
         // when
-        scores.event(new SomeEventObject(SomeEventObject.Type.TYPE1, 11));
+        scores.event(new ValueEvent(ValueEvent.Type.TYPE1, 11));
 
         // then
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(new SomeEventObject(SomeEventObject.Type.TYPE2, 22));
+        scores.event(new ValueEvent(ValueEvent.Type.TYPE2, 22));
 
         // then
         assertEquals(103, scores.getScore());
     }
 
-    @ToString
-    static class SomeEventValuesObject implements EventObject<SomeEventValuesObject.Type, SomeEventValuesObject> {
-
-        private Type type;
-        private Integer value1;
-        private Integer value2;
-
-        SomeEventValuesObject(Type type, Integer value1, Integer value2) {
-            this.type = type;
-            this.value1 = value1;
-            this.value2 = value2;
-        }
-
-        enum Type {
-            TYPE1,
-            TYPE2;
-        }
-
-        @Override
-        public Type type() {
-            return type;
-        }
-    }
-
     @Test
     public void shouldProcess_eventObject_wholeEvent() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<SomeEventValuesObject>(settings){{
-            put(SomeEventValuesObject.Type.TYPE1,
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<MultiValuesEvent>(settings){{
+            put(MultiValuesEvent.Type.TYPE1,
                     event -> {
-                        assertEquals("AbstractScoresTest.SomeEventValuesObject" +
+                        assertEquals("MultiValuesEvent" +
                                 "(type=TYPE1, value1=11, value2=12)", event.toString());
                         return 1;
                     });
 
-            put(SomeEventValuesObject.Type.TYPE2,
+            put(MultiValuesEvent.Type.TYPE2,
                     event -> {
-                        assertEquals("AbstractScoresTest.SomeEventValuesObject" +
+                        assertEquals("MultiValuesEvent" +
                                 "(type=TYPE2, value1=22, value2=23)", event.toString());
                         return 2;
                     });
         }});
 
         // when
-        scores.event(new SomeEventValuesObject(SomeEventValuesObject.Type.TYPE1, 11, 12));
+        scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE1, 11, 12));
 
         // then
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(new SomeEventValuesObject(SomeEventValuesObject.Type.TYPE2, 22, 23));
+        scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE2, 22, 23));
 
         // then
         assertEquals(103, scores.getScore());
-    }
-
-    @ToString
-    enum SomeValuedEvent implements EventObject<SomeValuedEvent, Integer> {
-
-        TYPE1(11),
-        TYPE2(22);
-
-        private final int value;
-
-        SomeValuedEvent(int value) {
-            this.value = value;
-        }
-
-        @Override
-        public SomeValuedEvent type() {
-            return this;
-        }
-
-        @Override
-        public Integer value() {
-            return value;
-        }
     }
 
     @Test
     public void shouldProcess_valuedEventEnum() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
-            put(SomeValuedEvent.TYPE1,
+            put(EnumValueEvent.TYPE1,
                     value -> {
                         assertEquals("11", value.toString());
                         return 1;
                     });
 
-            put(SomeValuedEvent.TYPE2,
+            put(EnumValueEvent.TYPE2,
                     value -> {
                         assertEquals("22", value.toString());
                         return 2;
@@ -261,36 +191,29 @@ public class AbstractScoresTest {
         }});
 
         // when
-        scores.event(SomeValuedEvent.TYPE1);
+        scores.event(EnumValueEvent.TYPE1);
 
         // then
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(SomeValuedEvent.TYPE2);
+        scores.event(EnumValueEvent.TYPE2);
 
         // then
         assertEquals(103, scores.getScore());
     }
 
-    enum SomeEvent {
-
-        TYPE1,
-        TYPE2,
-        TYPE3;
-    }
-
     @Test
     public void shouldProcess_eventEnum() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<SomeEvent>(settings){{
-            put(SomeEvent.TYPE1,
+        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<EnumEvent>(settings){{
+            put(EnumEvent.TYPE1,
                     value -> {
                         assertEquals(null, value);
                         return 1;
                     });
 
-            put(SomeEvent.TYPE2,
+            put(EnumEvent.TYPE2,
                     value -> {
                         assertEquals(null, value);
                         return 2;
@@ -298,13 +221,13 @@ public class AbstractScoresTest {
         }});
 
         // when
-        scores.event(SomeEvent.TYPE1);
+        scores.event(EnumEvent.TYPE1);
 
         // then
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(SomeEvent.TYPE2);
+        scores.event(EnumEvent.TYPE2);
 
         // then
         assertEquals(103, scores.getScore());
@@ -391,7 +314,7 @@ public class AbstractScoresTest {
     public void shouldProcess_whenNoKey() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put(SomeEvent.TYPE1,
+            put(EnumEvent.TYPE1,
                     value -> {
                         assertEquals(null, value);
                         return 1;
@@ -399,13 +322,13 @@ public class AbstractScoresTest {
         }});
 
         // when
-        scores.event(SomeEvent.TYPE1);
+        scores.event(EnumEvent.TYPE1);
 
         // then
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(SomeEvent.TYPE2); // no key
+        scores.event(EnumEvent.TYPE2); // no key
 
         // then
         assertEquals(101, scores.getScore());
@@ -415,7 +338,7 @@ public class AbstractScoresTest {
     public void shouldProcess_whenNullKey() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put(SomeEvent.TYPE1,
+            put(EnumEvent.TYPE1,
                     value -> {
                         assertEquals(null, value);
                         return 1;
@@ -429,19 +352,19 @@ public class AbstractScoresTest {
         }});
 
         // when
-        scores.event(SomeEvent.TYPE1);
+        scores.event(EnumEvent.TYPE1);
 
         // then
         assertEquals(101, scores.getScore());
 
         // when
-        scores.event(SomeEvent.TYPE2); // no key, but null
+        scores.event(EnumEvent.TYPE2); // no key, but null
 
         // then
         assertEquals(103, scores.getScore());
 
         // when
-        scores.event(SomeEvent.TYPE3); // no key, but null
+        scores.event(EnumEvent.TYPE3); // no key, but null
 
         // then
         assertEquals(105, scores.getScore());
