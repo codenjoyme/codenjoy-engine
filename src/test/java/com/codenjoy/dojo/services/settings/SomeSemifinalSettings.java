@@ -75,7 +75,7 @@ public class SomeSemifinalSettings extends SettingsImpl
         integer(SEMIFINAL_LIMIT, 50);
         bool(SEMIFINAL_RESET_BOARD, true);
         bool(SEMIFINAL_SHUFFLE_BOARD, true);
-        bool(SEMIFINAL_CLEAR_SCORES, false);
+        bool(SEMIFINAL_CLEAR_SCORE, false);
     }
 
     @Override

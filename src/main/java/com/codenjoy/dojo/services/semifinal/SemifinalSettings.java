@@ -29,7 +29,6 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.codenjoy.dojo.services.semifinal.SemifinalSettings.Keys.*;
 
@@ -45,7 +44,7 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         SEMIFINAL_LIMIT(SEMIFINAL + " Limit"),
         SEMIFINAL_RESET_BOARD(SEMIFINAL + " Reset board"),
         SEMIFINAL_SHUFFLE_BOARD(SEMIFINAL + " Shuffle board"),
-        SEMIFINAL_CLEAR_SCORES(SEMIFINAL + " Clear scores");
+        SEMIFINAL_CLEAR_SCORE(SEMIFINAL + " Clear scores");
 
         private String key;
 
@@ -107,7 +106,7 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         bool(SEMIFINAL_SHUFFLE_BOARD, true);
 
         // очищения очков между полуфиналами
-        bool(SEMIFINAL_CLEAR_SCORES, false);
+        bool(SEMIFINAL_CLEAR_SCORE, false);
     }
 
     // parameters getters
@@ -137,7 +136,7 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
     }
 
     default Parameter<Boolean> isClearScoresValue() {
-        return boolValue(SEMIFINAL_CLEAR_SCORES);
+        return boolValue(SEMIFINAL_CLEAR_SCORE);
     }
 
     // update methods
