@@ -36,8 +36,9 @@ import org.junit.Test;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 
-import static com.codenjoy.dojo.services.event.ScoresImpl.Mode.*;
+import static com.codenjoy.dojo.services.event.Mode.*;
 import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
 
 public class ScoresImplTest {
@@ -66,19 +67,20 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_customMessage() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<CustomMessage>(settings){{
-            put("message1",
-                    value -> {
-                        assertEquals("[message1]", value.toString());
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<CustomMessage>(settings){{
+                    put("message1",
+                            value -> {
+                                assertEquals("[message1]", value.toString());
+                                return 1;
+                            });
 
-            put("message2",
-                    value -> {
-                        assertEquals("[message2]", value.toString());
-                        return 2;
-                    });
-        }});
+                    put("message2",
+                            value -> {
+                                assertEquals("[message2]", value.toString());
+                                return 2;
+                            });
+                }}));
 
         // when
         scores.event(new CustomMessage("message1"));
@@ -96,21 +98,22 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_jsonObject() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<JSONObject>(settings){{
-            put("type1",
-                    value -> {
-                        assertEquals("{\"type\":\"type1\",\"value\":\"value1\"}",
-                                value.toString());
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<JSONObject>(settings){{
+                    put("type1",
+                            value -> {
+                                assertEquals("{\"type\":\"type1\",\"value\":\"value1\"}",
+                                        value.toString());
+                                return 1;
+                            });
 
-            put("type2",
-                    value -> {
-                        assertEquals("{\"type\":\"type2\",\"value\":\"value2\"}",
-                                value.toString());
-                        return 2;
-                    });
-        }});
+                    put("type2",
+                            value -> {
+                                assertEquals("{\"type\":\"type2\",\"value\":\"value2\"}",
+                                        value.toString());
+                                return 2;
+                            });
+                }}));
 
         // when
         scores.event(new JSONObject("{'type':'type1','value':'value1'}"));
@@ -128,19 +131,20 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_valueEvent() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
-            put(ValueEvent.Type.TYPE1,
-                    value -> {
-                        assertEquals("11", value.toString());
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<Integer>(settings){{
+                    put(ValueEvent.Type.TYPE1,
+                            value -> {
+                                assertEquals("11", value.toString());
+                                return 1;
+                            });
 
-            put(ValueEvent.Type.TYPE2,
-                    value -> {
-                        assertEquals("22", value.toString());
-                        return 2;
-                    });
-        }});
+                    put(ValueEvent.Type.TYPE2,
+                            value -> {
+                                assertEquals("22", value.toString());
+                                return 2;
+                            });
+                }}));
 
         // when
         scores.event(new ValueEvent(ValueEvent.Type.TYPE1, 11));
@@ -158,7 +162,7 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_multiValueEvent() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<MultiValuesEvent>(settings){{
+        PlayerScores scores = new ScoresImpl<>(100, new Calculator<>(new ScoresMap<MultiValuesEvent>(settings){{
             put(MultiValuesEvent.Type.TYPE1,
                     event -> {
                         assertEquals("MultiValuesEvent" +
@@ -174,7 +178,7 @@ public class ScoresImplTest {
                                 event.toString());
                         return 2;
                     });
-        }});
+        }}));
 
         // when
         scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE1, 11, 12));
@@ -192,7 +196,7 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_objectEvent_byClass() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
+        PlayerScores scores = new ScoresImpl<>(100, new Calculator<>(new ScoresMap<>(settings){{
             put(ObjectEvent1.class,
                     event -> {
                         assertEquals("ObjectEvent1(value=11)",
@@ -206,7 +210,7 @@ public class ScoresImplTest {
                                 ((ObjectEvent2)event).toString());
                         return 2;
                     });
-        }});
+        }}));
 
         // when
         scores.event(new ObjectEvent1(11));
@@ -224,19 +228,20 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_enumValueEvent() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<Integer>(settings){{
-            put(EnumValueEvent.TYPE1,
-                    value -> {
-                        assertEquals("11", value.toString());
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<Integer>(settings){{
+                    put(EnumValueEvent.TYPE1,
+                            value -> {
+                                assertEquals("11", value.toString());
+                                return 1;
+                            });
 
-            put(EnumValueEvent.TYPE2,
-                    value -> {
-                        assertEquals("22", value.toString());
-                        return 2;
-                    });
-        }});
+                    put(EnumValueEvent.TYPE2,
+                            value -> {
+                                assertEquals("22", value.toString());
+                                return 2;
+                            });
+                }}));
 
         // when
         scores.event(EnumValueEvent.TYPE1);
@@ -254,19 +259,20 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_enumEvent() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<EnumEvent>(settings){{
-            put(EnumEvent.TYPE1,
-                    value -> {
-                        assertEquals(null, value);
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<EnumEvent>(settings){{
+                    put(EnumEvent.TYPE1,
+                            value -> {
+                                assertEquals(null, value);
+                                return 1;
+                            });
 
-            put(EnumEvent.TYPE2,
-                    value -> {
-                        assertEquals(null, value);
-                        return 2;
-                    });
-        }});
+                    put(EnumEvent.TYPE2,
+                            value -> {
+                                assertEquals(null, value);
+                                return 2;
+                            });
+                }}));
 
         // when
         scores.event(EnumEvent.TYPE1);
@@ -284,25 +290,26 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_primitiveObject_byValue() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put("string1",
-                    value -> {
-                        assertEquals("string1", value);
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put("string1",
+                            value -> {
+                                assertEquals("string1", value);
+                                return 1;
+                            });
 
-            put(2,
-                    value -> {
-                        assertEquals(2, value);
-                        return 2;
-                    });
+                    put(2,
+                            value -> {
+                                assertEquals(2, value);
+                                return 2;
+                            });
 
-            put(true,
-                    value -> {
-                        assertEquals(true, value);
-                        return 3;
-                    });
-        }});
+                    put(true,
+                            value -> {
+                                assertEquals(true, value);
+                                return 3;
+                            });
+                }}));
 
         // when
         scores.event("string1");
@@ -326,25 +333,26 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_primitiveObject_byClass() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put(String.class,
-                    value -> {
-                        assertEquals("string1", value);
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(String.class,
+                            value -> {
+                                assertEquals("string1", value);
+                                return 1;
+                            });
 
-            put(Integer.class,
-                    value -> {
-                        assertEquals(2, value);
-                        return 2;
-                    });
+                    put(Integer.class,
+                            value -> {
+                                assertEquals(2, value);
+                                return 2;
+                            });
 
-            put(Boolean.class,
-                    value -> {
-                        assertEquals(true, value);
-                        return 3;
-                    });
-        }});
+                    put(Boolean.class,
+                            value -> {
+                                assertEquals(true, value);
+                                return 3;
+                            });
+                }}));
 
         // when
         scores.event("string1");
@@ -370,13 +378,14 @@ public class ScoresImplTest {
         // given
         AtomicReference<String> actual = new AtomicReference<>("");
 
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put(PROCESS_ALL_KEYS,
-                    value -> {
-                        actual.set(String.format("%s", value));
-                        return 1;
-                    });
-        }});
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(PROCESS_ALL_KEYS,
+                            value -> {
+                                actual.set(String.format("%s", value));
+                                return 1;
+                            });
+                }}));
 
         // when
         scores.event("string1");
@@ -463,15 +472,224 @@ public class ScoresImplTest {
     }
 
     @Test
+    public void shouldProcess_object_manualProcessing_defaultProcessor() {
+        // given
+        AtomicReference<String> actual = new AtomicReference<>("");
+
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<Answer>(settings){{
+                    put(new Manual(null), function("null", actual));
+                }}));
+
+        // when
+        scores.event("string1");
+
+        // then
+        assertEquals(101, scores.getScore());
+        assertEquals("null => string1", actual.toString());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(102, scores.getScore());
+        assertEquals("null => 2", actual.toString());
+
+        // when
+        scores.event(true);
+
+        // then
+        assertEquals(103, scores.getScore());
+        assertEquals("null => true", actual.toString());
+
+        // when
+        scores.event(new ObjectEvent1(11));
+
+        // then
+        assertEquals(104, scores.getScore());
+        assertEquals("null => ObjectEvent1(value=11)", actual.toString());
+
+        // when
+        scores.event(new ObjectEvent2("11", false));
+
+        // then
+        assertEquals(105, scores.getScore());
+        assertEquals("null => ObjectEvent2(value1=11, value2=false)", actual.toString());
+
+        // when
+        scores.event(EnumEvent.TYPE1);
+        // then
+        assertEquals(106, scores.getScore());
+        assertEquals("null => null", actual.toString());
+
+        // when
+        scores.event(EnumValueEvent.TYPE2);
+
+        // then
+        assertEquals(107, scores.getScore());
+        assertEquals("null => 22", actual.toString());
+
+        // when
+        scores.event(new CustomMessage("message2"));
+
+        // then
+        assertEquals(108, scores.getScore());
+        assertEquals("null => [message2]", actual.toString());
+
+        // when
+        scores.event(new JSONObject("{'type':'type2','value':'value2'}"));
+
+        // then
+        assertEquals(109, scores.getScore());
+        assertEquals("null => {\"type\":\"type2\",\"value\":\"value2\"}", actual.toString());
+
+        // when
+        scores.event(new ValueEvent(ValueEvent.Type.TYPE2, 22));
+
+        // then
+        assertEquals(110, scores.getScore());
+        assertEquals("null => 22", actual.toString());
+
+        // when
+        scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE2, 22, 23));
+
+        // then
+        assertEquals(111, scores.getScore());
+        assertEquals("null => MultiValuesEvent(type=TYPE2, value1=22, value2=23)", actual.toString());
+
+        // when
+        scores.event(null);
+
+        // then
+        assertEquals(112, scores.getScore());
+        assertEquals("null => null", actual.toString());
+    }
+
+    @Test
+    public void shouldProcess_object_manualProcessing_byProcessors() {
+        // given
+        AtomicReference<String> actual = new AtomicReference<>("");
+
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<Answer>(settings){{
+                    put(new Manual(String.class), function("String.class", actual));
+                    put(new Manual(Integer.class), function("Integer.class", actual));
+                    put(new Manual(Boolean.class), function("Boolean.class", actual));
+                    put(new Manual(ObjectEvent1.class), function("ObjectEvent1.class", actual));
+                    put(new Manual(ObjectEvent2.class), function("ObjectEvent2.class", actual));
+                    put(new Manual(EnumEvent.TYPE1), function("EnumEvent.TYPE1", actual));
+                    put(new Manual(EnumValueEvent.TYPE2), function("EnumValueEvent.TYPE2", actual));
+                    put(new Manual("message2"), function("CustomMessage(message2)", actual));
+                    put(new Manual("type2"), function("JSON(type2)", actual));
+                    put(new Manual(ValueEvent.Type.TYPE2), function("ValueEvent.Type.TYPE2", actual));
+                    put(new Manual(MultiValuesEvent.Type.TYPE2), function("MultiValuesEvent.Type.TYPE2", actual));
+                    put(new Manual(null), function("null", actual));
+                }}));
+
+        // when
+        scores.event("string1");
+
+        // then
+        assertEquals(101, scores.getScore());
+        assertEquals("String.class => string1", actual.toString());
+
+        // when
+        scores.event(2);
+
+        // then
+        assertEquals(102, scores.getScore());
+        assertEquals("Integer.class => 2", actual.toString());
+
+        // when
+        scores.event(true);
+
+        // then
+        assertEquals(103, scores.getScore());
+        assertEquals("Boolean.class => true", actual.toString());
+
+        // when
+        scores.event(new ObjectEvent1(11));
+
+        // then
+        assertEquals(104, scores.getScore());
+        assertEquals("ObjectEvent1.class => ObjectEvent1(value=11)", actual.toString());
+
+        // when
+        scores.event(new ObjectEvent2("11", false));
+
+        // then
+        assertEquals(105, scores.getScore());
+        assertEquals("ObjectEvent2.class => ObjectEvent2(value1=11, value2=false)", actual.toString());
+
+        // when
+        scores.event(EnumEvent.TYPE1);
+        // then
+        assertEquals(106, scores.getScore());
+        assertEquals("EnumEvent.TYPE1 => null", actual.toString());
+
+        // when
+        scores.event(EnumValueEvent.TYPE2);
+
+        // then
+        assertEquals(107, scores.getScore());
+        assertEquals("EnumValueEvent.TYPE2 => 22", actual.toString());
+
+        // when
+        scores.event(new CustomMessage("message2"));
+
+        // then
+        assertEquals(108, scores.getScore());
+        assertEquals("String.class => [message2]", actual.toString());
+
+        // when
+        scores.event(new JSONObject("{'type':'type2','value':'value2'}"));
+
+        // then
+        assertEquals(109, scores.getScore());
+        assertEquals("String.class => {\"type\":\"type2\",\"value\":\"value2\"}", actual.toString());
+
+        // when
+        scores.event(new ValueEvent(ValueEvent.Type.TYPE2, 22));
+
+        // then
+        assertEquals(110, scores.getScore());
+        assertEquals("ValueEvent.Type.TYPE2 => 22", actual.toString());
+
+        // when
+        scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE2, 22, 23));
+
+        // then
+        assertEquals(111, scores.getScore());
+        assertEquals("MultiValuesEvent.Type.TYPE2 => MultiValuesEvent(type=TYPE2, value1=22, value2=23)", actual.toString());
+
+        // when
+        scores.event(null);
+
+        // then
+        assertEquals(112, scores.getScore());
+        assertEquals("null => null", actual.toString());
+    }
+
+    private Function<Answer, Integer> function(String name, AtomicReference<String> actual) {
+        return answer -> {
+            Object value = answer.value(Object.class);
+            actual.set(String.format("%s => %s", name, value));
+            answer.score(answer.score() + 1);
+            return null;
+        };
+    }
+
+    @Test
     public void shouldProcess_whenNoKey() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put(EnumEvent.TYPE1,
-                    value -> {
-                        assertEquals(null, value);
-                        return 1;
-                    });
-        }});
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(EnumEvent.TYPE1,
+                            value -> {
+                                assertEquals(null, value);
+                                return 1;
+                            });
+                }}));
 
         // when
         scores.event(EnumEvent.TYPE1);
@@ -489,19 +707,20 @@ public class ScoresImplTest {
     @Test
     public void shouldProcess_whenNullKey() {
         // given
-        PlayerScores scores = new ScoresImpl<>(100, new ScoresMap<>(settings){{
-            put(EnumEvent.TYPE1,
-                    value -> {
-                        assertEquals(null, value);
-                        return 1;
-                    });
+        PlayerScores scores = new ScoresImpl<>(100,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(EnumEvent.TYPE1,
+                            value -> {
+                                assertEquals(null, value);
+                                return 1;
+                            });
 
-            put(PROCESS_ALL_KEYS,  // default processor
-                    value -> {
-                        assertEquals(null, value);
-                        return 2;
-                    });
-        }});
+                    put(PROCESS_ALL_KEYS,  // default processor
+                            value -> {
+                                assertEquals(null, value);
+                                return 2;
+                            });
+                }}));
 
         // when
         scores.event(EnumEvent.TYPE1);
@@ -527,9 +746,10 @@ public class ScoresImplTest {
         // given
         settings.initScore(MAX_VALUE);
 
-        ScoresImpl scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
-            put(PROCESS_ALL_KEYS, value -> (int)value);
-        }});
+        ScoresImpl scores = new ScoresImpl<>(2,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(PROCESS_ALL_KEYS, value -> (int)value);
+                }}));
 
         // when
         scores.event(1);
@@ -579,9 +799,10 @@ public class ScoresImplTest {
         // given
         settings.initScore(CUMULATIVELY);
 
-        ScoresImpl scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
-            put(PROCESS_ALL_KEYS, value -> (int)value);
-        }});
+        ScoresImpl scores = new ScoresImpl<>(2,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(PROCESS_ALL_KEYS, value -> (int)value);
+                }}));
 
         // when
         scores.event(1);
@@ -632,11 +853,12 @@ public class ScoresImplTest {
         settings.initScore(SERIES_MAX_VALUE);
         String clearSeries = "CLEAN";
 
-        ScoresImpl scores = new ScoresImpl<>(2, new ScoresMap<>(settings){{
-            put(clearSeries, value -> null); // return null to clean series
+        ScoresImpl scores = new ScoresImpl<>(2,
+                new Calculator<>(new ScoresMap<>(settings){{
+                    put(clearSeries, value -> null); // return null to clean series
 
-            put(PROCESS_ALL_KEYS, value -> (int)value);
-        }});
+                    put(PROCESS_ALL_KEYS, value -> (int)value);
+                }}));
 
         // when
         scores.event(2);

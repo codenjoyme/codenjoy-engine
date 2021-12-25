@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.settings;
  * #L%
  */
 
+import com.codenjoy.dojo.services.event.Mode;
 import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
@@ -75,7 +76,7 @@ public interface SettingsReader<T extends SettingsReader> {
     // init
 
     // TODO убрать в ScoresSettings когда он появится
-    default T initScore(ScoresImpl.Mode mode) {
+    default T initScore(Mode mode) {
         if (allKeys().stream()
                 .noneMatch(key -> key.key().equals(SCORE_COUNTING_TYPE.key())))
         {

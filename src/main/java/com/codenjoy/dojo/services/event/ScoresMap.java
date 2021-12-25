@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class ScoresMap<V> {
@@ -40,19 +41,24 @@ public class ScoresMap<V> {
         this.settings = settings;
     }
 
-    Function<V, Integer> getValue(Pair pair) {
-        if (pair.key() != null && map.containsKey(pair.key().getClass())) {
-            return map.get(pair.key().getClass());
+    public Map.Entry<Object, Function<V, Integer>> find(Object key) {
+        for (Map.Entry<Object, Function<V, Integer>> entry : map.entrySet()) {
+            if (key != null && Objects.equals(entry.getKey(), key.getClass())) {
+                return entry;
+            }
         }
 
-        if (map.containsKey(pair.key())) {
-            return map.get(pair.key());
+        for (Map.Entry<Object, Function<V, Integer>> entry : map.entrySet()) {
+            if (Objects.equals(entry.getKey(), key)) {
+                return entry;
+            }
         }
 
-        if (map.containsKey(null)) {
-            return map.get(null);
+        for (Map.Entry<Object, Function<V, Integer>> entry : map.entrySet()) {
+            if (Objects.equals(entry.getKey(), null)) {
+                return entry;
+            }
         }
-
         return null;
     }
     
@@ -60,7 +66,7 @@ public class ScoresMap<V> {
         map.put(key, value);
     }
 
-    public SettingsReader settings() {
+    public SettingsReader<SettingsReader> settings() {
         return settings;
     }
 }

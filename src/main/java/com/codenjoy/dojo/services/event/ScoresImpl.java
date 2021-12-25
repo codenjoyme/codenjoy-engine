@@ -22,57 +22,19 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-import com.codenjoy.dojo.services.CustomMessage;
 import com.codenjoy.dojo.services.PlayerScores;
 import com.codenjoy.dojo.services.settings.SelectBox;
 import com.codenjoy.dojo.services.settings.SettingsReader;
-import org.json.JSONObject;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Function;
-
-import static java.util.stream.Collectors.toList;
 
 public class ScoresImpl<V> implements PlayerScores {
 
     // TODO выделить полноценный блок настроек подсчета очков в settings как Rounds/Semifinal/Inactivity
     public static final SettingsReader.Key SCORE_COUNTING_TYPE = () -> "[Score] Counting score mode";
 
-    public enum Mode implements SettingsReader.Key {
-
-        CUMULATIVELY(0, "Accumulate points consistently"),
-        MAX_VALUE(1, "Maximum points from the event"),
-        SERIES_MAX_VALUE(2, "Maximum points from the series");
-
-        private int value;
-        private String key;
-
-        Mode(int value, String key) {
-            this.value = value;
-            this.key = key;
-        }
-
-        public static List<String> keys() {
-            return Arrays.stream(values())
-                    .map(Mode::key)
-                    .collect(toList());
-        }
-
-        public int value() {
-            return value;
-        }
-
-        @Override
-        public String key() {
-            return key;
-        }
-    }
-
     protected Mode counting;
     protected volatile int score;
     protected volatile int series;
-    protected ScoresMap<V> map;
+    private Calculator<V> calculator;
 
     // метод для инициализации настроек select'ом с заданным default Mode
     // либо если это уже произошло, то обновление значения настройки
@@ -99,11 +61,12 @@ public class ScoresImpl<V> implements PlayerScores {
         return settings.parameter(SCORE_COUNTING_TYPE, SelectBox.class);
     }
 
-    public ScoresImpl(int score, ScoresMap<V> map) {
+    public ScoresImpl(int score, Calculator<V> calculator) {
         this.score = score;
         this.series = 0;
-        this.map = map;
-        this.counting = modeValue(map.settings());
+        this.calculator = calculator;
+        this.calculator.init(this);
+        this.counting = modeValue(calculator.settings());
     }
 
     @Override
@@ -123,9 +86,17 @@ public class ScoresImpl<V> implements PlayerScores {
         return series;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
     @Override
     public void event(Object event) {
-        Integer amount = scoreFor(map, event);
+        Integer amount = calculator.score(event);
         if (counting == Mode.CUMULATIVELY) {
             if (amount == null) amount = 0;
             score += amount;
@@ -145,41 +116,6 @@ public class ScoresImpl<V> implements PlayerScores {
         if (counting != Mode.SERIES_MAX_VALUE) {
             series = score;
         }
-    }
-
-    public static <V> Integer scoreFor(ScoresMap<V> map, Object input) {
-        Pair pair = parseEvent(input);
-
-        Function<V, Integer> function = map.getValue(pair);
-        if (function == null) {
-            return 0;
-        }
-
-        return function.apply((V) pair.value());
-    }
-
-    private static Pair parseEvent(Object input) {
-        if (input instanceof EventObject) {
-            EventObject event = (EventObject) input;
-            return new Pair(event.type(), event.value());
-        }
-
-        if (input instanceof Enum) {
-            Enum event = (Enum) input;
-            return new Pair(event, null);
-        }
-
-        if (input instanceof JSONObject) {
-            JSONObject event = (JSONObject) input;
-            return new Pair(event.getString("type"), event);
-        }
-
-        if (input instanceof CustomMessage) {
-            CustomMessage event = (CustomMessage) input;
-            return new Pair(event.getMessage(), event.value());
-        }
-
-        return new Pair(input, input);
     }
 
     @Override
