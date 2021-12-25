@@ -71,12 +71,14 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<CustomMessage>(settings){{
                     put("message1",
                             value -> {
+                                assertEquals(CustomMessage.class, value.getClass());
                                 assertEquals("[message1]", value.toString());
                                 return 1;
                             });
 
                     put("message2",
                             value -> {
+                                assertEquals(CustomMessage.class, value.getClass());
                                 assertEquals("[message2]", value.toString());
                                 return 2;
                             });
@@ -102,13 +104,15 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<JSONObject>(settings){{
                     put("type1",
                             value -> {
-                                assertEquals("{\"type\":\"type1\",\"value\":\"value1\"}",
+                                    assertEquals(JSONObject.class, value.getClass());
+                                    assertEquals("{\"type\":\"type1\",\"value\":\"value1\"}",
                                         value.toString());
                                 return 1;
                             });
 
                     put("type2",
                             value -> {
+                                assertEquals(JSONObject.class, value.getClass());
                                 assertEquals("{\"type\":\"type2\",\"value\":\"value2\"}",
                                         value.toString());
                                 return 2;
@@ -135,12 +139,14 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<Integer>(settings){{
                     put(ValueEvent.Type.TYPE1,
                             value -> {
+                                assertEquals(Integer.class, value.getClass());
                                 assertEquals("11", value.toString());
                                 return 1;
                             });
 
                     put(ValueEvent.Type.TYPE2,
                             value -> {
+                                assertEquals(Integer.class, value.getClass());
                                 assertEquals("22", value.toString());
                                 return 2;
                             });
@@ -165,6 +171,7 @@ public class ScoresImplTest {
         PlayerScores scores = new ScoresImpl<>(100, new Calculator<>(new ScoresMap<MultiValuesEvent>(settings){{
             put(MultiValuesEvent.Type.TYPE1,
                     event -> {
+                        assertEquals(MultiValuesEvent.class, event.getClass());
                         assertEquals("MultiValuesEvent" +
                                 "(type=TYPE1, value1=11, value2=12)",
                                 event.toString());
@@ -173,6 +180,7 @@ public class ScoresImplTest {
 
             put(MultiValuesEvent.Type.TYPE2,
                     event -> {
+                        assertEquals(MultiValuesEvent.class, event.getClass());
                         assertEquals("MultiValuesEvent" +
                                 "(type=TYPE2, value1=22, value2=23)",
                                 event.toString());
@@ -199,6 +207,7 @@ public class ScoresImplTest {
         PlayerScores scores = new ScoresImpl<>(100, new Calculator<>(new ScoresMap<>(settings){{
             put(ObjectEvent1.class,
                     event -> {
+                        assertEquals(ObjectEvent1.class, event.getClass());
                         assertEquals("ObjectEvent1(value=11)",
                                 ((ObjectEvent1)event).toString());
                         return 1;
@@ -206,6 +215,7 @@ public class ScoresImplTest {
 
             put(ObjectEvent2.class,
                     event -> {
+                        assertEquals(ObjectEvent2.class, event.getClass());
                         assertEquals("ObjectEvent2(value1=22, value2=true)",
                                 ((ObjectEvent2)event).toString());
                         return 2;
@@ -232,12 +242,14 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<Integer>(settings){{
                     put(EnumValueEvent.TYPE1,
                             value -> {
+                                assertEquals(Integer.class, value.getClass());
                                 assertEquals("11", value.toString());
                                 return 1;
                             });
 
                     put(EnumValueEvent.TYPE2,
                             value -> {
+                                assertEquals(Integer.class, value.getClass());
                                 assertEquals("22", value.toString());
                                 return 2;
                             });
@@ -260,7 +272,7 @@ public class ScoresImplTest {
     public void shouldProcess_enumEvent() {
         // given
         PlayerScores scores = new ScoresImpl<>(100,
-                new Calculator<>(new ScoresMap<EnumEvent>(settings){{
+                new Calculator<>(new ScoresMap<Void>(settings){{
                     put(EnumEvent.TYPE1,
                             value -> {
                                 assertEquals(null, value);
@@ -294,18 +306,21 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<>(settings){{
                     put("string1",
                             value -> {
+                                assertEquals(String.class, value.getClass());
                                 assertEquals("string1", value);
                                 return 1;
                             });
 
                     put(2,
                             value -> {
+                                assertEquals(Integer.class, value.getClass());
                                 assertEquals(2, value);
                                 return 2;
                             });
 
                     put(true,
                             value -> {
+                                assertEquals(Boolean.class, value.getClass());
                                 assertEquals(true, value);
                                 return 3;
                             });
@@ -337,18 +352,21 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<>(settings){{
                     put(String.class,
                             value -> {
+                                assertEquals(String.class, value.getClass());
                                 assertEquals("string1", value);
                                 return 1;
                             });
 
                     put(Integer.class,
                             value -> {
+                                assertEquals(Integer.class, value.getClass());
                                 assertEquals(2, value);
                                 return 2;
                             });
 
                     put(Boolean.class,
                             value -> {
+                                assertEquals(Boolean.class, value.getClass());
                                 assertEquals(true, value);
                                 return 3;
                             });
@@ -382,7 +400,10 @@ public class ScoresImplTest {
                 new Calculator<>(new ScoresMap<>(settings){{
                     put(PROCESS_ALL_KEYS,
                             value -> {
-                                actual.set(String.format("%s", value));
+                                actual.set(String.format("[%s] %s",
+                                        (value != null) ? value.getClass().getSimpleName() : "",
+                                        value));
+
                                 return 1;
                             });
                 }}));
@@ -392,83 +413,83 @@ public class ScoresImplTest {
 
         // then
         assertEquals(101, scores.getScore());
-        assertEquals("string1", actual.toString());
+        assertEquals("[String] string1", actual.toString());
 
         // when
         scores.event(2);
 
         // then
         assertEquals(102, scores.getScore());
-        assertEquals("2", actual.toString());
+        assertEquals("[Integer] 2", actual.toString());
 
         // when
         scores.event(true);
 
         // then
         assertEquals(103, scores.getScore());
-        assertEquals("true", actual.toString());
+        assertEquals("[Boolean] true", actual.toString());
 
         // when
         scores.event(new ObjectEvent1(11));
 
         // then
         assertEquals(104, scores.getScore());
-        assertEquals("ObjectEvent1(value=11)", actual.toString());
+        assertEquals("[ObjectEvent1] ObjectEvent1(value=11)", actual.toString());
 
         // when
         scores.event(new ObjectEvent2("11", false));
 
         // then
         assertEquals(105, scores.getScore());
-        assertEquals("ObjectEvent2(value1=11, value2=false)", actual.toString());
+        assertEquals("[ObjectEvent2] ObjectEvent2(value1=11, value2=false)", actual.toString());
 
         // when
         scores.event(EnumEvent.TYPE1);
         // then
         assertEquals(106, scores.getScore());
-        assertEquals("null", actual.toString());
+        assertEquals("[] null", actual.toString());
 
         // when
         scores.event(EnumValueEvent.TYPE2);
 
         // then
         assertEquals(107, scores.getScore());
-        assertEquals("22", actual.toString());
+        assertEquals("[Integer] 22", actual.toString());
 
         // when
         scores.event(new CustomMessage("message2"));
 
         // then
         assertEquals(108, scores.getScore());
-        assertEquals("[message2]", actual.toString());
+        assertEquals("[CustomMessage] [message2]", actual.toString());
 
         // when
         scores.event(new JSONObject("{'type':'type2','value':'value2'}"));
 
         // then
         assertEquals(109, scores.getScore());
-        assertEquals("{\"type\":\"type2\",\"value\":\"value2\"}", actual.toString());
+        assertEquals("[JSONObject] {\"type\":\"type2\",\"value\":\"value2\"}", actual.toString());
 
         // when
         scores.event(new ValueEvent(ValueEvent.Type.TYPE2, 22));
 
         // then
         assertEquals(110, scores.getScore());
-        assertEquals("22", actual.toString());
+        assertEquals("[Integer] 22", actual.toString());
 
         // when
         scores.event(new MultiValuesEvent(MultiValuesEvent.Type.TYPE2, 22, 23));
 
         // then
         assertEquals(111, scores.getScore());
-        assertEquals("MultiValuesEvent(type=TYPE2, value1=22, value2=23)", actual.toString());
+        assertEquals("[MultiValuesEvent] MultiValuesEvent(type=TYPE2, value1=22, value2=23)", actual.toString());
 
         // when
         scores.event(null);
 
         // then
         assertEquals(112, scores.getScore());
-        assertEquals("null", actual.toString());
+        assertEquals("[] null", actual.toString());
     }
 
     @Test
