@@ -27,19 +27,25 @@ import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
+import com.codenjoy.dojo.utils.smart.SmartAssert;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.assertEquals;
+import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
+import static java.util.stream.Collectors.*;
+import static org.apache.commons.lang3.StringUtils.leftPad;
+import static org.apache.commons.lang3.StringUtils.rightPad;
 import static org.junit.Assert.fail;
 
 public class PointFieldTest {
@@ -59,6 +65,11 @@ public class PointFieldTest {
         field = new PointField().size(3);
         messages = new LinkedList<>();
         player = null;
+    }
+
+    @After
+    public void after() {
+        SmartAssert.checkResult();
     }
 
     class One extends PointImpl implements Tickable {
@@ -4295,5 +4306,284 @@ public class PointFieldTest {
                 "        Three.class=[\n" +
                 "                three5(2,2)]}\n" +
                 "]", field.toString());
+    }
+
+    List<Class[]> variants = new LinkedList<>(){{
+        add(new Class[]{});
+
+        add(new Class[]{One.class});
+        add(new Class[]{Two.class});
+        add(new Class[]{Three.class});
+        add(new Class[]{Four.class});
+
+        add(new Class[]{One.class, Two.class});
+        add(new Class[]{One.class, Three.class});
+        add(new Class[]{One.class, Four.class});
+        add(new Class[]{Two.class, Three.class});
+        add(new Class[]{Two.class, Four.class});
+        add(new Class[]{Three.class, Four.class});
+
+        add(new Class[]{One.class, Two.class, Three.class});
+        add(new Class[]{One.class, Two.class, Four.class});
+        add(new Class[]{One.class, Three.class, Four.class});
+        add(new Class[]{Two.class, Three.class, Four.class});
+
+        add(new Class[]{One.class, Two.class, Three.class, Four.class});
+    }};
+
+    @Test
+    public void testContainsAny() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertAll(pt(1, 1), field::containsAny, variants,
+                "false = []\n" +
+                "true  = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "true  = [One, Two]\n" +
+                "true  = [One, Three]\n" +
+                "true  = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "true  = [One, Two, Three]\n" +
+                "true  = [One, Two, Four]\n" +
+                "true  = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "true  = [One, Two, Three, Four]");
+
+        assertAll(pt(1, 2), field::containsAny, variants,
+                "false = []\n" +
+                "true  = [One]\n" +
+                "true  = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "true  = [One, Two]\n" +
+                "true  = [One, Three]\n" +
+                "true  = [One, Four]\n" +
+                "true  = [Two, Three]\n" +
+                "true  = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "true  = [One, Two, Three]\n" +
+                "true  = [One, Two, Four]\n" +
+                "true  = [One, Three, Four]\n" +
+                "true  = [Two, Three, Four]\n" +
+                "true  = [One, Two, Three, Four]");
+
+        assertAll(pt(2, 1), field::containsAny, variants,
+                "false = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(2, 2), field::containsAny, variants,
+                "false = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "true  = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "true  = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "true  = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "true  = [Three, Four]\n" +
+                "true  = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "true  = [One, Three, Four]\n" +
+                "true  = [Two, Three, Four]\n" +
+                "true  = [One, Two, Three, Four]");
+    }
+
+    @Test
+    public void testContainsAll() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertAll(pt(1, 1), field::containsAll, variants,
+                "true  = []\n" +
+                "true  = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(1, 2), field::containsAll, variants,
+                "true  = []\n" +
+                "true  = [One]\n" +
+                "true  = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "true  = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(2, 1), field::containsAll, variants,
+                "true  = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(2, 2), field::containsAll, variants,
+                "true  = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "true  = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+    }
+
+    @Test
+    public void testContainsExact() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertAll(pt(1, 1), field::containsExact, variants,
+                "false = []\n" +
+                "true  = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(1, 2), field::containsExact, variants,
+                "false = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "true  = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(2, 1), field::containsExact, variants,
+                "true  = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "false = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(pt(2, 2), field::containsExact, variants,
+                "false = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "true  = [Three]\n" +
+                "false = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+    }
+
+    private void assertAll(Point pt,
+                           BiFunction<Point, Class<? extends Point>[], Boolean> method,
+                           List<Class[]> inputs, String expected)
+    {
+        assertEquals(expected,
+                inputs.stream()
+                    .map(input -> new AbstractMap.SimpleEntry<>(
+                            rightPad(Boolean.toString(method.apply(pt, input)), 6),
+                            toString(input)))
+                    .map(Object::toString)
+                    .collect(joining("\n")));
+    }
+
+    private String toString(Class[] classes) {
+        return " [" + Arrays.stream(classes)
+                .map(clazz -> StringUtils.substringAfter(clazz.toString(), "$"))
+                .collect(Collectors.joining(", ")) + "]";
     }
 }

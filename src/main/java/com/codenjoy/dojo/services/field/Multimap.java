@@ -118,4 +118,8 @@ public class Multimap<K, V> {
     public void clear(K key) {
         get(key).clear();
     }
+
+    public List<K> keys() {
+        return new LinkedList<>(map.keySet());
+    }
 }
