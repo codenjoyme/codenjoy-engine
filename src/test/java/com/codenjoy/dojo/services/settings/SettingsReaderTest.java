@@ -171,10 +171,12 @@ public class SettingsReaderTest {
 
         // when then
         assertEquals("{\n" +
+                        "  'GAME_MODE':'[TRAINING] Consecutive levels. Each level is single player. Final is all together.',\n" +
                         "  'PARAMETER1':15,\n" +
                         "  'PARAMETER2':true,\n" +
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
+                        "  'ROOM_SIZE':5,\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
@@ -324,10 +326,12 @@ public class SettingsReaderTest {
 
         // then
         assertEquals("{\n" +
+                        "  'GAME_MODE':'[TRAINING] Consecutive levels. Each level is single player. Final is all together.',\n" +
                         "  'PARAMETER1':23,\n" +
                         "  'PARAMETER2':false,\n" +
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
+                        "  'ROOM_SIZE':5,\n" +
                         "  'ROUNDS_ENABLED':true,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +

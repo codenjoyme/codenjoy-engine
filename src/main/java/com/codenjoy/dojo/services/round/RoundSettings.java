@@ -220,16 +220,6 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         return minTicksForWin().getValue();
     }
 
-    default MultiplayerType getRoundsMultiplayerType() {
-        if (!bool(ROUNDS_ENABLED)) {
-            return MultiplayerType.MULTIPLE;
-        }
-
-        return MultiplayerType.TEAM.apply(
-                integer(ROUNDS_PLAYERS_PER_ROOM),
-                MultiplayerType.DISPOSABLE);
-    }
-
     // setters
 
     default RoundSettings setRoundsEnabled(boolean input) {

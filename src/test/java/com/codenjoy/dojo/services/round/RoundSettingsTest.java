@@ -111,6 +111,8 @@ public class RoundSettingsTest {
                         "[Rounds] Time before start Round=5, \n" +
                         "[Rounds] Rounds per Match=1, \n" +
                         "[Rounds] Min ticks for win=1, \n" +
+                        "[Multiplayer] Mode=[TRAINING] Consecutive levels. Each level is single player. Final is all together., \n" +
+                        "[Multiplayer] Room size=5, \n" +
                         "Parameter 1=15, \n" +
                         "Parameter 2=true, \n" +
                         "Parameter 3=0.5, \n" +
@@ -163,24 +165,5 @@ public class RoundSettingsTest {
         assertEquals(6, settings.getTimeBeforeStart());
         assertEquals(4, settings.getRoundsPerMatch());
         assertEquals(50, settings.getMinTicksForWin());
-    }
-
-    @Test
-    public void testRoundMultiplayerType(){
-        // given
-        RoundSettings settings = new SomeRoundSettings();
-
-        // when then
-        assertEquals("TeamType{roomSize=5, levelsCount=1, " +
-                        "disposable=true, shouldReloadAlone=true}",
-                settings.getRoundsMultiplayerType().toString());
-
-        // when
-        settings.setRoundsEnabled(false);
-
-        // when then
-        assertEquals("MultipleType{roomSize=2147483647, levelsCount=1, " +
-                        "disposable=false, shouldReloadAlone=false}",
-                settings.getRoundsMultiplayerType().toString());
     }
 }

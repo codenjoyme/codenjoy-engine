@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.settings;
  * #L%
  */
 
+import com.codenjoy.dojo.services.multiplayer.MultiplayerSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
 
 import java.util.Arrays;
@@ -32,7 +33,8 @@ import static com.codenjoy.dojo.services.round.RoundSettings.Keys.ROUNDS_MIN_TIC
 import static com.codenjoy.dojo.services.settings.SomeGameSettings.Keys.*;
 
 public class SomeRoundSettings extends SettingsImpl
-        implements RoundSettings<SomeRoundSettings> {
+        implements RoundSettings<SomeRoundSettings>,
+                   MultiplayerSettings<SomeRoundSettings> {
 
     public enum Keys implements Key {
 
@@ -60,6 +62,7 @@ public class SomeRoundSettings extends SettingsImpl
 
     public SomeRoundSettings() {
         initRound();
+        initMultiplayer();
 
         integer(PARAMETER1, 12);
         integerValue(PARAMETER1).update(15);

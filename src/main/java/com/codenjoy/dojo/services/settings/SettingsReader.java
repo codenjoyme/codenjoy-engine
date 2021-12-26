@@ -26,6 +26,7 @@ import com.codenjoy.dojo.services.event.Mode;
 import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
+import com.codenjoy.dojo.services.multiplayer.MultiplayerSettings;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import org.json.JSONObject;
@@ -60,6 +61,7 @@ public interface SettingsReader<T extends SettingsReader> {
                 .or(() -> Key.keyToName(RoundSettings.allRoundsKeys(), value))
                 .or(() -> Key.keyToName(SemifinalSettings.allSemifinalKeys(), value))
                 .or(() -> Key.keyToName(InactivitySettings.allInactivityKeys(), value))
+                .or(() -> Key.keyToName(MultiplayerSettings.allMultiplayerKeys(), value))
                 .or(() -> LevelsSettings.keyToName(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
     }
@@ -69,6 +71,7 @@ public interface SettingsReader<T extends SettingsReader> {
                 .or(() -> Key.nameToKey(RoundSettings.allRoundsKeys(), value))
                 .or(() -> Key.nameToKey(SemifinalSettings.allSemifinalKeys(), value))
                 .or(() -> Key.nameToKey(InactivitySettings.allInactivityKeys(), value))
+                .or(() -> Key.nameToKey(MultiplayerSettings.allMultiplayerKeys(), value))
                 .or(() -> LevelsSettings.nameToKey(LevelsSettings.allLevelsKeys(), value))
                 .orElseThrow(() -> new IllegalArgumentException("Parameter not found: " + value));
     }
