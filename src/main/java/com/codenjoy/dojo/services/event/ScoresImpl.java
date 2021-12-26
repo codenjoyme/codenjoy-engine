@@ -42,9 +42,7 @@ public class ScoresImpl<V> implements PlayerScores {
         if (settings.hasParameter(SCORE_COUNTING_TYPE.key())) {
             mode(settings).select(mode.value());
         } else {
-            settings.options(SCORE_COUNTING_TYPE,
-                    Mode.keys(),
-                    mode.key());
+            settings.options(SCORE_COUNTING_TYPE, Mode.keys(), mode.key());
         }
     }
 

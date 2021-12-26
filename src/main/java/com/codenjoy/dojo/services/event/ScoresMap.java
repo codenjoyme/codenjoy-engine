@@ -30,6 +30,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Function;
 
+import static com.codenjoy.dojo.services.event.Mode.SERIES_MAX_VALUE;
+
 public class ScoresMap<V> {
 
     public static Object PROCESS_ALL_KEYS = null;
@@ -68,5 +70,13 @@ public class ScoresMap<V> {
 
     public SettingsReader<SettingsReader> settings() {
         return settings;
+    }
+
+    public Integer heroDie(SettingsReader.Key key) {
+        if (SERIES_MAX_VALUE == ScoresImpl.modeValue(settings)) {
+            // что значит, что мы собрались обнулить серию
+            return null;
+        }
+        return settings.integer(key);
     }
 }
