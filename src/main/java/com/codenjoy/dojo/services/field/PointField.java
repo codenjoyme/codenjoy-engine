@@ -139,12 +139,12 @@ public class PointField {
     }
 
     /**
-     * @param pt Ячейка которой интересуемся.
+     * @param point Ячейка которой интересуемся.
      * @return Класс с группой утилитных методов, отвечающих на вопрос -
      *         что содержится в данной ячейке.
      */
-    public Contains contains(Point pt) {
-        return new Contains(get(pt).keys());
+    public Contains at(Point point) {
+        return new Contains(get(point).keys());
     }
 
     /**

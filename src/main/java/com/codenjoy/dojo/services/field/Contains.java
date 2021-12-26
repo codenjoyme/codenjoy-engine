@@ -21,7 +21,7 @@ public class Contains {
      *         заданного в списке классов filters.
      */
     @PerformanceOptimized
-    public boolean any(Class<? extends Point>... filters) {
+    public boolean anyOf(Class<? extends Point>... filters) {
         for (Class key : keys) {
             for (Class filter : filters) {
                 if (key.equals(filter)) {
@@ -33,12 +33,21 @@ public class Contains {
     }
 
     /**
-     * @param filters Список классов, все из которых необходимо чтобы были найдены в ячейке.
-     * @return Содержит ли заданная ячейка все элементы типы которых
-     *         заданы в списке классов filters. Ячейка может содержать и элементы других типов.
+     * @param filters Список классов, которых не должно быть в этой клетке.
+     * @return true - если в ячейке нет ничего из filters.
      */
     @PerformanceOptimized
-    public boolean all(Class<? extends Point>... filters) {
+    public boolean noneOf(Class<? extends Point>... filters) {
+        return !anyOf(filters);
+    }
+
+    /**
+     * @param filters Список классов, все из которых должны быть найдены в ячейке.
+     * @return true - если все, что указано в filters было найдено, при этом
+     *       ячейка может содержать и элементы других типов.
+     */
+    @PerformanceOptimized
+    public boolean allOf(Class<? extends Point>... filters) {
         for (Class filter : filters) {
             boolean contains = false;
             for (Class key : keys) {
@@ -53,13 +62,13 @@ public class Contains {
     }
 
     /**
-     * @param filters Список классов, все (и только они) из которых необходимо
-     *                чтобы были найдены в ячейке.
-     * @return Содержит ли заданная ячейка все элементы типы которых
-     *         заданы в списке классов filters. Ячейка должна содержать только указанные типы.
+     * @param filters Список классов, все из которых (и только они, больше
+     *                никаких других) должны быть найдены в ячейке.
+     * @return true - если все, что указано в filters было найдено, при этом
+     *         ячейка должна содержать только указанные типы.
      */
     @PerformanceOptimized
-    public boolean exact(Class<? extends Point>... filters) {
+    public boolean exactlyAllOf(Class<? extends Point>... filters) {
         List<Class<? extends Point>> all = new ArrayList<>(keys);
         for (Class filter : filters) {
             boolean contains = false;

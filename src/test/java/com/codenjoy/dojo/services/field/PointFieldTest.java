@@ -34,7 +34,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -4333,12 +4332,12 @@ public class PointFieldTest {
     }};
 
     @Test
-    public void testContainsAny() {
+    public void testContains_anyOf() {
         // given
         testAdd_severalElements_mixed();
 
         // when then
-        assertAll(field.contains(pt(1, 1))::any, variants,
+        assertAll(field.at(pt(1, 1))::anyOf, variants,
                 "false = []\n" +
                 "true  = [One]\n" +
                 "false = [Two]\n" +
@@ -4356,7 +4355,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "true  = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(1, 2))::any, variants,
+        assertAll(field.at(pt(1, 2))::anyOf, variants,
                 "false = []\n" +
                 "true  = [One]\n" +
                 "true  = [Two]\n" +
@@ -4374,7 +4373,7 @@ public class PointFieldTest {
                 "true  = [Two, Three, Four]\n" +
                 "true  = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(2, 1))::any, variants,
+        assertAll(field.at(pt(2, 1))::anyOf, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4392,7 +4391,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(2, 2))::any, variants,
+        assertAll(field.at(pt(2, 2))::anyOf, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4412,12 +4411,91 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testContainsAll() {
+    public void testContains_noneOf() {
         // given
         testAdd_severalElements_mixed();
 
         // when then
-        assertAll(field.contains(pt(1, 1))::all, variants,
+        assertAll(field.at(pt(1, 1))::noneOf, variants,
+                "true  = []\n" +
+                "false = [One]\n" +
+                "true  = [Two]\n" +
+                "true  = [Three]\n" +
+                "true  = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "true  = [Two, Three]\n" +
+                "true  = [Two, Four]\n" +
+                "true  = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "true  = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(field.at(pt(1, 2))::noneOf, variants,
+                "true  = []\n" +
+                "false = [One]\n" +
+                "false = [Two]\n" +
+                "true  = [Three]\n" +
+                "true  = [Four]\n" +
+                "false = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "false = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "false = [Two, Four]\n" +
+                "true  = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "false = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+
+        assertAll(field.at(pt(2, 1))::noneOf, variants,
+                "true  = []\n" +
+                "true  = [One]\n" +
+                "true  = [Two]\n" +
+                "true  = [Three]\n" +
+                "true  = [Four]\n" +
+                "true  = [One, Two]\n" +
+                "true  = [One, Three]\n" +
+                "true  = [One, Four]\n" +
+                "true  = [Two, Three]\n" +
+                "true  = [Two, Four]\n" +
+                "true  = [Three, Four]\n" +
+                "true  = [One, Two, Three]\n" +
+                "true  = [One, Two, Four]\n" +
+                "true  = [One, Three, Four]\n" +
+                "true  = [Two, Three, Four]\n" +
+                "true  = [One, Two, Three, Four]");
+
+        assertAll(field.at(pt(2, 2))::noneOf, variants,
+                "true  = []\n" +
+                "true  = [One]\n" +
+                "true  = [Two]\n" +
+                "false = [Three]\n" +
+                "true  = [Four]\n" +
+                "true  = [One, Two]\n" +
+                "false = [One, Three]\n" +
+                "true  = [One, Four]\n" +
+                "false = [Two, Three]\n" +
+                "true  = [Two, Four]\n" +
+                "false = [Three, Four]\n" +
+                "false = [One, Two, Three]\n" +
+                "true  = [One, Two, Four]\n" +
+                "false = [One, Three, Four]\n" +
+                "false = [Two, Three, Four]\n" +
+                "false = [One, Two, Three, Four]");
+    }
+
+    @Test
+    public void testContains_allOf() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertAll(field.at(pt(1, 1))::allOf, variants,
                 "true  = []\n" +
                 "true  = [One]\n" +
                 "false = [Two]\n" +
@@ -4435,7 +4513,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(1, 2))::all, variants,
+        assertAll(field.at(pt(1, 2))::allOf, variants,
                 "true  = []\n" +
                 "true  = [One]\n" +
                 "true  = [Two]\n" +
@@ -4453,7 +4531,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(2, 1))::all, variants,
+        assertAll(field.at(pt(2, 1))::allOf, variants,
                 "true  = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4471,7 +4549,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(2, 2))::all, variants,
+        assertAll(field.at(pt(2, 2))::allOf, variants,
                 "true  = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4491,12 +4569,12 @@ public class PointFieldTest {
     }
 
     @Test
-    public void testContainsExact() {
+    public void testContains_exactlyAllOf() {
         // given
         testAdd_severalElements_mixed();
 
         // when then
-        assertAll(field.contains(pt(1, 1))::exact, variants,
+        assertAll(field.at(pt(1, 1))::exactlyAllOf, variants,
                 "false = []\n" +
                 "true  = [One]\n" +
                 "false = [Two]\n" +
@@ -4514,7 +4592,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(1, 2))::exact, variants,
+        assertAll(field.at(pt(1, 2))::exactlyAllOf, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4532,7 +4610,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(2, 1))::exact, variants,
+        assertAll(field.at(pt(2, 1))::exactlyAllOf, variants,
                 "true  = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4550,7 +4628,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(field.contains(pt(2, 2))::exact, variants,
+        assertAll(field.at(pt(2, 2))::exactlyAllOf, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
