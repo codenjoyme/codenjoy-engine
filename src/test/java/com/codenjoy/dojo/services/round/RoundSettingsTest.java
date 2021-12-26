@@ -111,7 +111,7 @@ public class RoundSettingsTest {
                         "[Rounds] Time before start Round=5, \n" +
                         "[Rounds] Rounds per Match=1, \n" +
                         "[Rounds] Min ticks for win=1, \n" +
-                        "[Multiplayer] Mode=[TRAINING] Consecutive levels. Each level is single player. Final is all together., \n" +
+                        "[Multiplayer] Mode=[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms)., \n" +
                         "[Multiplayer] Room size=5, \n" +
                         "Parameter 1=15, \n" +
                         "Parameter 2=true, \n" +

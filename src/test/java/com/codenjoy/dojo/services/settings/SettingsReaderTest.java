@@ -171,7 +171,7 @@ public class SettingsReaderTest {
 
         // when then
         assertEquals("{\n" +
-                        "  'GAME_MODE':'[TRAINING] Consecutive levels. Each level is single player. Final is all together.',\n" +
+                        "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                         "  'PARAMETER1':15,\n" +
                         "  'PARAMETER2':true,\n" +
                         "  'PARAMETER3':0.5,\n" +
@@ -326,7 +326,7 @@ public class SettingsReaderTest {
 
         // then
         assertEquals("{\n" +
-                        "  'GAME_MODE':'[TRAINING] Consecutive levels. Each level is single player. Final is all together.',\n" +
+                        "  'GAME_MODE':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
                         "  'PARAMETER1':23,\n" +
                         "  'PARAMETER2':false,\n" +
                         "  'PARAMETER3':0.1,\n" +
