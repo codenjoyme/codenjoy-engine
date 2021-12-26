@@ -146,7 +146,7 @@ public class PointField {
      */
     @PerformanceOptimized
     public boolean containsAny(Point pt, Class<? extends Point>... filters) {
-        List<Class<? extends Point>> keys = get(pt).keys();
+        Set<Class<? extends Point>> keys = get(pt).keys();
         for (Class key : keys) {
             for (Class filter : filters) {
                 if (key.equals(filter)) {
@@ -165,7 +165,7 @@ public class PointField {
      */
     @PerformanceOptimized
     public boolean containsAll(Point pt, Class<? extends Point>... filters) {
-        List<Class<? extends Point>> keys = get(pt).keys();
+        Set<Class<? extends Point>> keys = get(pt).keys();
         for (Class filter : filters) {
             boolean contains = false;
             for (Class key : keys) {
@@ -188,7 +188,7 @@ public class PointField {
      */
     @PerformanceOptimized
     public boolean containsExact(Point pt, Class<? extends Point>... filters) {
-        List<Class<? extends Point>> keys = get(pt).keys();
+        List<Class<? extends Point>> keys = new ArrayList<>(get(pt).keys());
         for (Class filter : filters) {
             boolean contains = false;
             for (Class key : keys) {

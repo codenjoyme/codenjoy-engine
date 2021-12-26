@@ -119,7 +119,7 @@ public class Multimap<K, V> {
         get(key).clear();
     }
 
-    public List<K> keys() {
-        return new LinkedList<>(map.keySet());
+    public Set<K> keys() {
+        return Collections.unmodifiableSet(map.keySet());
     }
 }
