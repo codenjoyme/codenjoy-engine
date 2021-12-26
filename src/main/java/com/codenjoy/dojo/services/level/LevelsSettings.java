@@ -23,12 +23,14 @@ package com.codenjoy.dojo.services.level;
  */
 
 import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.settings.*;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static com.codenjoy.dojo.services.level.LevelsSettings.Keys.LEVELS_MAP;
 import static java.util.stream.Collectors.toList;
@@ -118,6 +120,10 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
 
     default void initLevels() {
         // TODO do we need this
+    }
+
+    default <T extends AbstractLevel> T level(int level, Dice dice, Function<String, T> constructor) {
+        return constructor.apply(getRandomLevelMap(level, dice));
     }
 
     // parameters getters
