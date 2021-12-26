@@ -139,68 +139,12 @@ public class PointField {
     }
 
     /**
-     * @param pt Проверяемая ячейка.
-     * @param filters Список классов, любой из которых достаточно чтобы был найден в ячейке.
-     * @return Содержит ли заданная ячейка хоть один элемент типа
-     *         заданного в списке классов filters.
+     * @param pt Ячейка которой интересуемся.
+     * @return Класс с группой утилитных методов, отвечающих на вопрос -
+     *         что содержится в данной ячейке.
      */
-    @PerformanceOptimized
-    public boolean containsAny(Point pt, Class<? extends Point>... filters) {
-        Set<Class<? extends Point>> keys = get(pt).keys();
-        for (Class key : keys) {
-            for (Class filter : filters) {
-                if (key.equals(filter)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param pt Проверяемая ячейка.
-     * @param filters Список классов, все из которых необходимо чтобы были найдены в ячейке.
-     * @return Содержит ли заданная ячейка все элементы типы которых
-     *         заданы в списке классов filters. Ячейка может содержать и элементы других типов.
-     */
-    @PerformanceOptimized
-    public boolean containsAll(Point pt, Class<? extends Point>... filters) {
-        Set<Class<? extends Point>> keys = get(pt).keys();
-        for (Class filter : filters) {
-            boolean contains = false;
-            for (Class key : keys) {
-                if (key.equals(filter)) {
-                    contains = true;
-                    break;
-                }
-            }
-            if (!contains) return false;
-        }
-        return true;
-    }
-
-    /**
-     * @param pt Проверяемая ячейка.
-     * @param filters Список классов, все (и только они) из которых необходимо
-     *                чтобы были найдены в ячейке.
-     * @return Содержит ли заданная ячейка все элементы типы которых
-     *         заданы в списке классов filters. Ячейка должна содержать только указанные типы.
-     */
-    @PerformanceOptimized
-    public boolean containsExact(Point pt, Class<? extends Point>... filters) {
-        List<Class<? extends Point>> keys = new ArrayList<>(get(pt).keys());
-        for (Class filter : filters) {
-            boolean contains = false;
-            for (Class key : keys) {
-                if (key.equals(filter)) {
-                    contains = true;
-                    keys.remove(key);
-                    break;
-                }
-            }
-            if (!contains) return false;
-        }
-        return keys.isEmpty();
+    public Contains contains(Point pt) {
+        return new Contains(get(pt).keys());
     }
 
     /**

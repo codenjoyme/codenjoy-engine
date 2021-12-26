@@ -36,6 +36,7 @@ import org.junit.Test;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -4337,7 +4338,7 @@ public class PointFieldTest {
         testAdd_severalElements_mixed();
 
         // when then
-        assertAll(pt(1, 1), field::containsAny, variants,
+        assertAll(field.contains(pt(1, 1))::any, variants,
                 "false = []\n" +
                 "true  = [One]\n" +
                 "false = [Two]\n" +
@@ -4355,7 +4356,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "true  = [One, Two, Three, Four]");
 
-        assertAll(pt(1, 2), field::containsAny, variants,
+        assertAll(field.contains(pt(1, 2))::any, variants,
                 "false = []\n" +
                 "true  = [One]\n" +
                 "true  = [Two]\n" +
@@ -4373,7 +4374,7 @@ public class PointFieldTest {
                 "true  = [Two, Three, Four]\n" +
                 "true  = [One, Two, Three, Four]");
 
-        assertAll(pt(2, 1), field::containsAny, variants,
+        assertAll(field.contains(pt(2, 1))::any, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4391,7 +4392,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(2, 2), field::containsAny, variants,
+        assertAll(field.contains(pt(2, 2))::any, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4416,7 +4417,7 @@ public class PointFieldTest {
         testAdd_severalElements_mixed();
 
         // when then
-        assertAll(pt(1, 1), field::containsAll, variants,
+        assertAll(field.contains(pt(1, 1))::all, variants,
                 "true  = []\n" +
                 "true  = [One]\n" +
                 "false = [Two]\n" +
@@ -4434,7 +4435,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(1, 2), field::containsAll, variants,
+        assertAll(field.contains(pt(1, 2))::all, variants,
                 "true  = []\n" +
                 "true  = [One]\n" +
                 "true  = [Two]\n" +
@@ -4452,7 +4453,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(2, 1), field::containsAll, variants,
+        assertAll(field.contains(pt(2, 1))::all, variants,
                 "true  = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4470,7 +4471,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(2, 2), field::containsAll, variants,
+        assertAll(field.contains(pt(2, 2))::all, variants,
                 "true  = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4495,7 +4496,7 @@ public class PointFieldTest {
         testAdd_severalElements_mixed();
 
         // when then
-        assertAll(pt(1, 1), field::containsExact, variants,
+        assertAll(field.contains(pt(1, 1))::exact, variants,
                 "false = []\n" +
                 "true  = [One]\n" +
                 "false = [Two]\n" +
@@ -4513,7 +4514,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(1, 2), field::containsExact, variants,
+        assertAll(field.contains(pt(1, 2))::exact, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4531,7 +4532,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(2, 1), field::containsExact, variants,
+        assertAll(field.contains(pt(2, 1))::exact, variants,
                 "true  = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4549,7 +4550,7 @@ public class PointFieldTest {
                 "false = [Two, Three, Four]\n" +
                 "false = [One, Two, Three, Four]");
 
-        assertAll(pt(2, 2), field::containsExact, variants,
+        assertAll(field.contains(pt(2, 2))::exact, variants,
                 "false = []\n" +
                 "false = [One]\n" +
                 "false = [Two]\n" +
@@ -4568,14 +4569,13 @@ public class PointFieldTest {
                 "false = [One, Two, Three, Four]");
     }
 
-    private void assertAll(Point pt,
-                           BiFunction<Point, Class<? extends Point>[], Boolean> method,
+    private void assertAll(Function<Class<? extends Point>[], Boolean> method,
                            List<Class[]> inputs, String expected)
     {
         assertEquals(expected,
                 inputs.stream()
                     .map(input -> new AbstractMap.SimpleEntry<>(
-                            rightPad(Boolean.toString(method.apply(pt, input)), 6),
+                            rightPad(Boolean.toString(method.apply(input)), 6),
                             toString(input)))
                     .map(Object::toString)
                     .collect(joining("\n")));
