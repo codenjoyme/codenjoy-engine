@@ -55,7 +55,7 @@ public class SomeRoundSettings extends SettingsImpl
 
     @Override
     public List<Key> allKeys() {
-        return Arrays.asList(SomeGameSettings.Keys.values());
+        return Arrays.asList(Keys.values());
     }
 
     public SomeRoundSettings() {

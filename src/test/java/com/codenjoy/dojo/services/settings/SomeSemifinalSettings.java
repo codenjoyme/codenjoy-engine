@@ -54,7 +54,7 @@ public class SomeSemifinalSettings extends SettingsImpl
 
     @Override
     public List<Key> allKeys() {
-        return Arrays.asList(SomeSemifinalSettings.Keys.values());
+        return Arrays.asList(Keys.values());
     }
 
     public SomeSemifinalSettings() {

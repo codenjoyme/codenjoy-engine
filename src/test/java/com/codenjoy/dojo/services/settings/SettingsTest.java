@@ -837,7 +837,6 @@ public class SettingsTest {
         verifyNoMoreInteractions(editListener, selectListener, checkListener);
     }
 
-
     @Test
     public void shouldRemoveParameterByName() {
         // given

@@ -57,7 +57,7 @@ public class SomeLevelsSettings extends SettingsImpl
 
     @Override
     public List<Key> allKeys() {
-        return Arrays.asList(SomeLevelsSettings.Keys.values());
+        return Arrays.asList(Keys.values());
     }
 
     public SomeLevelsSettings() {

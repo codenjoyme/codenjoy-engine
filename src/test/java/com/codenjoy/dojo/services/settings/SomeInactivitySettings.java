@@ -53,7 +53,7 @@ public class SomeInactivitySettings extends SettingsImpl
 
     @Override
     public List<Key> allKeys() {
-        return Arrays.asList(SomeInactivitySettings.Keys.values());
+        return Arrays.asList(Keys.values());
     }
 
     public SomeInactivitySettings() {
