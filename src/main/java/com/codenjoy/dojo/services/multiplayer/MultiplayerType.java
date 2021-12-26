@@ -144,7 +144,7 @@ public class MultiplayerType {
      * при этом продвигаясь по уровням вперед.
      * Другими словами это SINGLE на N уровней
      */
-    public static final Function<Integer, MultiplayerType> SINGLE_LEVELS = SingleLevelsType::new;
+    public static final Function<Integer, MultiplayerType> ALL_SINGLE = SingleLevelsType::new;
 
     /**
      * Игра многоуровневая многопользовательская.
@@ -152,13 +152,13 @@ public class MultiplayerType {
      * при этом продвигаясь по уровням вперед.
      * Другими словами это MULTIPLE на N уровней
      */
-    public static final BiFunction<Integer, Integer, MultiplayerType> MULTIPLE_LEVELS = MultipleLevelsType::new;
+    public static final BiFunction<Integer, Integer, MultiplayerType> ALL_IN_ROOMS = MultipleLevelsType::new;
 
     /**
      * Так же как и TRAINING только последний уровень
      * разделен на комнаты по N участников.
      */
-    public static final BiFunction<Integer, Integer, MultiplayerType> MULTIPLE_LEVELS_MULTIROOM = MultipleLevelsMultiroomType::new;
+    public static final BiFunction<Integer, Integer, MultiplayerType> TRAINING_FINAL_IN_ROOMS = MultipleLevelsMultiroomType::new;
 
     protected int roomSize;
     protected int levelsCount;

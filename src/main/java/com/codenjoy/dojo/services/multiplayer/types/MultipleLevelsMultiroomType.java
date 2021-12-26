@@ -45,5 +45,4 @@ public class MultipleLevelsMultiroomType extends LevelsType {
             return lastRoomSize;
         }
     }
-
 }

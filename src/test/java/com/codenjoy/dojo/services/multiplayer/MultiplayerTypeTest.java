@@ -271,7 +271,7 @@ public class MultiplayerTypeTest {
 
     @Test
     public void typeSingleLevels() {
-        MultiplayerType type = MultiplayerType.SINGLE_LEVELS.apply(5);
+        MultiplayerType type = MultiplayerType.ALL_SINGLE.apply(5);
 
         assertEquals(1, type.getRoomSize());
         assertEquals(5, type.getLevelsCount());
@@ -296,7 +296,7 @@ public class MultiplayerTypeTest {
 
     @Test
     public void typeMultipleLevels() {
-        MultiplayerType type = MultiplayerType.MULTIPLE_LEVELS.apply(5, 7);
+        MultiplayerType type = MultiplayerType.ALL_IN_ROOMS.apply(5, 7);
 
         assertEquals(5, type.getRoomSize());
         assertEquals(7, type.getLevelsCount());
@@ -321,7 +321,7 @@ public class MultiplayerTypeTest {
 
     @Test
     public void typeMultipleLevelsMultiroom() {
-        MultiplayerType type = MultiplayerType.MULTIPLE_LEVELS_MULTIROOM.apply(5, 7);
+        MultiplayerType type = MultiplayerType.TRAINING_FINAL_IN_ROOMS.apply(5, 7);
 
         assertEquals(1, type.getRoomSize());
         assertEquals(1, type.getRoomSize(new LevelProgress(7, 1, 2))); // level 1
