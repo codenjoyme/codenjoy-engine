@@ -80,25 +80,31 @@ public final class NullParameter<T> implements Parameter<T> {
     @Override
     public Parameter<T> update(Object value) {
         warn();
-        return null;
+        return this;
+    }
+
+    @Override
+    public Parameter<T> justSet(Object value) {
+        warn();
+        return this;
     }
 
     @Override
     public Parameter<T> def(T value) {
         warn();
-        return INSTANCE.get();
+        return this;
     }
 
     @Override
     public <V> Parameter<V> type(Class<V> type) {
         warn();
-        return INSTANCE.get();
+        return (Parameter) this;
     }
 
     @Override
     public Parameter<T> parser(Function<String, T> parser) {
         warn();
-        return INSTANCE.get();
+        return this;
     }
 
     @Override
@@ -109,7 +115,7 @@ public final class NullParameter<T> implements Parameter<T> {
     @Override
     public Parameter<T> onChange(BiConsumer<T, T> consumer) {
         warn();
-        return INSTANCE.get();
+        return this;
     }
 
     @Override

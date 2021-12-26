@@ -40,17 +40,19 @@ public abstract class Updatable<T> {
 
     protected abstract T def();
 
-    public void justSet(T value) {
+    protected Parameter<T> setOnly(T value) {
         changed = ((this.value == null && value != null) || (this.value != null && !this.value.equals(value)));
         this.value = value;
+        return (Parameter<T>) this;
     }
 
-    protected void set(T value) {
+    protected Parameter<T> set(T value) {
         T old = getOrDefault();
-        justSet(value);
+        setOnly(value);
         if (onChange != null) {
             onChange.accept(old, value);
         }
+        return (Parameter<T>) this;
     }
 
     public Parameter onChange(BiConsumer consumer) {

@@ -53,14 +53,26 @@ public interface Parameter<T> extends Cloneable {
 
     String getName();
 
+    /**
+     * Установка нового значения и триггер onChange обработчика.
+     * @param value Новое значение.
+     * @return this parameter.
+     */
     Parameter<T> update(Object value);
+
+    /**
+     * Установка нового значения без триггера onChange обработчика.
+     * @param value Новое значение.
+     * @return this parameter.
+     */
+    Parameter<T> justSet(Object value);
 
     /**
      * Так ты указываешь значение по умолчанию.
      * Обычно этого достаточно для ввода значения.
      *
      * @param value Значение.
-     * @return Возвращается this.
+     * @return this parameter.
      */
     Parameter<T> def(T value);
 

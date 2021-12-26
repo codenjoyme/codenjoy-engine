@@ -97,7 +97,7 @@ public class Chance<T extends CharElement> {
             value = value * (MAX_PERCENT - reserved) / sum;
             if (value <= 0) return;
 
-            update(param, value);
+            param.justSet(value);
         });
 
         checkParams();
@@ -105,11 +105,6 @@ public class Chance<T extends CharElement> {
 
     private int reservedForAuto() {
         return settings.integer(CHANCE_RESERVED);
-    }
-
-    private void update(Parameter param, int value) {
-        // обновляет параметр без вызова лиснера, который перегенерит все axis
-        ((Updatable)param).justSet(value);
     }
 
     private void fillAxis(int autoRange) {

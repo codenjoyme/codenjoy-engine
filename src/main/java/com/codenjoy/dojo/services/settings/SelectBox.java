@@ -76,8 +76,17 @@ public class SelectBox<T> extends Updatable<Integer> implements Parameter<T> {
 
     @Override
     public SelectBox<T> update(Object value) {
+        return update(value, super::set);
+    }
+
+    @Override
+    public Parameter<T> justSet(Object value) {
+        return update(value, super::setOnly);
+    }
+
+    private SelectBox<T> update(Object value, Function<Integer, Parameter<Integer>> process) {
         checkIsPresent(value);
-        set(options.indexOf(value));
+        process.apply(options.indexOf(value));
 
         return this;
     }

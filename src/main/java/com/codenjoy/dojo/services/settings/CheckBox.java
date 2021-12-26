@@ -55,14 +55,23 @@ public class CheckBox<T> extends TypeUpdatable<T> implements Parameter<T> {
 
     @Override
     public CheckBox<T> update(Object value) {
+        return update(value, super::set);
+    }
+
+    @Override
+    public Parameter<T> justSet(Object value) {
+        return update(value, super::setOnly);
+    }
+
+    private CheckBox<T> update(Object value, Function<T, Parameter<T>> process) {
         if (value == null) {
             return null;
         }
         Boolean b = parse(value);
         if (b == null) {
-            set(tryParse(value));
+            process.apply(tryParse(value));
         } else {
-            set(code(b));
+            process.apply(code(b));
         }
         return this;
     }
@@ -70,13 +79,14 @@ public class CheckBox<T> extends TypeUpdatable<T> implements Parameter<T> {
     private T code(boolean value) {
         if (Integer.class.equals(type)) {
             return (T)((value) ? Integer.valueOf(1) : Integer.valueOf(0));
-        } else if (Boolean.class.equals(type)) {
-            return (T) Boolean.valueOf(value);
-        } else if (String.class.equals(type)) {
-            return (T) Boolean.valueOf(value).toString();
-        } else {
-            return tryParse(Boolean.valueOf(value));
         }
+        if (Boolean.class.equals(type)) {
+            return (T) Boolean.valueOf(value);
+        }
+        if (String.class.equals(type)) {
+            return (T) Boolean.valueOf(value).toString();
+        }
+        return tryParse(Boolean.valueOf(value));
     }
 
     @Override
@@ -92,14 +102,15 @@ public class CheckBox<T> extends TypeUpdatable<T> implements Parameter<T> {
     private Boolean parse(Object value) {
         if (value instanceof Boolean) {
             return (Boolean)value;
-        } else if (value instanceof String) {
+        }
+        if (value instanceof String) {
             return ("true".equalsIgnoreCase((String) value)
                     || "1".equals(value));
-        } else if (value instanceof Integer){
-            return ((Integer)value == 1);
-        } else {
-            return null;
         }
+        if (value instanceof Integer){
+            return ((Integer)value == 1);
+        }
+        return null;
     }
 
     @Override

@@ -75,10 +75,16 @@ public class ConsumerSupplierParameter<T> implements Parameter<T> {
     @Override
     public Parameter<T> update(Object value) {
         T old = get.get();
-        set.accept((T)value);
+        justSet(value);
         if (consumer != null) {
             consumer.accept(old, (T)value);
         }
+        return this;
+    }
+
+    @Override
+    public Parameter<T> justSet(Object value) {
+        set.accept((T)value);
         return this;
     }
 

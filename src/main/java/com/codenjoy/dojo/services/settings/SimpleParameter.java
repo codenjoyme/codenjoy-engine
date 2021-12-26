@@ -69,6 +69,12 @@ public class SimpleParameter<T> implements Parameter<T> {
 
     @Override
     public Parameter<T> update(Object value) {
+        justSet(value);
+        return this;
+    }
+
+    @Override
+    public Parameter<T> justSet(Object value) {
         this.value = (T) value;
         return this;
     }

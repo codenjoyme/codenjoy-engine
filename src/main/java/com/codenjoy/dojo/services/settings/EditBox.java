@@ -74,20 +74,29 @@ public class EditBox<T> extends TypeUpdatable<T> implements Parameter<T> {
 
     @Override
     public EditBox<T> update(Object value) {
+        return update(value, super::set);
+    }
+
+    @Override
+    public Parameter<T> justSet(Object value) {
+        return update(value, super::setOnly);
+    }
+
+    private EditBox<T> update(Object value, Function<T, Parameter<T>> process) {
         if (value instanceof String) {
             if (Integer.class.equals(type)) {
-                set((T) Integer.valueOf((String) value));
+                process.apply((T) Integer.valueOf((String) value));
             } else if (Boolean.class.equals(type)) {
-                set((T) Boolean.valueOf((String) value));
+                process.apply((T) Boolean.valueOf((String) value));
             } else if (Double.class.equals(type)) {
-                set((T) Double.valueOf((String) value));
+                process.apply((T) Double.valueOf((String) value));
             } else if (String.class.equals(type)) {
-                set((T)value);
+                process.apply((T)value);
             } else {
-                set(tryParse(value));
+                process.apply(tryParse(value));
             }
         } else {
-            set((T)value);
+            process.apply((T)value);
         }
         return this;
     }
