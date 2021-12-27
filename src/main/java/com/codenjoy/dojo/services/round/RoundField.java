@@ -70,14 +70,16 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
      * устаревшие за время с прошлого тика артефакты. Актуально
      * например для "умирающих" объектов, которые пропадают на 2й тик.
      */
-    protected abstract void cleanStuff();
+    protected void cleanStuff() {
+        // clean all temporary stuff before next tick
+    }
 
     /**
      * После вручения призов победителю полю может понадобиться
      * провести какую-то работу. Тут это можно сделать.
      */
     protected void setNewObjects() {
-        // do nothing
+        // add new object after rewarding winner
     }
 
     /**
@@ -218,5 +220,4 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
 
         return;
     }
-
 }
