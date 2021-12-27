@@ -36,7 +36,7 @@ public final class NullGameField implements GameField {
     }
 
     @Override
-    public BoardReader reader() {
+    public BoardReader<?> reader() {
         return NullBoardReader.INSTANCE;
     }
 

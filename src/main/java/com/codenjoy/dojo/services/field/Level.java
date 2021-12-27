@@ -28,7 +28,7 @@ public interface Level {
 
     int size();
 
-    BoardReader reader();
+    BoardReader<?> reader();
 
     void saveTo(PointField field);
 }

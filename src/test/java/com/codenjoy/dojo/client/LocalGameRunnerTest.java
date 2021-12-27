@@ -71,10 +71,10 @@ public class LocalGameRunnerTest {
             public GamePlayer player;
 
             @Override
-            public BoardReader reader() {
+            public BoardReader<GamePlayer> reader() {
                 messages.add("GET_READER" + id());
 
-                return new BoardReader<GamePlayer>() {
+                return new BoardReader<>() {
                     @Override
                     public int size() {
                         return id++;

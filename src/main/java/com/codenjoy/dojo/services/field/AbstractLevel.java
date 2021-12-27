@@ -96,7 +96,7 @@ public abstract class AbstractLevel implements Level {
 
     // TODO remove it after migrating all games
     @Override
-    public BoardReader reader() {
+    public BoardReader<Object> reader() {
         return new BoardReader<>() {
             @Override
             public int size() {

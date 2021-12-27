@@ -40,7 +40,7 @@ import java.util.function.Supplier;
  */
 public interface GameField<P extends GamePlayer> extends Tickable {
 
-    BoardReader reader();
+    BoardReader<P> reader();
 
     void newGame(P player);
 

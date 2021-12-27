@@ -26,6 +26,7 @@ import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 import com.codenjoy.dojo.services.multiplayer.GameField;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
 import java.util.*;
@@ -60,8 +61,8 @@ public class PointField {
      * @param classes Порядок отрисовки типов элементов.
      * @return BoardReader для отрисовки элементов на поле в заданном порядке.
      */
-    public BoardReader<?> reader(Class<? extends Point>... classes) {
-        return reader(player -> classes);
+    public <P extends GamePlayer> BoardReader<P> reader(Class<? extends Point>... classes) {
+        return reader((P player) -> classes);
     }
 
     /**
@@ -70,7 +71,7 @@ public class PointField {
      *                 по порядку отрисовки.
      * @return BoardReader для отрисовки элементов на поле в заданном порядке.
      */
-    public BoardReader<?> reader(Function<Object, Class<? extends Point>[]> function) {
+    public <P extends GamePlayer> BoardReader<P> reader(Function<P, Class<? extends Point>[]> function) {
         return new BoardReader<>() {
 
             @Override
@@ -79,7 +80,7 @@ public class PointField {
             }
 
             @Override
-            public void addAll(Object player, Consumer<Iterable<? extends Point>> processor) {
+            public void addAll(P player, Consumer<Iterable<? extends Point>> processor) {
                 for (Class clazz : function.apply(player)) {
                     processor.accept(PointField.this.of(clazz).all());
                 }
