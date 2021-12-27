@@ -209,10 +209,11 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
             return;
         }
 
-        // кто уходит из игры не лишает коллег очков за победу
+        // кто уходит из игры не лишает коллег очков за победу,
         // но только если он был жив к этому моменту
-        if (fireEvents && player.getHero().isActiveAndAlive()) {
-            player.getHero().die();
+        RoundPlayerHero hero = player.getHero();
+        if (fireEvents && hero.isActiveAndAlive()) {
+            hero.die();
             rewardTheWinnerIfNeeded(() -> {});
         }
 
