@@ -22,11 +22,15 @@ package com.codenjoy.dojo.services.multiplayer;
  * #L%
  */
 
+import com.codenjoy.dojo.services.settings.SettingsReader;
 import com.codenjoy.dojo.services.settings.SomeRoundSettings;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static com.codenjoy.dojo.client.Utils.split;
+import static com.codenjoy.dojo.services.multiplayer.Mode.*;
 import static org.junit.Assert.*;
 
 public class MultiplayerSettingsTest {
@@ -161,7 +165,7 @@ public class MultiplayerSettingsTest {
     @Test
     public void testMultiplayerType_tournament() {
         // given
-        settings.mode().select(Mode.TOURNAMENT.value());
+        settings.mode().select(TOURNAMENT.value());
         settings.setPlayersPerRoom(15); // ignored
 
         // when then
@@ -172,7 +176,7 @@ public class MultiplayerSettingsTest {
     @Test
     public void testMultiplayerType_triple() {
         // given
-        settings.mode().select(Mode.TRIPLE.value());
+        settings.mode().select(TRIPLE.value());
         settings.setPlayersPerRoom(15); // ignored
 
         // when then
@@ -183,11 +187,38 @@ public class MultiplayerSettingsTest {
     @Test
     public void testMultiplayerType_quadro(){
         // given
-        settings.mode().select(Mode.QUADRO.value());
+        settings.mode().select(QUADRO.value());
         settings.setPlayersPerRoom(15); // ignored
 
         // when then
         assertType(13, "QuadroType{roomSize=4, levelsCount=1, \n" +
                 "disposable=true, shouldReloadAlone=true}");
+    }
+
+    @Test
+    public void testInitCustomOptions(){
+        // given
+        settings.removeParameter(MultiplayerSettings.Keys.GAME_MODE.key());
+        settings.initMultiplayer(15, Arrays.asList(
+                TOURNAMENT.key(),
+                TRIPLE.key(),
+                QUADRO.key()
+        ));
+
+        // when
+        settings.mode().select(0);
+
+        // then
+        assertEquals(0, settings.mode().index());
+        assertEquals("[TOURNAMENT] One level chosen at random. 2 players in room.",
+                settings.mode().getValue());
+
+        // when
+        settings.mode().select(2);
+
+        // then
+        assertEquals(2, settings.mode().index());
+        assertEquals("[QUADRO] One level chosen at random. 4 players in room.",
+                settings.mode().getValue());
     }
 }

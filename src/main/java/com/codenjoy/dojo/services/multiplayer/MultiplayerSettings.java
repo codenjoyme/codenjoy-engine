@@ -76,12 +76,16 @@ public interface MultiplayerSettings<T extends SettingsReader> extends SettingsR
 
         // TODO два связанных параметра, надо как-то развязать их
         Parameter<Integer> parameter = add(ROOM_SIZE, roomSize);
-        if (RoundSettings.is((Settings) this)) {
-            Parameter<Integer> playersPerRoom = RoundSettings.get((Settings) this).playersPerRoom();
 
-            parameter.onChange((old, updated) -> playersPerRoom.justSet(updated));
-            playersPerRoom.onChange((old, updated) -> parameter.justSet(updated));
+        // TODO убрать это после того как объединим два параметра в один
+        if (!RoundSettings.is((Settings) this)) {
+            integer(ROUNDS_PLAYERS_PER_ROOM, roomSize);
+            bool(ROUNDS_ENABLED, false);
         }
+
+        Parameter<Integer> playersPerRoom = RoundSettings.get((Settings) this).playersPerRoom();
+        parameter.onChange((old, updated) -> playersPerRoom.justSet(updated));
+        playersPerRoom.onChange((old, updated) -> parameter.justSet(updated));
     }
 
     default int roomSize() {
@@ -95,11 +99,11 @@ public interface MultiplayerSettings<T extends SettingsReader> extends SettingsR
         if (!hasParameter(GAME_MODE.key())) {
             return Mode.SINGLE;
         }
-        return Mode.values()[mode().index()];
+        return Mode.get(mode().getValue());
     }
 
     // метод для получения parameter Mode из настроек
-    default SelectBox mode() {
+    default SelectBox<String> mode() {
         return parameter(GAME_MODE, SelectBox.class);
     }
 

@@ -58,6 +58,13 @@ public enum Mode implements SettingsReader.Key {
                 .collect(toList());
     }
 
+    public static Mode get(String key) {
+        return Arrays.stream(values())
+                .filter(mode -> mode.key().equals(key))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Key not found: " + key));
+    }
+
     public int value() {
         return value;
     }
