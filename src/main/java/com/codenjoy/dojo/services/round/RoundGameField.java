@@ -38,5 +38,5 @@ public interface RoundGameField<P extends RoundGamePlayer> extends GameField<P> 
 
     int score(P player);
 
-    void oneMoreDead(P player);
+    void oneMoreDead(P player, Object loseEvent);
 }

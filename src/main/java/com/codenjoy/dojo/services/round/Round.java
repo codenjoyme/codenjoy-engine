@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.round;
  */
 
 public interface Round {
+
     void init(RoundGameField field, Object winEvent);
 
     boolean tick();

@@ -38,18 +38,16 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     private List<P> inactive;
 
     private Object startRoundEvent;
-    private Object loseEvent;
 
     public RoundField() {
         // do nothing, for testing only
     }
 
-    public RoundField(Object startRoundEvent, Object winEvent, Object loseEvent, RoundSettings settings) {
+    public RoundField(Object startRoundEvent, Object winEvent, RoundSettings settings) {
         this.round = RoundFactory.get(settings);
         round.init(this, winEvent);
 
         this.startRoundEvent = startRoundEvent;
-        this.loseEvent = loseEvent;
 
         inactive = new LinkedList<>();
     }
@@ -136,7 +134,7 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
     }
 
     @Override
-    public void oneMoreDead(P player) {
+    public void oneMoreDead(P player, Object loseEvent) {
         if (round instanceof NullRound) {
             player.die(false, loseEvent);
         } else {
@@ -155,7 +153,7 @@ public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayer
         }
     }
 
-    public void rewardTheWinnerIfNeeded(Runnable runnable) {
+    private void rewardTheWinnerIfNeeded(Runnable runnable) {
         if (inactive.isEmpty()) {
             return;
         }

@@ -52,12 +52,14 @@ public abstract class RoundPlayerHero<F extends RoundGameField> extends PlayerHe
         return alive;
     }
 
-    public void die() {
+    public void die(Object loseEvent) {
         if (alive) {
             alive = false;
-            field.oneMoreDead(player);
+            field.oneMoreDead(player, loseEvent);
         }
     }
+
+    public abstract void die();
 
     public boolean isActive() {
         return active;
