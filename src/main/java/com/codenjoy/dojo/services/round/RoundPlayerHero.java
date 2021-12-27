@@ -44,7 +44,7 @@ public abstract class RoundPlayerHero<F extends RoundGameField> extends PlayerHe
     }
 
     public boolean isActiveAndAlive() {
-        return active && alive;
+        return isActive() && isAlive();
     }
 
     @Override
