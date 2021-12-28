@@ -46,7 +46,7 @@ public class LocalWSGameServer {
         runner = new LocalWSGameRunner();
     }
 
-    public void run(String game, AbstractGameType<?> gameType) {
+    public void run(AbstractGameType<?> gameType) {
         String host = System.getProperty("host", "127.0.0.1");
         int port = Integer.parseInt(System.getProperty("port", "8080"));
         int timeout = Integer.parseInt(System.getProperty("timeout", "1000"));
@@ -61,8 +61,8 @@ public class LocalWSGameServer {
         runner.print("Log file is here: " + file.getAbsolutePath());
 
         runner.print(String.format(
-                "Run local WS server for %s on %s:%s\n",
-                game, host, port));
+                "Run local WS server on %s:%s\n",
+                host, port));
 
         runner.print("If you want to change something, please use command:\n" +
                 "\t\tjava -jar -Dhost=127.0.0.1 -Dport=8080 -Dtimeout=1000 " +
