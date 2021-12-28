@@ -26,8 +26,7 @@ import lombok.SneakyThrows;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 
@@ -50,36 +49,13 @@ import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
  */
 public class SmartAssert {
 
-    private static Map<String, List<AssertionError>> failures = new ConcurrentHashMap<>();
-
-    private static StackTraceElement[] stackTrace() {
-        Exception exception = new Exception();
-        return exception.getStackTrace();
-    }
-
-    private static StackTraceElement getCaller() {
-        StackTraceElement[] elements = stackTrace();
-        for (int i = 0; i < elements.length; i++) {
-            StackTraceElement element = elements[i];
-            String className = element.getClassName();
-
-            if (className.contains(".Abstract")
-                || className.equals(SmartAssert.class.getName())
-                || className.contains(SmartAssert.class.getSimpleName() + "$")
-                || className.contains("dojo.services.helper"))
-            {
-                continue;
-            }
-            return element;
-        }
-        throw new RuntimeException();
-    }
+    private static List<AssertionError> failures = new CopyOnWriteArrayList<>();
 
     public static void assertEquals(String message, Object expected, Object actual) {
         try {
             testing().assertEquals(message, expected, actual);
         } catch (AssertionError e) {
-            failures().add(e);
+            failures.add(e);
         }
     }
 
@@ -87,7 +63,7 @@ public class SmartAssert {
         try {
             testing().assertNotEquals(expected, actual);
         } catch (AssertionError e) {
-            failures().add(e);
+            failures.add(e);
         }
     }
 
@@ -95,7 +71,7 @@ public class SmartAssert {
         try {
             testing().assertEquals(expected, actual);
         } catch (AssertionError e) {
-            failures().add(e);
+            failures.add(e);
         }
     }
 
@@ -103,7 +79,7 @@ public class SmartAssert {
         try {
             testing().assertSame(object1, object2);
         } catch (AssertionError e) {
-            failures().add(e);
+            failures.add(e);
         }
     }
 
@@ -117,22 +93,6 @@ public class SmartAssert {
 
     @SneakyThrows
     public static void checkResult() {
-        checkResult(failures());
-    }
-
-    @SneakyThrows
-    public static void checkResult(Class<?> caller) {
-        checkResult(failures(caller.getName()));
-    }
-
-    private static List<AssertionError> failures() {
-        return failures(getCaller().getClassName().split("[$]")[0]);
-    }
-    
-    private static List<AssertionError> failures(String caller) {
-        if (!failures.containsKey(caller)) {
-            failures.put(caller, new LinkedList<>());
-        }
-        return failures.get(caller);
+        checkResult(failures);
     }
 }

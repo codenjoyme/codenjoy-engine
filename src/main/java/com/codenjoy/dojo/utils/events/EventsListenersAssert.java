@@ -70,8 +70,7 @@ public class EventsListenersAssert {
                 || is(e.getSuperclass(), exception);
     }
 
-    public static String collectAll(List<?> list, Function<Integer, String> function)
-    {
+    public static String collectAll(List<?> list, Function<Integer, String> function) {
         String result = "";
         for (int index = 0; index < list.size(); index++) {
             String line = function.apply(index);
