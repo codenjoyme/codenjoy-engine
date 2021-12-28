@@ -23,11 +23,11 @@ package com.codenjoy.dojo.services;
  */
 
 
+import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.services.settings.Settings;
-import com.codenjoy.dojo.services.settings.SettingsImpl;
 
 /**
  * Класс позволяет не фиксить все игры, если будет добьавлен интерфейсный метод в GameType
