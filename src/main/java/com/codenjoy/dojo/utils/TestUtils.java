@@ -27,23 +27,23 @@ import com.codenjoy.dojo.client.AbstractBoard;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
-import com.codenjoy.dojo.services.multiplayer.GameField;
-import com.codenjoy.dojo.services.multiplayer.GamePlayer;
-import com.codenjoy.dojo.services.multiplayer.LevelProgress;
-import com.codenjoy.dojo.services.multiplayer.Single;
+import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
+import com.codenjoy.dojo.services.round.RoundGamePlayer;
 import com.codenjoy.dojo.services.settings.Settings;
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
+import java.lang.reflect.Method;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
+import static java.util.stream.Collectors.joining;
 
 @UtilityClass
 public class TestUtils {
@@ -227,6 +227,31 @@ public class TestUtils {
         }
 
         return board.boardAsString();
+    }
+
+    /**
+     * Метод удобно пробежится по всем Player достанет из них Hero и дернет по рефлексии
+     * запрашиваемый метод, подготовит карту и приведет ее к строке.
+     * @param players Список игроков Player.
+     * @param methodName Имя вызываемого метода в Hero.
+     * @return Карта индексов игроков и связанных с ней результатов выполнения
+     *         метода соответствующего Hero.
+     */
+    @SneakyThrows
+    public String collectHeroesData(List<? extends RoundGamePlayer> players, String methodName) {
+        Map<Integer, Object> map = new LinkedHashMap<>();
+        for (int index = 0; index < players.size(); index++) {
+            RoundGamePlayer player = players.get(index);
+            PlayerHero hero = player.getHero();
+
+            Method method = hero.getClass().getMethod(methodName);
+            Object result = method.invoke(hero);
+
+            map.put(index, result);
+        }
+        return map.entrySet().stream()
+                .map(Object::toString)
+                .collect(joining("\n"));
     }
 
 }
