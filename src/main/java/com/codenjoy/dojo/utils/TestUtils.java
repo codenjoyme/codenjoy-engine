@@ -30,10 +30,10 @@ import com.codenjoy.dojo.services.algs.DeikstraFindWay;
 import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
-import com.codenjoy.dojo.services.round.RoundGamePlayer;
 import com.codenjoy.dojo.services.settings.Settings;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -234,11 +234,12 @@ public class TestUtils {
      * запрашиваемый метод, подготовит карту и приведет ее к строке.
      * @param players Список игроков Player.
      * @param methodName Имя вызываемого метода в Hero.
+     * @param skipDefault Пропускать ли default значения (Integer = 0, String = "")
      * @return Карта индексов игроков и связанных с ней результатов выполнения
      *         метода соответствующего Hero.
      */
     @SneakyThrows
-    public String collectHeroesData(List<? extends GamePlayer> players, String methodName) {
+    public String collectHeroesData(List<? extends GamePlayer> players, String methodName, boolean skipDefault) {
         Map<Integer, Object> map = new LinkedHashMap<>();
         for (int index = 0; index < players.size(); index++) {
             GamePlayer player = players.get(index);
@@ -247,11 +248,18 @@ public class TestUtils {
             Method method = hero.getClass().getMethod(methodName);
             Object result = method.invoke(hero);
 
+            if (skipDefault) {
+                if ((result instanceof String && StringUtils.isEmpty((String)result))
+                        || (result instanceof Integer && (Integer)result == 0))
+                    continue;
+            }
+
             map.put(index, result);
         }
         return map.entrySet().stream()
-                .map(Object::toString)
+                .map(entry -> String.format("hero(%s)=%s",
+                        entry.getKey(),
+                        entry.getValue()))
                 .collect(joining("\n"));
     }
-
 }

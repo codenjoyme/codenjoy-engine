@@ -139,22 +139,46 @@ public class TestUtilsTest {
             add(new Player(new Hero(23, "s23")));
             add(new Player(new Hero(34, "s34")));
             add(new Player(new Hero(45, "s45")));
+            add(new Player(new Hero(56, "")));    // default String data
+            add(new Player(new Hero(0, "s67")));  // default Integer data
         }};
 
         // when then
+        boolean processAll = false;
         assertEquals(
-                "0=12\n" +
-                "1=23\n" +
-                "2=34\n" +
-                "3=45",
-                TestUtils.collectHeroesData(players, "property1"));
+                "hero(0)=12\n" +
+                "hero(1)=23\n" +
+                "hero(2)=34\n" +
+                "hero(3)=45\n" +
+                "hero(4)=56\n" +
+                "hero(5)=0",
+                TestUtils.collectHeroesData(players, "property1", processAll));
 
         assertEquals(
-                "0=s12\n" +
-                "1=s23\n" +
-                "2=s34\n" +
-                "3=s45",
-                TestUtils.collectHeroesData(players, "property2"));
+                "hero(0)=s12\n" +
+                "hero(1)=s23\n" +
+                "hero(2)=s34\n" +
+                "hero(3)=s45\n" +
+                "hero(4)=\n" +
+                "hero(5)=s67",
+                TestUtils.collectHeroesData(players, "property2", processAll));
 
+        // when then
+        boolean skipEmpty = true;
+        assertEquals(
+                "hero(0)=12\n" +
+                "hero(1)=23\n" +
+                "hero(2)=34\n" +
+                "hero(3)=45\n" +
+                "hero(4)=56",
+                TestUtils.collectHeroesData(players, "property1", skipEmpty));
+
+        assertEquals(
+                "hero(0)=s12\n" +
+                "hero(1)=s23\n" +
+                "hero(2)=s34\n" +
+                "hero(3)=s45\n" +
+                "hero(5)=s67",
+                TestUtils.collectHeroesData(players, "property2", skipEmpty));
     }
 }
