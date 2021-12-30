@@ -23,7 +23,16 @@ package com.codenjoy.dojo.utils;
  */
 
 
+import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.joystick.NoActJoystick;
+import com.codenjoy.dojo.services.joystick.NoDirectionJoystick;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
+import com.codenjoy.dojo.services.multiplayer.PlayerHero;
+import com.codenjoy.dojo.services.printer.CharElement;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -59,5 +68,93 @@ public class TestUtilsTest {
                     "HIJK\n" +
                     "LMNO\n",
                 TestUtils.injectN("1234567890ABCDEFHIJKLMNO"));
+    }
+
+    static class Hero extends PlayerHero implements NoActJoystick, NoDirectionJoystick, State<CharElement, Player> {
+
+        private int property1;
+        private String property2;
+
+        public Hero(int property1, String property2) {
+            super(pt(1, 1));
+            this.property1 = property1;
+            this.property2 = property2;
+        }
+
+        @Override
+        public boolean isAlive() {
+            return true;
+        }
+
+        @Override
+        public void tick() {
+
+        }
+
+        @Override
+        public CharElement state(Player player, Object... alsoAtPoint) {
+            return new CharElement() {
+                @Override
+                public char ch() {
+                    return '1';
+                }
+
+                @Override
+                public String name() {
+                    return "NAME";
+                }
+            };
+        }
+
+        public int property1() {
+            return property1;
+        }
+
+        public String property2() {
+            return property2;
+        }
+    }
+
+    static class Player extends GamePlayer {
+
+        Hero hero;
+
+        public Player(Hero hero) {
+            super(null, null);
+            this.hero = hero;
+        }
+
+        @Override
+        public PlayerHero getHero() {
+            return hero;
+        }
+
+    };
+
+    @Test
+    public void testCollectHeroesData() {
+        // given
+        List<Player> players = new ArrayList<>(){{
+            add(new Player(new Hero(12, "s12")));
+            add(new Player(new Hero(23, "s23")));
+            add(new Player(new Hero(34, "s34")));
+            add(new Player(new Hero(45, "s45")));
+        }};
+
+        // when then
+        assertEquals(
+                "0=12\n" +
+                "1=23\n" +
+                "2=34\n" +
+                "3=45",
+                TestUtils.collectHeroesData(players, "property1"));
+
+        assertEquals(
+                "0=s12\n" +
+                "1=s23\n" +
+                "2=s34\n" +
+                "3=s45",
+                TestUtils.collectHeroesData(players, "property2"));
+
     }
 }

@@ -238,10 +238,10 @@ public class TestUtils {
      *         метода соответствующего Hero.
      */
     @SneakyThrows
-    public String collectHeroesData(List<? extends RoundGamePlayer> players, String methodName) {
+    public String collectHeroesData(List<? extends GamePlayer> players, String methodName) {
         Map<Integer, Object> map = new LinkedHashMap<>();
         for (int index = 0; index < players.size(); index++) {
-            RoundGamePlayer player = players.get(index);
+            GamePlayer player = players.get(index);
             PlayerHero hero = player.getHero();
 
             Method method = hero.getClass().getMethod(methodName);
