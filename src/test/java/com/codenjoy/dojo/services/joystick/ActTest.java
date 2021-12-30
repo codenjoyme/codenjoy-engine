@@ -22,19 +22,22 @@ package com.codenjoy.dojo.services.joystick;
  * #L%
  */
 
+import org.junit.Test;
 
-import com.codenjoy.dojo.services.Joystick;
+import static org.junit.Assert.assertEquals;
 
-public interface RoundsActJoystick extends Joystick {
+public class ActTest {
 
-    boolean isActiveAndAlive();
+    @Test
+    public void testWithoutArguments() {
+        assertEquals(true, new Act(null).is());
+        assertEquals(true, new Act().is());
+    }
 
-    void act(Act act);
-
-    @Override
-    default void act(int... parameters) {
-        if (!isActiveAndAlive()) return;
-
-        act(new Act(parameters));
+    @Test
+    public void testWithArguments() {
+        assertEquals(false, new Act(1).is());
+        assertEquals(true, new Act(1).is(1));
+        assertEquals(false, new Act(1).is(2));
     }
 }

@@ -30,11 +30,11 @@ public class Act {
         this.data = data;
     }
 
-    public boolean act() {
+    public boolean is() {
         return data == null || data.length == 0;
     }
 
-    public boolean act(int input) {
-        return !act() && data[0] == input;
+    public boolean is(int input) {
+        return !is() && data[0] == input;
     }
 }
