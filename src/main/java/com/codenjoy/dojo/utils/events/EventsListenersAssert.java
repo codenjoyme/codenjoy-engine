@@ -26,10 +26,13 @@ import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.utils.core.Testing;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
+import static java.util.stream.Collectors.joining;
 
 public class EventsListenersAssert {
 
@@ -46,7 +49,7 @@ public class EventsListenersAssert {
     }
 
     public String getEvents() {
-        return collectAll(listeners(), index -> getEventsFormatted(index));
+        return collectAll(listeners(), this::getEventsFormatted);
     }
 
     private String getEvents(EventListener events) {
@@ -71,14 +74,10 @@ public class EventsListenersAssert {
     }
 
     public static String collectAll(List<?> list, Function<Integer, String> function) {
-        String result = "";
-        for (int index = 0; index < list.size(); index++) {
-            String line = function.apply(index);
-            if (line != null) {
-                result += line;
-            }
-        }
-        return result;
+        return IntStream.range(0, list.size())
+                .mapToObj(function::apply)
+                .filter(Objects::nonNull)
+                .collect(joining(""));
     }
 
     private static <A> A tryCatch(Supplier<A> tryCode, String exception, Supplier<A> failureCode) {
