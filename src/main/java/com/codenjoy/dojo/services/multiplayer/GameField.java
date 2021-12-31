@@ -24,8 +24,8 @@ package com.codenjoy.dojo.services.multiplayer;
 
 
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.Tickable;
+import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import org.json.JSONObject;
 
@@ -70,7 +70,7 @@ public interface GameField<P extends GamePlayer> extends Tickable {
 
     SettingsReader settings();
 
-    default List<P> load(String board, Supplier<P> createPlayer) {
+    default List<P> load(String board, Supplier<P> player) {
         return Arrays.asList();
     }
 
