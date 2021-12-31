@@ -22,10 +22,12 @@ package com.codenjoy.dojo.whatsnext;
  * #L%
  */
 
-import com.codenjoy.dojo.services.field.AbstractLevel;
-import com.codenjoy.dojo.services.field.PointField;
+import com.codenjoy.dojo.services.Game;
+import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
+import com.codenjoy.dojo.services.multiplayer.Single;
+import com.codenjoy.dojo.services.printer.PrinterFactory;
 import lombok.experimental.UtilityClass;
 
 import java.util.LinkedList;
@@ -36,16 +38,41 @@ import java.util.function.Supplier;
 public class WhatsNextUtils {
 
     public <P extends GamePlayer, H extends PlayerHero> List<P> load(
-            PointField field, AbstractLevel level, List<H> heroes, Supplier<P> creator)
+            GameField field,
+            List<H> heroes,
+            Supplier<P> creator)
     {
-        List<P> result = new LinkedList<>();
-        heroes.forEach(hero -> {
-            P player = creator.get();
-            player.setHero(hero);
-            result.add(player);
+        field.clearScore();
 
-        });
-        level.saveTo(field);
-        return result;
+        return new LinkedList<>(){{
+            heroes.forEach(hero -> {
+                P player = creator.get();
+                player.setHero(hero);
+                hero.manual(false);
+                add(player);
+            });
+        }};
+    }
+
+    public List<Game> newGameForAll(
+            List<? extends GamePlayer> players,
+            PrinterFactory printer,
+            GameField field)
+    {
+        return new LinkedList<>(){{
+            players.forEach(player ->
+                    add(newGame(player, printer, field)));
+        }};
+    }
+
+    public Game newGame(
+            GamePlayer player,
+            PrinterFactory printer,
+            GameField field)
+    {
+        return new Single(player, printer){{
+            on(field);
+            newGame();
+        }};
     }
 }

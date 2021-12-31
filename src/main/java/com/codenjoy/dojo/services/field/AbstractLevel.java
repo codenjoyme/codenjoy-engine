@@ -125,4 +125,8 @@ public abstract class AbstractLevel implements Level {
     protected void fill(PointField field) {
         // just override if needed
     }
+
+    public String map() {
+        return map;
+    }
 }

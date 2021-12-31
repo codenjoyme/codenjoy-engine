@@ -262,4 +262,11 @@ public class TestUtils {
                         entry.getValue()))
                 .collect(joining("\n"));
     }
+
+    public int[] asArray(List<? extends Point> points) {
+        return points.stream()
+                .flatMap(Point::stream)
+                .mapToInt(value -> value)
+                .toArray();
+    }
 }
