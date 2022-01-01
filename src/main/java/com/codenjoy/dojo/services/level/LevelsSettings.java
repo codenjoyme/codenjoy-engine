@@ -122,7 +122,7 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
         // TODO do we need this
     }
 
-    default <T extends AbstractLevel> T level(int level, Dice dice, Function<String, T> constructor) {
+    default <L extends AbstractLevel> L level(int level, Dice dice, Function<String, L> constructor) {
         return constructor.apply(getRandomLevelMap(level, dice));
     }
 
