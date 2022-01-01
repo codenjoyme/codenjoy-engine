@@ -68,6 +68,9 @@ public abstract class AbstractBaseGameTest
     private EventsListenersAssert events;
     private L level;
 
+    /**
+     * Метод необходимо аннотировать @Before в наследнике.
+     */
     public void setup() {
         listeners = new LinkedList<>();
         players = new LinkedList<>();
@@ -78,19 +81,53 @@ public abstract class AbstractBaseGameTest
         events = new EventsListenersAssert(() -> listeners, eventClass());
     }
 
+    /**
+     * Метод необходимо аннотировать @After в наследнике.
+     */
     public void after() {
         verifyAllEvents("");
         SmartAssert.checkResult();
     }
 
-    protected void dice(int... ints) {
+    /**
+     * @return Класс представляющий Event в игре.
+     */
+    protected abstract Class<?> eventClass();
+
+    /**
+     * @return Конструктор для создания Field в игре.
+     */
+    protected abstract TriFunction<Dice, L, S, F> createField();
+
+    /**
+     * @return Конструктор для создания Level в игре.
+     */
+    protected abstract Function<String, L> createLevel();
+
+    /**
+     * @return Конструктор для создания Player в игре.
+     */
+    protected abstract BiFunction<EventListener,S,P> createPlayer();
+
+    /**
+     * @return Объект Settings с базовыми настройками для тестов.
+     */
+    protected abstract S setupSettings();
+
+    public void dice(int... ints) {
         if (ints.length == 0) return;
+
         Testing.OngoingStubbing<Integer> when = testing().when(dice.next(testing().anyInt()));
         for (int i : ints) {
             when = when.thenReturn(i);
         }
     }
 
+    /**
+     * Генерирует Filed настроенный так, как указано на карте maps[0].
+     * Карты заносятся в Settings.
+     * @param maps Карты на основе которых будет сгенерирована игра.
+     */
     public void givenFl(String... maps) {
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, maps);
@@ -108,19 +145,30 @@ public abstract class AbstractBaseGameTest
         afterCreateField();
     }
 
-    protected abstract Class<?> eventClass();
-
-    protected abstract TriFunction<Dice, L, S, F> createField();
-
-    protected abstract Function<String, L> createLevel();
-
+    /**
+     * Метод служит для инициализации dice непосредственно
+     * перед генерацией героев на поле.
+     */
     protected abstract void setupHeroesDice();
 
-    protected abstract void beforeCreateField();
+    /**
+     * Метод служит предварительной настройке окружения перед
+     * созданием Field. Настройки подтюнить или что-то в level
+     * из которого будет создаваться Field.
+     */
+    protected void beforeCreateField() {
+        // settings / level pre-processing
+    }
 
-    protected abstract void afterCreateField();
+    /**
+     * Метод служит постобработке окружения после
+     * создания Field. Настройки подтюнить или что-то в самой Field.
+     */
+    protected void afterCreateField() {
+        // settings / field post-processing
+    }
 
-    protected P givenPlayer() {
+    private P givenPlayer() {
         EventListener listener = testing().mock(EventListener.class);
         listeners.add(listener);
 
@@ -129,8 +177,12 @@ public abstract class AbstractBaseGameTest
         return player;
     }
 
-    protected abstract BiFunction<EventListener,S,P> createPlayer();
-
+    /**
+     * Создает Player в заданной координате. Используется в случае,
+     * если мы хотим где-то в тесте после givenFl создать еще одного героя.
+     * @param pt Координата где будет новый герой.
+     * @return Созданный Player.
+     */
     public P givenPlayer(Point pt) {
         P player = givenPlayer();
 
@@ -141,20 +193,35 @@ public abstract class AbstractBaseGameTest
         return players.get(players.size() - 1);
     }
 
-    protected S setupSettings() {
-        return null;
-    }
-
     public void tick() {
         field.tick();
     }
+
+    // basic asserts
 
     public void assertF(String expected) {
         assertF(expected, 0);
     }
 
+    /**
+     * Проверяет одну борду с заданным индексом.
+     * @param expected Ожидаемое значение.
+     * @param index Индекс игрока.
+     */
     public void assertF(String expected, int index) {
         assertEquals(expected, game(index).getBoardAsString());
+    }
+
+    /**
+     * Проверяет все борды сразу.
+     * @param expected Ожидаемое значение.
+     */
+    public void assertA(String expected) {
+        assertEquals(expected,
+                EventsListenersAssert.collectAll(games, index -> {
+                    Object actual = game(index).getBoardAsString();
+                    return String.format("game(%s)\n%s\n", index, actual);
+                }));
     }
 
     public void verifyAllEvents(String expected) {
@@ -174,29 +241,33 @@ public abstract class AbstractBaseGameTest
         SmartAssert.assertEquals(expected, actual);
     }
 
-    public S settings() {
+    // protected getters
+
+    protected S settings() {
         return settings;
     }
 
-    public List<EventListener> listeners() {
+    protected List<EventListener> listeners() {
         return listeners;
     }
 
-    public List<P> players() {
+    protected List<P> players() {
         return players;
     }
 
-    public F field() {
+    protected F field() {
         return field;
     }
 
-    public L level() {
+    protected L level() {
         return level;
     }
 
-    public EventsListenersAssert events() {
+    protected EventsListenersAssert events() {
         return events;
     }
+
+    // public getters
 
     public Game game() {
         return games.get(0);
@@ -228,6 +299,16 @@ public abstract class AbstractBaseGameTest
 
     public P player(int index) {
         return players.get(index);
+    }
+
+    // other stuff
+
+    public void assertHeroDie() {
+        assertEquals(true, game().isGameOver());
+    }
+
+    public void assertHeroAlive() {
+        assertEquals(false, game().isGameOver());
     }
 
     public void remove(int index) {
