@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.whatsnext;
+package com.codenjoy.dojo.utils.whatsnext;
 
 /*-
  * #%L
@@ -37,7 +37,7 @@ import java.util.function.Supplier;
 @UtilityClass
 public class WhatsNextUtils {
 
-    public <P extends GamePlayer, H extends PlayerHero> List<P> load(
+    public static <P extends GamePlayer, H extends PlayerHero> List<P> load(
             GameField field,
             List<H> heroes,
             Supplier<P> creator)
@@ -54,7 +54,7 @@ public class WhatsNextUtils {
         }};
     }
 
-    public List<Game> newGameForAll(
+    public static List<Game> newGameForAll(
             List<? extends GamePlayer> players,
             PrinterFactory printer,
             GameField field)
@@ -65,7 +65,7 @@ public class WhatsNextUtils {
         }};
     }
 
-    public Game newGame(
+    public static Game newGame(
             GamePlayer player,
             PrinterFactory printer,
             GameField field)

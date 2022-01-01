@@ -239,7 +239,7 @@ public class TestUtils {
      *         метода соответствующего Hero.
      */
     @SneakyThrows
-    public String collectHeroesData(List<? extends GamePlayer> players, String methodName, boolean skipDefault) {
+    public static String collectHeroesData(List<? extends GamePlayer> players, String methodName, boolean skipDefault) {
         Map<Integer, Object> map = new LinkedHashMap<>();
         for (int index = 0; index < players.size(); index++) {
             GamePlayer player = players.get(index);
@@ -263,7 +263,7 @@ public class TestUtils {
                 .collect(joining("\n"));
     }
 
-    public int[] asArray(List<? extends Point> points) {
+    public static int[] asArray(List<? extends Point> points) {
         return points.stream()
                 .flatMap(Point::stream)
                 .mapToInt(value -> value)

@@ -39,7 +39,7 @@ import com.codenjoy.dojo.services.settings.AllSettings;
 import com.codenjoy.dojo.utils.core.Testing;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import com.codenjoy.dojo.utils.smart.SmartAssert;
-import com.codenjoy.dojo.whatsnext.WhatsNextUtils;
+import com.codenjoy.dojo.utils.whatsnext.WhatsNextUtils;
 
 import java.util.LinkedList;
 import java.util.List;
