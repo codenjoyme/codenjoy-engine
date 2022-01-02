@@ -132,6 +132,15 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     void removeIn(List<? extends Point> points);
 
     /**
+     * Удаляются все элементы соответствующие условию.
+     * То есть в каждой клеточке, указанной в points будет удалены все элементы
+     * выбранного в Accessor типа, если они подходят под условие.
+     *
+     * @param predicate Условие при котором элементы удалятся.
+     */
+    void removeIf(Predicate<E> predicate);
+
+    /**
      * Каждый элемент исходного списка добавится в конкретную ячейку
      * поля в соответствии с его координатами. Тип добавляемого элемента
      * будет выбран в соответствии с типом элемента
@@ -201,4 +210,5 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     List<E> filter(Predicate<E> filter);
 
     String toString();
+
 }

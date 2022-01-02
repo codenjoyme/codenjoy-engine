@@ -29,8 +29,13 @@ import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -225,6 +230,12 @@ public class PointField {
             @Override
             public void removeIn(List<? extends Point> points) {
                 points.forEach(this::removeAt);
+            }
+
+            @Override
+            public void removeIf(Predicate<E> predicate) {
+                field.remove(filter, (Predicate) predicate);
+                all.remove(filter, (Predicate) predicate);
             }
 
             @Override

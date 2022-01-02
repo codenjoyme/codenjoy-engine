@@ -25,6 +25,10 @@ package com.codenjoy.dojo.services.field;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
 public class MultimapMatrix<K, V> {
@@ -60,30 +64,42 @@ public class MultimapMatrix<K, V> {
         return map;
     }
 
-    public String toString() {
-        StringBuilder result = new StringBuilder();
+    public void forEach(boolean createPoint, BiConsumer<Point, Multimap<K, V>> consumer) {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
-                Multimap<K, V> map = field[x][y];
-                result.append(pt(x, y))
-                        .append(":")
-                        .append(map == null || map.isEmpty() ? "{}" : map.toString())
-                        .append('\n');
+                consumer.accept(
+                        createPoint ? pt(x, y) : null,
+                        field[x][y]);
             }
         }
+    }
+
+    public void forEach(Consumer<Multimap<K, V>> consumer) {
+        forEach(false,
+                (pt, map) -> {
+                    if (map != null) {
+                        consumer.accept(map);
+                    }
+                });
+
+    }
+
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        forEach(true,
+                (pt, map) -> result.append(pt)
+                        .append(":")
+                        .append(map == null || map.isEmpty() ? "{}" : map.toString())
+                        .append('\n'));
         return result.toString();
     }
 
     @PerformanceOptimized
     public void clear(K key) {
-        // TODO устранить дублирование с циклом выше
-        for (int x = 0; x < size; x++) {
-            for (int y = 0; y < size; y++) {
-                Multimap<K, V> map = field[x][y];
-                if (map != null) {
-                    map.removeKey(key);
-                }
-            }
-        }
+        forEach(map -> map.removeKey(key));
+    }
+
+    public void remove(K key, Predicate<V> predicate) {
+        forEach(map -> map.remove(key, predicate));
     }
 }

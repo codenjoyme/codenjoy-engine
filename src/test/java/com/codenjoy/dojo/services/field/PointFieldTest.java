@@ -43,8 +43,8 @@ import java.util.stream.Stream;
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.utils.smart.SmartAssert.assertEquals;
-import static java.util.stream.Collectors.*;
-import static org.apache.commons.lang3.StringUtils.leftPad;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.rightPad;
 import static org.junit.Assert.fail;
 
@@ -3581,6 +3581,76 @@ public class PointFieldTest {
     }
 
     private void assert_mixed_without_any_one() {
+        assertEquals("[map={\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testRemoveIf_byYCoordinate() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when
+        field.of(One.class).removeIf(it -> it.getY() == 1);
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{}\n" +
+                "[1,2]:{\n" +
+                "        One.class=[\n" +
+                "                one3(1,2)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,2)]}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        Three.class=[\n" +
+                "                three5(2,2)]}\n" +
+                "]", field.toString());
+    }
+
+    @Test
+    public void testRemoveIf_byXCoordinate() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when
+        field.of(One.class).removeIf(it -> it.getX() == 1);
+
+        // then
         assertEquals("[map={\n" +
                 "        Three.class=[\n" +
                 "                three5(2,2)]}\n" +

@@ -28,9 +28,11 @@ import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toMap;
 
 public class Multimap<K, V> {
 
@@ -49,8 +51,13 @@ public class Multimap<K, V> {
 
     @PerformanceOptimized
     public boolean remove(K key, Point element) {
+        return remove(key, it -> it.equals(element));
+    }
+
+    @PerformanceOptimized
+    public boolean remove(K key, Predicate<V> predicate) {
         return ifPresent(key, false,
-                list -> list.removeIf(it -> it.equals(element)));
+                list -> list.removeIf(predicate::test));
     }
 
     @PerformanceOptimized
