@@ -38,11 +38,25 @@ import static java.util.stream.Collectors.toList;
 
 public class Smoke {
 
+    private static Smoke SMOKE;
+
     private final List<String> messages;
     private LocalGameRunner runner;
     private DiceGenerator dice;
 
+    /**
+     * Испоользуется для отладки. Из любого места игры можно скидывать
+     * сюда любую отладочную информацию. Она попадет в результирующий файл.
+     * @param message Сообщение.
+     */
+    public static void print(String message) {
+        if (SMOKE == null) return;
+
+        SMOKE.messages.add(message);
+    }
+
     public Smoke() {
+        SMOKE = this;
         messages = new LinkedList<>();
 
         runner = new LocalGameRunner();
