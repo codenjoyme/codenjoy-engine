@@ -29,7 +29,7 @@ import java.util.Comparator;
 
 public class RoundImpl implements Round {
 
-    private RoundGameField<RoundGamePlayer<RoundPlayerHero, RoundGameField>> field;
+    private RoundGameField<RoundGamePlayer<RoundPlayerHero, RoundGameField>, RoundPlayerHero> field;
 
     private RoundSettings<SettingsReader> settings;
 

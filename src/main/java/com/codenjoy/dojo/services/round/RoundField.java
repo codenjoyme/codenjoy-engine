@@ -29,7 +29,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public abstract class RoundField<P extends RoundGamePlayer<? extends RoundPlayerHero, ? extends RoundGameField>> implements RoundGameField<P>, Tickable {
+public abstract class RoundField<P extends RoundGamePlayer<H, ? extends RoundGameField>, H extends RoundPlayerHero> implements RoundGameField<P, H>, Tickable {
 
     private static final boolean FIRE_EVENTS = true;
     private static final boolean DONT_FIRE_EVENTS = !FIRE_EVENTS;

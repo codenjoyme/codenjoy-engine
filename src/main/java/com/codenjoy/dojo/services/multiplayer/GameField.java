@@ -32,13 +32,13 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 /**
  * Любая игра должна реализовать этот интерфейс чтобы с ней мог работать фреймворк
  * @param <P> Объъект-игрок, который предоставляет героя в игре
  */
-public interface GameField<P extends GamePlayer> extends Tickable {
+public interface GameField<P extends GamePlayer, H extends PlayerHero> extends Tickable {
 
     BoardReader<P> reader();
 
@@ -70,7 +70,7 @@ public interface GameField<P extends GamePlayer> extends Tickable {
 
     SettingsReader settings();
 
-    default List<P> load(String board, Supplier<P> player) {
+    default List<P> load(String board, Function<H, P> player) {
         return Arrays.asList();
     }
 

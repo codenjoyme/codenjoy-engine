@@ -26,7 +26,7 @@ import com.codenjoy.dojo.services.multiplayer.GameField;
 
 import java.util.List;
 
-public interface RoundGameField<P extends RoundGamePlayer> extends GameField<P> {
+public interface RoundGameField<P extends RoundGamePlayer, H extends RoundPlayerHero> extends GameField<P, H> {
 
     List<P> aliveActive();
 

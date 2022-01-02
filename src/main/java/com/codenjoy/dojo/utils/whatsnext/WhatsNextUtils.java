@@ -32,7 +32,7 @@ import lombok.experimental.UtilityClass;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 @UtilityClass
 public class WhatsNextUtils {
@@ -40,17 +40,13 @@ public class WhatsNextUtils {
     public static <P extends GamePlayer, H extends PlayerHero> List<P> load(
             GameField field,
             List<H> heroes,
-            Supplier<P> creator)
+            Function<H, P> creator)
     {
         field.clearScore();
 
         return new LinkedList<>(){{
-            heroes.forEach(hero -> {
-                P player = creator.get();
-                player.setHero(hero);
-                hero.manual(false);
-                add(player);
-            });
+            heroes.forEach(hero ->
+                    add(creator.apply(hero)));
         }};
     }
 

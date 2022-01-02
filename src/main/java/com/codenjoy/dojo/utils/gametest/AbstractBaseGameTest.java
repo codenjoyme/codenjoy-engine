@@ -136,20 +136,10 @@ public abstract class AbstractBaseGameTest
         beforeCreateField();
 
         field = createField().apply(dice, null, settings);
-        field.load(level.map(), this::givenPlayer);
-
-        setupHeroesDice();
-
-        games = WhatsNextUtils.newGameForAll(players, printer, field);
+        field.load(level.map(), (Function<H, P>) this::givenPlayer);
 
         afterCreateField();
     }
-
-    /**
-     * Метод служит для инициализации dice непосредственно
-     * перед генерацией героев на поле.
-     */
-    protected abstract void setupHeroesDice();
 
     /**
      * Метод служит предварительной настройке окружения перед
@@ -168,7 +158,21 @@ public abstract class AbstractBaseGameTest
         // settings / field post-processing
     }
 
-    private P givenPlayer() {
+    private P givenPlayer(H hero) {
+        P player = newPlayer();
+
+        player.setHero(hero);
+        newGame(player);
+        player.getHero().manual(false);
+
+        return player;
+    }
+
+    private void newGame(P player) {
+        games.add(WhatsNextUtils.newGame(player, printer, field));
+    }
+
+    private P newPlayer() {
         EventListener listener = testing().mock(EventListener.class);
         listeners.add(listener);
 
@@ -184,13 +188,12 @@ public abstract class AbstractBaseGameTest
      * @return Созданный Player.
      */
     public P givenPlayer(Point pt) {
-        P player = givenPlayer();
+        P player = newPlayer();
 
         dice(asArray(asList(pt)));
-        Game game = WhatsNextUtils.newGame(player, printer, field);
-        games.add(game);
+        newGame(player);
 
-        return players.get(players.size() - 1);
+        return player;
     }
 
     public void tick() {
@@ -290,7 +293,7 @@ public abstract class AbstractBaseGameTest
     }
 
     public H hero(int index) {
-        return (H) game(index).getPlayer().getHero();
+        return (H) player(index).getHero();
     }
 
     public P player() {
