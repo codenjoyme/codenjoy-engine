@@ -216,7 +216,5 @@ public abstract class RoundField<P extends RoundGamePlayer<H, ? extends RoundGam
         }
 
         onRemove(player);
-
-        return;
     }
 }
