@@ -23,12 +23,13 @@ package com.codenjoy.dojo.services;
  */
 
 public abstract class MovingObject extends PointImpl {
+
     protected Direction direction;
     protected int speed;
     protected boolean moving;
 
-    public MovingObject(int x, int y, Direction direction) {
-        super(x, y);
+    public MovingObject(Point pt, Direction direction) {
+        super(pt);
         this.direction = direction;
         moving = false;
     }
