@@ -39,7 +39,7 @@ public abstract class MovingObject extends PointImpl {
     }
 
     public void move() {
-        for (int i = 0; i < speed; i++) {
+        for (int tick = 0; tick < speed; tick++) {
             if (!moving) {
                 return;
             }
