@@ -59,6 +59,15 @@ public abstract class RoundPlayerHero<F extends RoundGameField> extends PlayerHe
         }
     }
 
+    @Override
+    public void tick() {
+        if (!isActiveAndAlive()) return;
+
+        tickHero();
+    }
+
+    protected abstract void tickHero();
+
     public abstract void die();
 
     public boolean isActive() {
