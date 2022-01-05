@@ -4275,6 +4275,152 @@ public class PointFieldTest {
     }
 
     @Test
+    public void testSameOf_hasAt_mixed() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        // найдет два элемента
+        assertEquals(true,
+                field.of(One.class).hasAt(pt(1, 1),
+                        it -> assertEquals(true,
+                                Arrays.asList("one1(1,1)", "one2(1,1)")
+                                        .contains(it.toString()))));
+
+        // найдет только один элемент
+        assertEquals(true,
+                field.of(One.class).hasAt(pt(1, 2),
+                        it -> assertEquals("one3(1,2)", it.toString())));
+
+        assertEquals(true,
+                field.of(Two.class).hasAt(pt(1, 2),
+                        it -> assertEquals("two4(1,2)", it.toString())));
+
+        assertEquals(true,
+                field.of(Three.class).hasAt(pt(2, 2),
+                        it -> assertEquals("three5(2,2)", it.toString())));
+
+        // ничего не найдет
+        assertEquals(false,
+                field.of(One.class).hasAt(pt(2, 2),
+                        it -> fail()));
+
+        assertEquals(false,
+                field.of(Two.class).hasAt(pt(1, 1),
+                        it -> fail()));
+
+        assertEquals(false,
+                field.of(Two.class).hasAt(pt(1, 1),
+                        it -> fail()));
+
+        assertEquals(false,
+                field.of(Four.class).hasAt(pt(1, 1),
+                        it -> fail()));
+
+        // then
+        assert_severalElements_mixed();
+    }
+
+    @Test
+    public void testSameOf_hasAt_mixed_changeOrder() {
+        // given
+        One some = givenSeveralElements_mixed_inOneCell();
+
+        assert_severalElements_mixed_inOneCell();
+
+        // when then
+        // найдет два элемента
+        assertEquals(true,
+                field.of(One.class).hasAt(pt(1, 1),
+                        it -> assertEquals(true,
+                                Arrays.asList("one1(1,1)", "one2(1,1)", "one3(1,1)")
+                                        .contains(it.toString()))));
+
+        // найдет только один элемент
+        assertEquals(true,
+                field.of(Two.class).hasAt(pt(1, 1),
+                        it -> assertEquals("two4(1,1)", it.toString())));
+
+        assertEquals(true,
+                field.of(Three.class).hasAt(pt(1, 1),
+                        it -> assertEquals("three5(1,1)", it.toString())));
+
+        // ничего не найдет
+        assertEquals(false,
+                field.of(Four.class).hasAt(pt(1, 1),
+                        it -> fail()));
+
+        assertEquals(false,
+                field.of(One.class).hasAt(pt(2, 2),
+                        it -> fail()));
+
+        // when
+        some.move(2, 2);
+
+        // when then
+        assertEquals(true,
+                field.of(One.class).hasAt(pt(1, 1),
+                        it -> assertEquals(true,
+                                Arrays.asList("one1(1,1)", "one3(1,1)")
+                                        .contains(it.toString()))));
+
+        // найдет только один элемент
+        assertEquals(true,
+                field.of(One.class).hasAt(pt(2, 2),
+                        it -> assertEquals(true,
+                                Arrays.asList("one2(2,2)")
+                                        .contains(it.toString()))));
+
+        assertEquals(true,
+                field.of(Two.class).hasAt(pt(1, 1),
+                        it -> assertEquals("two4(1,1)", it.toString())));
+
+        assertEquals(true,
+                field.of(Three.class).hasAt(pt(1, 1),
+                        it -> assertEquals("three5(1,1)", it.toString())));
+
+        // ничего не найдет
+        assertEquals(false,
+                field.of(Four.class).hasAt(pt(1, 1),
+                        it -> fail()));
+
+        // then
+        assertEquals("[map={\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one3(1,1)\n" +
+                "                one2(2,2)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}]\n" +
+                "\n" +
+                "[field=[0,0]:{}\n" +
+                "[0,1]:{}\n" +
+                "[0,2]:{}\n" +
+                "[1,0]:{}\n" +
+                "[1,1]:{\n" +
+                "        One.class=[\n" +
+                "                one1(1,1)\n" +
+                "                one3(1,1)]}\n" +
+                "        {\n" +
+                "        Three.class=[\n" +
+                "                three5(1,1)]}\n" +
+                "        {\n" +
+                "        Two.class=[\n" +
+                "                two4(1,1)]}\n" +
+                "[1,2]:{}\n" +
+                "[2,0]:{}\n" +
+                "[2,1]:{}\n" +
+                "[2,2]:{\n" +
+                "        One.class=[\n" +
+                "                one2(2,2)]}\n" +
+                "]", field.toString());
+    }
+
+    @Test
     public void testSameOf_getAt_mixed() {
         // given
         testAdd_severalElements_mixed();

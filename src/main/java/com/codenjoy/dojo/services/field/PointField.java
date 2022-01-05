@@ -258,6 +258,13 @@ public class PointField {
             }
 
             @Override
+            public boolean hasAt(Point point, Consumer<E> onExists) {
+                List<E> list = getAt(point);
+                list.forEach(onExists);
+                return !list.isEmpty();
+            }
+
+            @Override
             @PerformanceOptimized
             public List<E> copy() {
                 return new ArrayList(points());
