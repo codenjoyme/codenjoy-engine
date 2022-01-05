@@ -34,7 +34,7 @@ public abstract class MovingObject extends PointImpl {
         moving = false;
     }
 
-    public Direction getDirection() {
+    public Direction direction() {
         return direction;
     }
 
