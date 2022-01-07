@@ -25,7 +25,7 @@ package com.codenjoy.dojo.services.route;
 import com.codenjoy.dojo.services.Direction;
 import com.codenjoy.dojo.services.Point;
 
-import static com.codenjoy.dojo.services.route.Route.*;
+import static com.codenjoy.dojo.services.route.Route.FORWARD;
 
 public interface RouteProcessor {
 
@@ -47,14 +47,23 @@ public interface RouteProcessor {
 
     boolean isSliding();
 
-    boolean isModeSideView();
+    boolean isSideViewMode();
+
+    boolean isTurnForwardMode();
 
     default void change(Direction direction) {
-        // если вид сбоку, то работает route=direction
-        // если режим вид сверху - route=FORWARD + direction
-        if (isModeSideView()) {
-            route(Route.get(direction));
+        if (isSideViewMode()) {
+            // если вид сбоку, то работает
+            // route=LEFT/RIGHT/UP/DOWN
+            route(Route.getInSideMode(direction));
+        } else if (isTurnForwardMode()) {
+            // если режим вид сверху и turn/forward режим -
+            // route=TURN_LEFT/TURN_RIGHT/FORWARD/BACKWARD
+            route(Route.getInTurnMode(direction));
         } else {
+            // если режим вид сверху и классический режим -
+            // route=FORWARD
+            // а так же устанавливаем direction
             direction(direction);
             route(FORWARD);
         }
@@ -63,25 +72,25 @@ public interface RouteProcessor {
     default void forward() {
         validateTurnModeEnabled();
 
-        route(FORWARD);
+        change(Direction.UP);
     }
 
     default void backward() {
         validateTurnModeEnabled();
 
-        route(BACKWARD);
+        change(Direction.DOWN);
     }
 
     default void turnLeft() {
         validateTurnModeEnabled();
 
-        route(TURN_LEFT);
+        change(Direction.LEFT);
     }
 
     default void turnRight() {
         validateTurnModeEnabled();
 
-        route(TURN_RIGHT);
+        change(Direction.RIGHT);
     }
 
     default void tryMove(Direction direction) {

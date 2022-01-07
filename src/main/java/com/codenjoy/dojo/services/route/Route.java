@@ -36,12 +36,22 @@ public enum Route {
     FORWARD,
     BACKWARD;
 
-    public static Route get(Direction direction) {
+    public static Route getInSideMode(Direction direction) {
         switch (direction) {
             case UP : return UP;
             case DOWN : return DOWN;
             case LEFT: return LEFT;
             case RIGHT: return RIGHT;
+            default: return null;
+        }
+    }
+
+    public static Route getInTurnMode(Direction direction) {
+        switch (direction) {
+            case UP : return FORWARD;
+            case DOWN : return BACKWARD;
+            case LEFT: return TURN_LEFT;
+            case RIGHT: return TURN_RIGHT;
             default: return null;
         }
     }
