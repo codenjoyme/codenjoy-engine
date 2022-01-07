@@ -29,8 +29,6 @@ import static com.codenjoy.dojo.services.route.Route.FORWARD;
 
 public interface RouteProcessor {
 
-    void validateTurnModeEnabled();
-
     void route(Route route);
 
     Route route();
@@ -69,29 +67,59 @@ public interface RouteProcessor {
         }
     }
 
+    // режим TurnForward
+
     default void forward() {
-        validateTurnModeEnabled();
+        validateTurnForwardModeEnabled();
 
         change(Direction.UP);
     }
 
     default void backward() {
-        validateTurnModeEnabled();
+        validateTurnForwardModeEnabled();
 
         change(Direction.DOWN);
     }
 
     default void turnLeft() {
-        validateTurnModeEnabled();
+        validateTurnForwardModeEnabled();
 
         change(Direction.LEFT);
     }
 
     default void turnRight() {
-        validateTurnModeEnabled();
+        validateTurnForwardModeEnabled();
 
         change(Direction.RIGHT);
     }
+
+    // режим SideView
+
+    default void floats() {
+        validateSideViewModeEnabled();
+
+        change(Direction.UP);
+    }
+
+    default void sink() {
+        validateSideViewModeEnabled();
+
+        change(Direction.DOWN);
+    }
+
+    default void moveLeft() {
+        validateSideViewModeEnabled();
+
+        change(Direction.LEFT);
+    }
+
+    default void moveRight() {
+        validateSideViewModeEnabled();
+
+        change(Direction.RIGHT);
+    }
+
+    // ------------
 
     default void tryMove(Direction direction) {
         Point pt = direction.change((Point) this);
@@ -182,5 +210,19 @@ public interface RouteProcessor {
         }
 
         route(null);
+    }
+
+    default void validateTurnForwardModeEnabled() {
+        if (!isTurnForwardMode()) {
+            throw new IllegalStateException("Please fix settings:\n" +
+                    "\t settings().integer(TURN_MODE, MODE_FORWARD_BACKWARD);");
+        }
+    }
+
+    default void validateSideViewModeEnabled() {
+        if (!isSideViewMode()) {
+            throw new IllegalStateException("Please fix settings:\n" +
+                    "\t settings().integer(TURN_MODE, MODE_SIDE_VIEW);");
+        }
     }
 }

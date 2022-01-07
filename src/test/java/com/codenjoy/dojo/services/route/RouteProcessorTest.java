@@ -59,11 +59,6 @@ public class RouteProcessorTest {
         }
 
         @Override
-        public void validateTurnModeEnabled() {
-            assertEquals(true, isTurn);
-        }
-
-        @Override
         public void route(Route route) {
             this.route = route;
         }
