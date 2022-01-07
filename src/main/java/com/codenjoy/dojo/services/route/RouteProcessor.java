@@ -47,6 +47,19 @@ public interface RouteProcessor {
 
     boolean isSliding();
 
+    boolean isModeSideView();
+
+    default void change(Direction direction) {
+        // если вид сбоку, то работает route=direction
+        // если режим вид сверху - route=FORWARD + direction
+        if (isModeSideView()) {
+            route(Route.get(direction));
+        } else {
+            direction(direction);
+            route(FORWARD);
+        }
+    }
+
     default void forward() {
         validateTurnModeEnabled();
 
@@ -71,7 +84,8 @@ public interface RouteProcessor {
         route(TURN_RIGHT);
     }
 
-    default void tryMove(Point pt) {
+    default void tryMove(Direction direction) {
+        Point pt = direction.change((Point) this);
         if (canMove(pt)) {
             doMove(pt);
         }
@@ -87,18 +101,37 @@ public interface RouteProcessor {
         }
 
         switch (route()) {
-            case TURN_LEFT:  // поворот налево
+            // (вид сбоку) всплываем/погружаемся
+            case UP:
+            case DOWN:
+                break;
+
+            // (вид сбоку) движемся влево
+            case LEFT:
+                direction(Direction.LEFT);
+                break;
+
+            // (вид сбоку) движемся вправо
+            case RIGHT:
+                direction(Direction.RIGHT);
+                break;
+
+            // (вид сверху) поворот налево
+            case TURN_LEFT:
                 direction(direction().counterClockwise());
                 break;
 
-            case TURN_RIGHT: // поворот налево
+            // (вид сверху) поворот налево
+            case TURN_RIGHT:
                 direction(direction().clockwise());
                 break;
 
-            case FORWARD:   // полный ход
+            // (вид сверху) полный ход
+            case FORWARD:
                 break;
 
-            case BACKWARD: // задний ход
+            // (вид сверху) задний ход
+            case BACKWARD:
                 direction(direction().inverted());
                 break;
         }
@@ -106,19 +139,35 @@ public interface RouteProcessor {
         beforeMove();
 
         switch (route()) {
-            // повороты не влияют на изменения положения
+            // (вид сбоку) всплываем сохраняя ориентацию
+            case UP:
+                tryMove(Direction.UP);
+                break;
+
+            // (вид сбоку) погружаемся сохраняя ориентацию
+            case DOWN:
+                tryMove(Direction.DOWN);
+                break;
+
+            // (вид сбоку) движемся влево/вправо
+            case LEFT:
+            case RIGHT:
+                tryMove(direction());
+                break;
+            
+            // (вид сверху) повороты не влияют на изменения положения
             case TURN_LEFT:
             case TURN_RIGHT:
                 break;
 
-            // полный ход (в направлении direction)
+            // (вид сверху) полный ход (в направлении direction)
             case FORWARD:
-                tryMove(direction().change((Point) this));
+                tryMove(direction());
                 break;
 
-            // задний ход (в направлении противоположном direction)
+            // (вид сверху) задний ход (в направлении противоположном direction)
             case BACKWARD:
-                tryMove(direction().change((Point) this));
+                tryMove(direction());
                 direction(direction().inverted());
                 break;
         }

@@ -23,10 +23,26 @@ package com.codenjoy.dojo.services.route;
  */
 
 
+import com.codenjoy.dojo.services.Direction;
+
 public enum Route {
 
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
     TURN_LEFT,
     TURN_RIGHT,
     FORWARD,
     BACKWARD;
+
+    public static Route get(Direction direction) {
+        switch (direction) {
+            case UP : return UP;
+            case DOWN : return DOWN;
+            case LEFT: return LEFT;
+            case RIGHT: return RIGHT;
+            default: return null;
+        }
+    }
 }
