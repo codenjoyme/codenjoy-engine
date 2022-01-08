@@ -35,6 +35,7 @@ import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Function;
@@ -43,6 +44,7 @@ import java.util.function.Supplier;
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
+import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.joining;
 
 @UtilityClass
@@ -268,5 +270,26 @@ public class TestUtils {
                 .flatMap(Point::stream)
                 .mapToInt(value -> value)
                 .toArray();
+    }
+
+    /**
+     * Метод проверяет есть ли все изображения спрайтов в формате png в сырцах игры.
+     * @param game Проверяемая игра.
+     * @param elements Elements этой игры.
+     */
+    public static void assertSprites(String game, CharElement[] elements) {
+        List<String> errors = new LinkedList<>();
+
+        // when then
+        for (CharElement element : elements) {
+            String path = "./src/main/webapp/resources/%s/sprite/%s.png";
+            File file = new File(String.format(path, game, element.name().toLowerCase()));
+            if (!file.exists()) {
+                errors.add("Sprite not found: " + file.getAbsolutePath());
+            }
+        }
+
+        // then
+        testing().assertEquals("[]", split(errors, ", \nSprite"));
     }
 }
