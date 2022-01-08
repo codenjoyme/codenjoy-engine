@@ -22,7 +22,6 @@ package com.codenjoy.dojo.services;
  * #L%
  */
 
-import com.codenjoy.dojo.services.field.Multimap;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 
@@ -54,8 +53,8 @@ public class StateUtils {
 		return null;
 	}
 
-	public static boolean itsMe(GamePlayer player, PlayerHero hero,
-								Object[] alsoAtPoint, State item)
+	public static boolean containsMyHero(GamePlayer player, PlayerHero hero,
+										 Object[] alsoAtPoint, State item)
 	{
 		return player.getHero() == hero
 				|| Arrays.asList(alsoAtPoint).contains(item);

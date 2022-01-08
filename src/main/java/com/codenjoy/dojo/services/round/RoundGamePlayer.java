@@ -23,11 +23,12 @@ package com.codenjoy.dojo.services.round;
  */
 
 import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.SettingsReader;
+
+import java.util.List;
 
 public abstract class RoundGamePlayer<H extends RoundPlayerHero, F extends GameField> extends GamePlayer<H, F> {
 
@@ -98,4 +99,8 @@ public abstract class RoundGamePlayer<H extends RoundPlayerHero, F extends GameF
         }
     }
 
+    public boolean allFromMyTeam(List<H> heroes) {
+        return heroes.stream()
+                .allMatch(hero -> getTeamId() == hero.getPlayer().getTeamId());
+    }
 }

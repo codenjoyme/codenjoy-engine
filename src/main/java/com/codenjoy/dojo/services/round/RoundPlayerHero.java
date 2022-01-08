@@ -103,4 +103,12 @@ public abstract class RoundPlayerHero<F extends RoundGameField> extends PlayerHe
     public boolean hasPlayer() {
         return player != null;
     }
+
+    public int getTeamId() {
+        return getPlayer().getTeamId();
+    }
+
+    public boolean isMyTeam(RoundPlayerHero hero) {
+        return getTeamId() == hero.getTeamId();
+    }
 }
