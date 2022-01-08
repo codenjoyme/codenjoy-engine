@@ -24,7 +24,7 @@ package com.codenjoy.dojo.services.printer.layeredview;
 
 
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.printer.state.State;
 
 import java.util.function.BiFunction;
 

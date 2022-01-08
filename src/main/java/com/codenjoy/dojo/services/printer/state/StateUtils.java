@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services;
+package com.codenjoy.dojo.services.printer.state;
 
 /*-
  * #%L
@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-// TODO перенести в utils пакет
 public class StateUtils {
 
 	public static <T> List<T> filter(Object[] array, Class<T> clazz) {
