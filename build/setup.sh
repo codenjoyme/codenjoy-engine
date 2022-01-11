@@ -41,7 +41,7 @@ eval_echo() {
 }
 
 if [ "x$VERSION" = "x" ]; then
-    VERSION=1.1.2
+    VERSION=1.1.3
 fi
 
 echo VERSION=$VERSION
