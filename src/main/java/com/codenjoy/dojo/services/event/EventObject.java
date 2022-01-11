@@ -22,11 +22,25 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
+import java.util.Objects;
+
 public interface EventObject<T, V> {
 
     T type();
 
     default V value() {
         return (V) this;
+    }
+
+    default boolean _equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EventObject events = (EventObject) o;
+        return type() == events.type() &&
+                value() == events.value();
+    }
+
+    default int _hashCode() {
+        return Objects.hash(type());
     }
 }
