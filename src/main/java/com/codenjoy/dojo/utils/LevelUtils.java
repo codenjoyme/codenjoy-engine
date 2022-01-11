@@ -22,23 +22,20 @@ package com.codenjoy.dojo.utils;
  * #L%
  */
 
-import com.codenjoy.dojo.services.LengthToXY;
-import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.printer.CharElement;
 import lombok.experimental.UtilityClass;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
-import static java.util.stream.Collectors.toList;
 
 @UtilityClass
 public class LevelUtils {
 
     public static String clear(String map) {
         return map.replaceAll("[\n\r]", "");
+    }
+
+    public static String replaceN(String value) {
+        return value.replace("\\n", "\n")
+                .replace("\\r", "\r")
+                .replace("\r\n", "\n")
+                .replace("\n\r", "\n")
+                .replace("\r", "\n");
     }
 }
