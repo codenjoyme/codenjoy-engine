@@ -20,7 +20,7 @@ rem <http://www.gnu.org/licenses/gpl-3.0.html>.
 rem #L%
 @echo on
 
-if "%VERSION%"=="" set VERSION=1.1.1
+if "%VERSION%"=="" set VERSION=1.1.2
 
 echo VERSION=%VERSION%
 
