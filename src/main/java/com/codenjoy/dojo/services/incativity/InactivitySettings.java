@@ -104,19 +104,19 @@ public interface InactivitySettings<T extends SettingsReader> extends SettingsRe
         }};
     }
 
-    default InactivitySettings update(InactivitySettings input) {
+    default T update(InactivitySettings input) {
         setKickEnabled(input.isKickEnabled());
         setInactivityTimeout(input.getInactivityTimeout());
-        return this;
+        return (T) this;
     }
 
-    default InactivitySettings updateInactivity(Settings input) {
+    default T updateInactivity(Settings input) {
         if (input != null) {
             allInactivityKeys().stream()
                     .map(Key::key)
                     .forEach(key -> getParameter(key).update(input.getParameter(key).getValue()));
         }
-        return this;
+        return (T) this;
     }
 
     // getters
@@ -131,13 +131,13 @@ public interface InactivitySettings<T extends SettingsReader> extends SettingsRe
 
     // setters
 
-    default InactivitySettings setKickEnabled(boolean input) {
+    default T setKickEnabled(boolean input) {
         kickEnabled().update(input);
-        return this;
+        return (T) this;
     }
 
-    default InactivitySettings setInactivityTimeout(int input) {
+    default T setInactivityTimeout(int input) {
         inactivityTimeout().update(input);
-        return this;
+        return (T) this;
     }
 }

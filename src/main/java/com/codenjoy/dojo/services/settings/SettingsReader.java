@@ -90,7 +90,8 @@ public interface SettingsReader<T extends SettingsReader> {
         }
 
         ScoresImpl.setup(this, mode);
-        return (T)this;
+
+        return (T) this;
     }
 
     // methods from Settings
@@ -194,7 +195,7 @@ public interface SettingsReader<T extends SettingsReader> {
             add(key, data);
         }
         getParameter(key.key()).update(data);
-        return (T)this;
+        return (T) this;
     }
 
     default T integer(Key key, int data) {
@@ -202,7 +203,7 @@ public interface SettingsReader<T extends SettingsReader> {
             add(key, data);
         }
         getParameter(key.key()).update(data);
-        return (T)this;
+        return (T) this;
     }
 
     default T real(Key key, double data) {
@@ -210,7 +211,7 @@ public interface SettingsReader<T extends SettingsReader> {
             add(key, data);
         }
         getParameter(key.key()).update(data);
-        return (T)this;
+        return (T) this;
     }
 
     default T bool(Key key, boolean data) {
@@ -218,7 +219,7 @@ public interface SettingsReader<T extends SettingsReader> {
             add(key, data);
         }
         getParameter(key.key()).update(data);
-        return (T)this;
+        return (T) this;
     }
 
     // json
@@ -235,7 +236,7 @@ public interface SettingsReader<T extends SettingsReader> {
                 add(() -> key, value);
             }
         });
-        return (T)this;
+        return (T) this;
     }
 
     default JSONObject asJson() {

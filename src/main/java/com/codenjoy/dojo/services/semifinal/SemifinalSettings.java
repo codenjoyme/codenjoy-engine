@@ -157,7 +157,7 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         }};
     }
 
-    default SemifinalSettings update(SemifinalSettings input) {
+    default T update(SemifinalSettings input) {
         setEnabled(input.isEnabled());
         setPercentage(input.isPercentage());
         setLimit(input.getLimit());
@@ -165,16 +165,16 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         setResetBoard(input.isResetBoard());
         setShuffleBoard(input.isShuffleBoard());
         setClearScores(input.isClearScores());
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings updateSemifinal(Settings input) {
+    default T updateSemifinal(Settings input) {
         if (input != null) {
             allSemifinalKeys().stream()
                     .map(Key::key)
                     .forEach(key -> getParameter(key).update(input.getParameter(key).getValue()));
         }
-        return this;
+        return (T) this;
     }
 
     // getters
@@ -209,38 +209,38 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
 
     // setters
 
-    default SemifinalSettings setEnabled(boolean input) {
+    default T setEnabled(boolean input) {
         isEnabledValue().update(input);
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings setTimeout(int input) {
+    default T setTimeout(int input) {
         getTimeoutValue().update(input);
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings setPercentage(boolean input) {
+    default T setPercentage(boolean input) {
         isPercentageValue().update(input);
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings setLimit(int input) {
+    default T setLimit(int input) {
         getLimitValue().update(input);
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings setResetBoard(boolean input) {
+    default T setResetBoard(boolean input) {
         isResetBoardValue().update(input);
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings setShuffleBoard(boolean input) {
+    default T setShuffleBoard(boolean input) {
         isShuffleBoardValue().update(input);
-        return this;
+        return (T) this;
     }
 
-    default SemifinalSettings setClearScores(boolean input) {
+    default T setClearScores(boolean input) {
         isClearScoresValue().update(input);
-        return this;
+        return (T) this;
     }
 }

@@ -22,7 +22,6 @@ package com.codenjoy.dojo.services.round;
  * #L%
  */
 
-import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
 import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.services.settings.SettingsReader;
@@ -30,7 +29,6 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
 
@@ -161,7 +159,7 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         }};
     }
 
-    default RoundSettings update(RoundSettings input) {
+    default T update(RoundSettings input) {
         setRoundsEnabled(input.isRoundsEnabled());
         setPlayersPerRoom(input.getPlayersPerRoom());
         setTeamsPerRoom(input.getTeamsPerRoom());
@@ -170,16 +168,16 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         setTimeBeforeStart(input.getTimeBeforeStart());
         setRoundsPerMatch(input.getRoundsPerMatch());
         setMinTicksForWin(input.getMinTicksForWin());
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings updateRound(Settings input) {
+    default T updateRound(Settings input) {
         if (input != null) {
             allRoundsKeys().stream()
                     .map(Key::key)
                     .forEach(key -> getParameter(key).update(input.getParameter(key).getValue()));
         }
-        return this;
+        return (T) this;
     }
 
     // getters
@@ -222,43 +220,43 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
 
     // setters
 
-    default RoundSettings setRoundsEnabled(boolean input) {
+    default T setRoundsEnabled(boolean input) {
         roundsEnabled().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setPlayersPerRoom(int input) {
+    default T setPlayersPerRoom(int input) {
         playersPerRoom().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setTeamsPerRoom(int input) {
+    default T setTeamsPerRoom(int input) {
         teamsPerRoom().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setTimePerRound(int input) {
+    default T setTimePerRound(int input) {
         timePerRound().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setTimeForWinner(int input) {
+    default T setTimeForWinner(int input) {
         timeForWinner().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setTimeBeforeStart(int input) {
+    default T setTimeBeforeStart(int input) {
         timeBeforeStart().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setRoundsPerMatch(int input) {
+    default T setRoundsPerMatch(int input) {
         roundsPerMatch().update(input);
-        return this;
+        return (T) this;
     }
 
-    default RoundSettings setMinTicksForWin(int input) {
+    default T setMinTicksForWin(int input) {
         minTicksForWin().update(input);
-        return this;
+        return (T) this;
     }
 }
