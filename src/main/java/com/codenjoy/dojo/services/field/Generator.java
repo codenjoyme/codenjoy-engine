@@ -59,7 +59,8 @@ public class Generator {
         // добавляем недостающих к тем что есть
         for (int index = 0; index < count; index++) {
             Optional<Point> pt = freeRandom.apply(null);
-            pt.ifPresent(point -> list.add(creator.apply(point)));
+            if (pt.isEmpty()) break;
+            list.add(creator.apply(pt.get()));
         }
     }
 }
