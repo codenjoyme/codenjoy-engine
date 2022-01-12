@@ -48,7 +48,11 @@ public class DiceGenerator {
     }
 
     public Dice getDice() {
-        return getDice(SOUL, 100, 200);
+        return getDice(200);
+    }
+
+    public Dice getDice(int count) {
+        return getDice(SOUL, 100, count);
     }
 
     public Dice generate(int... numbers) {
