@@ -24,12 +24,15 @@ package com.codenjoy.dojo.utils;
 
 
 import com.codenjoy.dojo.client.AbstractBoard;
+import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
+import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
+import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.services.settings.Settings;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
@@ -291,5 +294,85 @@ public class TestUtils {
 
         // then
         testing().assertEquals("[]", split(errors, ", \nSprite"));
+    }
+
+    /**
+     * Метод прогоняет всю игру как интеграционный тест для заданного количества
+     * юзеров на протяжении заданного количества тиков и подсчитывает
+     * сумарное время определенных операций.
+     * @param runner Игра.
+     * @param players Количество игроков.
+     * @param ticks Количество тиков.
+     * @param expectedPrint Ожидаемое время выполнения печати поля на экране.
+     * @param expectedTick Ожидаемое время тиков.
+     * @param expectedCreation Ожидаемое время создания игры.
+     * @param printBoard Печатать ли борду в консоли каждый тик (для отладки).
+     */
+    public static void assertPerformance(AbstractGameType runner,
+                                   int players,
+                                   int ticks,
+                                   int expectedPrint,
+                                   int expectedTick,
+                                   int expectedCreation,
+                                   boolean printBoard)
+    {
+        Profiler profiler = new Profiler(){{
+            PRINT_SOUT = true;
+        }};
+        profiler.start();
+
+        PrinterFactory factory = new PrinterFactoryImpl();
+
+        List<Game> games = TestUtils.getGames(players, runner,
+                factory, () -> testing().mock(EventListener.class));
+
+        profiler.done("creation");
+
+        for (int i = 0; i < ticks; i++) {
+            for (Game game : games) {
+                Joystick joystick = game.getJoystick();
+                int next = new RandomDice().next(5);
+                if (next % 2 == 0) {
+                    joystick.act();
+                }
+                switch (next) {
+                    case 0: joystick.left(); break;
+                    case 1: joystick.right(); break;
+                    case 2: joystick.up(); break;
+                    case 3: joystick.down(); break;
+                }
+            }
+            // because of MULTIPLE there is only one tick for all
+            games.get(0).getField().tick();
+            for (Game game : games) {
+                if (game.isGameOver()) {
+                    game.newGame();
+                }
+            }
+            profiler.done("tick");
+
+            Object board = null;
+            for (int j = 0; j < games.size(); j++) {
+                board = games.get(j).getBoardAsString();
+            }
+            if (printBoard) {
+                System.out.println(board);
+            }
+            profiler.done("print");
+        }
+
+        profiler.print();
+
+        int reserve = 3;
+        // выполнялось единожды
+        assertLess(profiler, "creation", expectedCreation * reserve);
+        // сколько пользователей - столько раз выполнялось
+        assertLess(profiler, "print", expectedPrint * reserve);
+        assertLess(profiler, "tick", expectedTick * reserve);
+    }
+
+    private void assertLess(Profiler profiler, String phase, double expected) {
+        double actual = profiler.info(phase).getTime();
+        testing().assertEquals(actual + " > " + expected, true, actual < expected);
     }
 }
