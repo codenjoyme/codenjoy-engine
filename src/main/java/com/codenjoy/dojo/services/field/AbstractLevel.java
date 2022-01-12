@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
+import com.codenjoy.dojo.games.namdreab.Element;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.printer.BoardReader;
@@ -58,6 +59,10 @@ public abstract class AbstractLevel implements Level {
     @Override
     public int size() {
         return size;
+    }
+
+    protected Element getAt(Point pt) {
+        return Element.valueOf(map.charAt(xy.getLength(pt.getX(), pt.getY())));
     }
 
     protected <T, E extends CharElement> List<T> find(
