@@ -101,10 +101,13 @@ public abstract class RoundPlayerHero<F extends RoundGameField> extends PlayerHe
     public abstract int scores();
 
     public boolean hasPlayer() {
-        return player != null;
+        return player != null;  // TODO а почему player может быть у героя null ?
     }
 
     public int getTeamId() {
+        if (!hasPlayer()) {
+            return -1;
+        }
         return getPlayer().getTeamId();
     }
 
