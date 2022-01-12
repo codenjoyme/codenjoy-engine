@@ -61,8 +61,8 @@ public abstract class AbstractLevel implements Level {
         return size;
     }
 
-    protected Element getAt(Point pt) {
-        return Element.valueOf(map.charAt(xy.getLength(pt.getX(), pt.getY())));
+    protected Character getAt(Point pt) {
+        return map.charAt(xy.getLength(pt.getX(), pt.getY()));
     }
 
     protected <T, E extends CharElement> List<T> find(

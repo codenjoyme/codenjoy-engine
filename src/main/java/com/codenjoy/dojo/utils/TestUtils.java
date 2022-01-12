@@ -98,7 +98,7 @@ public class TestUtils {
     }
 
     public static String getWay(String inputBoard,
-                                Function<Character, CharElement> elements,
+                                CharElement[] elements,
                                 Function<AbstractBoard, DeikstraFindWay.Possible> possible)
     {
         AbstractBoard board = getBoard(elements);
@@ -117,14 +117,14 @@ public class TestUtils {
         return split(map, "], \n[");
     }
 
-    public static AbstractBoard getBoard(Function<Character, CharElement> elements) {
+    public static AbstractBoard getBoard(CharElement[] elements) {
         return new AbstractBoard() {
-                @Override
-                public CharElement valueOf(char ch) {
-                    return elements.apply(ch);
-                }
+            @Override
+            public CharElement[] elements() {
+                return elements;
+            }
 
-                @Override
+            @Override
                 protected int inversionY(int y) {
                     return size - 1 - y;
                 }

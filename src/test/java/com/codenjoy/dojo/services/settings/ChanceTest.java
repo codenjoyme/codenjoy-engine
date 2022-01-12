@@ -86,15 +86,6 @@ public class ChanceTest {
         public String toString() {
             return String.valueOf(ch);
         }
-
-        public static Element valueOf(char ch) {
-            for (Element el : values()) {
-                if (el.ch == ch) {
-                    return el;
-                }
-            }
-            throw new IllegalArgumentException("No such element for " + ch);
-        }
     }
 
     enum Keys implements SettingsReader.Key {

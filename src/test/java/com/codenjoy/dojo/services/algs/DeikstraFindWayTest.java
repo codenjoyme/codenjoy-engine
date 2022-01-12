@@ -403,15 +403,6 @@ public class DeikstraFindWayTest {
         public char ch() {
             return ch;
         }
-
-        public static Element valueOf(char ch) {
-            for (Element el : Element.values()) {
-                if (el.ch == ch) {
-                    return el;
-                }
-            }
-            throw new IllegalArgumentException("No such element for " + ch);
-        }
     }
 
     private void asrtWay(String expected) {
@@ -423,14 +414,14 @@ public class DeikstraFindWayTest {
                 TestUtils.printWay(map,
                         START, FINISH,
                         NONE, WAY,
-                        TestUtils.getBoard(Element::valueOf),
+                        TestUtils.getBoard(Element.values()),
                         this::getPossible));
     }
 
     private void assertP(String inputBoard, String expected) {
         assertEquals(expected,
                 TestUtils.getWay(inputBoard,
-                        Element::valueOf,
+                        Element.values(),
                         this::getPossible));
     }
 

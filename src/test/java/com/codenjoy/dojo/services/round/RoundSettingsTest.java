@@ -143,17 +143,17 @@ public class RoundSettingsTest {
     @Test
     public void testGetters(){
         // given
-        RoundSettings settings = new SomeRoundSettings();
+        SomeRoundSettings settings = new SomeRoundSettings();
 
         // when
-        settings.setRoundsEnabled(false);
-        settings.setPlayersPerRoom(7);
-        settings.setTeamsPerRoom(3);
-        settings.setTimePerRound(150);
-        settings.setTimeForWinner(30);
-        settings.setTimeBeforeStart(6);
-        settings.setRoundsPerMatch(4);
-        settings.setMinTicksForWin(50);
+        settings.setRoundsEnabled(false)
+                .setPlayersPerRoom(7)
+                .setTeamsPerRoom(3)
+                .setTimePerRound(150)
+                .setTimeForWinner(30)
+                .setTimeBeforeStart(6)
+                .setRoundsPerMatch(4)
+                .setMinTicksForWin(50);
 
         // when then
         assertEquals(false, settings.isRoundsEnabled());
