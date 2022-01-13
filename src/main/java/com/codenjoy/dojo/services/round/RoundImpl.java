@@ -109,17 +109,17 @@ public class RoundImpl implements Round {
         }
 
         Integer max = field.aliveActive().stream()
-                .map(p -> field.score(p))
+                .map(player -> field.score(player))
                 .max(Comparator.comparingInt(i1 -> i1))
                 .orElse(Integer.MAX_VALUE);
 
-        field.aliveActive().forEach(p -> {
-            if (field.score(p) == max
+        field.aliveActive().forEach(player -> {
+            if (field.score(player) == max
                     && roundTimer.time() > settings.minTicksForWin().getValue())
             {
-                p.event(winEvent);
+                player.event(winEvent);
             } else {
-                p.printMessage("Time is over");
+                player.printMessage("Time is over");
             }
         });
 

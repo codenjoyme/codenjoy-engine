@@ -114,7 +114,15 @@ public abstract class RoundField<P extends RoundGamePlayer<H, ? extends RoundGam
     @Override
     public List<P> aliveActive() {
         return players().stream()
-                .filter(p -> p.isAlive() && p.isActive())
+                .filter(player -> player.isAlive() && player.isActive())
+                .collect(toList());
+    }
+
+    @Override
+    public List<H> aliveActiveHeroes() {
+        return players().stream()
+                .map(RoundGamePlayer::getHero)
+                .filter(RoundPlayerHero::isActiveAndAlive)
                 .collect(toList());
     }
 

@@ -30,6 +30,8 @@ public interface RoundGameField<P extends RoundGamePlayer, H extends RoundPlayer
 
     List<P> aliveActive();
 
+    List<H> aliveActiveHeroes();
+
     void reset(P player);
 
     void start(int round);
