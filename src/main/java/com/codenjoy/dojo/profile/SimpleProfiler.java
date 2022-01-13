@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services.algs;
+package com.codenjoy.dojo.profile;
 
 /*-
  * #%L
