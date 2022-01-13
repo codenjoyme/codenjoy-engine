@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.Game;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.dice.MockDice;
 import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.TriFunction;
@@ -36,7 +37,6 @@ import com.codenjoy.dojo.services.round.RoundField;
 import com.codenjoy.dojo.services.round.RoundGamePlayer;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
 import com.codenjoy.dojo.services.settings.AllSettings;
-import com.codenjoy.dojo.utils.core.Testing;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import com.codenjoy.dojo.utils.smart.SmartAssert;
 import com.codenjoy.dojo.utils.whatsnext.WhatsNextUtils;
@@ -61,7 +61,7 @@ public abstract class AbstractBaseGameTest
     private List<EventListener> listeners;
     private List<P> players;
     private List<Game> games;
-    private Dice dice;
+    private MockDice dice;
     private PrinterFactory<Element, P> printer;
     private F field;
     private S settings;
@@ -75,7 +75,7 @@ public abstract class AbstractBaseGameTest
         listeners = new LinkedList<>();
         players = new LinkedList<>();
         games = new LinkedList<>();
-        dice = testing().mock(Dice.class);
+        dice = new MockDice();
         printer = new PrinterFactoryImpl<>();
         settings = setupSettings();
         events = new EventsListenersAssert(() -> listeners, eventClass());
@@ -114,13 +114,9 @@ public abstract class AbstractBaseGameTest
      */
     protected abstract S setupSettings();
 
-    public void dice(int... ints) {
-        if (ints.length == 0) return;
-
-        Testing.OngoingStubbing<Integer> when = testing().when(dice.next(testing().anyInt()));
-        for (int i : ints) {
-            when = when.thenReturn(i);
-        }
+    public void dice(Integer... next) {
+        if (next.length == 0) return;
+        dice.then(next);
     }
 
     /**

@@ -49,6 +49,7 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 @UtilityClass
 public class TestUtils {
@@ -268,11 +269,11 @@ public class TestUtils {
                 .collect(joining("\n"));
     }
 
-    public static int[] asArray(List<? extends Point> points) {
+    public static Integer[] asArray(List<? extends Point> points) {
         return points.stream()
                 .flatMap(Point::stream)
-                .mapToInt(value -> value)
-                .toArray();
+                .collect(toList())
+                .toArray(new Integer[0]);
     }
 
     /**

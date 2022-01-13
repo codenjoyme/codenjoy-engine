@@ -32,6 +32,7 @@ import java.util.function.Function;
 public class Generator {
 
     public static <T> void generate(Accessor<T> list,
+                                    int fieldSize,
                                     SettingsReader settings,
                                     SettingsReader.Key key,
                                     Function<? extends GamePlayer, Optional<Point>> freeRandom,
@@ -49,18 +50,24 @@ public class Generator {
             // важно оставить текущие, потому что метод работает каждый тик
             list.remove(count, list.size());
         } else {
-            generate(list, added, freeRandom, creator);
+            generate(list, fieldSize, added, freeRandom, creator);
         }
     }
 
-    public static <T> void generate(Accessor<T> list, int count,
+    public static <T> void generate(Accessor<T> list,
+                                    int fieldSize,
+                                    int count,
                                     Function<? extends GamePlayer, Optional<Point>> freeRandom,
                                     Function<Point, T> creator) {
         // добавляем недостающих к тем что есть
         for (int index = 0; index < count; index++) {
-            Optional<Point> pt = freeRandom.apply(null);
-            if (pt.isEmpty()) break;
-            list.add(creator.apply(pt.get()));
+            Optional<Point> option = freeRandom.apply(null);
+            if (option.isEmpty()) break;
+
+            Point pt = option.get();
+            if (pt.isOutOf(fieldSize)) break;
+
+            list.add(creator.apply(pt));
         }
     }
 }

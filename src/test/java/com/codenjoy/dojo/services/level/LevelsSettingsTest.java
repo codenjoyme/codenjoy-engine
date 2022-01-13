@@ -22,15 +22,12 @@ package com.codenjoy.dojo.services.level;
  * #L%
  */
 
-import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.dice.MockDice;
 import com.codenjoy.dojo.services.settings.*;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.client.Utils.split;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class LevelsSettingsTest {
     
@@ -244,16 +241,18 @@ public class LevelsSettingsTest {
                         "[Level] Map[3,2]=map6, \n" +
                         "[Level] Map[4,1]=map7, \n" +
                         "[Level] Map[5]=map8]");
-        Dice dice = mock(Dice.class);
+        MockDice dice = new MockDice();
 
         // when then
-        when(dice.next(anyInt())).thenReturn(2);
+        dice.then(2);
         assertEquals("map3", settings.getRandomLevelMap(1, dice));
 
-        when(dice.next(anyInt())).thenReturn(0);
+        dice.then(0);
         assertEquals("map5", settings.getRandomLevelMap(3, dice));
 
-        when(dice.next(anyInt())).thenThrow(new RuntimeException());
+        dice.then(() -> {
+            throw new RuntimeException();
+        });
         assertEquals("map8", settings.getRandomLevelMap(5, dice));
 
         assertEquals("map7", settings.getRandomLevelMap(4, dice));

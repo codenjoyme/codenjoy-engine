@@ -23,7 +23,7 @@ package com.codenjoy.dojo.services.settings;
  */
 
 import com.codenjoy.dojo.client.TestGameSettings;
-import com.codenjoy.dojo.services.Dice;
+import com.codenjoy.dojo.services.dice.MockDice;
 import com.codenjoy.dojo.services.printer.CharElement;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,18 +34,19 @@ import static com.codenjoy.dojo.services.settings.Chance.CHANCE_RESERVED;
 import static com.codenjoy.dojo.services.settings.ChanceTest.Element.*;
 import static com.codenjoy.dojo.services.settings.ChanceTest.Keys.*;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 public class ChanceTest {
 
     private TestGameSettings settings;
     private Chance chance;
-    private Dice dice;
+    private MockDice dice;
 
     @Before
     public void setup() {
         settings = new TestGameSettings();
-        dice = mock(Dice.class);
+        dice = new MockDice();
     }
 
     private int axis(Element elements) {
