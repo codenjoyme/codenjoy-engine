@@ -27,6 +27,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
 
+import static java.util.stream.Collectors.toList;
+
 public class RoundImpl implements Round {
 
     private RoundGameField<RoundGamePlayer<RoundPlayerHero, RoundGameField>, RoundPlayerHero> field;
@@ -92,11 +94,11 @@ public class RoundImpl implements Round {
     }
 
     private boolean isNoOneOnBoard() {
-        return field.aliveActive().size() == 0;
+        return field.aliveActive().count() == 0;
     }
 
     private boolean isLastOnBoard() {
-        return field.aliveActive().size() == 1;
+        return field.aliveActive().count() == 1;
     }
 
     private RoundGamePlayer<RoundPlayerHero, RoundGameField> getLast() {
@@ -104,11 +106,11 @@ public class RoundImpl implements Round {
     }
 
     private void rewardWinnersByTimeout() {
-        if (field.aliveActive().isEmpty()) {
+        if (field.aliveActive().count() == 0) {
             return;
         }
 
-        Integer max = field.aliveActive().stream()
+        Integer max = field.aliveActive()
                 .map(player -> field.score(player))
                 .max(Comparator.comparingInt(i1 -> i1))
                 .orElse(Integer.MAX_VALUE);
@@ -123,7 +125,9 @@ public class RoundImpl implements Round {
             }
         });
 
-        field.aliveActive().forEach(player -> field.reset(player));
+        field.aliveActive()
+                .collect(toList()) // because ConcurrentModificationException
+                .forEach(player -> field.reset(player));
     }
 
     private void sendTimerStatus() {

@@ -26,8 +26,7 @@ import com.codenjoy.dojo.services.Tickable;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Stream;
 
 public abstract class RoundField<P extends RoundGamePlayer<H, ? extends RoundGameField>, H extends RoundPlayerHero> implements RoundGameField<P, H>, Tickable {
 
@@ -112,18 +111,16 @@ public abstract class RoundField<P extends RoundGamePlayer<H, ? extends RoundGam
     }
 
     @Override
-    public List<P> aliveActive() {
+    public Stream<P> aliveActive() {
         return players().stream()
-                .filter(player -> player.isAlive() && player.isActive())
-                .collect(toList());
+                .filter(player -> player.isAlive() && player.isActive());
     }
 
     @Override
-    public List<H> aliveActiveHeroes() {
+    public Stream<H> aliveActiveHeroes() {
         return players().stream()
                 .map(RoundGamePlayer::getHero)
-                .filter(RoundPlayerHero::isActiveAndAlive)
-                .collect(toList());
+                .filter(RoundPlayerHero::isActiveAndAlive);
     }
 
     @Override

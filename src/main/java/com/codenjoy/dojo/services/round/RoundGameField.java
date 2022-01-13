@@ -24,13 +24,13 @@ package com.codenjoy.dojo.services.round;
 
 import com.codenjoy.dojo.services.multiplayer.GameField;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface RoundGameField<P extends RoundGamePlayer, H extends RoundPlayerHero> extends GameField<P, H> {
 
-    List<P> aliveActive();
+    Stream<P> aliveActive();
 
-    List<H> aliveActiveHeroes();
+    Stream<H> aliveActiveHeroes();
 
     void reset(P player);
 
