@@ -23,13 +23,17 @@ package com.codenjoy.dojo.services.settings;
  */
 
 
+import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 import com.codenjoy.dojo.services.nullobj.NullParameter;
 import com.google.common.collect.Lists;
 import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static java.util.Comparator.comparing;
@@ -43,29 +47,32 @@ public class SettingsImpl implements Settings {
     protected Map<String, Parameter<?>> map = new LinkedHashMap<>();
 
     @Override
+    @PerformanceOptimized
     public List<Parameter> getParameters() {
-        // TODO это вызывается очень много раз при любом чихе, надо потимизировать
-        return new LinkedList<>(map.values());
+        return new UnmodifiableList(map.values());
     }
 
     @Override
     public EditBox<?> addEditBox(String name) {
-        return (EditBox<?>) (map.containsKey(name)
-                ? map.get(name)
+        Parameter<?> parameter = map.get(name);
+        return (EditBox<?>) (parameter != null
+                ? parameter
                 : put(name, new EditBox(name)));
     }
 
     @Override
     public SelectBox<?> addSelect(String name, List<Object> options) {
-        return (SelectBox<?>) (map.containsKey(name)
-                ? map.get(name)
+        Parameter<?> parameter = map.get(name);
+        return (SelectBox<?>) (parameter != null
+                ? parameter
                 : put(name, new SelectBox(name, options)));
     }
 
     @Override
     public CheckBox<Boolean> addCheckBox(String name) {
-        return (CheckBox<Boolean>) (map.containsKey(name)
-                ? map.get(name)
+        Parameter<?> parameter = map.get(name);
+        return (CheckBox<Boolean>) (parameter != null
+                ? parameter
                 : put(name, new CheckBox<Boolean>(name).type(Boolean.class)));
     }
 
@@ -76,6 +83,7 @@ public class SettingsImpl implements Settings {
 
     @Override
     public boolean hasParameter(String name) {
+        // TODO do not use map.containsKey just check that map.get() != null
         return map.containsKey(name);
     }
 
@@ -87,10 +95,11 @@ public class SettingsImpl implements Settings {
 
     @Override
     public Parameter<?> getParameter(String name) {
-        if (map.containsKey(name)) {
-            return map.get(name);
+        Parameter<?> parameter = map.get(name);
+        if (parameter == null) {
+            return NullParameter.INSTANCE();
         }
-        return NullParameter.INSTANCE.get();
+        return parameter;
     }
 
     @Override
@@ -100,7 +109,7 @@ public class SettingsImpl implements Settings {
 
     @Override
     public void replaceParameter(Parameter parameter) {
-        map.put(parameter.getName(), parameter);
+        put(parameter.getName(), parameter);
     }
 
     @Override
@@ -132,8 +141,10 @@ public class SettingsImpl implements Settings {
     public void updateAll(List<Parameter> parameters) {
         parameters.forEach(parameter -> {
             String name = parameter.getName();
-            if (map.containsKey(name)) {
-                ((Parameter<Object>) map.get(name)).update(parameter.getValue());
+
+            Parameter<?> exists = map.get(name);
+            if (exists != null) {
+                exists.update(parameter.getValue());
             } else {
                 replaceParameter(parameter);
             }
@@ -142,19 +153,19 @@ public class SettingsImpl implements Settings {
 
     @Override
     public void copyFrom(List<Parameter> parameters) {
-        parameters.forEach(parameter -> replaceParameter(parameter));
+        parameters.forEach(this::replaceParameter);
     }
 
     @Override
     public void replaceAll(List<String> keysToRemove, List<Parameter> parameters) {
-        // TODO make this synchronized
+        // TODO make this synchronized (and others)
         keysToRemove.forEach(this::removeParameter);
         parameters.forEach(this::replaceParameter);
     }
 
     @Override
     public void reset() {
-        map.values().forEach(parameter -> parameter.reset());
+        map.values().forEach(Parameter::reset);
     }
 
     public String toStringShort() {

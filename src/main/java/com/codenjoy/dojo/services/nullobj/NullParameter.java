@@ -31,15 +31,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Slf4j
 public final class NullParameter<T> implements Parameter<T> {
 
-    public static final Supplier<Parameter> INSTANCE = () -> {
+    private static final Parameter INSTANCE = new NullParameter();
+
+    public static Parameter INSTANCE() {
         warn("Attempting to use NullParameter");
-        return new NullParameter();
-    };
+        return INSTANCE;
+    }
 
     private NullParameter() {
         // do nothing
@@ -50,7 +51,7 @@ public final class NullParameter<T> implements Parameter<T> {
     }
 
     private static void warn(String message) {
-        log.warn(message, new IllegalStateException());
+        log.warn(message);
     }
 
     @Override

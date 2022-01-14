@@ -27,6 +27,7 @@ import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.multiplayer.MultiplayerSettings;
+import com.codenjoy.dojo.services.nullobj.NullParameter;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import org.json.JSONObject;
@@ -153,17 +154,20 @@ public interface SettingsReader<T extends SettingsReader> {
     default Parameter<?> add(SettingsReader.Key key, Object value) {
         if (value == null) {
             throw new IllegalArgumentException("Type is not recognized: " + value);
-        } else if (value instanceof Integer) {
-            return add(key, (int) value);
-        } else if (value instanceof Boolean) {
-            return add(key, (boolean) value);
-        } else if (value instanceof String) {
-            return add(key, (String) value);
-        } else if (value instanceof Double) {
-            return add(key, (double) value);
-        } else {
-            throw new IllegalArgumentException("Type is not supported: " + value.getClass());
         }
+        if (value instanceof Integer) {
+            return add(key, (int) value);
+        }
+        if (value instanceof Boolean) {
+            return add(key, (boolean) value);
+        }
+        if (value instanceof String) {
+            return add(key, (String) value);
+        }
+        if (value instanceof Double) {
+            return add(key, (double) value);
+        }
+        throw new IllegalArgumentException("Type is not supported: " + value.getClass());
     }
 
     default CheckBox<Boolean> add(SettingsReader.Key key, boolean value) {
@@ -191,34 +195,38 @@ public interface SettingsReader<T extends SettingsReader> {
     }
 
     default T string(Key key, String data) {
-        if (!hasParameter(key.key())) {
-            add(key, data);
+        Parameter<?> parameter = getParameter(key.key());
+        if (parameter == NullParameter.INSTANCE()) {
+            parameter = add(key, data);
         }
-        getParameter(key.key()).update(data);
+        parameter.update(data);
         return (T) this;
     }
 
     default T integer(Key key, int data) {
-        if (!hasParameter(key.key())) {
-            add(key, data);
+        Parameter<?> parameter = getParameter(key.key());
+        if (parameter == NullParameter.INSTANCE()) {
+            parameter = add(key, data);
         }
-        getParameter(key.key()).update(data);
+        parameter.update(data);
         return (T) this;
     }
 
     default T real(Key key, double data) {
-        if (!hasParameter(key.key())) {
-            add(key, data);
+        Parameter<?> parameter = getParameter(key.key());
+        if (parameter == NullParameter.INSTANCE()) {
+            parameter = add(key, data);
         }
-        getParameter(key.key()).update(data);
+        parameter.update(data);
         return (T) this;
     }
 
     default T bool(Key key, boolean data) {
-        if (!hasParameter(key.key())) {
-            add(key, data);
+        Parameter<?> parameter = getParameter(key.key());
+        if (parameter == NullParameter.INSTANCE()) {
+            parameter = add(key, data);
         }
-        getParameter(key.key()).update(data);
+        parameter.update(data);
         return (T) this;
     }
 
@@ -230,11 +238,12 @@ public interface SettingsReader<T extends SettingsReader> {
         json.keySet().forEach(name -> {
             String key = nameToKey(allKeys(), name);
             Object value = json.get(name);
-            if (hasParameter(key)) {
-                getParameter(key).update(value);
-            } else {
-                add(() -> key, value);
+
+            Parameter<?> parameter = getParameter(key);
+            if (parameter == NullParameter.INSTANCE()) {
+                parameter = add(() -> key, value);
             }
+            parameter.update(value);
         });
         return (T) this;
     }
