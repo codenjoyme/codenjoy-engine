@@ -250,7 +250,7 @@ public class LevelsSettingsTest {
         dice.then(0);
         assertEquals("map5", settings.getRandomLevelMap(3, dice));
 
-        dice.then(() -> {
+        dice.then(max -> {
             throw new RuntimeException();
         });
         assertEquals("map8", settings.getRandomLevelMap(5, dice));

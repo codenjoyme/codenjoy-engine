@@ -50,8 +50,8 @@ public class Multimap<K, V> {
     }
 
     @PerformanceOptimized
-    public boolean remove(K key, Point element) {
-        return remove(key, it -> it.equals(element));
+    public boolean remove(K key, Point pt) {
+        return remove(key, it -> Point.equals(it, pt));
     }
 
     @PerformanceOptimized
@@ -128,5 +128,16 @@ public class Multimap<K, V> {
 
     public Set<K> keys() {
         return Collections.unmodifiableSet(map.keySet());
+    }
+
+    @PerformanceOptimized
+    public List<V> allValues() {
+        List<V> result = new ArrayList<>(10);
+        for (Map.Entry<K, List<V>> entry : map.entrySet()) {
+            for (V value : entry.getValue()) {
+                result.add(value);
+            }
+        }
+        return result;
     }
 }

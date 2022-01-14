@@ -252,6 +252,10 @@ public abstract class AbstractBaseGameTest
         return settings;
     }
 
+    protected MockDice dice() {
+        return dice;
+    }
+
     protected List<EventListener> listeners() {
         return listeners;
     }

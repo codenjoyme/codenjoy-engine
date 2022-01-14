@@ -37,13 +37,13 @@ import java.util.stream.Stream;
 public interface Accessor<E> extends Iterable<E>, Tickable {
 
     /**
-     * @param point Любой элемент типа Point, у которого
+     * @param pt Любой элемент типа Point, у которого
      * будут взяты только координаты.
      *
      * @return True - если в коллекции есть хоть один элемент (выбранного
      * в Accessor типа) в ячейке с заданными в point координатами.
      */
-    boolean contains(Point point);
+    boolean contains(Point pt);
 
     /**
      * Удаляются все вхождения (дубликаты) этого элемента.
@@ -60,12 +60,12 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     /**
      * Удаляются все найденные (по выбранному в Accessor типу)
      * в конкретной ячейке поля элементы.
-     * Поиск клетки осуществляется по координатам point.
+     * Поиск клетки осуществляется по координатам pt.
      *
-     * @param point Координаты удаляемого элемента.
+     * @param pt Координаты удаляемого элемента.
      * @return true - если было удаление.
      */
-    boolean removeAt(Point point);
+    boolean removeAt(Point pt);
 
     /**
      * @return Возвращает все найденные (по выбранному в Accessor типу)
@@ -153,7 +153,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
     void addAll(List<E> elements);
 
     /**
-     * @param point Координата ячейки которой интересуемся.
+     * @param pt Координата ячейки которой интересуемся.
      *
      * @return Копия списка всех элементов в заданной ячейке поля
      * (выбранного в Accessor типа).
@@ -164,12 +164,12 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      * (при этом он останется консистентным, т.к. умеет
      * обрабатывать подобные случаи).
      */
-    List<E> getAt(Point point);
+    List<E> getAt(Point pt);
 
     /**
      * Вернет (если есть) первый найденный элемент в заданной ячейке.
      *
-     * @param point Координата ячейки которой интересуемся.
+     * @param pt Координата ячейки которой интересуемся.
      *
      * @return Один единственный элемент (первый если их там несколько)
      * в заданной ячейке поля (выбранного в Accessor типа).
@@ -181,13 +181,13 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      * (при этом он останется консистентным, т.к. умеет
      * обрабатывать подобные случаи).
      */
-    E getFirstAt(Point point);
+    E getFirstAt(Point pt);
 
     /**
      * Метод сообщит, есть ли элементы заданного типа в этой ячейке,
      * и если да - совершит над каждым деяние.
      *
-     * @param point Координата ячейки которой интересуемся.
+     * @param pt Координата ячейки которой интересуемся.
      * @param onExists совершаемое деяние.
      *
      * @return true если был найден хоть один элемент.
@@ -197,7 +197,7 @@ public interface Accessor<E> extends Iterable<E>, Tickable {
      * (при этом он останется консистентным, т.к. умеет
      * обрабатывать подобные случаи).
      */
-    boolean hasAt(Point point, Consumer<E> onExists);
+    boolean hasAt(Point pt, Consumer<E> onExists);
 
     /**
      * @return Копия списка всех элементов во всех ячейках поля

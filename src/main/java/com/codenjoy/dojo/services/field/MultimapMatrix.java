@@ -25,6 +25,8 @@ package com.codenjoy.dojo.services.field;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -32,6 +34,8 @@ import java.util.function.Predicate;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
 public class MultimapMatrix<K, V> {
+
+    public static final boolean CREATE_POINT = true;
 
     private int size;
     private Multimap<K, V>[][] field;
@@ -75,18 +79,29 @@ public class MultimapMatrix<K, V> {
     }
 
     public void forEach(Consumer<Multimap<K, V>> consumer) {
-        forEach(false,
+        forEach(!CREATE_POINT,
                 (pt, map) -> {
                     if (map != null) {
                         consumer.accept(map);
                     }
                 });
+    }
 
+    public List<Point> pointsMatch(Predicate<List<V>> filter) {
+        List<Point> result = new LinkedList<>();
+        forEach(CREATE_POINT,
+                (pt, map) -> {
+                    List<V> list = (map == null) ? null : map.allValues();
+                    if (filter.test(list)) {
+                        result.add(pt);
+                    }
+                });
+        return result;
     }
 
     public String toString() {
         StringBuilder result = new StringBuilder();
-        forEach(true,
+        forEach(CREATE_POINT,
                 (pt, map) -> result.append(pt)
                         .append(":")
                         .append(map == null || map.isEmpty() ? "{}" : map.toString())
