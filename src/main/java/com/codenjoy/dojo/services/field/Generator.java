@@ -45,13 +45,17 @@ public class Generator {
         int added = count - list.size();
         if (added == 0) {
             return;
-        } else if (added < 0) {
+        }
+
+        if (added < 0) {
             // удаляем из существующих
             // важно оставить текущие, потому что метод работает каждый тик
             list.remove(count, list.size());
-        } else {
-            generate(list, fieldSize, added, freeRandom, creator);
+            return;
         }
+
+        // added > 0
+        generate(list, fieldSize, added, freeRandom, creator);
     }
 
     public static <T> void generate(Accessor<T> list,
