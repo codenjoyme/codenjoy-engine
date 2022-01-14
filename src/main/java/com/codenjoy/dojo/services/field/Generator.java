@@ -65,7 +65,7 @@ public class Generator {
         generate2(list, dice, added, free, creator);
     }
 
-    private static <T> void generate2(Accessor<T> list,
+    public static <T> void generate2(Accessor<T> list,
                                     Dice dice,
                                     int count,
                                     Supplier<List<Point>> free,
