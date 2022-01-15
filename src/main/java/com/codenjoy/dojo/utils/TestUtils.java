@@ -325,7 +325,7 @@ public class TestUtils {
         PrinterFactory factory = new PrinterFactoryImpl();
 
         List<Game> games = TestUtils.getGames(players, runner,
-                factory, () -> testing().mock(EventListener.class));
+                factory, () -> event -> {});
 
         List<Solver> solvers = new LinkedList<>();
         List<ClientBoard> boards = new LinkedList<>();
