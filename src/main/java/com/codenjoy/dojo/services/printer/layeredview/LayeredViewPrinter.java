@@ -23,8 +23,8 @@ package com.codenjoy.dojo.services.printer.layeredview;
  */
 
 
-
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.LengthToXY;
+import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.state.State;
 
@@ -90,7 +90,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
         LengthToXY xy = new LengthToXY(size);
         for (int y = vy + viewSize - 1; y >= vy; --y) {
             for (int x = vx; x < vx + viewSize; ++x) {
-                int index = xy.getLength(x, y);
+                int index = xy.length(x, y);
 
                 for (int layer = 0; layer < countLayers; ++layer) {
                     State item = elements.apply(index, layer);
