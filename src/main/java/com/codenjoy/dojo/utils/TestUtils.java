@@ -24,11 +24,12 @@ package com.codenjoy.dojo.utils;
 
 
 import com.codenjoy.dojo.client.AbstractBoard;
+import com.codenjoy.dojo.client.ClientBoard;
+import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
-import com.codenjoy.dojo.services.dice.RandomDice;
 import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
@@ -309,7 +310,7 @@ public class TestUtils {
      * @param expectedPrint Ожидаемое время выполнения печати поля на экране.
      * @param printBoard Печатать ли борду в консоли каждый тик (для отладки).
      */
-    public static void assertPerformance(AbstractGameType runner,
+    public static String assertPerformance(AbstractGameType runner,
                                          int players,
                                          int ticks,
                                          int expectedCreation,
@@ -327,22 +328,42 @@ public class TestUtils {
         List<Game> games = TestUtils.getGames(players, runner,
                 factory, () -> testing().mock(EventListener.class));
 
+        List<Solver> solvers = new LinkedList<>();
+        List<ClientBoard> boards = new LinkedList<>();
+        for (Game game : games) {
+            try {
+                solvers.add((Solver) runner.getAI()
+                        .getConstructor(Dice.class)
+                        .newInstance(runner.getDice()));
+
+                boards.add((ClientBoard) runner.getBoard()
+                        .getConstructor()
+                        .newInstance());
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
         profiler.done("creation");
 
-        for (int i = 0; i < ticks; i++) {
-            for (Game game : games) {
+        String boardString = "";
+        for (int tick = 0; tick < ticks; tick++) {
+            for (int index = 0; index < games.size(); index++) {
+                Game game = games.get(index);
+                ClientBoard board = boards.get(index);
+                Solver solver = solvers.get(index);
                 Joystick joystick = game.getJoystick();
-                int next = new RandomDice().next(5);
-                if (next % 2 == 0) {
-                    joystick.act();
-                }
-                switch (next) {
-                    case 0: joystick.left(); break;
-                    case 1: joystick.right(); break;
-                    case 2: joystick.up(); break;
-                    case 3: joystick.down(); break;
-                }
+
+                boardString = game.getBoardAsString().toString();
+                board.forString(boardString);
+                String command = solver.get(board);
+                new PlayerCommand(joystick, command).execute();
             }
+            if (printBoard) {
+                System.out.println(boardString);
+                System.out.println("TICK: " + tick);
+            }
+            profiler.done("print");
+
             // because of MULTIPLE there is only one tick for all
             games.get(0).getField().tick();
             for (Game game : games) {
@@ -351,15 +372,6 @@ public class TestUtils {
                 }
             }
             profiler.done("tick");
-
-            Object board = null;
-            for (int j = 0; j < games.size(); j++) {
-                board = games.get(j).getBoardAsString();
-            }
-            if (printBoard) {
-                System.out.println(board);
-            }
-            profiler.done("print");
         }
 
         profiler.print();
@@ -370,6 +382,9 @@ public class TestUtils {
         // сколько пользователей - столько раз выполнялось
         assertLess(profiler, "print", expectedPrint * reserve);
         assertLess(profiler, "tick", expectedTick * reserve);
+
+        System.out.println(boardString);
+        return boardString;
     }
 
     private void assertLess(Profiler profiler, String phase, double expected) {
