@@ -29,7 +29,6 @@ import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.experimental.UtilityClass;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -37,53 +36,6 @@ import java.util.function.Supplier;
 
 @UtilityClass
 public class Generator {
-
-    public static <T> void generate2(Accessor<T> list,
-                                    Dice dice,
-                                    SettingsReader settings,
-                                    SettingsReader.Key key,
-                                    Supplier<List<Point>> free,
-                                    Function<Point, T> creator) {
-        if (settings.integer(key) < 0) {
-            settings.integer(key, 0);
-        }
-
-        int count = Math.max(0, settings.integer(key));
-        int added = count - list.size();
-        if (added == 0) {
-            return;
-        }
-
-        if (added < 0) {
-            // удаляем из существующих
-            // важно оставить текущие, потому что метод работает каждый тик
-            list.remove(count, list.size());
-            return;
-        }
-
-        // added > 0
-        generate2(list, dice, added, free, creator);
-    }
-
-    public static <T> void generate2(Accessor<T> list,
-                                    Dice dice,
-                                    int count,
-                                    Supplier<List<Point>> free,
-                                    Function<Point, T> creator) {
-        List<Point> points = free.get();
-        // добавляем недостающих к тем что есть
-        for (int index = 0; index < count; index++) {
-            if (points.isEmpty()) return;
-
-            int randomIndex = dice.next(points.size());
-
-            // используется для тестов, чтобы остановить генерацию объектов
-            if (randomIndex == -1) return;
-
-            Point pt = points.remove(randomIndex);
-            list.add(creator.apply(pt));
-        }
-    }
 
     public static <T> void generate(Accessor<T> list,
                                     int fieldSize,
