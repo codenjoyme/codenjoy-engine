@@ -191,7 +191,7 @@ public class TestUtils {
     }
 
     private static String toString(char[][] chars) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int x = 0; x < chars.length; x++) {
             for (int y = 0; y < chars.length; y++) {
                 buffer.append(chars[y][chars.length - 1 - x]);
