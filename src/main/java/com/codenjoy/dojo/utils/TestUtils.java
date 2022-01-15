@@ -306,17 +306,16 @@ public class TestUtils {
      * @param players Количество игроков.
      * @param ticks Количество тиков.
      * @param expectedCreation Ожидаемое время создания игры.
-     * @param expectedTick Ожидаемое время тиков.
      * @param expectedPrint Ожидаемое время выполнения печати поля на экране.
+     * @param expectedTick Ожидаемое время тиков.
      * @param printBoard Печатать ли борду в консоли каждый тик (для отладки).
      */
     public static String assertPerformance(AbstractGameType runner,
-                                         int players,
-                                         int ticks,
-                                         int expectedCreation,
-                                         int expectedTick,
-                                         int expectedPrint,
-                                         boolean printBoard)
+                                           int players,
+                                           int ticks,
+                                           int expectedCreation,
+                                           int expectedPrint, int expectedTick,
+                                           boolean printBoard)
     {
         Profiler profiler = new Profiler(){{
             PRINT_SOUT = true;
