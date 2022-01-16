@@ -81,5 +81,7 @@ public interface GameField<P extends GamePlayer, H extends PlayerHero> extends T
         return null;
     }
 
-    int size();
+    default int size() {
+        return 0;
+    }
 }
