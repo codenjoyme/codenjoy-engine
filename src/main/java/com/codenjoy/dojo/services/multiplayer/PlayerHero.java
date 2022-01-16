@@ -23,7 +23,10 @@ package com.codenjoy.dojo.services.multiplayer;
  */
 
 
-import com.codenjoy.dojo.services.*;
+import com.codenjoy.dojo.services.Joystick;
+import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.Tickable;
 import com.codenjoy.dojo.services.field.Fieldable;
 import com.codenjoy.dojo.services.joystick.NoMessageJoystick;
 import com.codenjoy.dojo.services.settings.SettingsReader;
@@ -86,5 +89,13 @@ public abstract class PlayerHero<F extends GameField> extends PointImpl implemen
 
     public void manual(boolean manual) {
         this.manual = manual;
+    }
+
+    @Override
+    public void move(int x, int y) {
+        if (Point.isOutOf(x, y, field.size())) {
+            return;
+        }
+        super.move(x, y);
     }
 }

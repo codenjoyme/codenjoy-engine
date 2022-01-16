@@ -80,4 +80,6 @@ public interface GameField<P extends GamePlayer, H extends PlayerHero> extends T
         // актуально для игр, герои которых не бегают по полю
         return null;
     }
+
+    int size();
 }

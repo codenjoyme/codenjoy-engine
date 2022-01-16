@@ -56,6 +56,11 @@ public final class NullGameField implements GameField {
     }
 
     @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
     public void tick() {
         // do nothing
     }
