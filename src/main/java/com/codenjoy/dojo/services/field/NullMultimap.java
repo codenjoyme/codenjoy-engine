@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.field;
  */
 
 import com.codenjoy.dojo.services.Point;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,7 +40,7 @@ public final class NullMultimap extends Multimap<Object, Object> {
 
     @Override
     public List get(Object key) {
-        return Arrays.asList();
+        return Lists.newLinkedList();
     }
 
     @Override
