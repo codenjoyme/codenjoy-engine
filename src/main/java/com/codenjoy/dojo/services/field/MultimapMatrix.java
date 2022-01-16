@@ -58,7 +58,7 @@ public class MultimapMatrix<K, V> {
 
     @PerformanceOptimized
     public Multimap<K, V> get(int x, int y) {
-        if (Point.isOutOfExclude(x, y, 0, 0, size)) {
+        if (Point.isOutOf(x, y, size)) {
             return new Multimap<>(); // TODO а точно тут так надо?
         }
         Multimap<K, V> map = field[x][y];
