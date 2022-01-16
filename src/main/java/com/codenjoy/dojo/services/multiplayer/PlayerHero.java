@@ -93,9 +93,16 @@ public abstract class PlayerHero<F extends GameField> extends PointImpl implemen
 
     @Override
     public void move(int x, int y) {
-        if (Point.isOutOf(x, y, field.size())) {
+        if (isValidateOnMove()
+                && Point.isOutOf(x, y, field.size()))
+        {
             return;
         }
         super.move(x, y);
+    }
+
+    // TODO убрать когда пофикшу в играх несоответсвия
+    protected boolean isValidateOnMove() {
+        return true;
     }
 }
