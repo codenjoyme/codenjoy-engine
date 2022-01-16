@@ -59,7 +59,7 @@ public class MultimapMatrix<K, V> {
     @PerformanceOptimized
     public Multimap<K, V> get(int x, int y) {
         if (Point.isOutOf(x, y, size)) {
-            return new Multimap<>(); // TODO а точно тут так надо?
+            return NullMultimap.INSTANCE;
         }
         Multimap<K, V> map = field[x][y];
         if (map == null) {
