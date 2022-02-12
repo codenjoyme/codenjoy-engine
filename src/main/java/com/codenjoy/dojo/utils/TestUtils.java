@@ -35,6 +35,7 @@ import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.services.settings.Settings;
+import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +45,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
@@ -389,5 +391,19 @@ public class TestUtils {
     private void assertLess(Profiler profiler, String phase, double expected) {
         double actual = profiler.info(phase).getTime();
         testing().assertEquals(actual + " > " + expected, true, actual < expected);
+    }
+
+    public static String toString(List<SettingsReader.Key> keys) {
+        int max = keys.stream()
+                .map(Object::toString)
+                .map(String::length)
+                .max(Integer::compare)
+                .get() + 1;
+
+        return keys.stream()
+                .map(key -> String.format("%s=%s",
+                        StringUtils.rightPad(key.toString(), max),
+                        key.key()))
+                .collect(Collectors.joining("\n"));
     }
 }
