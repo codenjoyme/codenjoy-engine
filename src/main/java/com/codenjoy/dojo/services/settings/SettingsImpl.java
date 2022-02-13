@@ -97,7 +97,7 @@ public class SettingsImpl implements Settings {
     public Parameter<?> getParameter(String name) {
         Parameter<?> parameter = map.get(name);
         if (parameter == null) {
-            return NullParameter.INSTANCE();
+            return NullParameter.INSTANCE(); // TODO вот это вообще не очень, выпилить нафиг
         }
         return parameter;
     }
