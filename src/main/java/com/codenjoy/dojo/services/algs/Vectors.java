@@ -45,14 +45,13 @@ public class Vectors {
     }
 
     public void add(List<Point> goals, Point from, int pathLength) {
-        boolean[] goes = ways.get(from).goes();
         Status status = points.add(from);
-        for (int index = 0; index < goes.length; index++) {
-            if (!goes[index]) continue;
-
-            Direction direction = Direction.valueOf(index);
-            status.add(direction);
-            queue.add(new Vector(from, direction, goals, pathLength));
+        Status status2 = ways.get(from);
+        for (Direction direction : Direction.values()) {
+            if (status2.is(direction)) {
+                status.add(direction);
+                queue.add(new Vector(from, direction, goals, pathLength));
+            }
         }
     }
 

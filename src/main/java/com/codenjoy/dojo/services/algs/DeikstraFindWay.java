@@ -193,12 +193,10 @@ public class DeikstraFindWay {
                 Point pt = pt(x, y);
                 if (basic.isAdded(pt)) {
                     Status status = basic.get(pt);
-                    boolean[] goes = status.goes();
-                    for (int index = 0; index < goes.length; index++) {
-                        if (!goes[index]) continue;
-
-                        Direction direction = Direction.valueOf(index);
-                        goes[index] = possible.check(size, pt, direction);
+                    for (Direction direction : Direction.values()) {
+                        if (status.is(direction)) {
+                            status.set(direction, possible.check(size, pt, direction));
+                        }
                     }
                 }
             }
