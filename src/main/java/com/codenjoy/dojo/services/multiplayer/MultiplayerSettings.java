@@ -22,10 +22,8 @@ package com.codenjoy.dojo.services.multiplayer;
  * #L%
  */
 
-import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.settings.Parameter;
 import com.codenjoy.dojo.services.settings.SelectBox;
-import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 
 import java.util.Arrays;
@@ -78,12 +76,10 @@ public interface MultiplayerSettings<T extends SettingsReader> extends SettingsR
         Parameter<Integer> parameter = add(ROOM_SIZE, roomSize);
 
         // TODO убрать это после того как объединим два параметра в один
-        if (!RoundSettings.is((Settings) this)) {
-            integer(ROUNDS_PLAYERS_PER_ROOM, roomSize);
-            bool(ROUNDS_ENABLED, false);
-        }
+        integer(ROUNDS_PLAYERS_PER_ROOM, roomSize);
+        bool(ROUNDS_ENABLED, false);
 
-        Parameter<Integer> playersPerRoom = RoundSettings.get((Settings) this).playersPerRoom();
+        Parameter<Integer> playersPerRoom = integerValue(ROUNDS_PLAYERS_PER_ROOM);
         parameter.onChange((old, updated) -> playersPerRoom.justSet(updated));
         playersPerRoom.onChange((old, updated) -> parameter.justSet(updated));
     }

@@ -212,7 +212,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
                         "  'ROOM_SIZE':5,\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -404,7 +404,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
                         "  'ROOM_SIZE':5,\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +

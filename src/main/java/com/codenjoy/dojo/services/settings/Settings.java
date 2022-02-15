@@ -25,6 +25,7 @@ package com.codenjoy.dojo.services.settings;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Все то, что ты прошил бы в константы в своей игре
@@ -48,7 +49,9 @@ public interface Settings {
     CheckBox<Boolean> addCheckBox(String name);
 
     // TODO remove word 'Parameter' from every methods
-    Parameter<?> getParameter(String name);
+    Parameter<?> getParameter(String name, Supplier<Parameter<?>> ifNull);
+
+    Parameter<?> parameter(String name);
 
     boolean hasParameter(String name);
 

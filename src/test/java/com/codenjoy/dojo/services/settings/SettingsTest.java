@@ -57,8 +57,8 @@ public class SettingsTest {
             settings.addSelect("select" + count, options).type(String.class);
             settings.addCheckBox("check" + count).type(Boolean.class);
 
-            settings.getParameter("edit1");
-            settings.getParameter("non-exists");
+            settings.parameter("edit1");
+            settings.getParameter("non-exists", () -> null);
             settings.getParameters();
         }
     }
@@ -100,7 +100,7 @@ public class SettingsTest {
         Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class).def(5);
 
         // when
-        assertSame(edit, settings.getParameter("edit"));
+        assertSame(edit, settings.parameter("edit"));
 
         // then
         edit.update(12);

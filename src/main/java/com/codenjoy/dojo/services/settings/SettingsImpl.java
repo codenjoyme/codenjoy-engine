@@ -24,7 +24,6 @@ package com.codenjoy.dojo.services.settings;
 
 
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
-import com.codenjoy.dojo.services.nullobj.NullParameter;
 import com.google.common.collect.Lists;
 import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
@@ -35,6 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static java.util.Comparator.comparing;
 import static java.util.function.Function.identity;
@@ -94,12 +94,19 @@ public class SettingsImpl implements Settings {
     }
 
     @Override
-    public Parameter<?> getParameter(String name) {
+    public Parameter<?> getParameter(String name, Supplier<Parameter<?>> ifNull) {
         Parameter<?> parameter = map.get(name);
         if (parameter == null) {
-            return NullParameter.INSTANCE(); // TODO вот это вообще не очень, выпилить нафиг
+            parameter = ifNull.get();
         }
         return parameter;
+    }
+
+    @Override
+    public Parameter<?> parameter(String name) {
+        return getParameter(name, () -> {
+            throw new IllegalArgumentException("Parameter not found with name:" + name);
+        });
     }
 
     @Override

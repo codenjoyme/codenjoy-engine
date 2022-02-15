@@ -29,10 +29,10 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
-import static com.codenjoy.dojo.services.incativity.InactivitySettings.Keys.*;
-import static com.codenjoy.dojo.services.incativity.InactivitySettingsImpl.INACTIVITY;
+import static com.codenjoy.dojo.services.incativity.InactivitySettings.Keys.INACTIVITY_ENABLED;
+import static com.codenjoy.dojo.services.incativity.InactivitySettings.Keys.INACTIVITY_TIMEOUT;
+import static com.codenjoy.dojo.services.settings.Parameter.copy;
 
 public interface InactivitySettings<T extends SettingsReader> extends SettingsReader<T> {
 
@@ -114,7 +114,9 @@ public interface InactivitySettings<T extends SettingsReader> extends SettingsRe
         if (input != null) {
             allInactivityKeys().stream()
                     .map(Key::key)
-                    .forEach(key -> getParameter(key).update(input.getParameter(key).getValue()));
+                    .forEach(key -> copy(
+                            input.getParameter(key, () -> null),
+                            getParameter(key, () -> null)));
         }
         return (T) this;
     }

@@ -27,13 +27,13 @@ import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.incativity.InactivitySettings;
 import com.codenjoy.dojo.services.level.LevelsSettings;
 import com.codenjoy.dojo.services.multiplayer.MultiplayerSettings;
-import com.codenjoy.dojo.services.nullobj.NullParameter;
 import com.codenjoy.dojo.services.round.RoundSettings;
 import com.codenjoy.dojo.services.semifinal.SemifinalSettings;
 import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.services.event.ScoresImpl.SCORE_COUNTING_TYPE;
 
@@ -101,7 +101,9 @@ public interface SettingsReader<T extends SettingsReader> {
 
     boolean hasParameter(String name);
 
-    Parameter<?> getParameter(String name);
+    Parameter<?> getParameter(String name, Supplier<Parameter<?>> ifNull);
+
+    Parameter<?> parameter(String name);
 
     EditBox<?> addEditBox(String name);
 
@@ -114,7 +116,7 @@ public interface SettingsReader<T extends SettingsReader> {
     // getters
 
     default <T extends Parameter> T parameter(Key key, Class<T> clazz) {
-        return (T)getParameter(key.key());
+        return (T) parameter(key.key());
     }
 
     default String string(Key key) {
@@ -122,7 +124,7 @@ public interface SettingsReader<T extends SettingsReader> {
     }
 
     default Parameter<String> stringValue(Key key) {
-        return getParameter(key.key()).type(String.class);
+        return parameter(key.key()).type(String.class);
     }
 
     default Integer integer(Key key) {
@@ -130,7 +132,7 @@ public interface SettingsReader<T extends SettingsReader> {
     }
 
     default Parameter<Integer> integerValue(Key key) {
-        return getParameter(key.key()).type(Integer.class);
+        return parameter(key.key()).type(Integer.class);
     }
 
     default Double real(Key key) {
@@ -138,7 +140,7 @@ public interface SettingsReader<T extends SettingsReader> {
     }
 
     default Parameter<Double> realValue(Key key) {
-        return getParameter(key.key()).type(Double.class);
+        return parameter(key.key()).type(Double.class);
     }
 
     default Boolean bool(Key key) {
@@ -146,7 +148,7 @@ public interface SettingsReader<T extends SettingsReader> {
     }
 
     default Parameter<Boolean> boolValue(Key key) {
-        return getParameter(key.key()).type(Boolean.class);
+        return parameter(key.key()).type(Boolean.class);
     }
 
     // setters
@@ -195,38 +197,26 @@ public interface SettingsReader<T extends SettingsReader> {
     }
 
     default T string(Key key, String data) {
-        Parameter<?> parameter = getParameter(key.key());
-        if (parameter == NullParameter.INSTANCE()) {
-            parameter = add(key, data);
-        }
-        parameter.update(data);
+        getParameter(key.key(), () -> add(key, data))
+                .update(data);
         return (T) this;
     }
 
     default T integer(Key key, int data) {
-        Parameter<?> parameter = getParameter(key.key());
-        if (parameter == NullParameter.INSTANCE()) {
-            parameter = add(key, data);
-        }
-        parameter.update(data);
+        getParameter(key.key(), () -> add(key, data))
+                .update(data);
         return (T) this;
     }
 
     default T real(Key key, double data) {
-        Parameter<?> parameter = getParameter(key.key());
-        if (parameter == NullParameter.INSTANCE()) {
-            parameter = add(key, data);
-        }
-        parameter.update(data);
+        getParameter(key.key(), () -> add(key, data))
+                .update(data);
         return (T) this;
     }
 
     default T bool(Key key, boolean data) {
-        Parameter<?> parameter = getParameter(key.key());
-        if (parameter == NullParameter.INSTANCE()) {
-            parameter = add(key, data);
-        }
-        parameter.update(data);
+        getParameter(key.key(), () -> add(key, data))
+                .update(data);
         return (T) this;
     }
 
@@ -239,11 +229,8 @@ public interface SettingsReader<T extends SettingsReader> {
             String key = nameToKey(allKeys(), name);
             Object value = json.get(name);
 
-            Parameter<?> parameter = getParameter(key);
-            if (parameter == NullParameter.INSTANCE()) {
-                parameter = add(() -> key, value);
-            }
-            parameter.update(value);
+            getParameter(key, () -> add(() -> key, value))
+                    .update(value);
         });
         return (T) this;
     }
