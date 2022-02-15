@@ -57,7 +57,7 @@ public class SettingsTest {
             settings.addSelect("select" + count, options).type(String.class);
             settings.addCheckBox("check" + count).type(Boolean.class);
 
-            settings.parameter("edit1");
+            settings.parameter("edit0");
             settings.getParameter("non-exists", () -> null);
             settings.getParameters();
         }
