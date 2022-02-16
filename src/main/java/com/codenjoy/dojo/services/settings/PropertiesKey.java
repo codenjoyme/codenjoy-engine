@@ -24,10 +24,12 @@ package com.codenjoy.dojo.services.settings;
 
 import com.codenjoy.dojo.services.properties.GameProperties;
 
+import java.util.Locale;
+
 public interface PropertiesKey extends SettingsReader.Key {
 
     default String key(String game) {
-        return GameProperties.get(".", game, name());
+        return GameProperties.get("", Locale.ENGLISH, game, name());
     }
 
     String name();
