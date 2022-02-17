@@ -25,7 +25,10 @@ package com.codenjoy.dojo.services.level;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
-import com.codenjoy.dojo.services.settings.*;
+import com.codenjoy.dojo.services.settings.Parameter;
+import com.codenjoy.dojo.services.settings.Settings;
+import com.codenjoy.dojo.services.settings.SettingsReader;
+import com.codenjoy.dojo.services.settings.SimpleParameter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -160,13 +163,9 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
                     Parameter<String> source = parameter.type(String.class);
                     String def = source.getDefault();
                     String value = source.getValue();
-                    if (hasParameter(key)) {
-                        getParameter(key).update(value);
-                    } else {
-                        EditBox<String> box = add(() -> key, def);
-                        if (!def.equals(value)) {
-                            box.update(value);
-                        }
+                    Parameter<?> dest = getParameter(key, () -> add(() -> key, def));
+                    if (!def.equals(value)) {
+                        dest.update(value);
                     }
                 });
     }

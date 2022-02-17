@@ -22,8 +22,7 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
-import com.codenjoy.dojo.games.namdreab.Element;
-import com.codenjoy.dojo.services.LengthToXY;
+import com.codenjoy.dojo.services.BoardMap;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.CharElement;
@@ -42,27 +41,19 @@ import static java.util.stream.Collectors.toList;
 public abstract class AbstractLevel implements Level {
 
     // TODO make all final & private after migrating all games
-    protected String map;
-    protected int size;
-    protected LengthToXY xy;
+    protected BoardMap map;
 
     public AbstractLevel(String map) {
-        this.map = LevelUtils.clear(map);
-        resize();
-    }
-
-    protected void resize() {
-        this.size = (int) Math.sqrt(map.length());
-        this.xy = new LengthToXY(size);
+        this.map = new BoardMap(LevelUtils.clear(map));
     }
 
     @Override
     public int size() {
-        return size;
+        return map.size();
     }
 
     protected Character getAt(Point pt) {
-        return map.charAt(xy.getLength(pt.getX(), pt.getY()));
+        return map.getAt(pt.getX(), pt.getY());
     }
 
     protected <T, E extends CharElement> List<T> find(
@@ -72,8 +63,8 @@ public abstract class AbstractLevel implements Level {
         List<T> result = new LinkedList<>();
         for (E el : elements) {
             for (int index = 0; index < map.length(); index++) {
-                if (map.charAt(index) == el.ch()) {
-                    Point pt = xy.getXY(index);
+                if (map.map().charAt(index) == el.ch()) {
+                    Point pt = map.xy().point(index);
                     result.add(objects.apply(pt, el));
                 }
             }
@@ -132,6 +123,10 @@ public abstract class AbstractLevel implements Level {
     }
 
     public String map() {
-        return map;
+        return map.map();
+    }
+
+    public void resize(int size) {
+        map.resize(size);
     }
 }

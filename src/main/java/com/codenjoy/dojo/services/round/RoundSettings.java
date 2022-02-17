@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.services.round.RoundSettings.Keys.*;
+import static com.codenjoy.dojo.services.settings.Parameter.copy;
 
 public interface RoundSettings<T extends SettingsReader> extends SettingsReader<T> {
 
@@ -175,7 +176,9 @@ public interface RoundSettings<T extends SettingsReader> extends SettingsReader<
         if (input != null) {
             allRoundsKeys().stream()
                     .map(Key::key)
-                    .forEach(key -> getParameter(key).update(input.getParameter(key).getValue()));
+                    .forEach(key -> copy(
+                            input.getParameter(key, () -> null),
+                            getParameter(key, () -> null)));
         }
         return (T) this;
     }

@@ -92,6 +92,12 @@ public class PointFieldTest {
         public void tick() {
             messages.add(toString());
         }
+
+        @Override
+        public boolean equals(Object o) {
+            return super.equals(o)
+                    && o.getClass().equals(this.getClass());
+        }
     }
 
     class Two extends PointImpl {
@@ -109,6 +115,12 @@ public class PointFieldTest {
                     getX(),
                     getY());
         }
+
+        @Override
+        public boolean equals(Object o) {
+            return super.equals(o)
+                    && o.getClass().equals(this.getClass());
+        }
     }
 
     class Three extends PointImpl  {
@@ -125,6 +137,12 @@ public class PointFieldTest {
                     id,
                     getX(),
                     getY());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return super.equals(o)
+                    && o.getClass().equals(this.getClass());
         }
     }
 
@@ -147,6 +165,12 @@ public class PointFieldTest {
         @Override
         public void tick() {
             messages.add(toString());
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return super.equals(o)
+                    && o.getClass().equals(this.getClass());
         }
     }
 
@@ -4879,5 +4903,30 @@ public class PointFieldTest {
         return " [" + Arrays.stream(classes)
                 .map(clazz -> StringUtils.substringAfter(clazz.toString(), "$"))
                 .collect(Collectors.joining(", ")) + "]";
+    }
+
+    @Test
+    public void testPointsMatch() {
+        // given
+        testAdd_severalElements_mixed();
+
+        // when then
+        assertEquals("[[1,1]]",
+                field.pointsMatch(list -> list != null && list.contains(new One(1, 1))).toString());
+
+        assertEquals("[[1,2]]",
+                field.pointsMatch(list -> list != null && list.contains(new One(1, 2))).toString());
+
+        assertEquals("[[1,2]]",
+                field.pointsMatch(list -> list != null && list.contains(new Two(1, 2))).toString());
+
+        assertEquals("[[2,2]]",
+                field.pointsMatch(list -> list != null && list.contains(new Three(2, 2))).toString());
+
+        assertEquals("[]",
+                field.pointsMatch(list -> list != null && list.contains(new Four(2, 2))).toString());
+
+        assertEquals("[[0,0], [0,1], [0,2], [1,0], [2,0], [2,1]]",
+                field.pointsMatch(Objects::isNull).toString());
     }
 }

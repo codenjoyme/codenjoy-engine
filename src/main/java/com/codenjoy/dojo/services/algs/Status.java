@@ -27,8 +27,6 @@ import com.codenjoy.dojo.services.Direction;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codenjoy.dojo.services.Direction.*;
-
 /**
  * Оптимизированная версия List<Direction>.
  * Как часть Points помогает понять куда в этой клеточке
@@ -36,37 +34,45 @@ import static com.codenjoy.dojo.services.Direction.*;
  */
 public class Status {
 
-    private boolean[] goes = new boolean[4];
+    private byte goes = 0b0000;
 
     public void add(Direction direction) {
-        goes[direction.value()] = true;
+        set(direction, true);
+    }
+
+    private int mask(Direction direction) {
+        return 0b1 << direction.value();
     }
 
     public boolean done(Direction direction) {
-        boolean result = goes[direction.value()];
-        goes[direction.value()] = false;
+        boolean result = is(direction);
+        set(direction, false);
         return result;
     }
 
+    public void set(Direction direction, boolean check) {
+        if (check) {
+            goes |= mask(direction);
+        } else {
+            goes &= ~mask(direction);
+        }
+    }
+
+    public boolean is(Direction direction) {
+        return (goes & mask(direction)) > 0;
+    }
+
     public boolean empty() {
-        return goes[LEFT.value()]
-                && goes[RIGHT.value()]
-                && goes[UP.value()]
-                && goes[DOWN.value()];
+        return goes == 0;
     }
 
-    public boolean[] goes() {
-        return goes;
-    }
-
-    // not optimized method, used for testing
     public List<Direction> directions() {
         List<Direction> result = new ArrayList<>(4);
-        for (int index = 0; index < goes.length; index++) {
-            if (!goes[index]) continue;
 
-            Direction direction = Direction.valueOf(index);
-            result.add(direction);
+        for (Direction direction : Direction.values()) {
+            if (is(direction)) {
+                result.add(direction);
+            }
         }
         return result;
     }

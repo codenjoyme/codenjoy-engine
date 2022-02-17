@@ -22,6 +22,8 @@ package com.codenjoy.dojo.services;
  * #L%
  */
 
+import com.codenjoy.dojo.services.multiplayer.GameField;
+
 public abstract class MovingObject extends PointImpl {
 
     protected Direction direction;
@@ -44,10 +46,22 @@ public abstract class MovingObject extends PointImpl {
                 return;
             }
 
-            moving(direction.change(this));
+            tryMove();
+        }
+    }
+
+    protected void tryMove() {
+        Point to = direction.change(this);
+        if (to.isOutOf(field().size())) {
+            remove();
+        } else {
+            moving(to);
         }
     }
 
     protected abstract void moving(Point pt);
 
+    protected abstract GameField field();
+
+    protected abstract void remove();
 }

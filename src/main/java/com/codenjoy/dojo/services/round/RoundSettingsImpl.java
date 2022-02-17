@@ -28,6 +28,7 @@ import com.codenjoy.dojo.services.settings.SettingsImpl;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class RoundSettingsImpl extends SettingsImpl
         implements SettingsReader<RoundSettingsImpl>,
@@ -51,11 +52,11 @@ public class RoundSettingsImpl extends SettingsImpl
     }
 
     @Override
-    public Parameter<?> getParameter(String name) {
+    public Parameter<?> getParameter(String name, Supplier<Parameter<?>> ifNull) {
         if (settings != null) {
-            return settings.getParameter(name);
+            return settings.getParameter(name, ifNull);
         } else {
-            return super.getParameter(name);
+            return super.getParameter(name, ifNull);
         }
     }
 

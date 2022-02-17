@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.codenjoy.dojo.services.semifinal.SemifinalSettings.Keys.*;
+import static com.codenjoy.dojo.services.settings.Parameter.copy;
 
 public interface SemifinalSettings<T extends SettingsReader> extends SettingsReader<T> {
 
@@ -172,7 +173,9 @@ public interface SemifinalSettings<T extends SettingsReader> extends SettingsRea
         if (input != null) {
             allSemifinalKeys().stream()
                     .map(Key::key)
-                    .forEach(key -> getParameter(key).update(input.getParameter(key).getValue()));
+                    .forEach(key -> copy(
+                            input.getParameter(key, () -> null),
+                            getParameter(key, () -> null)));
         }
         return (T) this;
     }

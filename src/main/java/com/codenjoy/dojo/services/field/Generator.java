@@ -22,13 +22,19 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
+import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.settings.SettingsReader;
+import lombok.experimental.UtilityClass;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
+@UtilityClass
 public class Generator {
 
     public static <T> void generate(Accessor<T> list,
@@ -45,13 +51,17 @@ public class Generator {
         int added = count - list.size();
         if (added == 0) {
             return;
-        } else if (added < 0) {
+        }
+
+        if (added < 0) {
             // удаляем из существующих
             // важно оставить текущие, потому что метод работает каждый тик
             list.remove(count, list.size());
-        } else {
-            generate(list, fieldSize, added, freeRandom, creator);
+            return;
         }
+
+        // added > 0
+        generate(list, fieldSize, added, freeRandom, creator);
     }
 
     public static <T> void generate(Accessor<T> list,
@@ -69,5 +79,31 @@ public class Generator {
 
             list.add(creator.apply(pt));
         }
+    }
+
+    public static Optional<Point> freeRandom(int size, Dice dice, Predicate<Point> isFree) {
+        return freeRandom(
+                () -> dice.next(size),
+                () -> dice.next(size),
+                isFree);
+    }
+
+    public static Optional<Point> freeRandom(Supplier<Integer> getX,
+                                             Supplier<Integer> getY,
+                                             Predicate<Point> isFree)
+    {
+        Point pt = new PointImpl();
+        int count = 0;
+        int max = 100;
+        do {
+            pt.setX(getX.get());
+            pt.setY(getY.get());
+        } while (!isFree.test(pt) && count++ < max);
+
+        if (count >= max) {
+            return Optional.empty();
+        }
+
+        return Optional.of(pt);
     }
 }

@@ -113,13 +113,13 @@ public class PointField {
      * Метод помогает работать в связке с двумя контейнерами данных.
      * Если выполнение операции на первом вернул false, со вторым (из за
      * опатимизаций производительности) операция не будет осуществляться.
-     * @param point Координата с которой работаем.
+     * @param pt Координата с которой работаем.
      * @param function Осуществляемая операция.
      * @return Результат выполнения операции на первом контейнере.
      */
     @PerformanceOptimized
-    private boolean with(Point point, Function<Multimap<Class<? extends Point>, Point>, Boolean> function) {
-        boolean result = function.apply(get(point));
+    private boolean with(Point pt, Function<Multimap<Class<? extends Point>, Point>, Boolean> function) {
+        boolean result = function.apply(get(pt));
         if (result) {
             function.apply(all);
         }
@@ -145,12 +145,22 @@ public class PointField {
     }
 
     /**
-     * @param point Ячейка которой интересуемся.
+     * Возвращает все координаты поля, элменты в ячейках которых соответствуют
+     * критерию.
+     * @param filter Критерий отбора.
+     * @return Список координат ячеек.
+     */
+    public List<Point> pointsMatch(Predicate<List<Point>> filter) {
+        return field.pointsMatch(filter);
+    }
+
+    /**
+     * @param pt Ячейка которой интересуемся.
      * @return Класс с группой утилитных методов, отвечающих на вопрос -
      *         что содержится в данной ячейке.
      */
-    public Contains at(Point point) {
-        return new Contains(get(point).keys());
+    public Contains at(Point pt) {
+        return new Contains(get(pt).keys());
     }
 
     /**
@@ -169,8 +179,8 @@ public class PointField {
 
             @Override
             @PerformanceOptimized
-            public boolean contains(Point point) {
-                return get(point).contains(filter);
+            public boolean contains(Point pt) {
+                return get(pt).contains(filter);
             }
 
             @Override
@@ -181,8 +191,8 @@ public class PointField {
 
             @Override
             @PerformanceOptimized
-            public boolean removeAt(Point point) {
-                return with(point, map -> map.remove(filter, point));
+            public boolean removeAt(Point pt) {
+                return with(pt, map -> map.remove(filter, pt));
             }
 
             @Override
@@ -244,13 +254,13 @@ public class PointField {
             }
 
             @Override
-            public List<E> getAt(Point point) {
-                return (List) new ArrayList<>(get(point).get(filter));
+            public List<E> getAt(Point pt) {
+                return (List) new ArrayList<>(get(pt).get(filter));
             }
 
             @Override
-            public E getFirstAt(Point point) {
-                List<Point> list = get(point).get(filter);
+            public E getFirstAt(Point pt) {
+                List<Point> list = get(pt).get(filter);
                 if (list.isEmpty()) {
                     return null;
                 }
@@ -258,8 +268,8 @@ public class PointField {
             }
 
             @Override
-            public boolean hasAt(Point point, Consumer<E> onExists) {
-                List<E> list = getAt(point);
+            public boolean hasAt(Point pt, Consumer<E> onExists) {
+                List<E> list = getAt(pt);
                 list.forEach(onExists);
                 return !list.isEmpty();
             }

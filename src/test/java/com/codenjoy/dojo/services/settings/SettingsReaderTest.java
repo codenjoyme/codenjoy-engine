@@ -28,10 +28,31 @@ import org.json.JSONObject;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.client.Utils.split;
+import static com.codenjoy.dojo.services.settings.SomeGameSettings.Keys.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class SettingsReaderTest {
+
+    @Test
+    public void performance() {
+        // about 1.9 sec
+        int ticks = 1_000_000;
+
+        // given
+        for (int count = 0; count < ticks; count++) {
+            SomeGameSettings settings = new SomeGameSettings();
+
+            settings.integer(PARAMETER1, 23)
+                    .bool(PARAMETER2, false)
+                    .real(PARAMETER3, 1.5)
+                    .string(PARAMETER4, "STRING")
+                    .integerValue(PARAMETER1).update(25);
+
+            JSONObject json = settings.asJson();
+            settings.update(json);
+        }
+    }
 
     @Test
     public void shouldAddObject_fail_caseNull() {
@@ -165,6 +186,20 @@ public class SettingsReaderTest {
     }
 
     @Test
+    public void shouldCheckParameters() {
+        // given
+        SomeGameSettings settings = new SomeGameSettings();
+
+        // when then
+        assertEquals("SomeSettingsImpl(map={\n" +
+                        "Parameter 1=[Parameter 1:Integer = multiline[false] def[12] val[15]], \n" +
+                        "Parameter 2=[Parameter 2:Boolean = def[true] val[true]], \n" +
+                        "Parameter 3=[Parameter 3:Double = multiline[false] def[0.5] val[0.5]], \n" +
+                        "Parameter 4=[Parameter 4:String = multiline[false] def[string] val[string]]})",
+                split(settings.toStringLong(), ", \n", "map={\n"));
+    }
+
+    @Test
     public void shouldConvertToJson_caseRound() {
         // given
         SettingsReader settings = new SomeRoundSettings();
@@ -177,7 +212,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.5,\n" +
                         "  'PARAMETER4':'string',\n" +
                         "  'ROOM_SIZE':5,\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':1,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +
@@ -242,7 +277,7 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldParseFromJson_whenNameNotFound() {
+    public void shouldUpdateFromJson_whenNameNotFound() {
         // given
         SettingsReader settings = new SomeGameSettings();
 
@@ -258,9 +293,9 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldParseFromJson() {
+    public void shouldParseUpdateFromJson_existsParameters() {
         // given
-        SettingsReader settings = new SomeGameSettings();
+        SomeGameSettings settings = new SomeGameSettings();
 
         // when
         settings.update(new JSONObject("{\n" +
@@ -278,6 +313,43 @@ public class SettingsReaderTest {
                         "  'PARAMETER4':'updated'\n" +
                         "}",
                 JsonUtils.prettyPrint(settings.asJson()));
+
+        assertEquals("SomeSettingsImpl(map={\n" +
+                        "Parameter 1=[Parameter 1:Integer = multiline[false] def[12] val[23]], \n" +
+                        "Parameter 2=[Parameter 2:Boolean = def[true] val[false]], \n" +
+                        "Parameter 3=[Parameter 3:Double = multiline[false] def[0.5] val[0.1]], \n" +
+                        "Parameter 4=[Parameter 4:String = multiline[false] def[string] val[updated]]})",
+                split(settings.toStringLong(), ", \n", "map={\n"));
+    }
+
+    @Test
+    public void shouldParseUpdateFromJson_notExistsParameters() {
+        // given
+        SettingsReader settings = new SomeEmptyGameSettings();
+
+        // when
+        settings.update(new JSONObject("{\n" +
+                "  'PARAMETER4':'updated',\n" +
+                "  'PARAMETER2':false,\n" +
+                "  'PARAMETER1':23,\n" +
+                "  'PARAMETER3':0.1\n" +
+                "}"));
+
+        // then
+        assertEquals("{\n" +
+                        "  'PARAMETER1':23,\n" +
+                        "  'PARAMETER2':false,\n" +
+                        "  'PARAMETER3':0.1,\n" +
+                        "  'PARAMETER4':'updated'\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asJson()));
+
+        assertEquals("SettingsImpl(map={\n" +
+                        "Parameter 2=[Parameter 2:Boolean = def[false] val[false]], \n" +
+                        "Parameter 1=[Parameter 1:Integer = multiline[false] def[23] val[23]], \n" +
+                        "Parameter 4=[Parameter 4:String = multiline[false] def[updated] val[updated]], \n" +
+                        "Parameter 3=[Parameter 3:Double = multiline[false] def[0.1] val[0.1]]})",
+                split(settings, ", \n", "map={\n"));
     }
 
     @Test
@@ -332,7 +404,7 @@ public class SettingsReaderTest {
                         "  'PARAMETER3':0.1,\n" +
                         "  'PARAMETER4':'updated',\n" +
                         "  'ROOM_SIZE':5,\n" +
-                        "  'ROUNDS_ENABLED':true,\n" +
+                        "  'ROUNDS_ENABLED':false,\n" +
                         "  'ROUNDS_MIN_TICKS_FOR_WIN':4,\n" +
                         "  'ROUNDS_PER_MATCH':1,\n" +
                         "  'ROUNDS_PLAYERS_PER_ROOM':5,\n" +

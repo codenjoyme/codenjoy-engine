@@ -34,6 +34,8 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 
 public class DeikstraFindWay {
 
+    public static boolean POSSIBLE_IS_CONSTANT = true;
+
     // карта возможных передвижений, которые не будут менять на этом уровне: стены и прочие препятствия
     private Points basic;
 
@@ -46,7 +48,7 @@ public class DeikstraFindWay {
     private Point reached;
 
     public DeikstraFindWay() {
-        this(false);
+        this(!POSSIBLE_IS_CONSTANT);
     }
 
     /**
@@ -191,12 +193,10 @@ public class DeikstraFindWay {
                 Point pt = pt(x, y);
                 if (basic.isAdded(pt)) {
                     Status status = basic.get(pt);
-                    boolean[] goes = status.goes();
-                    for (int index = 0; index < goes.length; index++) {
-                        if (!goes[index]) continue;
-
-                        Direction direction = Direction.valueOf(index);
-                        goes[index] = possible.check(size, pt, direction);
+                    for (Direction direction : Direction.values()) {
+                        if (status.is(direction)) {
+                            status.set(direction, possible.check(size, pt, direction));
+                        }
                     }
                 }
             }

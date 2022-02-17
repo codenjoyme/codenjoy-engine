@@ -25,9 +25,9 @@ package com.codenjoy.dojo.services.printer.layeredview;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.Printer;
+import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -157,7 +157,7 @@ public class LayeredViewPrinterTest {
             @Override
             public BiFunction<Integer, Integer, State> elements() {
                 return (index, layer) -> {
-                    Point pt = lxy.getXY(index);
+                    Point pt = lxy.point(index);
                     if (layer == 1) {
                         return new Air(pt);
                     }
@@ -183,7 +183,7 @@ public class LayeredViewPrinterTest {
             @Override
             public Object[] itemsInSameCell(State item, int layer) {
                 Point pt = (Point) item;
-                int length = lxy.getLength(pt.getX(), pt.getY());
+                int length = lxy.length(pt.getX(), pt.getY());
                 State inCell = elements().apply(length, 0);
                 if (inCell == item) {
                     return new Object[0];

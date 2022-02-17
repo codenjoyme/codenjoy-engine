@@ -250,7 +250,7 @@ public class LevelsSettingsTest {
         dice.then(0);
         assertEquals("map5", settings.getRandomLevelMap(3, dice));
 
-        dice.then(() -> {
+        dice.then(max -> {
             throw new RuntimeException();
         });
         assertEquals("map8", settings.getRandomLevelMap(5, dice));
@@ -637,7 +637,7 @@ public class LevelsSettingsTest {
 
         // when then
         assertEquals("[[Level] Map[1,2]:String = multiline[false] def[map2] val[map2]]",
-                settings.getParameter("[Level] Map[1,2]").toString());
+                settings.parameter("[Level] Map[1,2]").toString());
     }
 
     @Test
@@ -652,7 +652,7 @@ public class LevelsSettingsTest {
 
         // when then
         assertEquals(expected,
-                settings.getParameter("[Level] Map[1,2]").toString());
+                settings.parameter("[Level] Map[1,2]").toString());
     }
 
     @Test
@@ -665,7 +665,7 @@ public class LevelsSettingsTest {
 
         // when then
         assertEquals(expected,
-                settings.getParameter("[Level] Map[1,2]").toString());
+                settings.parameter("[Level] Map[1,2]").toString());
     }
 
     @Test

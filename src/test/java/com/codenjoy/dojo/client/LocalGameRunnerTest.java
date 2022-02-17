@@ -118,6 +118,11 @@ public class LocalGameRunnerTest {
             }
 
             @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
             public void tick() {
                 messages.add("TICK_GAME" + id());
                 player.getHero().tick();

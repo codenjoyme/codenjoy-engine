@@ -65,4 +65,8 @@ public class SomeGameSettings extends SettingsImpl implements SettingsReader<Som
     public String toString() {
         return "Some" + super.toStringShort();
     }
+
+    public String toStringLong() {
+        return "Some" + super.toString();
+    }
 }

@@ -46,6 +46,24 @@ public class SettingsTest {
     }
 
     @Test
+    public void performance() {
+        // about 2.8 sec
+        int ticks = 1_000_000;
+
+        // given
+        List<Object> options = Arrays.asList("option1", "option2");
+        for (int count = 0; count < ticks; count++) {
+            settings.addEditBox("edit" + count).type(Integer.class);
+            settings.addSelect("select" + count, options).type(String.class);
+            settings.addCheckBox("check" + count).type(Boolean.class);
+
+            settings.parameter("edit0");
+            settings.getParameter("non-exists", () -> null);
+            settings.getParameters();
+        }
+    }
+
+    @Test
     public void shouldGetAllOptionsContainsCreatedParameter() {
         // given
         Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class);
@@ -82,7 +100,7 @@ public class SettingsTest {
         Parameter<Integer> edit = settings.addEditBox("edit").type(Integer.class).def(5);
 
         // when
-        assertSame(edit, settings.getParameter("edit"));
+        assertSame(edit, settings.parameter("edit"));
 
         // then
         edit.update(12);

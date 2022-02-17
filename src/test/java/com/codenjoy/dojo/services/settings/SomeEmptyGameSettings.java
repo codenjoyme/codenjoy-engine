@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services.round;
+package com.codenjoy.dojo.services.settings;
 
 /*-
  * #%L
@@ -22,23 +22,13 @@ package com.codenjoy.dojo.services.round;
  * #L%
  */
 
-import com.codenjoy.dojo.services.multiplayer.GameField;
+import java.util.List;
 
-import java.util.stream.Stream;
+public class SomeEmptyGameSettings extends SettingsImpl implements SettingsReader<SomeEmptyGameSettings> {
 
-public interface RoundGameField<P extends RoundGamePlayer, H extends RoundPlayerHero> extends GameField<P, H> {
+    @Override
+    public List<Key> allKeys() {
+        return new SomeGameSettings().allKeys();
+    }
 
-    Stream<P> aliveActive();
-
-    Stream<H> aliveActiveHeroes();
-
-    void reset(P player);
-
-    void start(int round);
-
-    void print(String message);
-
-    int score(P player);
-
-    void oneMoreDead(P player, Object loseEvent);
 }

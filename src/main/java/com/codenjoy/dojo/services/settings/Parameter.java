@@ -99,4 +99,10 @@ public interface Parameter<T> extends Cloneable {
     void reset();
 
     Parameter<T> clone(String newName);
+
+    static void copy(Parameter<?> source, Parameter<?> dest) {
+        if (source != null && dest != null) {
+            dest.update(source.getValue());
+        }
+    }
 }

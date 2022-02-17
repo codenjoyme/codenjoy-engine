@@ -72,6 +72,7 @@ public class Profiler {
         }
 
         boolean append = cycle;
+        // TODO do not use map.containsKey just check that map.get() != null
         if (!phases.containsKey(phase)) {
             phases.put(phase, new AverageTime());
         }
@@ -128,6 +129,7 @@ public class Profiler {
     }
 
     public AverageTime info(String phase) {
+        // TODO do not use map.containsKey just check that map.get() != null
         if (!phases.containsKey(phase)) {
             return null;
         }

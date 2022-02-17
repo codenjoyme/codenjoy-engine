@@ -196,6 +196,12 @@ public abstract class AbstractBaseGameTest
         field.tick();
     }
 
+    public void ticks(int fromInclusive, int tillExclusive) {
+        for (int tick = fromInclusive; tick < tillExclusive; tick++) {
+            tick();
+        }
+    }
+
     // basic asserts
 
     public void assertF(String expected) {
@@ -244,6 +250,10 @@ public abstract class AbstractBaseGameTest
 
     protected S settings() {
         return settings;
+    }
+
+    protected MockDice dice() {
+        return dice;
     }
 
     protected List<EventListener> listeners() {

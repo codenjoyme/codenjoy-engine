@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.printer.state;
 
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
+import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.TeamElement;
 import com.codenjoy.dojo.services.round.RoundGamePlayer;
 import com.codenjoy.dojo.services.round.RoundPlayerHero;
@@ -32,7 +33,7 @@ import java.util.List;
 
 import static com.codenjoy.dojo.services.printer.state.StateUtils.filter;
 
-public interface HeroState<E extends TeamElement, H extends HeroState<E, H, P>, P extends RoundGamePlayer<? extends RoundPlayerHero, ? extends GameField>> {
+public interface HeroState<E extends CharElement, H extends HeroState<E, H, P>, P extends RoundGamePlayer<? extends RoundPlayerHero, ? extends GameField>> {
 
     E beforeState(Object... alsoAtPoint);
 
@@ -44,7 +45,7 @@ public interface HeroState<E extends TeamElement, H extends HeroState<E, H, P>, 
         return state;
     }
 
-    default E state(P player, Object... alsoAtPoint) {
+    default E state(P player, TeamElement teamElement, Object... alsoAtPoint) {
         boolean myHero = StateUtils.containsMyHero(player, (PlayerHero) this, alsoAtPoint, (State) player.getHero());
         H hero = (H) (myHero ? player.getHero() : this);
 
@@ -60,8 +61,8 @@ public interface HeroState<E extends TeamElement, H extends HeroState<E, H, P>, 
             }
 
             state = (E) (player.allFromMyTeam((List) heroes)
-                    ? state.otherHero()
-                    : state.enemyHero());
+                    ? teamElement.otherHero(state)
+                    : teamElement.enemyHero(state));
         }
 
         return hero.afterState(state);
