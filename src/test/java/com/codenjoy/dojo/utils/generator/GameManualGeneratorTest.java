@@ -72,8 +72,8 @@ public class GameManualGeneratorTest extends AbstractManualGeneratorTest {
         // then generator should print to console error message
         generator.generate();
         clear();
-        Assert.assertEquals("\u001B[45;93mFile is missing: C:\\work\\DOJO\\" + MANUAL_TYPE + "\\CodingDojo\\games\\engine\\target\\test-classes\\generator\\missOneFile\\games\\mollymage\\part3.md\n" +
-                "\u001B[0m\u001B[41;93m[ERROR] Can't find resources for manualType{" + MANUAL_TYPE + "}, game{mollymage}, language{en}\n" +
+        Assert.assertEquals("\u001B[45;93mFile is missing: " + base + "games\\" + GAME + "\\part3.md\n" +
+                "\u001B[0m\u001B[41;93m[ERROR] Can't find resources for manualType{" + MANUAL_TYPE + "}, game{" + GAME + "}, language{" + LANGUAGE + "}\n" +
                 "\u001B[0m", baos.toString());
     }
 }
