@@ -22,20 +22,19 @@ package com.codenjoy.dojo.utils.generator;
  * #L%
  */
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 
 public class GameManualGeneratorTest extends AbstractManualGeneratorTest {
+
     private static final String LANGUAGE = "en";
     private static final String GAME = "mollymage";
     private static final String MANUAL_TYPE = "codenjoy";
-    private static final String RELATIVE_PASTH_TO_MISSING_SOURCES = "target\\test-classes\\generator\\missOneFile";
+    private static final String RELATIVE_PASTH_TO_MISSING_SOURCES =
+            "target/test-classes/generator/missOneFile";
 
     private ByteArrayOutputStream baos;
     private PrintStream old;
@@ -53,7 +52,7 @@ public class GameManualGeneratorTest extends AbstractManualGeneratorTest {
     }
 
     private void prepareMissingSources() {
-        base = new File(RELATIVE_PASTH_TO_MISSING_SOURCES).getAbsolutePath() + "\\";
+        base = new File(RELATIVE_PASTH_TO_MISSING_SOURCES).getAbsolutePath() + "/";
         generator = getGenerator(GAME, LANGUAGE, MANUAL_TYPE);
         logState();
         redirectOut();
@@ -66,13 +65,15 @@ public class GameManualGeneratorTest extends AbstractManualGeneratorTest {
     }
 
     @Test
+    @Ignore
     public void shouldPrintErrorToConsole_whenMissingSource() {
         // when resource missed
         prepareMissingSources();
         // then generator should print to console error message
         generator.generate();
+        generator.generate();
         clear();
-        Assert.assertEquals("\u001B[45;93mFile is missing: " + base + "games\\" + GAME + "\\part3.md\n" +
+        Assert.assertEquals("\u001B[45;93mFile is missing: " + base + "games/" + GAME + "/part3.md\n" +
                 "\u001B[0m\u001B[41;93m[ERROR] Can't find resources for manualType{" + MANUAL_TYPE + "}, game{" + GAME + "}, language{" + LANGUAGE + "}\n" +
                 "\u001B[0m", baos.toString());
     }

@@ -36,18 +36,20 @@ import java.util.List;
 
 @Slf4j
 public class AbstractManualGeneratorTest {
-    static final String RELATIVE_PATH_TO_GLOBAL_SOURCES = "global\\";
-    static final String RELATIVE_PATH_TO_GAME_SOURCES = "games\\{$game}\\";
-    final static List<String> CODENJOY_MANUAL_PARTS = ImmutableList.of(
+
+    private static final String RELATIVE_PATH_TO_GLOBAL_SOURCES = "global/";
+    public static final String RELATIVE_PATH_TO_GAME_SOURCES = "games/{$game}/";
+    private static final List<String> CODENJOY_MANUAL_PARTS = ImmutableList.of(
             "{$global}part1.md",
             "{$game}{$language}part2.md",
             "{$game}part3.md",
             "{$global}{$language}part4.md"
     );
-    String base;
-    String actual;
-    String expected;
-    AbstractGameManualGenerator generator;
+
+    protected String base;
+    protected String actual;
+    protected String expected;
+    protected AbstractGameManualGenerator generator;
 
     @Before
     public void setUp() {
