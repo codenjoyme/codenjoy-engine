@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.questionanswer;
  * #L%
  */
 
+import com.codenjoy.dojo.services.questionanswer.event.FailTestEvent;
 import com.codenjoy.dojo.services.questionanswer.event.NextAlgorithmEvent;
 import com.codenjoy.dojo.services.questionanswer.event.PassTestEvent;
 import com.codenjoy.dojo.services.questionanswer.levels.LevelsPool;
@@ -159,7 +160,7 @@ public class Examiner {
                 level.nextQuestion();
             }
         } else {
-            // do nothing, gamification is a positive thing
+            events.add(new FailTestEvent(level.getComplexity(), level.getTotalQuestions()));
         }
         return events;
     }

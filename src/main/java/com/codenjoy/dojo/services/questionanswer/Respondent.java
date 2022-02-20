@@ -46,5 +46,7 @@ public interface Respondent {
     /**
      * Очистить признаки игрока, такие как wantsSkipLevel и wantsNextLevel.
      */
-    void clearFlags();
+    default void clearFlags() {
+        // do nothing
+    }
 }

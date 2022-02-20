@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.services.questionanswer.levels;
+package com.codenjoy.dojo.services.questionanswer.event;
 
 /*-
  * #%L
@@ -23,14 +23,15 @@ package com.codenjoy.dojo.services.questionanswer.levels;
  */
 
 
-import static com.codenjoy.dojo.client.Command.START_NEXT_LEVEL;
+public class FailTestEvent extends PassTestEvent {
 
-public class WaitLevel extends NullLevel implements Level {
-    
+    public FailTestEvent(int complexity, int testCount) {
+        super(complexity, testCount);
+    }
+
     @Override
-    public String description() {
-        return "Wait for next level. Please send " +
-                "'message(\'" + START_NEXT_LEVEL +
-                "\')' command.";
+    public String toString() {
+        return super.toString()
+                .replace("Pass", "Fail");
     }
 }
