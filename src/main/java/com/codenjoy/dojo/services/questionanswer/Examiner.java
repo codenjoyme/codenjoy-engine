@@ -31,13 +31,13 @@ import org.json.JSONArray;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Processor {
+public class Examiner {
 
     private List<QuestionAnswers> history;
     private LevelsPool level;
     private Timer timer;
 
-    public Processor(LevelsPool level) {
+    public Examiner(LevelsPool level) {
         this.level = level;
         timer = new Timer();
         clear();
