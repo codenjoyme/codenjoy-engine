@@ -40,7 +40,11 @@ import java.util.function.Function;
  */
 public interface GameField<P extends GamePlayer, H extends PlayerHero> extends Tickable {
 
-    BoardReader<P> reader();
+    default BoardReader<P> reader() {
+        // do nothing, this is text game
+        // or custom Printer implemented
+        return null;
+    }
 
     void newGame(P player);
 
