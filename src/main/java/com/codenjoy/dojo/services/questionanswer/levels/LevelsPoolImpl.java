@@ -87,6 +87,14 @@ public class LevelsPoolImpl implements LevelsPool {
         return level instanceof WaitLevel; 
     }
 
+    @Override
+    public String getNextQuestion() {
+        List<String> questions = getQuestions();
+        return questions.isEmpty() ?
+                null :
+                questions.get(questions.size() - 1);
+    }
+
     private void firstQuestion() {
         questionIndex = 0;
     }

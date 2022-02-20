@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class QuestionAnswers {
+
     private List<QuestionAnswer> questionAnswers = new LinkedList<>();
 
     public void add(QuestionAnswer questionAnswer) {
