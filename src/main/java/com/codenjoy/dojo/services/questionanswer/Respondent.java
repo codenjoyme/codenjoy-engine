@@ -24,12 +24,27 @@ package com.codenjoy.dojo.services.questionanswer;
 
 public interface Respondent {
 
+    /**
+     * @return Игрок должен вернуть свои ответы на вопросы через этот метод.
+     */
     String popAnswers();
 
-    boolean wantsSkipLevel();
+    /**
+     * @return true - если игрок хочет пропустить этот тест.
+     */
+    default boolean wantsSkipLevel() {
+        return false;
+    }
 
-    boolean wantsNextLevel();
+    /**
+     * @return true - если игрок хочет начать новый тест.
+     */
+    default boolean wantsNextLevel() {
+        return false;
+    }
 
+    /**
+     * Очистить признаки игрока, такие как wantsSkipLevel и wantsNextLevel.
+     */
     void clearFlags();
-
 }
