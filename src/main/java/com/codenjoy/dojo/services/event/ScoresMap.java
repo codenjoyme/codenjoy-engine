@@ -63,9 +63,13 @@ public class ScoresMap<V> {
         }
         return null;
     }
-    
+
     protected void put(Object key, Function<V, Integer> value) {
         map.put(key, value);
+    }
+
+    protected <V2> void putAs(Class<V2> key, Function<V2, Integer> value) {
+        put(key, (Function) value);
     }
 
     public SettingsReader<SettingsReader> settings() {

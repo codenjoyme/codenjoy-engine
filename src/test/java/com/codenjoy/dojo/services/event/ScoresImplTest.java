@@ -205,19 +205,19 @@ public class ScoresImplTest {
     public void shouldProcess_objectEvent_byClass() {
         // given
         PlayerScores scores = new ScoresImpl<>(100, new Calculator<>(new ScoresMap<>(settings){{
-            put(ObjectEvent1.class,
-                    event -> {
+            putAs(ObjectEvent1.class,
+                    (ObjectEvent1 event) -> {
                         assertEquals(ObjectEvent1.class, event.getClass());
                         assertEquals("ObjectEvent1(value=11)",
-                                ((ObjectEvent1)event).toString());
+                                event.toString());
                         return 1;
                     });
 
-            put(ObjectEvent2.class,
-                    event -> {
+            putAs(ObjectEvent2.class,
+                    (ObjectEvent2 event) -> {
                         assertEquals(ObjectEvent2.class, event.getClass());
                         assertEquals("ObjectEvent2(value1=22, value2=true)",
-                                ((ObjectEvent2)event).toString());
+                                event.toString());
                         return 2;
                     });
         }}));
