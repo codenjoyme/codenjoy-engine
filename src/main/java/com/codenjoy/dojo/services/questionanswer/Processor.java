@@ -22,6 +22,10 @@ package com.codenjoy.dojo.services.questionanswer;
  * #L%
  */
 
+import com.codenjoy.dojo.services.questionanswer.event.NextAlgorithmEvent;
+import com.codenjoy.dojo.services.questionanswer.event.PassTestEvent;
+import com.codenjoy.dojo.services.questionanswer.levels.LevelsPool;
+import com.codenjoy.dojo.services.time.Timer;
 import org.json.JSONArray;
 
 import java.util.LinkedList;
@@ -30,13 +34,18 @@ import java.util.List;
 public class Processor {
 
     private List<QuestionAnswers> history;
+    private LevelsPool level;
+    private Timer timer;
 
-    public Processor() {
-        this.history = new LinkedList<>();
+    public Processor(LevelsPool level) {
+        this.level = level;
+        timer = new Timer();
+        clear();
     }
 
     public void clear() {
-        history.clear();
+        this.history = new LinkedList<>();
+        level.firstLevel();
     }
 
     public List<QuestionAnswer> getLastHistory() {
@@ -103,5 +112,55 @@ public class Processor {
             }
         }
         return isWin;
+    }
+
+    public List<Object> ask(Respondent hero) {
+        List<Object> events = new LinkedList<>();
+
+        if (hero.wantsSkipLevel()) {
+            hero.clearFlags();
+            level.waitNext();
+            return events;
+        }
+
+        if (hero.wantsNextLevel()) {
+            hero.clearFlags();
+            if (level.isWaitNext()) {
+                timer.start();
+                level.nextLevel();
+                logNextAttempt();
+            }
+            return events;
+        }
+
+        String answersString = hero.popAnswers();
+        if (answersString == null) {
+            return events;
+        }
+
+        List<String> actualAnswers = nextAnswer(answersString);
+
+        if (level.isLastQuestion()) {
+            return events;
+        }
+
+        List<String> questions = level.getQuestions();
+        List<String> expectedAnswers = level.getAnswers();
+
+        boolean isWin = checkAnswers(questions, expectedAnswers, actualAnswers);
+
+        if (isWin) {
+            events.add(new PassTestEvent(level.getComplexity(), level.getTotalQuestions()));
+            boolean levelFinished = level.isLevelFinished();
+            if (levelFinished) {
+                events.add(new NextAlgorithmEvent(level.getComplexity(), timer.end()));
+                level.waitNext();
+            } else {
+                level.nextQuestion();
+            }
+        } else {
+            // do nothing, gamification is a positive thing
+        }
+        return events;
     }
 }
