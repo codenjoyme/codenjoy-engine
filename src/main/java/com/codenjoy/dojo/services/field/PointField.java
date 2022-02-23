@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -134,10 +135,40 @@ public class PointField {
     @PerformanceOptimized
     public void add(Point pt) {
         with(pt, map -> map.get(pt.getClass()).add(pt));
-        pt.beforeChange(from ->
-                with(from, map -> map.removeAllExact(pt.getClass(), from)));
-        pt.onChange((from, to) ->
-                with(to, map -> map.get(pt.getClass()).add(to)));
+        pt.beforeChange(new OnBeforeChange(this, pt));
+        pt.onChange(new OnChange(this, pt));
+    }
+
+    public static class OnBeforeChange implements Consumer<Point> {
+
+        private PointField field;
+        private Point key;
+
+        public OnBeforeChange(PointField field, Point key) {
+            this.field = field;
+            this.key = key;
+        }
+
+        @Override
+        public void accept(Point from) {
+            field.with(from, map -> map.removeAllExact(key.getClass(), from));
+        }
+    }
+
+    public static class OnChange implements BiConsumer<Point, Point> {
+
+        private PointField field;
+        private Point key;
+
+        public OnChange(PointField field, Point key) {
+            this.field = field;
+            this.key = key;
+        }
+
+        @Override
+        public void accept(Point from, Point to) {
+            field.with(key, map -> map.get(key.getClass()).add(to));
+        }
     }
 
     public Multimap<Class<? extends Point>, Point> get(Point pt) {
