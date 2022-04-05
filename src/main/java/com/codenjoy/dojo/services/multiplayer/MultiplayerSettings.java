@@ -60,8 +60,12 @@ public interface MultiplayerSettings<T extends SettingsReader> extends SettingsR
         return Arrays.asList(Keys.values());
     }
 
+    default void initMultiplayer(int defaultOption) {
+        initMultiplayer(playersPerRooms(), Mode.keys(), defaultOption);
+    }
+
     default void initMultiplayer() {
-        initMultiplayer(playersPerRooms(), Mode.keys());
+        initMultiplayer(0);
     }
 
     private Integer playersPerRooms() {
@@ -69,8 +73,8 @@ public interface MultiplayerSettings<T extends SettingsReader> extends SettingsR
     }
 
     // TODO убрать после того как icancode не будет как все
-    default void initMultiplayer(int roomSize, List<String> options) {
-        options(GAME_MODE, options, options.get(0));
+    default void initMultiplayer(int roomSize, List<String> options, int defaultOption) {
+        options(GAME_MODE, options, options.get(defaultOption));
 
         // TODO два связанных параметра, надо как-то развязать их
         Parameter<Integer> parameter = add(ROOM_SIZE, roomSize);

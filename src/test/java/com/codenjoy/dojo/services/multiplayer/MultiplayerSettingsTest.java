@@ -203,7 +203,7 @@ public class MultiplayerSettingsTest {
                 TOURNAMENT.key(),
                 TRIPLE.key(),
                 QUADRO.key()
-        ));
+        ), 0);
 
         // when
         settings.mode().select(0);
