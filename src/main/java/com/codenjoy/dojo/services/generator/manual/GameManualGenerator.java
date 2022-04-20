@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.utils.generator;
+package com.codenjoy.dojo.services.generator.manual;
 
 /*-
  * #%L
@@ -22,36 +22,40 @@ package com.codenjoy.dojo.utils.generator;
  * #L%
  */
 
-import com.codenjoy.dojo.utils.PrintUtils;
-import com.google.common.base.Charsets;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codenjoy.dojo.utils.PrintUtils.Color.ERROR;
-import static com.codenjoy.dojo.utils.PrintUtils.Color.WARNING;
+import static com.codenjoy.dojo.utils.PrintUtils.Color.*;
+import static com.codenjoy.dojo.utils.PrintUtils.printf;
+import static org.apache.commons.io.FileUtils.*;
 
-public abstract class AbstractGameManualGenerator {
+public abstract class GameManualGenerator {
     private static final String FILE_SEPARATOR = "\n\n";
     private static final String TARGET_FILE_TEMPLATE = "{$path}{$manualType}-{$language}.md";
+    private static final String $_GAME = "{$game}";
+    private static final String $_GLOBAL = "{$global}";
+    private static final String $_LANGUAGE = "{$language}";
+    private static final String $_PATH = "{$path}";
+    private static final String $_MANUAL_TYPE = "{$manualType}";
+    private static final String SLASH = "/";
 
     private final String game;
     private final String language;
-    private final String base;
+    private final String basePath;
     private final String globalSources;
     private final String gameSources;
 
-
-    public AbstractGameManualGenerator(String game, String language, String base, String globalSources, String gameSources) {
+    public GameManualGenerator(String game, String language, String basePath, String globalSources, String gameSources) {
         this.game = game;
         this.language = language;
-        this.base = base;
+        this.basePath = basePath;
         this.globalSources = globalSources;
         this.gameSources = gameSources;
     }
@@ -69,14 +73,16 @@ public abstract class AbstractGameManualGenerator {
 
     protected abstract String getManualType();
 
-    public void generate() {
-        String globalPath = makeAbsolutePath(base, globalSources);
-        String gamePath = makeAbsolutePath(base, gameSources.replace("{$game}", game));
-        String targetFile = getTargetFile(gamePath);
+    protected String getTargetFileTemplate() {
+        return TARGET_FILE_TEMPLATE;
+    }
 
-        List<String> preparedManualsPartsPath = getPreparedManualsPartsPath(getManualParts(), globalPath, gamePath);
+    public void generate() {
+        String targetFile = getTargetFile();
+
+        List<String> preparedManualsPartsPath = getPreparedManualsPartsPath();
         if (!isResourcesPresent(preparedManualsPartsPath)) {
-            PrintUtils.printf(
+            printf(
                     "[ERROR] Can't find resources for manualType{%s}, game{%s}, language{%s}\n"
                     , ERROR,
                     getManualType(),
@@ -88,7 +94,7 @@ public abstract class AbstractGameManualGenerator {
         save(targetFile, data);
     }
 
-    private String build(List<String> preparedManualsPartsPath) {
+    private final String build(List<String> preparedManualsPartsPath) {
         StringBuilder data = new StringBuilder();
         for (String path : preparedManualsPartsPath) {
             data.append(load(path));
@@ -101,7 +107,7 @@ public abstract class AbstractGameManualGenerator {
         boolean result = true;
         for (String filePath : preparedManualsPartsPath) {
             if (!Files.isRegularFile(Path.of(filePath))) {
-                PrintUtils.printf("File is missing: %s\n", WARNING, filePath);
+                printf("File is missing: %s\n", WARNING, filePath);
                 result = false;
             }
         }
@@ -109,31 +115,39 @@ public abstract class AbstractGameManualGenerator {
     }
 
     private String makeAbsolutePath(String base, String additional) {
-        return new File(base + additional).getAbsolutePath() + "\\";
+        return new File(base + SLASH + additional).getAbsolutePath() + SLASH;
     }
 
-    private List<String> getPreparedManualsPartsPath(List<String> rawList, String globalPath, String gamePath) {
-        return rawList.stream()
+    private final String makePathToGameFolder() {
+        return makeAbsolutePath(basePath, gameSources.replace($_GAME, game));
+    }
+
+    private final String makePathToGlobalFolder() {
+        return makeAbsolutePath(basePath, globalSources);
+    }
+
+    private final List<String> getPreparedManualsPartsPath() {
+        return getManualParts().stream()
                 .map(
-                        file -> file
-                                .replace("{$global}", globalPath)
-                                .replace("{$game}", gamePath)
-                                .replace("{$language}", language + "\\")
+                        path -> path
+                                .replace($_GLOBAL, makePathToGlobalFolder())
+                                .replace($_GAME, makePathToGameFolder())
+                                .replace($_LANGUAGE, language + SLASH)
                 )
                 .collect(Collectors.toList());
     }
 
-    protected String getTargetFile(String path) {
-        return TARGET_FILE_TEMPLATE
-                .replace("{$path}", path)
-                .replace("{$language}", language)
-                .replace("{$manualType}", getManualType());
+    private String getTargetFile() {
+        return getTargetFileTemplate()
+                .replace($_PATH, makePathToGameFolder())
+                .replace($_LANGUAGE, language)
+                .replace($_MANUAL_TYPE, getManualType());
     }
 
     private String load(String path) {
         String fileData;
         try {
-            fileData = Files.readString(Path.of(path), Charsets.UTF_8);
+            fileData = readFileToString(getFile(path), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
             fileData = StringUtils.EMPTY;
@@ -143,7 +157,11 @@ public abstract class AbstractGameManualGenerator {
 
     private void save(String path, String data) {
         try {
-            Files.writeString(Path.of(path), data, StandardOpenOption.CREATE);
+            write(getFile(path), data, StandardCharsets.UTF_8);
+            printf("[INFO] Manual for [%s] type:[%s] saved:[%s]",
+                    INFO,
+                    game, getManualType(), path
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
