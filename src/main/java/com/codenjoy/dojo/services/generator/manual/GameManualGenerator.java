@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.generator.manual;
  * #L%
  */
 
+import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -91,14 +92,21 @@ public abstract class GameManualGenerator {
             return;
         }
         String data = build(preparedManualsPartsPath);
+        // TODO: 4/27/2022 добавить генерацию инструкции как и откуда взять этот мануал
         save(targetFile, data);
     }
 
     private final String build(List<String> preparedManualsPartsPath) {
         StringBuilder data = new StringBuilder();
+        // TODO: 4/27/2022 добавить в начало файла информацию о том, что это автоматически генерируемый файл
+        //                 и ссылку на инструкцию
         for (String path : preparedManualsPartsPath) {
-            data.append(load(path));
-            data.append(FILE_SEPARATOR);
+            String partOfData = load(path);
+            if (!Strings.isNullOrEmpty(partOfData)) {
+                partOfData = partOfData.replace($_GAME, game);
+                data.append(partOfData);
+                data.append(FILE_SEPARATOR);
+            }
         }
         return data.toString();
     }

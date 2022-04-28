@@ -59,7 +59,7 @@ public class GameManualGeneratorTest {
     private static final String PREPARED_FILE_PATH_PART3 = "target/generated-test-sources/manual-generator/games/molly/part3.md";
     private static final String PREPARED_FILE_PATH_PART4 = "target/generated-test-sources/manual-generator/global/en/part4.md";
 
-    private static final String PREPARED_DATA_PART1 = "Part1 file from Global Path";
+    private static final String PREPARED_DATA_PART1 = "Part1 file from Global Path\nTest change game name: {$game}";
     private static final String PREPARED_DATA_PART2 = "Part2 file from Game Path, Language directory";
     private static final String PREPARED_DATA_PART3 = "Part3 file from Game Path";
     private static final String PREPARED_DATA_PART4 = "Part4 file from Global Path, Language directory";
@@ -117,6 +117,7 @@ public class GameManualGeneratorTest {
         ));
         assertTrue(Files.isRegularFile(Path.of(getTargetFilePath())));
         assertEquals("Part1 file from Global Path\n" +
+                        "Test change game name: molly\n" +
                         "\n" +
                         "Part2 file from Game Path, Language directory\n" +
                         "\n" +
