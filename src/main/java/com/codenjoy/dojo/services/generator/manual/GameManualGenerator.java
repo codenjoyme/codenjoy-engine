@@ -170,7 +170,7 @@ public abstract class GameManualGenerator {
     private void save(String path, String data) {
         try {
             write(getFile(path), data, StandardCharsets.UTF_8);
-            printf("[INFO] Manual for [%s] type:[%s] saved:[%s]",
+            printf("[INFO] Manual for [%s] type:[%s] saved:[%s]\n",
                     INFO,
                     game, getManualType(), path
             );
