@@ -45,7 +45,7 @@ public class CodenjoyManual extends GameManualGenerator {
                 "{$global}{$language}02-codenjoy-intro.md",
                 "{$game}{$language}03-general-game-about.md",
                 "{$global}{$language}04-codenjoy-how-connect.md",
-                "{$global}{$language}05-general-message-format.md",
+                "{$game}{$language}05-general-message-format.md",
                 "{$game}{$language}06-general-field.md",
                 "{$game}elements.md",
                 "{$game}{$language}08-general-what-to-do.md",
