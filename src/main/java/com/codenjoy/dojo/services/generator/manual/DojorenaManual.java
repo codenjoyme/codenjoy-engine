@@ -41,19 +41,18 @@ public class DojorenaManual extends GameManualGenerator {
 
     @Override
     protected List<String> getManualParts() {
-        return Arrays.asList("{$global}01-general-header.md",
-                "{$game}{$language}02-dojorena-intro.md",
-                "{$game}{$language}03-general-game-about.md",
-                "{$global}{$language}04-dojorena-how-connect.md",
-                "{$game}{$language}05-general-message-format.md",
-                "{$game}{$language}06-general-field.md",
-                "{$game}elements.md",
-                "{$game}{$language}08-general-what-to-do.md",
-                "{$global}{$language}09-general-ask-sensei.md",
-                "{$game}{$language}10-general-hints.md",
-                "{$game}{$language}11-general-client-and-api.md",
-                "{$game}{$language}12-general-faq.md",
-                "{$global}{$language}13-general-how-to-host.md"
+        return Arrays.asList("header.md",
+                "dojorena_intro.md",
+                "game-about.md",
+                "dojorena_how-connect.md",
+                "message-format.md",
+                "field.md",
+                "elements.md",
+                "what-to-do.md",
+                "ask-sensei.md",
+                "client-and-api.md",
+                "faq.md",
+                "how-to-host.md"
                 );
     }
 
