@@ -30,8 +30,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.utils.PrintUtils.Color.*;
 import static com.codenjoy.dojo.utils.PrintUtils.printf;
@@ -64,12 +65,12 @@ public abstract class GameManualGenerator {
 
     /*
         Перечень и порядок файлов, которые участвуют в сборке мануала.
-        Файлы могут быть глобальны для всех игр либо уникальные для каждой.
-        Варианты имени файла:
-        {$global}{$language}filename.ext
-        {$global}filename.ext
-        {$game}{$language}filename.ext
-        {$game}filename.ext
+        Список должен содержать только имя файла без всяких дополнительных тегов.
+        Порядок работы с файлом такой, мы его ищем в:
+        1. в директории с игрой, с привязкой к языку
+        2. в директории с игрой, но без привязки к языку
+        3. в глобальной папке с привязкой к языку
+        4. в глобальной папке, без привязки к языку.
      */
     protected abstract List<String> getManualParts();
 
@@ -82,8 +83,9 @@ public abstract class GameManualGenerator {
     public void generate() {
         String targetFile = getTargetFile();
 
-        List<String> preparedManualsPartsPath = getPreparedManualsPartsPath();
-        if (!isResourcesPresent(preparedManualsPartsPath)) {
+        List<String> preparedManualPartPaths = getPreparedManualPartPaths();
+
+        if (preparedManualPartPaths.size() != getManualParts().size()) {
             printf(
                     "[ERROR] Can't find resources for manualType{%s}, game{%s}, language{%s}\n"
                     , ERROR,
@@ -92,15 +94,56 @@ public abstract class GameManualGenerator {
                     language);
             return;
         }
-        String data = build(preparedManualsPartsPath);
-        // TODO: 4/27/2022 добавить генерацию инструкции как и откуда взять этот мануал
+        String data = build(preparedManualPartPaths);
         save(targetFile, data);
     }
 
-    private final String build(List<String> preparedManualsPartsPath) {
+    private List<String> getPreparedManualPartPaths() {
+        List<String> preparedManualsPartsPath = new ArrayList<>();
+        for (String fileName : getManualParts()) {
+            printf("Trying to find the file: %s\n", TEXT, fileName);
+            String found = null;
+            for (String file : getFilePathVariants(fileName)) {
+                String pathToFile = createPathToFile(file);
+                if (isFilePresent(pathToFile)) {
+                    preparedManualsPartsPath.add(pathToFile);
+                    found = pathToFile;
+                    printf(
+                            "Found the file: %s\n",
+                            TEXT,
+                            pathToFile
+                    );
+                    break;
+                } else {
+                    printf(
+                            "File not found: %s\n",
+                            TEXT,
+                            pathToFile
+                    );
+                }
+            }
+            if (StringUtils.isNoneEmpty(found)) {
+                printf("File accepted: %s\n", WARNING, found);
+            } else {
+                printf("File is missing: %s\n", WARNING, fileName);
+            }
+        }
+        return preparedManualsPartsPath;
+    }
+
+    private List<String> getFilePathVariants(String fileName) {
+        return Arrays.asList(
+                $_GAME + $_LANGUAGE + fileName,
+                $_GAME + fileName,
+                $_GLOBAL + $_LANGUAGE + fileName,
+                $_GLOBAL + fileName
+        );
+    }
+
+    private final String build(List<String> preparedManualPartPaths) {
         StringBuilder data = new StringBuilder();
         data.append(notificationText());
-        for (String path : preparedManualsPartsPath) {
+        for (String path : preparedManualPartPaths) {
             String partOfData = load(path);
             if (!Strings.isNullOrEmpty(partOfData)) {
                 partOfData = partOfData.replace($_GAME, game);
@@ -115,15 +158,8 @@ public abstract class GameManualGenerator {
         return NOT_EDIT_NOTICE;
     }
 
-    private boolean isResourcesPresent(List<String> preparedManualsPartsPath) {
-        boolean result = true;
-        for (String filePath : preparedManualsPartsPath) {
-            if (!Files.isRegularFile(Path.of(filePath))) {
-                printf("File is missing: %s\n", WARNING, filePath);
-                result = false;
-            }
-        }
-        return result;
+    private boolean isFilePresent(String filePath) {
+        return Files.isRegularFile(Path.of(filePath));
     }
 
     private String makeAbsolutePath(String base, String additional) {
@@ -138,15 +174,12 @@ public abstract class GameManualGenerator {
         return makeAbsolutePath(basePath, globalSources);
     }
 
-    private final List<String> getPreparedManualsPartsPath() {
-        return getManualParts().stream()
-                .map(
-                        path -> path
-                                .replace($_GLOBAL, makePathToGlobalFolder())
-                                .replace($_GAME, makePathToGameFolder())
-                                .replace($_LANGUAGE, language + SLASH)
-                )
-                .collect(Collectors.toList());
+    private String createPathToFile(String fileMask) {
+        return fileMask
+                .replace($_GLOBAL, makePathToGlobalFolder())
+                .replace($_GAME, makePathToGameFolder())
+                .replace($_LANGUAGE, language + SLASH)
+                ;
     }
 
     private String getTargetFile() {
@@ -170,7 +203,7 @@ public abstract class GameManualGenerator {
     private void save(String path, String data) {
         try {
             write(getFile(path), data, StandardCharsets.UTF_8);
-            printf("[INFO] Manual for [%s] type:[%s] saved:[%s]\n",
+            printf("Manual for [%s] type:[%s] saved:[%s]\n",
                     INFO,
                     game, getManualType(), path
             );

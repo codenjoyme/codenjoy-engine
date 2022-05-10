@@ -45,10 +45,10 @@ public class GameManualGeneratorTest {
     private static final String TEST_GAME = "molly";
     private static final String TEST_MANUAL_TYPE = "codenjoy";
     private static final List<String> TEST_MANUAL_PARTS = ImmutableList.of(
-            "{$global}part1.md",
-            "{$game}{$language}part2.md",
-            "{$game}part3.md",
-            "{$global}{$language}part4.md"
+            "part1.md",
+            "part2.md",
+            "part3.md",
+            "part4.md"
     );
     private static final String TEST_BASE = "target/generated-test-sources/manual-generator";
     private static final String TEST_RELATIVE_PATH_TO_GLOBAL_SOURCES = "global/";
@@ -112,7 +112,7 @@ public class GameManualGeneratorTest {
 
         // then generated manual should be present in source folder
         assertTrue(baos.toString().contains(
-                String.format("[INFO] Manual for [%s] type:[%s] saved",
+                String.format("Manual for [%s] type:[%s] saved",
                         TEST_GAME, TEST_MANUAL_TYPE)
         ));
         assertTrue(Files.isRegularFile(Path.of(getTargetFilePath())));
@@ -138,14 +138,17 @@ public class GameManualGeneratorTest {
         // when we generate complete manual
         generator.generate();
 
-        // then target file should not be created
-        //      and error message printed at console
+        // then
+        //      target file should not be created
+        //      error message printed at console
+        //      information about missing file should be printed in console
+        assertFalse(Files.isRegularFile(Path.of(getTargetFilePath())));
         assertTrue(baos.toString().contains(
                 String.format(
                         "[ERROR] Can't find resources for manualType{%s}, game{%s}, language{%s}",
                         TEST_MANUAL_TYPE, TEST_GAME, TEST_LANGUAGE)
         ));
-        assertFalse(Files.isRegularFile(Path.of(getTargetFilePath())));
+        assertTrue(baos.toString().contains("File is missing: part4.md"));
     }
 
     private void generateCorrectTestFiles() {
