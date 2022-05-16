@@ -47,6 +47,7 @@ public class CodenjoyManual extends GameManualGenerator {
                 "codenjoy_how-connect.md",
                 "message-format.md",
                 "field.md",
+                "codenjoy-board-link.md",
                 "elements.md",
                 "what-to-do.md",
                 "ask-sensei.md",

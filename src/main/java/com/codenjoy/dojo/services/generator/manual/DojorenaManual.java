@@ -47,6 +47,7 @@ public class DojorenaManual extends GameManualGenerator {
                 "dojorena_how-connect.md",
                 "message-format.md",
                 "field.md",
+                "dojorena-board-link.md",
                 "elements.md",
                 "what-to-do.md",
                 "ask-sensei.md",
