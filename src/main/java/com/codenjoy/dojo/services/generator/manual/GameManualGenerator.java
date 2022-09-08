@@ -41,6 +41,9 @@ public abstract class GameManualGenerator {
     // используется для тестирования, этим флагом отключаем реальное сохранение файлов
     public static boolean READONLY = false;
 
+    private static final String GLOBAL_SOURCES = "engine/src/main/resources/manuals/";
+    private static final String GAME_SOURCES = "{$game}/src/main/webapp/resources/{$game}/help/";
+
     private static final String FILE_SEPARATOR = "\n\n";
     private static final String TARGET_FILE = "{$path}{$manualType}-{$language}.md";
     private static final String GAME = "{$game}";
@@ -56,6 +59,10 @@ public abstract class GameManualGenerator {
     private final String basePath;
     private final String globalSources;
     private final String gameSources;
+
+    public GameManualGenerator(String game, String language, String basePath) {
+        this(game, language, basePath, GLOBAL_SOURCES, GAME_SOURCES);
+    }
 
     public GameManualGenerator(String game, String language, String basePath, String globalSources, String gameSources) {
         this.game = game;

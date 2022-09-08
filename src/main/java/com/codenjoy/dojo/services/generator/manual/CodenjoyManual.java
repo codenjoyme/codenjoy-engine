@@ -27,16 +27,8 @@ import java.util.List;
 
 public class CodenjoyManual extends GameManualGenerator {
 
-    private static final String OUTPUT_FILE = "codenjoy-manual";
-    private static final String GLOBAL_SOURCES = "engine/src/main/resources/manuals/";
-    private static final String GAME_SOURCES = "{$game}/src/main/webapp/resources/{$game}/help/";
-
     public CodenjoyManual(String game, String language, String basePath) {
-        this(game, language, basePath, GLOBAL_SOURCES, GAME_SOURCES);
-    }
-
-    public CodenjoyManual(String game, String language, String basePath, String globalSources, String gameSources) {
-        super(game, language, basePath, globalSources, gameSources);
+        super(game, language, basePath);
     }
 
     @Override
@@ -60,6 +52,6 @@ public class CodenjoyManual extends GameManualGenerator {
 
     @Override
     protected String getManualType() {
-        return OUTPUT_FILE;
+        return "codenjoy-manual";
     }
 }
