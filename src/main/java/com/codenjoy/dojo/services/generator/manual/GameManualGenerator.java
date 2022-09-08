@@ -25,11 +25,8 @@ package com.codenjoy.dojo.services.generator.manual;
 import com.codenjoy.dojo.utils.PrintUtils;
 import com.codenjoy.dojo.utils.SmokeUtils;
 import com.google.common.base.Strings;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -90,43 +87,48 @@ public abstract class GameManualGenerator {
     }
 
     public void generate() {
-        String targetFile = getTargetFile();
+        String target = getTargetFile();
 
-        List<String> preparedManualPartPaths = getPreparedManualPartPaths();
+        List<String> paths = getPreparedManualPartPaths();
 
-        if (preparedManualPartPaths.size() != getManualParts().size()) {
+        if (paths.size() != getManualParts().size()) {
             PrintUtils.printf("[ERROR] Can't find resources for manualType{%s}, " +
                             "game{%s}, language{%s}",
                     ERROR, getManualType(), game, language);
             return;
         }
-        String data = build(preparedManualPartPaths);
-        save(targetFile, data);
+        String data = build(paths);
+        save(target, data);
     }
 
     private List<String> getPreparedManualPartPaths() {
-        List<String> preparedManualsPartsPath = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         for (String fileName : getManualParts()) {
             PrintUtils.printf("Trying to find the file: %s", TEXT, fileName);
-            String found = null;
-            for (String file : getFilePathVariants(fileName)) {
-                String pathToFile = createPathToFile(file);
-                if (isFilePresent(pathToFile)) {
-                    preparedManualsPartsPath.add(pathToFile);
-                    found = pathToFile;
-                    PrintUtils.printf("Found the file: %s", TEXT, pathToFile);
-                    break;
-                } else {
-                    PrintUtils.printf("File not found: %s", TEXT, pathToFile);
-                }
-            }
-            if (StringUtils.isNoneEmpty(found)) {
+
+            String found = lookingFor(fileName);
+            if (found != null) {
+                result.add(found);
+
                 PrintUtils.printf("File accepted: %s", INFO, found);
             } else {
                 PrintUtils.printf("File is missing: %s", WARNING, fileName);
             }
         }
-        return preparedManualsPartsPath;
+        return result;
+    }
+
+    private String lookingFor(String fileName) {
+        for (String fileMask : getFilePathVariants(fileName)) {
+            String path = createPathToFile(fileMask);
+            if (new File(path).exists()) {
+                PrintUtils.printf("Found the file: %s", TEXT, path);
+                return path;
+            }
+
+            PrintUtils.printf("File not found: %s", TEXT, path);
+        }
+        return null;
     }
 
     private List<String> getFilePathVariants(String fileName) {
@@ -137,37 +139,35 @@ public abstract class GameManualGenerator {
                 GLOBAL + fileName);
     }
 
-    private final String build(List<String> preparedManualPartPaths) {
-        StringBuilder data = new StringBuilder();
-        data.append(notificationText());
-        for (String path : preparedManualPartPaths) {
+    private String build(List<String> paths) {
+        StringBuilder result = new StringBuilder();
+        result.append(notificationText());
+        for (String path : paths) {
             String part = load(path);
-            if (!Strings.isNullOrEmpty(part)) {
-                part = part.replace(GAME, game);
-                data.append(part);
-                data.append(FILE_SEPARATOR);
+            if (Strings.isNullOrEmpty(part)) {
+                continue;
             }
+
+            part = part.replace(GAME, game);
+            result.append(part);
+            result.append(FILE_SEPARATOR);
         }
-        return data.toString();
+        return result.toString();
     }
 
     private String notificationText() {
         return NOT_EDIT_NOTICE;
     }
 
-    private boolean isFilePresent(String filePath) {
-        return Files.isRegularFile(Path.of(filePath));
-    }
-
     private String makeAbsolutePath(String base, String additional) {
         return new File(base + SLASH + additional).getAbsolutePath() + SLASH;
     }
 
-    private final String makePathToGameFolder() {
+    private String makePathToGameFolder() {
         return makeAbsolutePath(basePath, gameSources.replace(GAME, game));
     }
 
-    private final String makePathToGlobalFolder() {
+    private String makePathToGlobalFolder() {
         return makeAbsolutePath(basePath, globalSources);
     }
 
