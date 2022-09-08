@@ -43,12 +43,12 @@ public class DojorenaManual extends GameManualGenerator {
     protected List<String> getManualParts() {
         return Arrays.asList(
                 "header.md",
-                "dojorena_intro.md",
+                "intro.dojorena.md",
                 "game-about.md",
-                "dojorena_how-connect.md",
+                "how-connect.dojorena.md",
                 "message-format.md",
                 "field.md",
-                "dojorena-board-link.md",
+                "board-link.dojorena.md",
                 "elements.md",
                 "what-to-do.md",
                 "ask-sensei.md",

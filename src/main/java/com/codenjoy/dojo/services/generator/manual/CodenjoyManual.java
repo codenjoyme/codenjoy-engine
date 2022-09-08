@@ -43,12 +43,12 @@ public class CodenjoyManual extends GameManualGenerator {
     protected List<String> getManualParts() {
         return Arrays.asList(
                 "header.md",
-                "codenjoy_intro.md",
+                "intro.codenjoy.md",
                 "game-about.md",
-                "codenjoy_how-connect.md",
+                "how-connect.codenjoy.md",
                 "message-format.md",
                 "field.md",
-                "codenjoy-board-link.md",
+                "board-link.codenjoy.md",
                 "elements.md",
                 "what-to-do.md",
                 "ask-sensei.md",
