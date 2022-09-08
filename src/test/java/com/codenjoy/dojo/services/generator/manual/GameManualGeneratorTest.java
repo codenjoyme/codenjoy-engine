@@ -162,6 +162,6 @@ public class GameManualGeneratorTest {
     }
 
     private File generatedManual() {
-        return new File(BASE + "/games/mollymage/codenjoy-en.md");
+        return new File(BASE + "/games/mollymage/codenjoy-manual-en.md");
     }
 }

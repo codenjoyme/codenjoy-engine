@@ -35,12 +35,12 @@ public class CodenjoyManual extends GameManualGenerator {
     protected List<String> getManualParts() {
         return Arrays.asList(
                 "header.md",
-                "intro.codenjoy.md",
+                "intro.{$manualType}.md",
                 "game-about.md",
-                "how-connect.codenjoy.md",
+                "how-connect.{$manualType}.md",
                 "message-format.md",
                 "field.md",
-                "board-link.codenjoy.md",
+                "board-link.{$manualType}.md",
                 "elements.md",
                 "what-to-do.md",
                 "faq.md",
@@ -52,6 +52,6 @@ public class CodenjoyManual extends GameManualGenerator {
 
     @Override
     protected String getManualType() {
-        return "codenjoy-manual";
+        return "codenjoy";
     }
 }

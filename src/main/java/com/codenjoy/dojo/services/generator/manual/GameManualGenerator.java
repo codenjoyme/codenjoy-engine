@@ -104,6 +104,7 @@ public abstract class GameManualGenerator {
     private List<String> getPreparedManualPartPaths() {
         List<String> result = new ArrayList<>();
         for (String fileName : getManualParts()) {
+            fileName = fileName.replace(MANUAL_TYPE, getManualType());
             PrintUtils.printf("Trying to find the file: %s", TEXT, fileName);
 
             String found = lookingFor(fileName);
@@ -182,7 +183,7 @@ public abstract class GameManualGenerator {
         return getTargetFileTemplate()
                 .replace(PATH, makePathToGameFolder())
                 .replace(LANGUAGE, language)
-                .replace(MANUAL_TYPE, getManualType());
+                .replace(MANUAL_TYPE, getManualType() + "-manual");
     }
 
     private String load(String path) {
