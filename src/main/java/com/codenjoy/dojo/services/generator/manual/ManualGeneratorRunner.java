@@ -71,7 +71,7 @@ public class ManualGeneratorRunner {
         }
         if (!new File(base).isAbsolute()) {
             base = new File(base).getAbsoluteFile().getPath();
-            PrintUtils.printf("\t   absolute:'%s'\n",
+            PrintUtils.printf("\t   absolute:'%s'",
                     INFO,
                     base);
         }
@@ -90,7 +90,7 @@ public class ManualGeneratorRunner {
                 "Got from %s:\n" +
                         "\t 'GAMES':   '%s'\n" +
                         "\t 'LOCALES': '%s'\n" +
-                        "\t 'BASE':    '%s'\n",
+                        "\t 'BASE':    '%s'",
                 INFO,
                 source,
                 games,

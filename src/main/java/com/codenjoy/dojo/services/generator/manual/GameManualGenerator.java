@@ -88,7 +88,7 @@ public abstract class GameManualGenerator {
 
         if (preparedManualPartPaths.size() != getManualParts().size()) {
             PrintUtils.printf("[ERROR] Can't find resources for manualType{%s}, " +
-                            "game{%s}, language{%s}\n",
+                            "game{%s}, language{%s}",
                     ERROR, getManualType(), game, language);
             return;
         }
@@ -99,23 +99,23 @@ public abstract class GameManualGenerator {
     private List<String> getPreparedManualPartPaths() {
         List<String> preparedManualsPartsPath = new ArrayList<>();
         for (String fileName : getManualParts()) {
-            PrintUtils.printf("Trying to find the file: %s\n", TEXT, fileName);
+            PrintUtils.printf("Trying to find the file: %s", TEXT, fileName);
             String found = null;
             for (String file : getFilePathVariants(fileName)) {
                 String pathToFile = createPathToFile(file);
                 if (isFilePresent(pathToFile)) {
                     preparedManualsPartsPath.add(pathToFile);
                     found = pathToFile;
-                    PrintUtils.printf("Found the file: %s\n", TEXT, pathToFile);
+                    PrintUtils.printf("Found the file: %s", TEXT, pathToFile);
                     break;
                 } else {
-                    PrintUtils.printf("File not found: %s\n", TEXT, pathToFile);
+                    PrintUtils.printf("File not found: %s", TEXT, pathToFile);
                 }
             }
             if (StringUtils.isNoneEmpty(found)) {
-                PrintUtils.printf("File accepted: %s\n", WARNING, found);
+                PrintUtils.printf("File accepted: %s", INFO, found);
             } else {
-                PrintUtils.printf("File is missing: %s\n", WARNING, fileName);
+                PrintUtils.printf("File is missing: %s", WARNING, fileName);
             }
         }
         return preparedManualsPartsPath;
@@ -126,8 +126,7 @@ public abstract class GameManualGenerator {
                 $_GAME + $_LANGUAGE + fileName,
                 $_GAME + fileName,
                 $_GLOBAL + $_LANGUAGE + fileName,
-                $_GLOBAL + fileName
-        );
+                $_GLOBAL + fileName);
     }
 
     private final String build(List<String> preparedManualPartPaths) {
@@ -184,8 +183,8 @@ public abstract class GameManualGenerator {
 
     private void save(String path, String data) {
         SmokeUtils.saveToFile(new File(path), data);
-        PrintUtils.printf("Manual for [%s] type:[%s] saved:[%s]\n",
-                INFO,
+        PrintUtils.printf("Manual for [%s] type:[%s] saved:[%s]",
+                SUMMARY,
                 game, getManualType(), path);
     }
 }
