@@ -22,25 +22,20 @@ package com.codenjoy.dojo.services.generator.manual;
  * #L%
  */
 
-import com.codenjoy.dojo.services.generator.ElementGenerator;
-import com.codenjoy.dojo.services.printer.CharElement;
+import com.codenjoy.dojo.utils.GamesUtils;
 import com.codenjoy.dojo.utils.PrintUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.reflections.Reflections;
 
 import java.io.File;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import static com.codenjoy.dojo.utils.PrintUtils.Color.INFO;
-import static java.util.stream.Collectors.toList;
 
 public class ManualGeneratorRunner {
 
     private static final String ALL = "all";
-    public static List<String> ALL_GAMES = games();
+    public static List<String> ALL_GAMES = GamesUtils.games();
     public static List<String> ALL_LOCALES = Arrays.asList("en", "ru");
 
     private static String base;
@@ -48,9 +43,9 @@ public class ManualGeneratorRunner {
     private static String locales;
 
     public static void main(String[] args) {
-        System.out.println("+-----------------------------+");
-        System.out.println("| Starting elements generator |");
-        System.out.println("+-----------------------------+");
+        System.out.println("+---------------------------+");
+        System.out.println("| Starting manual generator |");
+        System.out.println("+---------------------------+");
 
         if (args != null && args.length == 3) {
             base = args[0];
@@ -96,21 +91,5 @@ public class ManualGeneratorRunner {
                 games,
                 locales,
                 base);
-    }
-
-    private static List<String> games() {
-        String packageName = "com.codenjoy.dojo.games";
-        return new Reflections(packageName).getSubTypesOf(CharElement.class).stream()
-                .filter(clazz -> !Modifier.isAbstract(clazz.getModifiers()))
-                .filter(clazz -> !Modifier.isInterface(clazz.getModifiers()))
-                .filter(clazz -> Modifier.isPublic(clazz.getModifiers()))
-                .filter(clazz -> !clazz.toString().contains("test"))
-                .map(Class::getCanonicalName)
-                .map(name -> StringUtils.substringBetween(name,
-                        "com.codenjoy.dojo.games.", ".Element"))
-                .filter(Objects::nonNull)
-                .map(ElementGenerator::getCanonicalGame)
-                .sorted()
-                .collect(toList());
     }
 }
