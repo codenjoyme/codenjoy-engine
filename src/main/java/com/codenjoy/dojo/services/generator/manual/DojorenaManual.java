@@ -41,7 +41,8 @@ public class DojorenaManual extends GameManualGenerator {
 
     @Override
     protected List<String> getManualParts() {
-        return Arrays.asList("header.md",
+        return Arrays.asList(
+                "header.md",
                 "dojorena_intro.md",
                 "game-about.md",
                 "dojorena_how-connect.md",
@@ -54,7 +55,7 @@ public class DojorenaManual extends GameManualGenerator {
                 "client-and-api.md",
                 "faq.md",
                 "how-to-host.md"
-                );
+        );
     }
 
     @Override

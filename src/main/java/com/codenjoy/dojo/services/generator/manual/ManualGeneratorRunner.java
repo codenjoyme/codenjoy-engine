@@ -38,15 +38,14 @@ import static com.codenjoy.dojo.utils.PrintUtils.Color.INFO;
 import static java.util.stream.Collectors.toList;
 
 public class ManualGeneratorRunner {
+
     private static final String ALL = "all";
     public static List<String> ALL_GAMES = games();
     public static List<String> ALL_LOCALES = Arrays.asList("en", "ru");
 
-
     private static String base;
     private static String games;
     private static String locales;
-
 
     public static void main(String[] args) {
         System.out.println("+-----------------------------+");
