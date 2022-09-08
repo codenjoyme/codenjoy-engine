@@ -1,1 +1,1 @@
-![](/codenjoy-contest/resources/${game}/help/board.png)
+<img src="/codenjoy-contest/resources/${game}/help/board.png" style="height:100%;" />
