@@ -1,0 +1,71 @@
+package com.codenjoy.dojo.services.generator.manual;
+
+/*-
+ * #%L
+ * Codenjoy - it's a dojo-like platform from developers to developers.
+ * %%
+ * Copyright (C) 2012 - 2022 Codenjoy
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
+ */
+
+import com.codenjoy.dojo.utils.RedirectOutput;
+import com.codenjoy.dojo.utils.SmokeUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TestName;
+
+import java.util.Arrays;
+
+@Slf4j // because logger prints to console some data that we dont need at the assertEqualse phase
+public class ManualGeneratorRunnerTest {
+
+    @Rule
+    public TestName test = new TestName();
+
+    private RedirectOutput output = new RedirectOutput();
+
+    @Test
+    public void shouldGenerate_allGames_andLanguages() {
+        // given
+        output.redirect();
+        GameManualGenerator.READONLY = true;
+
+        // when
+        ManualGeneratorRunner.main(new String[]{
+                "..",
+                "mollymage,namdreab,rawelbbub,sample,sampletext,verland,tetris",
+                "ALL"});
+
+        // then
+        String actual = output.toString();
+        output.rollback();
+        assertEquals(actual);
+    }
+
+    private static void assertSmokeEquals(String actual, Class owner, TestName test) {
+        SmokeUtils.assertSmokeFile(owner.getSimpleName()
+                        + "/" + test.getMethodName() +  ".data",
+                Arrays.asList(actual
+                        .replace("\r\n", "\n")
+                        .split("\n")));
+    }
+
+    private void assertEquals(String actual) {
+        assertSmokeEquals(actual, getClass(), test);
+    }
+}

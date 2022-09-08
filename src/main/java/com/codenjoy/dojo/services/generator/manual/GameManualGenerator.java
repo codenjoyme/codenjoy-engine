@@ -38,6 +38,9 @@ import static com.codenjoy.dojo.utils.PrintUtils.Color.*;
 
 public abstract class GameManualGenerator {
 
+    // используется для тестирования, этим флагом отключаем реальное сохранение файлов
+    public static boolean READONLY = false;
+
     private static final String FILE_SEPARATOR = "\n\n";
     private static final String TARGET_FILE = "{$path}{$manualType}-{$language}.md";
     private static final String GAME = "{$game}";
@@ -180,7 +183,9 @@ public abstract class GameManualGenerator {
     }
 
     private void save(String path, String data) {
-        SmokeUtils.saveToFile(new File(path), data);
+        if (!READONLY) {
+            SmokeUtils.saveToFile(new File(path), data);
+        }
         PrintUtils.printf("Manual for [%s] type:[%s] saved:[%s]",
                 SUMMARY,
                 game, getManualType(), path);

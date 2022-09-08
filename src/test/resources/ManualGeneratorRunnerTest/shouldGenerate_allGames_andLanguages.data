@@ -1,0 +1,1638 @@
++---------------------------+
+| Starting manual generator |
++---------------------------+
+[44;93mGot from Environment:
+	 'GAMES':   'mollymage,namdreab,rawelbbub,sample,sampletext,verland,tetris'
+	 'LOCALES': 'ALL'
+	 'BASE':    '..'[0m
+[44;93m	   absolute:'C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..'[0m
+[44;93mGot from Processed parameters:
+	 'GAMES':   'mollymage,namdreab,rawelbbub,sample,sampletext,verland,tetris'
+	 'LOCALES': 'en,ru'
+	 'BASE':    'C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..'[0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [mollymage] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/codenjoy-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [mollymage] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/dojorena-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [mollymage] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/codenjoy-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [mollymage] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\mollymage\src\main\webapp\resources\mollymage\help/dojorena-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [namdreab] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/codenjoy-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [namdreab] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/dojorena-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [namdreab] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/codenjoy-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [namdreab] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\namdreab\src\main\webapp\resources\namdreab\help/dojorena-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [rawelbbub] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/codenjoy-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [rawelbbub] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/dojorena-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [rawelbbub] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/codenjoy-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [rawelbbub] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\rawelbbub\src\main\webapp\resources\rawelbbub\help/dojorena-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [sample] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/codenjoy-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [sample] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/dojorena-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [sample] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/codenjoy-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [sample] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sample\src\main\webapp\resources\sample\help/dojorena-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [sampletext] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/codenjoy-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [sampletext] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/dojorena-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [sampletext] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/codenjoy-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [sampletext] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\sampletext\src\main\webapp\resources\sampletext\help/dojorena-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [verland] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/codenjoy-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[42;93mManual for [verland] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/dojorena-manual-en.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [verland] type:[codenjoy-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/codenjoy-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/intro.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/game-about.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/field.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/what-to-do.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/client-and-api.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/faq.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[42;93mManual for [verland] type:[dojorena-manual] saved:[C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\verland\src\main\webapp\resources\verland\help/dojorena-manual-ru.md][0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/game-about.md[0m
+[45;93mFile is missing: game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/field.md[0m
+[45;93mFile is missing: field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/what-to-do.md[0m
+[45;93mFile is missing: what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/client-and-api.md[0m
+[45;93mFile is missing: client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/faq.md[0m
+[45;93mFile is missing: faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[41;93m[ERROR] Can't find resources for manualType{codenjoy-manual}, game{tetris}, language{en}[0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/intro.dojorena.md[0m
+[45;93mFile is missing: intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/game-about.md[0m
+[45;93mFile is missing: game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/field.md[0m
+[45;93mFile is missing: field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/what-to-do.md[0m
+[45;93mFile is missing: what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/client-and-api.md[0m
+[45;93mFile is missing: client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/faq.md[0m
+[45;93mFile is missing: faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/en/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/en/how-to-host.md[0m
+[41;93m[ERROR] Can't find resources for manualType{dojorena-manual}, game{tetris}, language{en}[0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/intro.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/intro.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/game-about.md[0m
+[45;93mFile is missing: game-about.md[0m
+[mTrying to find the file: how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/how-connect.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-connect.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/field.md[0m
+[45;93mFile is missing: field.md[0m
+[mTrying to find the file: board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/board-link.codenjoy.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.codenjoy.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.codenjoy.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/what-to-do.md[0m
+[45;93mFile is missing: what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/client-and-api.md[0m
+[45;93mFile is missing: client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/faq.md[0m
+[45;93mFile is missing: faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[41;93m[ERROR] Can't find resources for manualType{codenjoy-manual}, game{tetris}, language{ru}[0m
+[mTrying to find the file: header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/header.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/header.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/header.md[0m
+[mTrying to find the file: intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/intro.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/intro.dojorena.md[0m
+[45;93mFile is missing: intro.dojorena.md[0m
+[mTrying to find the file: game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/game-about.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/game-about.md[0m
+[45;93mFile is missing: game-about.md[0m
+[mTrying to find the file: how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/how-connect.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-connect.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
+[mTrying to find the file: message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/message-format.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/message-format.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/message-format.md[0m
+[mTrying to find the file: field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/field.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/field.md[0m
+[45;93mFile is missing: field.md[0m
+[mTrying to find the file: board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/board-link.dojorena.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/board-link.dojorena.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/board-link.dojorena.md[0m
+[mTrying to find the file: elements.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/elements.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/elements.md[0m
+[mTrying to find the file: what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/what-to-do.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/what-to-do.md[0m
+[45;93mFile is missing: what-to-do.md[0m
+[mTrying to find the file: ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/ask-sensei.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ask-sensei.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+[mTrying to find the file: client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/client-and-api.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/client-and-api.md[0m
+[45;93mFile is missing: client-and-api.md[0m
+[mTrying to find the file: faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/faq.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/faq.md[0m
+[45;93mFile is missing: faq.md[0m
+[mTrying to find the file: how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/ru/how-to-host.md[0m
+[mFile not found: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\tetris\src\main\webapp\resources\tetris\help/how-to-host.md[0m
+[mFound the file: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[44;93mFile accepted: C:\Java\dojorena\codenjoy\CodingDojo\games\engine\..\engine\src\main\resources\manuals/ru/how-to-host.md[0m
+[41;93m[ERROR] Can't find resources for manualType{dojorena-manual}, game{tetris}, language{ru}[0m
