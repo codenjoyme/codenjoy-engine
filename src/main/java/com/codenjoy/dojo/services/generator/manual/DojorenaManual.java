@@ -27,7 +27,7 @@ import java.util.List;
 
 public class DojorenaManual extends GameManualGenerator {
 
-    private static final String DOJORENA_MANUAL_MD = "dojorena-manual";
+    private static final String OUTPUT_FILE = "dojorena-manual";
     private static final String GLOBAL_SOURCES = "engine/src/main/resources/manuals/";
     private static final String GAME_SOURCES = "{$game}/src/main/webapp/resources/{$game}/help/";
 
@@ -60,6 +60,6 @@ public class DojorenaManual extends GameManualGenerator {
 
     @Override
     protected String getManualType() {
-        return DOJORENA_MANUAL_MD;
+        return OUTPUT_FILE;
     }
 }

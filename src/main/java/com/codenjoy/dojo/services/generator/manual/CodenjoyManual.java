@@ -27,7 +27,7 @@ import java.util.List;
 
 public class CodenjoyManual extends GameManualGenerator {
 
-    private static final String CODENJOY_MANUAL_MD = "codenjoy-manual";
+    private static final String OUTPUT_FILE = "codenjoy-manual";
     private static final String GLOBAL_SOURCES = "engine/src/main/resources/manuals/";
     private static final String GAME_SOURCES = "{$game}/src/main/webapp/resources/{$game}/help/";
 
@@ -60,6 +60,6 @@ public class CodenjoyManual extends GameManualGenerator {
 
     @Override
     protected String getManualType() {
-        return CODENJOY_MANUAL_MD;
+        return OUTPUT_FILE;
     }
 }
