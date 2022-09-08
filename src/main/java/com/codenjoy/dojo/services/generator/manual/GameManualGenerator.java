@@ -154,7 +154,8 @@ public abstract class GameManualGenerator {
                 GAME + LANGUAGE + fileName,
                 GAME + fileName,
                 GLOBAL + LANGUAGE + fileName,
-                GLOBAL + fileName);
+                GLOBAL + fileName,
+                GAME + "en" + SLASH + fileName); // TODO берем default english
     }
 
     private String build(List<String> paths) {
