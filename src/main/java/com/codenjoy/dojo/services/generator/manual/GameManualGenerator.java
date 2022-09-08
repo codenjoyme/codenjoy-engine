@@ -22,6 +22,8 @@ package com.codenjoy.dojo.services.generator.manual;
  * #L%
  */
 
+import com.codenjoy.dojo.utils.PrintUtils;
+import com.codenjoy.dojo.utils.SmokeUtils;
 import com.google.common.base.Strings;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,10 +37,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codenjoy.dojo.utils.PrintUtils.Color.*;
-import static com.codenjoy.dojo.utils.PrintUtils.printf;
-import static org.apache.commons.io.FileUtils.*;
 
 public abstract class GameManualGenerator {
+
     private static final String FILE_SEPARATOR = "\n\n";
     private static final String TARGET_FILE_TEMPLATE = "{$path}{$manualType}-{$language}.md";
     private static final String $_GAME = "{$game}";
@@ -63,14 +64,14 @@ public abstract class GameManualGenerator {
         this.gameSources = gameSources;
     }
 
-    /*
-        Перечень и порядок файлов, которые участвуют в сборке мануала.
-        Список должен содержать только имя файла без всяких дополнительных тегов.
-        Порядок работы с файлом такой, мы его ищем в:
-        1. в директории с игрой, с привязкой к языку
-        2. в директории с игрой, но без привязки к языку
-        3. в глобальной папке с привязкой к языку
-        4. в глобальной папке, без привязки к языку.
+    /**
+     * Перечень и порядок файлов, которые участвуют в сборке мануала.
+     * Список должен содержать только имя файла без всяких дополнительных тегов.
+     * Порядок работы с файлом такой, мы его ищем в:
+     * 1. в директории с игрой, с привязкой к языку
+     * 2. в директории с игрой, но без привязки к языку
+     * 3. в глобальной папке с привязкой к языку
+     * 4. в глобальной папке, без привязки к языку.
      */
     protected abstract List<String> getManualParts();
 
@@ -86,12 +87,9 @@ public abstract class GameManualGenerator {
         List<String> preparedManualPartPaths = getPreparedManualPartPaths();
 
         if (preparedManualPartPaths.size() != getManualParts().size()) {
-            printf(
-                    "[ERROR] Can't find resources for manualType{%s}, game{%s}, language{%s}\n"
-                    , ERROR,
-                    getManualType(),
-                    game,
-                    language);
+            PrintUtils.printf("[ERROR] Can't find resources for manualType{%s}, " +
+                            "game{%s}, language{%s}\n",
+                    ERROR, getManualType(), game, language);
             return;
         }
         String data = build(preparedManualPartPaths);
@@ -101,31 +99,23 @@ public abstract class GameManualGenerator {
     private List<String> getPreparedManualPartPaths() {
         List<String> preparedManualsPartsPath = new ArrayList<>();
         for (String fileName : getManualParts()) {
-            printf("Trying to find the file: %s\n", TEXT, fileName);
+            PrintUtils.printf("Trying to find the file: %s\n", TEXT, fileName);
             String found = null;
             for (String file : getFilePathVariants(fileName)) {
                 String pathToFile = createPathToFile(file);
                 if (isFilePresent(pathToFile)) {
                     preparedManualsPartsPath.add(pathToFile);
                     found = pathToFile;
-                    printf(
-                            "Found the file: %s\n",
-                            TEXT,
-                            pathToFile
-                    );
+                    PrintUtils.printf("Found the file: %s\n", TEXT, pathToFile);
                     break;
                 } else {
-                    printf(
-                            "File not found: %s\n",
-                            TEXT,
-                            pathToFile
-                    );
+                    PrintUtils.printf("File not found: %s\n", TEXT, pathToFile);
                 }
             }
             if (StringUtils.isNoneEmpty(found)) {
-                printf("File accepted: %s\n", WARNING, found);
+                PrintUtils.printf("File accepted: %s\n", WARNING, found);
             } else {
-                printf("File is missing: %s\n", WARNING, fileName);
+                PrintUtils.printf("File is missing: %s\n", WARNING, fileName);
             }
         }
         return preparedManualsPartsPath;
@@ -178,8 +168,7 @@ public abstract class GameManualGenerator {
         return fileMask
                 .replace($_GLOBAL, makePathToGlobalFolder())
                 .replace($_GAME, makePathToGameFolder())
-                .replace($_LANGUAGE, language + SLASH)
-                ;
+                .replace($_LANGUAGE, language + SLASH);
     }
 
     private String getTargetFile() {
@@ -190,25 +179,13 @@ public abstract class GameManualGenerator {
     }
 
     private String load(String path) {
-        String fileData;
-        try {
-            fileData = readFileToString(getFile(path), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-            fileData = StringUtils.EMPTY;
-        }
-        return fileData;
+        return SmokeUtils.load(new File(path));
     }
 
     private void save(String path, String data) {
-        try {
-            write(getFile(path), data, StandardCharsets.UTF_8);
-            printf("Manual for [%s] type:[%s] saved:[%s]\n",
-                    INFO,
-                    game, getManualType(), path
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SmokeUtils.saveToFile(new File(path), data);
+        PrintUtils.printf("Manual for [%s] type:[%s] saved:[%s]\n",
+                INFO,
+                game, getManualType(), path);
     }
 }

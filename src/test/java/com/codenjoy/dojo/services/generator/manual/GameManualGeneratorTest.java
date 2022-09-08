@@ -22,104 +22,94 @@ package com.codenjoy.dojo.services.generator.manual;
  * #L%
  */
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableList;
-import lombok.SneakyThrows;
+import com.codenjoy.dojo.utils.RedirectOutput;
+import com.codenjoy.dojo.utils.SmokeUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
-import static org.apache.commons.io.FileUtils.*;
 import static org.junit.Assert.*;
 
 public class GameManualGeneratorTest {
-    private static final String TEST_LANGUAGE = "en";
-    private static final String TEST_GAME = "molly";
-    private static final String TEST_MANUAL_TYPE = "codenjoy";
-    private static final List<String> TEST_MANUAL_PARTS = ImmutableList.of(
-            "part1.md",
-            "part2.md",
-            "part3.md",
-            "part4.md"
-    );
-    private static final String TEST_BASE = "target/generated-test-sources/manual-generator";
-    private static final String TEST_RELATIVE_PATH_TO_GLOBAL_SOURCES = "global/";
-    private static final String TEST_RELATIVE_PATH_TO_GAME_SOURCES = "games/{$game}/";
 
-    private static final String PREPARED_FILE_PATH_PART1 = "target/generated-test-sources/manual-generator/global/part1.md";
-    private static final String PREPARED_FILE_PATH_PART2 = "target/generated-test-sources/manual-generator/games/molly/en/part2.md";
-    private static final String PREPARED_FILE_PATH_PART3 = "target/generated-test-sources/manual-generator/games/molly/part3.md";
-    private static final String PREPARED_FILE_PATH_PART4 = "target/generated-test-sources/manual-generator/global/en/part4.md";
+    private final String BASE = "target/generated-test-sources/manual-generator" + new Random().nextInt();
+    private final String GLOBAL_SOURCES_PATH = "global/";
+    private final String GAME_SOURCES_PATH = "games/{$game}/";
 
-    private static final String PREPARED_DATA_PART1 = "Part1 file from Global Path\nTest change game name: {$game}";
-    private static final String PREPARED_DATA_PART2 = "Part2 file from Game Path, Language directory";
-    private static final String PREPARED_DATA_PART3 = "Part3 file from Game Path";
-    private static final String PREPARED_DATA_PART4 = "Part4 file from Global Path, Language directory";
+    private final String GLOBAL_DEFAULT_PART1 = BASE + "/global/part1.md";
+    private final String DATA1 = "Part1 file from Global Path\nTest change game name: {$game}";
 
+    private final String GAME_LANGUAGE_PART2 = BASE + "/games/mollymage/en/part2.md";
+    private final String DATA2 = "Part2 file from Game Path, Language directory";
+
+    private final String GAME_DEFAULT_PART3 = BASE + "/games/mollymage/part3.md";
+    private final String DATA3 = "Part3 file from Game Path";
+
+    private final String GLOBAL_LANGUAGE_PART4 = BASE + "/global/en/part4.md";
+    private final String DATA4 = "Part4 file from Global Path, Language directory";
+
+    private RedirectOutput output = new RedirectOutput();
     private GameManualGenerator generator;
-    private ByteArrayOutputStream baos;
-    private PrintStream old;
 
     @Before
-    public void setUp() {
+    public void setup() {
         generator = getGenerator();
-        old = System.out;
-        redirectOut();
+        output.redirect();
     }
 
-    private void redirectOut() {
-        baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        System.setOut(ps);
+    @After
+    public void after() {
+        output.rollback();
     }
 
     private GameManualGenerator getGenerator() {
-        return new GameManualGenerator(TEST_GAME, TEST_LANGUAGE, TEST_BASE, TEST_RELATIVE_PATH_TO_GLOBAL_SOURCES, TEST_RELATIVE_PATH_TO_GAME_SOURCES) {
+        return new GameManualGenerator(
+                "mollymage",
+                "en",
+                BASE,
+                GLOBAL_SOURCES_PATH,
+                GAME_SOURCES_PATH) {
             @Override
             protected List<String> getManualParts() {
-                return TEST_MANUAL_PARTS;
+                return Arrays.asList(
+                        "part1.md",
+                        "part2.md",
+                        "part3.md",
+                        "part4.md");
             }
 
             @Override
             protected String getManualType() {
-                return TEST_MANUAL_TYPE;
+                return "codenjoy";
             }
         };
     }
 
-    @After
-    public void clear() {
-        System.out.flush();
-        System.setOut(old);
-        System.out.println(baos);
-    }
-
     @Test
     public void whenAllSourceFilesPresented_shouldGenerateTargetFileCorrect() {
-        // given generate correct files for generation
-        generateCorrectTestFiles();
+        // given
+        generateCorrectManualParts();
 
-        // when we generate complete manual
+        // when
         generator.generate();
 
-        // then generated manual should be present in source folder
-        assertTrue(baos.toString().contains(
-                String.format("Manual for [%s] type:[%s] saved",
-                        TEST_GAME, TEST_MANUAL_TYPE)
-        ));
-        assertTrue(Files.isRegularFile(Path.of(getTargetFilePath())));
+        // then
+        assertEquals("target file should be created",
+                true, generatedManual().exists());
+
+        assertEquals("success message printed at console",
+                true, output.contains(
+                        "Manual for [mollymage] type:[codenjoy] saved"));
+
         assertEquals("<!-- Code generated by ManualGeneratorRunner.java\n" +
                         "  !!!DO NOT EDIT!!! -->\n" +
                         "Part1 file from Global Path\n" +
-                        "Test change game name: molly\n" +
+                        "Test change game name: mollymage\n" +
                         "\n" +
                         "Part2 file from Game Path, Language directory\n" +
                         "\n" +
@@ -127,69 +117,51 @@ public class GameManualGeneratorTest {
                         "\n" +
                         "Part4 file from Global Path, Language directory\n" +
                         "\n",
-                load(getTargetFilePath()));
+                SmokeUtils.load(generatedManual()));
     }
 
     @Test
     public void whenOneSourceFileMissed_shouldPrintErrorMessageToConsole() {
-        // given generate source files for generation without one file
-        generateMissedTestFiles();
+        // given
+        generateManualPartsWithoutOneFile();
 
-        // when we generate complete manual
+        // when
         generator.generate();
 
         // then
-        //      target file should not be created
-        //      error message printed at console
-        //      information about missing file should be printed in console
-        assertFalse(Files.isRegularFile(Path.of(getTargetFilePath())));
-        assertTrue(baos.toString().contains(
-                String.format(
-                        "[ERROR] Can't find resources for manualType{%s}, game{%s}, language{%s}",
-                        TEST_MANUAL_TYPE, TEST_GAME, TEST_LANGUAGE)
-        ));
-        assertTrue(baos.toString().contains("File is missing: part4.md"));
+        assertEquals("target file should not be created",
+                false, generatedManual().exists());
+
+        assertEquals("error message printed at console",
+                true, output.contains(
+                        "[ERROR] Can't find resources for manualType{codenjoy}, " +
+                                "game{mollymage}, language{en}"));
+
+        assertEquals("information about missing file should be printed in console",
+                true, output.contains(
+                        "File is missing: part4.md"));
     }
 
-    private void generateCorrectTestFiles() {
-        delete(TEST_BASE);
-        createFile(PREPARED_FILE_PATH_PART1, PREPARED_DATA_PART1);
-        createFile(PREPARED_FILE_PATH_PART2, PREPARED_DATA_PART2);
-        createFile(PREPARED_FILE_PATH_PART3, PREPARED_DATA_PART3);
-        createFile(PREPARED_FILE_PATH_PART4, PREPARED_DATA_PART4);
+    private void generateCorrectManualParts() {
+        createFile(GLOBAL_DEFAULT_PART1, DATA1);
+        createFile(GAME_LANGUAGE_PART2, DATA2);
+        createFile(GAME_DEFAULT_PART3, DATA3);
+        createFile(GLOBAL_LANGUAGE_PART4, DATA4);
     }
 
-    private void generateMissedTestFiles() {
-        delete(TEST_BASE);
-        createFile(PREPARED_FILE_PATH_PART1, PREPARED_DATA_PART1);
-        createFile(PREPARED_FILE_PATH_PART2, PREPARED_DATA_PART2);
-        createFile(PREPARED_FILE_PATH_PART3, PREPARED_DATA_PART3);
-        // we didn't create last file and should see message about its missing in error logs
+    private void generateManualPartsWithoutOneFile() {
+        createFile(GLOBAL_DEFAULT_PART1, DATA1);
+        createFile(GAME_LANGUAGE_PART2, DATA2);
+        createFile(GAME_DEFAULT_PART3, DATA3);
+        // we didn't create last file and should see message
+        // about its missing in error logs
     }
 
     private void createFile(String path, String data) {
-        try {
-            write(getFile(path), data, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SmokeUtils.saveToFile(new File(path), data);
     }
 
-    private String getTargetFilePath() {
-        return TEST_BASE + "/games/" + TEST_GAME + "/"
-                + TEST_MANUAL_TYPE + "-" + TEST_LANGUAGE + ".md";
-    }
-
-    @SneakyThrows
-    String load(String path) {
-        return Files.readString(Path.of(path), Charsets.UTF_8).replace(System.lineSeparator(), "\n");
-    }
-
-    void delete(String path) {
-        try {
-            deleteDirectory(getFile(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private File generatedManual() {
+        return new File(BASE + "/games/mollymage/codenjoy-en.md");
     }
 }
