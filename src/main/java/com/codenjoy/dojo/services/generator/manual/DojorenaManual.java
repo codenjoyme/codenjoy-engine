@@ -43,9 +43,9 @@ public class DojorenaManual extends GameManualGenerator {
                 "board-link.dojorena.md",
                 "elements.md",
                 "what-to-do.md",
+                "faq.md",
                 "ask-sensei.md",
                 "client-and-api.md",
-                "faq.md",
                 "how-to-host.md"
         );
     }
