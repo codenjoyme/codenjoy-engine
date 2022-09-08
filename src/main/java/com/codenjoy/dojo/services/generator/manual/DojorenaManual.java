@@ -22,32 +22,10 @@ package com.codenjoy.dojo.services.generator.manual;
  * #L%
  */
 
-import java.util.Arrays;
-import java.util.List;
-
 public class DojorenaManual extends GameManualGenerator {
 
     public DojorenaManual(String game, String language, String basePath) {
         super(game, language, basePath);
-    }
-
-    @Override
-    protected List<String> getManualParts() {
-        return Arrays.asList(
-                "header.md",
-                "intro.{$manualType}.md",
-                "game-about.md",
-                "how-connect.{$manualType}.md",
-                "message-format.md",
-                "field.md",
-                "board-link.{$manualType}.md",
-                "elements.md",
-                "what-to-do.md",
-                "faq.md",
-                "ask-sensei.md",
-                "client-and-api.md",
-                "how-to-host.md"
-        );
     }
 
     @Override

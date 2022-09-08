@@ -78,7 +78,23 @@ public abstract class GameManualGenerator {
      * 3. в глобальной папке с привязкой к языку
      * 4. в глобальной папке, без привязки к языку.
      */
-    protected abstract List<String> getManualParts();
+    protected List<String> getManualParts() {
+        return Arrays.asList(
+                "header.md",
+                "intro.{$manualType}.md",
+                "game-about.md",
+                "how-connect.{$manualType}.md",
+                "message-format.md",
+                "field.md",
+                "board-link.{$manualType}.md",
+                "elements.md",
+                "what-to-do.md",
+                "faq.md",
+                "ask-sensei.md",
+                "client-and-api.md",
+                "how-to-host.md"
+        );
+    }
 
     protected abstract String getManualType();
 
