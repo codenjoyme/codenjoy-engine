@@ -1,1 +1,1 @@
-![](https://dojorena.io/codenjoy-contest/resources/{$game}/help/board.png)
+![](https://dojorena.io/codenjoy-contest/resources/${game}/help/board.png)

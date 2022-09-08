@@ -1,6 +1,6 @@
 ## Connect to the server
 
-So, the player [registers on the server](../../../register?gameName={$game})
+So, the player [registers on the server](../../../register?gameName=${game})
 and joining the game.
 
 Then you should connect from client code to the server via websockets.

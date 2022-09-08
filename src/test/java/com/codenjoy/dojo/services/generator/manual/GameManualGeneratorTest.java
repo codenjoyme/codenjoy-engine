@@ -39,10 +39,10 @@ public class GameManualGeneratorTest {
 
     private final String BASE = "target/generated-test-sources/manual-generator" + new Random().nextInt();
     private final String GLOBAL_SOURCES_PATH = "global/";
-    private final String GAME_SOURCES_PATH = "games/{$game}/";
+    private final String GAME_SOURCES_PATH = "games/${game}/";
 
     private final String GLOBAL_DEFAULT_PART1 = BASE + "/global/part1.md";
-    private final String DATA1 = "Part1 file from Global Path\nTest change game name: {$game}";
+    private final String DATA1 = "Part1 file from Global Path\nTest change game name: ${game}";
 
     private final String GAME_LANGUAGE_PART2 = BASE + "/games/mollymage/en/part2.md";
     private final String DATA2 = "Part2 file from Game Path, Language directory";
