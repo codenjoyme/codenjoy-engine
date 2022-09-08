@@ -92,7 +92,8 @@ public abstract class GameManualGenerator {
                 "faq.md",
                 "ask-sensei.md",
                 "client-and-api.md",
-                "how-to-host.md"
+                "how-to-host.md",
+                "how-to-host-contacts.${manualType}.md"
         );
     }
 
