@@ -86,7 +86,7 @@ public abstract class GameManualGenerator {
                 "how-connect.${manualType}.md",
                 "message-format.md",
                 "field.md",
-                "board-link.${manualType}.md",
+                "board-link.md",
                 "elements.md",
                 "what-to-do.md",
                 "faq.md",

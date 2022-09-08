@@ -1,0 +1,1 @@
+![](/codenjoy-contest/resources/${game}/help/board.png)
