@@ -47,7 +47,7 @@ eval_echo "BASE=$(pwd)/.."
 eval_echo "MVNW=./mvnw"
 
 
-eval_echo "GAMES=mollymage,sample"
+eval_echo "GAMES=mollymage,namdreab,rawelbbub,sample,sampletext,verland"
 # eval_echo "GAMES=all"
 # eval_echo "GAMES=a2048,excitebike,rawelbbub,chess,clifford,collapse,expansion,fifteen,football,hex,icancode,japanese,kata,lemonade,lunolet,moebius,mollymage,pong,puzzlebox,quadro,quake2d,reversi,rubicscube,sample,sampletext,selfdefense,knibert,namdreab,sokoban,spacerace,startandjump,sudoku,tetris,vacuum,verland,xonix"
 eval_echo "LOCALE=all"
