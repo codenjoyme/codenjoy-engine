@@ -37,6 +37,9 @@ import static org.junit.Assert.*;
 
 public class GameManualGeneratorTest {
 
+    private final String PROPERTIES_FILE = "/games/mollymage/src/main/webapp/resources/mollymage/help/ru/info.properties";
+    private final String PROPERTIES_DATA = "key.one=data1\nkey.two=data2\n";
+
     private final String BASE = "target/generated-test-sources/manual-generator" + new Random().nextInt();
     private final String GLOBAL_SOURCES_PATH = "global/";
     private final String GAME_SOURCES_PATH = "games/${game}/";
@@ -61,8 +64,13 @@ public class GameManualGeneratorTest {
 
     @Before
     public void setup() {
+        createPropertiesFile();
         generator = getGenerator();
         output.redirect();
+    }
+
+    private void createPropertiesFile() {
+        createFile(BASE + PROPERTIES_FILE, PROPERTIES_DATA);
     }
 
     @After
@@ -124,7 +132,7 @@ public class GameManualGeneratorTest {
     }
 
     @Test
-    public void whenNotFoundGameFileWithThisLangageButPresentDefaultEnglish_shouldGenerateTargetFileCorrect() {
+    public void whenNotFoundGameFileWithThisLanguageButPresentDefaultEnglish_shouldGenerateTargetFileCorrect() {
         // given
         generateManualPartsWithoutOneFile_butPresentThisPartWithOtherLanguage();
 

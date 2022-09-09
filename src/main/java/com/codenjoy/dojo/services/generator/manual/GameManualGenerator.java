@@ -22,15 +22,15 @@ package com.codenjoy.dojo.services.generator.manual;
  * #L%
  */
 
+import com.codenjoy.dojo.services.properties.GameProperties;
 import com.codenjoy.dojo.utils.PrintUtils;
 import com.codenjoy.dojo.utils.SmokeUtils;
 import com.google.common.base.Strings;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
+import static com.codenjoy.dojo.services.generator.ElementGenerator.getBase;
 import static com.codenjoy.dojo.utils.PrintUtils.Color.*;
 
 public abstract class GameManualGenerator {
@@ -38,8 +38,8 @@ public abstract class GameManualGenerator {
     // используется для тестирования, этим флагом отключаем реальное сохранение файлов
     public static boolean READONLY = false;
 
-    private static final String GLOBAL_SOURCES = "engine/src/main/resources/manuals/";
-    private static final String GAME_SOURCES = "${game}/src/main/webapp/resources/${game}/help/";
+    private static final String GLOBAL_SOURCES = "games/engine/src/main/resources/manuals/";
+    private static final String GAME_SOURCES = "games/${game}/src/main/webapp/resources/${game}/help/";
 
     private static final String FILE_SEPARATOR = "\n\n";
     private static final String TARGET_FILE = "${path}${manualType}-${language}.md";
@@ -53,20 +53,31 @@ public abstract class GameManualGenerator {
 
     private final String game;
     private final String language;
-    private final String basePath;
+    private final String base;
     private final String globalSources;
     private final String gameSources;
+    private final Map<String, String> properties;
 
-    public GameManualGenerator(String game, String language, String basePath) {
-        this(game, language, basePath, GLOBAL_SOURCES, GAME_SOURCES);
+    public GameManualGenerator(String game, String language, String base) {
+        this(game, language, base, GLOBAL_SOURCES, GAME_SOURCES);
     }
 
-    public GameManualGenerator(String game, String language, String basePath, String globalSources, String gameSources) {
+    public GameManualGenerator(String game, String language, String inputBase, String globalSources, String gameSources) {
         this.game = game;
         this.language = language;
-        this.basePath = basePath;
+        this.base = getBase(inputBase);
         this.globalSources = globalSources;
         this.gameSources = gameSources;
+        properties = loadInfo();
+    }
+
+    private Map<String, String> loadInfo() {
+        GameProperties properties = new GameProperties(false);
+        if (!properties.load(base, Locale.forLanguageTag(language), game)) {
+            return new HashMap<>();
+        }
+
+        return properties.properties();
     }
 
     /**
@@ -168,6 +179,14 @@ public abstract class GameManualGenerator {
             }
 
             part = part.replace(GAME, game);
+
+            for (Map.Entry<String, String> entry : properties.entrySet()) {
+                String replacement = "${" + entry.getKey() + "}";
+                if (part.contains(replacement)) {
+                    part = part.replace(replacement, entry.getValue());
+                }
+            }
+
             result.append(part);
             result.append(FILE_SEPARATOR);
         }
@@ -183,11 +202,11 @@ public abstract class GameManualGenerator {
     }
 
     private String makePathToGameFolder() {
-        return makeAbsolutePath(basePath, gameSources.replace(GAME, game));
+        return makeAbsolutePath(base, gameSources.replace(GAME, game));
     }
 
     private String makePathToGlobalFolder() {
-        return makeAbsolutePath(basePath, globalSources);
+        return makeAbsolutePath(base, globalSources);
     }
 
     private String createPathToFile(String fileMask) {
