@@ -1,1 +1,1 @@
-<img src="/codenjoy-contest/resources/${game}/help/board.png" style="height:100%;" />
+<img src="/codenjoy-contest/resources/${game}/help/board.png" style="height:auto;" />
