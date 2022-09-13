@@ -23,13 +23,12 @@ package com.codenjoy.dojo.services.generator.manual;
  */
 
 import com.codenjoy.dojo.utils.RedirectOutput;
-import com.codenjoy.dojo.utils.SmokeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import java.util.Arrays;
+import static com.codenjoy.dojo.utils.SmokeUtils.assertSmokeEquals;
 
 @Slf4j // because logger prints to console some data that we dont need at the assertEqualse phase
 public class ManualGeneratorRunnerTest {
@@ -57,15 +56,7 @@ public class ManualGeneratorRunnerTest {
         assertEquals(actual);
     }
 
-    private static void assertSmokeEquals(String actual, Class owner, TestName test) {
-        SmokeUtils.assertSmokeFile(owner.getSimpleName()
-                        + "/" + test.getMethodName() +  ".data",
-                Arrays.asList(actual
-                        .replace("\r\n", "\n")
-                        .split("\n")));
-    }
-
     private void assertEquals(String actual) {
-        assertSmokeEquals(actual, getClass(), test);
+        assertSmokeEquals(actual, getClass(), test.getMethodName());
     }
 }
