@@ -156,7 +156,7 @@ public abstract class AbstractBaseGameTest
         // settings / field post-processing
     }
 
-    private P givenPlayer(H hero) {
+    protected P givenPlayer(H hero) {
         P player = newPlayer();
 
         player.setHero(hero);
@@ -171,12 +171,15 @@ public abstract class AbstractBaseGameTest
     }
 
     private P newPlayer() {
-        EventListener listener = testing().mock(EventListener.class);
-        listeners.add(listener);
-
-        P player = createPlayer().apply(listener, settings);
+        P player = createPlayer().apply(newEventListener(), settings);
         players.add(player);
         return player;
+    }
+
+    private EventListener newEventListener() {
+        EventListener listener = testing().mock(EventListener.class);
+        listeners.add(listener);
+        return listener;
     }
 
     /**
