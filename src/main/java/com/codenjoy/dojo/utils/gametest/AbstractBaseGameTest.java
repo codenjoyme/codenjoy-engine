@@ -45,11 +45,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.utils.TestUtils.asArray;
 import static com.codenjoy.dojo.utils.TestUtils.collectHeroesData;
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 public abstract class AbstractBaseGameTest
         <P extends RoundGamePlayer,
@@ -260,10 +262,6 @@ public abstract class AbstractBaseGameTest
         return listeners;
     }
 
-    protected List<P> players() {
-        return players;
-    }
-
     protected F field() {
         return field;
     }
@@ -302,12 +300,23 @@ public abstract class AbstractBaseGameTest
         return (H) player(index).getHero();
     }
 
+    protected List<H> heroes() {
+        return players.stream()
+                .map(RoundGamePlayer::getHero)
+                .map(it -> (H)it)
+                .collect(toList());
+    }
+
     public P player() {
         return player(0);
     }
 
     public P player(int index) {
         return players.get(index);
+    }
+
+    protected List<P> players() {
+        return players();
     }
 
     // other stuff
