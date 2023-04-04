@@ -241,4 +241,11 @@ public interface SettingsReader<T extends SettingsReader> {
                     put(keyToName(allKeys(), param.getName()), param.getValue()));
         }};
     }
+
+    default JSONObject asNameValueJson() {
+        return new JSONObject(){{
+            getParameters().forEach(param ->
+                    put(param.getName(), param.getValue()));
+        }};
+    }
 }

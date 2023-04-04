@@ -77,7 +77,7 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldAddObject_fail_caseUnsuppertedType() {
+    public void shouldAddObject_fail_caseUnsupportedType() {
         // given
         SettingsReader settings = new SomeGameSettings();
 
@@ -171,7 +171,7 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldConvertToJson() {
+    public void shouldConvertToJson_formatKeyValue() {
         // given
         SettingsReader settings = new SomeGameSettings();
 
@@ -183,6 +183,53 @@ public class SettingsReaderTest {
                         "  'PARAMETER4':'string'\n" +
                         "}",
                 JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldConvertToJson_formatNameValue() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+
+        // when then
+        assertEquals("{\n" +
+                        "  'Parameter 1':15,\n" +
+                        "  'Parameter 2':true,\n" +
+                        "  'Parameter 3':0.5,\n" +
+                        "  'Parameter 4':'string'\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asNameValueJson()));
+    }
+
+    @Test
+    public void shouldConvertToJson_fail_whenNoKeyParameter_formatKeyValue() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+        settings.string(() -> "Name without key", "someValue");
+
+        // when then
+        try {
+            settings.asJson();
+            fail("Expected exception");
+        } catch (Exception e) {
+            assertEquals("Parameter not found: Name without key", e.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldConvertToJson_success_whenNoKeyParameter_formatNameValue() {
+        // given
+        SettingsReader settings = new SomeGameSettings();
+        settings.string(() -> "Name without key", "someValue");
+
+        // when then
+        assertEquals("{\n" +
+                        "  'Name without key':'someValue',\n" +
+                        "  'Parameter 1':15,\n" +
+                        "  'Parameter 2':true,\n" +
+                        "  'Parameter 3':0.5,\n" +
+                        "  'Parameter 4':'string'\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asNameValueJson()));
     }
 
     @Test
@@ -200,7 +247,7 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldConvertToJson_caseRound() {
+    public void shouldConvertToJson_caseRound_formatKeyValue() {
         // given
         SettingsReader settings = new SomeRoundSettings();
 
@@ -225,7 +272,32 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldConvertToJson_caseSemifinal() {
+    public void shouldConvertToJson_caseRound_formatNameValue() {
+        // given
+        SettingsReader settings = new SomeRoundSettings();
+
+        // when then
+        assertEquals("{\n" +
+                        "  'Parameter 1':15,\n" +
+                        "  'Parameter 2':true,\n" +
+                        "  'Parameter 3':0.5,\n" +
+                        "  'Parameter 4':'string',\n" +
+                        "  '[Multiplayer] Mode':'[MULTIPLE] One level chosen at random. Multi player (all together or in the rooms).',\n" +
+                        "  '[Multiplayer] Room size':5,\n" +
+                        "  '[Rounds] Enabled':false,\n" +
+                        "  '[Rounds] Min ticks for win':1,\n" +
+                        "  '[Rounds] Players per room':5,\n" +
+                        "  '[Rounds] Rounds per Match':1,\n" +
+                        "  '[Rounds] Teams per room':1,\n" +
+                        "  '[Rounds] Time before start Round':5,\n" +
+                        "  '[Rounds] Time for Winner':1,\n" +
+                        "  '[Rounds] Time per Round':200\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asNameValueJson()));
+    }
+
+    @Test
+    public void shouldConvertToJson_caseSemifinal_formatKeyValue() {
         // given
         SettingsReader settings = new SomeSemifinalSettings();
 
@@ -247,7 +319,29 @@ public class SettingsReaderTest {
     }
 
     @Test
-    public void shouldConvertToJson_caseSemifinalRound() {
+    public void shouldConvertToJson_caseSemifinal_formatNameValue() {
+        // given
+        SettingsReader settings = new SomeSemifinalSettings();
+
+        // when then
+        assertEquals("{\n" +
+                        "  'Parameter 1':15,\n" +
+                        "  'Parameter 2':true,\n" +
+                        "  'Parameter 3':0.5,\n" +
+                        "  'Parameter 4':'string',\n" +
+                        "  '[Semifinal] Clear scores':false,\n" +
+                        "  '[Semifinal] Enabled':false,\n" +
+                        "  '[Semifinal] Limit':50,\n" +
+                        "  '[Semifinal] Percentage':true,\n" +
+                        "  '[Semifinal] Reset board':true,\n" +
+                        "  '[Semifinal] Shuffle board':true,\n" +
+                        "  '[Semifinal] Timeout':900\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asNameValueJson()));
+    }
+
+    @Test
+    public void shouldConvertToJson_caseSemifinalRound_formatKeyValue() {
         // given
         SettingsReader settings = new SomeSemifinalRoundSettings();
 
@@ -274,6 +368,36 @@ public class SettingsReaderTest {
                         "  'SEMIFINAL_TIMEOUT':900\n" +
                         "}",
                 JsonUtils.prettyPrint(settings.asJson()));
+    }
+
+    @Test
+    public void shouldConvertToJson_caseSemifinalRound_formatNameValue() {
+        // given
+        SettingsReader settings = new SomeSemifinalRoundSettings();
+
+        // when then
+        assertEquals("{\n" +
+                        "  'Parameter 1':15,\n" +
+                        "  'Parameter 2':true,\n" +
+                        "  'Parameter 3':0.5,\n" +
+                        "  'Parameter 4':'string',\n" +
+                        "  '[Rounds] Enabled':true,\n" +
+                        "  '[Rounds] Min ticks for win':1,\n" +
+                        "  '[Rounds] Players per room':5,\n" +
+                        "  '[Rounds] Rounds per Match':1,\n" +
+                        "  '[Rounds] Teams per room':1,\n" +
+                        "  '[Rounds] Time before start Round':5,\n" +
+                        "  '[Rounds] Time for Winner':1,\n" +
+                        "  '[Rounds] Time per Round':200,\n" +
+                        "  '[Semifinal] Clear scores':false,\n" +
+                        "  '[Semifinal] Enabled':false,\n" +
+                        "  '[Semifinal] Limit':50,\n" +
+                        "  '[Semifinal] Percentage':true,\n" +
+                        "  '[Semifinal] Reset board':true,\n" +
+                        "  '[Semifinal] Shuffle board':true,\n" +
+                        "  '[Semifinal] Timeout':900\n" +
+                        "}",
+                JsonUtils.prettyPrint(settings.asNameValueJson()));
     }
 
     @Test

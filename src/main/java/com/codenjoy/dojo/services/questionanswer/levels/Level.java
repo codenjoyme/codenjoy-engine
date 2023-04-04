@@ -25,11 +25,19 @@ package com.codenjoy.dojo.services.questionanswer.levels;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public interface Level {
 
     List<String> getQuestions();
 
     List<String> getAnswers();
+
+    default List<String> getQuestionAnswers() {
+        return getAnswers().stream()
+                .map(answer -> getQuestions().get(getAnswers().indexOf(answer)) + "=" + answer)
+                .collect(toList());
+    }
 
     int size();
 
@@ -54,4 +62,8 @@ public interface Level {
     int complexity();
 
     String description();
+
+    default String name() {
+        return getClass().getSimpleName();
+    }
 }
