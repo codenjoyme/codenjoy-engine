@@ -60,4 +60,6 @@ public interface LevelsPool {
     boolean isWaitNext();
 
     String getNextQuestion();
+
+    String getExpectedAnswer();
 }

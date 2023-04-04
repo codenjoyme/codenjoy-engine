@@ -95,6 +95,14 @@ public class LevelsPoolImpl implements LevelsPool {
                 questions.get(questions.size() - 1);
     }
 
+    @Override
+    public String getExpectedAnswer() {
+        List<String> answers = getAnswers();
+        return answers.isEmpty() ?
+                null :
+                answers.get(answers.size() - 1);
+    }
+
     private void firstQuestion() {
         questionIndex = 0;
     }
