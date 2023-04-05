@@ -51,6 +51,8 @@ public interface LevelsPool {
 
     void firstLevel();
 
+    void setLevel(int index);
+
     String getDescription();
 
     int getComplexity();

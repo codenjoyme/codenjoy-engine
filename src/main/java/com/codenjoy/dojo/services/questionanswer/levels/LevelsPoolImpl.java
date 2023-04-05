@@ -63,7 +63,12 @@ public class LevelsPoolImpl implements LevelsPool {
 
     @Override
     public void firstLevel() {
-        levelIndex = -1;
+        setLevel(0);
+    }
+
+    @Override
+    public void setLevel(int index) {
+        levelIndex = index - 1;
         nextLevel();
     }
 
