@@ -205,7 +205,7 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
         return (int) getParameters().stream()
                 .map(Parameter::getName)
                 .filter(LevelsSettings::isLevelsMap)
-                .map(name -> parseLevelNumberFromKey(name))
+                .map(LevelsSettings::parseLevelNumberFromKey)
                 .distinct()
                 .count();
     }
@@ -252,6 +252,13 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
         return index + LevelProgress.levelsStartsFrom1;
     }
 
+    /**
+     * Sets several level maps for given level.
+     * If there are already some maps, they will be removed.
+     * @param levelNumber level number
+     * @param maps set of maps
+     * @return this
+     */
     default T setLevelMaps(int levelNumber, String... maps) {
         clearLevelMaps(levelNumber);
         for (int index = 0; index < maps.length; index++) {
@@ -262,6 +269,12 @@ public interface LevelsSettings<T extends SettingsReader> extends SettingsReader
         return (T) this;
     }
 
+    /**
+     * Sets one level map for given level.
+     * @param levelNumber level number
+     * @param map map to set
+     * @return this
+     */
     default T setLevelMap(int levelNumber, String map) {
         return setLevelMap(levelNumber, null, map);
     }
