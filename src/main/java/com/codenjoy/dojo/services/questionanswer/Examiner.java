@@ -118,6 +118,12 @@ public class Examiner {
     public List<Object> ask(Respondent hero) {
         List<Object> events = new LinkedList<>();
 
+        if (hero.wantsResetLevel()) {
+            hero.clearFlags();
+            clear(level.getLevelIndex());
+            return events;
+        }
+
         if (hero.wantsSkipLevel()) {
             hero.clearFlags();
             level.waitNext();
