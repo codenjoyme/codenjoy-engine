@@ -41,12 +41,12 @@ public class Examiner {
     public Examiner(LevelsPool level) {
         this.level = level;
         timer = new Timer();
-        clear();
+        clear(0);
     }
 
-    public void clear() {
+    public void clear(int levelIndex) {
         this.history = new LinkedList<>();
-        level.firstLevel();
+        level.setLevel(levelIndex);
     }
 
     public List<QuestionAnswer> getLastHistory() {
