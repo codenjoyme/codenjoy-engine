@@ -45,7 +45,7 @@ public class NullLevel implements Level {
 
     @Override
     public int complexity() {
-        return 0;
+        return Integer.MAX_VALUE;
     }
 
     @Override

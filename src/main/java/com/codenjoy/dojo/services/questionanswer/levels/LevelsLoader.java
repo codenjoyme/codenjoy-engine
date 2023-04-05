@@ -34,7 +34,6 @@ public class LevelsLoader {
 
     private static List<Class<? extends Level>> classes;
 
-    // TODO На админке можно менять порядок задач местами для играющих, а это убрать
     public static List<Level> getAlgorithms() {
         return getAlgorithmsOrderedByComplexity();
     }
@@ -80,7 +79,6 @@ public class LevelsLoader {
         classes.addAll(ReflectUtils.findInPackage("net", Level.class));
 
         classes.remove(Level.class);
-        classes.remove(NullLevel.class);
         classes.remove(WaitLevel.class);
         classes.remove(LevelsPoolImpl.class);
         classes.remove(AlgorithmLevelImpl.class);
