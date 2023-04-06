@@ -30,6 +30,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class LevelsLoader {
 
     private static List<Class<? extends Level>> classes;
@@ -83,13 +85,11 @@ public class LevelsLoader {
         classes.remove(LevelsPoolImpl.class);
         classes.remove(AlgorithmLevelImpl.class);
         classes.remove(QuestionAnswerLevelImpl.class);
-        for (Class aClass : classes.toArray(new Class[0])) {
-            String name = aClass.getName();
-            if (name.contains("Test$") || name.contains("TestLevel")) {
-                classes.remove(aClass);
-            }
-        }
-
+        classes = classes.stream()
+                .filter(clazz -> !clazz.getName().contains("Test$"))
+                .filter(clazz -> !clazz.getName().contains("TestLevel"))
+                .filter(clazz -> !clazz.getName().contains("SampleAlgorithm"))
+                .collect(toList());
         return classes;
     }
 
