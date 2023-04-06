@@ -406,4 +406,23 @@ public class TestUtils {
                         key.key()))
                 .collect(Collectors.joining("\n"));
     }
+
+    public static boolean isMatch(String pattern, String actual) {
+        String[] parts = pattern.split("\\*");
+        int pos = 0;
+        for (String part : parts) {
+            int index = actual.indexOf(part, pos);
+            if (index < pos) {
+                return false;
+            }
+            pos = index + part.length();
+        }
+        return true;
+    }
+
+    public static void assertMatch(String pattern, String actual) {
+        if (!isMatch(pattern, actual)) {
+            testing().assertEquals(pattern, actual);
+        }
+    }
 }

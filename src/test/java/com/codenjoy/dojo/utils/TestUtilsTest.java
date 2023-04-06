@@ -23,12 +23,12 @@ package com.codenjoy.dojo.utils;
  */
 
 
-import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.joystick.NoActJoystick;
 import com.codenjoy.dojo.services.joystick.NoDirectionJoystick;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 import com.codenjoy.dojo.services.printer.CharElement;
+import com.codenjoy.dojo.services.printer.state.State;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -180,5 +180,23 @@ public class TestUtilsTest {
                 "hero(3)=s45\n" +
                 "hero(5)=s67",
                 TestUtils.collectHeroesData(players, "property2", skipEmpty));
+    }
+
+    @Test
+    public void testAssertMatch() {
+        assertEquals(true,  TestUtils.isMatch("qwe-asd-*",    "qwe-asd-zxc"));
+        assertEquals(false, TestUtils.isMatch("qwe-Asd-*",    "qwe-asd-zxc"));
+        assertEquals(true,  TestUtils.isMatch("*-asd-zxc",    "qwe-asd-zxc"));
+        assertEquals(false, TestUtils.isMatch("*-aSd-zxc",    "qwe-asd-zxc"));
+        assertEquals(true,  TestUtils.isMatch("*-asd-*",      "qwe-asd-zxc"));
+        assertEquals(false, TestUtils.isMatch("*-asd-*A",     "qwe-asd-zxc"));
+        assertEquals(true,  TestUtils.isMatch("*-*-*",        "qwe-asd-zxc"));
+        assertEquals(false, TestUtils.isMatch("A*-*-*",       "qwe-asd-zxc"));
+        assertEquals(true,  TestUtils.isMatch("*",            "qwe-asd-zxc"));
+        assertEquals(false, TestUtils.isMatch("*A",           "qwe-asd-zxc"));
+        assertEquals(true,  TestUtils.isMatch("qwe-*-zxc",    "qwe-asd-zxc"));
+        assertEquals(false, TestUtils.isMatch("qwe-A*-zxc",   "qwe-asd-zxc"));
+        assertEquals(true,  TestUtils.isMatch("q*-*-zx*-wer", "qwe-asd-zxc-wer"));
+        assertEquals(false, TestUtils.isMatch("q*-*-Zx*-wer", "qwe-asd-zxc-wer"));
     }
 }
