@@ -44,13 +44,6 @@ public interface Respondent {
     }
 
     /**
-     * @return true - если игрок хочет очистить текущий тест.
-     */
-    default boolean wantsResetLevel() {
-        return false;
-    }
-
-    /**
      * Очистить признаки игрока, такие как wantsSkipLevel,
      * wantsResetLevel и wantsNextLevel.
      */
