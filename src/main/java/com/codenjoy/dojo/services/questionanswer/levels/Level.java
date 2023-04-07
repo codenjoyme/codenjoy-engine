@@ -63,6 +63,10 @@ public interface Level {
 
     String description();
 
+    default String winCode() {
+        return null;
+    }
+
     default String name() {
         return getClass().getSimpleName();
     }
