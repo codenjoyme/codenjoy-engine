@@ -64,7 +64,9 @@ public interface Level {
     String description();
 
     default String winCode() {
-        return null;
+        return "function program(question) {\n" +
+                "    return 'answer';\n" +
+                "}";
     }
 
     default String name() {
