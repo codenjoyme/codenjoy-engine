@@ -407,22 +407,39 @@ public class TestUtils {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static boolean isMatch(String pattern, String actual) {
-        String[] parts = pattern.split("\\*");
+    public static boolean isMatch(String expectedPattern, String actual) {
+        String[] patterns = expectedPattern.split("\\*", -1);
+
+        String first = patterns[0];
+        if (!first.isEmpty()
+                && !actual.startsWith(first))
+        {
+            return false;
+        }
+
+        String last = patterns[patterns.length - 1];
+        if (patterns.length > 1
+                && !last.isEmpty()
+                && !actual.endsWith(last))
+        {
+            return false;
+        }
+
         int pos = 0;
-        for (String part : parts) {
-            int index = actual.indexOf(part, pos);
+        for (String pattern : patterns) {
+            int index = actual.indexOf(pattern, pos);
             if (index < pos) {
                 return false;
             }
-            pos = index + part.length();
+            pos = index + pattern.length();
         }
+
         return true;
     }
 
-    public static void assertMatch(String pattern, String actual) {
-        if (!isMatch(pattern, actual)) {
-            testing().assertEquals(pattern, actual);
+    public static void assertMatch(String expectedPattern, String actual) {
+        if (!isMatch(expectedPattern, actual)) {
+            testing().assertEquals(expectedPattern, actual);
         }
     }
 }

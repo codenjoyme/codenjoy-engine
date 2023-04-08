@@ -183,7 +183,7 @@ public class TestUtilsTest {
     }
 
     @Test
-    public void testAssertMatch() {
+    public void testIsMatch() {
         assertEquals(true,  TestUtils.isMatch("qwe-asd-*",    "qwe-asd-zxc"));
         assertEquals(false, TestUtils.isMatch("qwe-Asd-*",    "qwe-asd-zxc"));
         assertEquals(true,  TestUtils.isMatch("*-asd-zxc",    "qwe-asd-zxc"));
@@ -198,5 +198,30 @@ public class TestUtilsTest {
         assertEquals(false, TestUtils.isMatch("qwe-A*-zxc",   "qwe-asd-zxc"));
         assertEquals(true,  TestUtils.isMatch("q*-*-zx*-wer", "qwe-asd-zxc-wer"));
         assertEquals(false, TestUtils.isMatch("q*-*-Zx*-wer", "qwe-asd-zxc-wer"));
+
+        assertEquals(true,  TestUtils.isMatch("a*c", "abbbc"));
+        assertEquals(false, TestUtils.isMatch("a*b", "abbbc"));
+        assertEquals(true,  TestUtils.isMatch("*a*", "banana"));
+        assertEquals(true,  TestUtils.isMatch("*a*", "ananas"));
+        assertEquals(true,  TestUtils.isMatch("**a*", "ananas"));
+        assertEquals(true,  TestUtils.isMatch("*a**", "ananas"));
+        assertEquals(true,  TestUtils.isMatch("**a**", "ananas"));
+        assertEquals(true,  TestUtils.isMatch("*a*b", "ab"));
+        assertEquals(true,  TestUtils.isMatch("*a*b*", "acbabcab"));
+        assertEquals(true,  TestUtils.isMatch("a*", "a"));
+        assertEquals(true,  TestUtils.isMatch("a", "a"));
+        assertEquals(true,  TestUtils.isMatch("*a", "ba"));
+        assertEquals(true,  TestUtils.isMatch("*", ""));
+        assertEquals(true,  TestUtils.isMatch("a*b", "acbabcab"));
+        assertEquals(true,  TestUtils.isMatch("a**b", "acbabcab"));
+        assertEquals(true,  TestUtils.isMatch("a***b", "acbabcab"));
+        assertEquals(false, TestUtils.isMatch("b*", "ab"));
+        assertEquals(false, TestUtils.isMatch("b**", "ab"));
+        assertEquals(false, TestUtils.isMatch("*a", "b"));
+        assertEquals(false, TestUtils.isMatch("**a", "b"));
+        assertEquals(false, TestUtils.isMatch("*a*b", "abbc"));
+        assertEquals(true,  TestUtils.isMatch("*a*b*", "acbabc"));
+        assertEquals(true,  TestUtils.isMatch("*a*c", "abbbc"));
+        assertEquals(true,  TestUtils.isMatch("*a*c*", "acbabc"));
     }
 }
