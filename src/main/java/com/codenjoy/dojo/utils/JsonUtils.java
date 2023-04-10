@@ -32,8 +32,6 @@ import org.json.SortedJSONArray;
 import org.json.SortedJSONObject;
 
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 @UtilityClass
 public class JsonUtils {
@@ -55,8 +53,12 @@ public class JsonUtils {
 
     // TODO почему-то этот малый слетает в MVN при билде из консоли для символов борды expansion
     public static String prettyPrint(String jsonString) {
+        return clean(asString(jsonString));
+    }
+
+    public static String asString(String jsonString) {
         String json = toStringSorted(jsonString);
-        return clean(JsonWriter.formatJson(json));
+        return JsonWriter.formatJson(json);
     }
 
     public static String toStringSorted(String jsonString) {

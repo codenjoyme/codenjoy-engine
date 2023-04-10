@@ -69,6 +69,12 @@ public interface Level {
                 "}";
     }
 
+    default String defaultCode() {
+        return "function program(question) {\n" +
+                "    return 'answer';\n" +
+                "}";
+    }
+
     default String name() {
         return getClass().getSimpleName();
     }
