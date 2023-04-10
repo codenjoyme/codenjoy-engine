@@ -71,6 +71,7 @@ public interface Level {
 
     default String defaultCode() {
         return "function program(question) {\n" +
+                "    // TODO implement your logic here" +
                 "    return 'answer';\n" +
                 "}";
     }
