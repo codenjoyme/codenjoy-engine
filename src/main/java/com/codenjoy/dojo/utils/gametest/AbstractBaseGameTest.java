@@ -45,7 +45,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static com.codenjoy.dojo.utils.TestUtils.asArray;
 import static com.codenjoy.dojo.utils.TestUtils.collectHeroesData;
@@ -319,7 +318,7 @@ public abstract class AbstractBaseGameTest
     }
 
     protected List<P> players() {
-        return players();
+        return players;
     }
 
     // other stuff
