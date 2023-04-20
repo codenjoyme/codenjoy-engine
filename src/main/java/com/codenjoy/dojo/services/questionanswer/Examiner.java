@@ -74,21 +74,13 @@ public class Examiner {
         return answers;
     }
 
-    private void logSuccess(String question, String answer) {
-        log(question, answer, true);
-    }
-
-    private void logFailure(String question, String answer) {
-        log(question, answer, false);
-    }
-
     public void logNextAttempt() {
         history.add(new QuestionAnswers());
     }
 
-    private void log(String question, String answer, boolean valid) {
-        QuestionAnswer qa = new QuestionAnswer(question, answer);
-        qa.setValid(valid);
+    private void log(String question, String expectedAnswer, String actualAnswer) {
+        QuestionAnswer qa = new QuestionAnswer(question, actualAnswer);
+        qa.setExpectedAnswer(expectedAnswer);
         history.get(history.size() - 1).add(qa);
     }
 
@@ -105,10 +97,8 @@ public class Examiner {
                 actualAnswer = actualAnswers.get(index);
             }
 
-            if (expectedAnswer.equals(actualAnswer)) {
-                logSuccess(question, actualAnswer);
-            } else {
-                logFailure(question, actualAnswer);
+            log(question, expectedAnswer, actualAnswer);
+            if (!expectedAnswer.equals(actualAnswer)) {
                 isWin = false;
             }
         }

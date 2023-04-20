@@ -26,6 +26,7 @@ public class QuestionAnswer {
 
     private String question;
     private String answer;
+    private String expected;
     private boolean valid;
 
     public QuestionAnswer(String question, String answer) {
@@ -41,6 +42,10 @@ public class QuestionAnswer {
         return answer;
     }
 
+    public String getExpected() {
+        return expected;
+    }
+
     public boolean isValid() {
         return valid;
     }
@@ -49,4 +54,14 @@ public class QuestionAnswer {
         this.valid = valid;
     }
 
+    public void setExpectedAnswer(String expected) {
+        if (expected == null) {
+            this.expected = null;
+            return;
+        }
+        setValid(answer.equals(expected));
+        if (!valid) {
+            this.expected = expected;
+        }
+    }
 }
