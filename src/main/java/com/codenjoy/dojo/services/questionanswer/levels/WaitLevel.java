@@ -23,14 +23,18 @@ package com.codenjoy.dojo.services.questionanswer.levels;
  */
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.codenjoy.dojo.client.Command.START_NEXT_LEVEL;
 
 public class WaitLevel extends NullLevel implements Level {
     
     @Override
-    public String description() {
-        return "Wait for next level. Please send " +
+    public List<String> description() {
+        return Arrays.asList(
+                "Wait for next level. Please send " +
                 "'message(\'" + START_NEXT_LEVEL +
-                "\')' command.";
+                "\')' command.");
     }
 }

@@ -55,7 +55,7 @@ public class LevelsPoolImplTest {
         when(level.getQuestions()).thenReturn(questions);
         when(level.getAnswers()).thenReturn(answers);
         when(level.size()).thenReturn(data.length);
-        when(level.description()).thenReturn(description);
+        when(level.description()).thenReturn(Arrays.asList(description));
     }
 
     @Test
@@ -396,44 +396,43 @@ public class LevelsPoolImplTest {
         pool.firstLevel();
 
         // then
-        assertEquals("[q1]", pool.getQuestions().toString());
-        assertEquals("d1", pool.getDescription());
+        assertState(pool, "[q1]", "[d1]");
 
         // when
         pool.nextQuestion();
 
         // then
-        assertEquals("[q1, q2]", pool.getQuestions().toString());
-        assertEquals("d1", pool.getDescription());
+        assertState(pool, "[q1, q2]", "[d1]");
 
         // when
         pool.nextQuestion();
 
         // then
-        assertEquals("[q1, q2, q3]", pool.getQuestions().toString());
-        assertEquals("d1", pool.getDescription());
+        assertState(pool, "[q1, q2, q3]", "[d1]");
 
         // when
         assertEquals(true, pool.isLevelFinished());
         pool.nextLevel();
 
         // then
-        assertEquals("[q4]", pool.getQuestions().toString());
-        assertEquals("d2", pool.getDescription());
+        assertState(pool, "[q4]", "[d2]");
 
         // when
         pool.nextQuestion();
 
         // then
-        assertEquals("[q4, q5]", pool.getQuestions().toString());
-        assertEquals("d2", pool.getDescription());
+        assertState(pool, "[q4, q5]", "[d2]");
 
         // when
         assertEquals(true, pool.isLevelFinished());
         pool.nextLevel();
 
         // then
-        assertEquals("[]", pool.getQuestions().toString());
-        assertEquals("No more Levels. You win!", pool.getDescription());
+        assertState(pool, "[]", "[No more Levels. You win!]");
+    }
+
+    private void assertState(LevelsPoolImpl pool, String questions, String description) {
+        assertEquals(questions, pool.getQuestions().toString());
+        assertEquals(description, pool.getDescription().toString());
     }
 }

@@ -49,7 +49,7 @@ public class NullLevel implements Level {
     }
 
     @Override
-    public String description() {
-        return "No more Levels. You win!";
+    public List<String> description() {
+        return Arrays.asList("No more Levels. You win!");
     }
 }

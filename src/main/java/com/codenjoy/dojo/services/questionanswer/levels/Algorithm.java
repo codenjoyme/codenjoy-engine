@@ -22,11 +22,13 @@ package com.codenjoy.dojo.services.questionanswer.levels;
  * #L%
  */
 
+import java.util.List;
+
 public interface Algorithm {
 
     String get(String input);
 
-    String description();
+    List<String> description();
 
     String author();
 

@@ -53,7 +53,7 @@ public interface LevelsPool {
 
     void setLevel(int index);
 
-    String getDescription();
+    List<String> getDescription();
 
     int getComplexity();
 

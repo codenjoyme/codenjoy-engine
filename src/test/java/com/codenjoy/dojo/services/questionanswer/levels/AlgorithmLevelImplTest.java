@@ -58,8 +58,8 @@ public class AlgorithmLevelImplTest {
             }
 
             @Override
-            public String description() {
-                return "BlaBlaDescription";
+            public List<String> description() {
+                return Arrays.asList("BlaBlaDescription");
             }
 
             @Override
@@ -135,7 +135,7 @@ public class AlgorithmLevelImplTest {
         }
 
         @Override
-        public String description() {
+        public List<String> description() {
             return null;
         }
 

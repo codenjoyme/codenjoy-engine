@@ -73,7 +73,7 @@ public class LevelsPoolImpl implements LevelsPool {
     }
 
     @Override
-    public String getDescription() {
+    public List<String> getDescription() {
         return level.description();
     }
 

@@ -61,7 +61,7 @@ public interface Level {
      */
     int complexity();
 
-    String description();
+    List<String> description();
 
     default String winCode() {
         return "function program(question) {\n" +

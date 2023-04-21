@@ -25,6 +25,9 @@ package com.codenjoy.dojo.services.questionanswer.levels;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class NullAlgorithm implements Algorithm {
 
     @Override
@@ -33,8 +36,8 @@ public class NullAlgorithm implements Algorithm {
     }
 
     @Override
-    public String description() {
-        return StringUtils.EMPTY;
+    public List<String> description() {
+        return Arrays.asList();
     }
 
     @Override
