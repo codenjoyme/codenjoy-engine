@@ -86,4 +86,11 @@ public interface GameField<P extends GamePlayer, H extends PlayerHero> extends T
     }
 
     int size();
+
+    /**
+     * @see com.codenjoy.dojo.services.Game#sameBoard()
+     */
+    default boolean sameBoard() {
+        return true;
+    }
 }

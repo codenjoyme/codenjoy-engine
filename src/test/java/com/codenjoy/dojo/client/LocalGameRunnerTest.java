@@ -131,8 +131,9 @@ public class LocalGameRunnerTest {
         when(gameType.getSettings()).thenReturn((Settings) settings);
         when(gameType.createGame(anyInt(), any(Settings.class))).thenReturn(field);
         when(gameType.getPrinterFactory()).thenReturn(PrinterFactory.get(
-                (BoardReader reader, GamePlayer player)
-                        -> "PRINTER_PRINTS_BOARD" + id() + "{reader=" + reader + ",player=" + player + "}")
+                (BoardReader reader, GamePlayer player, Object... parameters)
+                        -> String.format("PRINTER_PRINTS_BOARD%s{reader=%s,player=%s}",
+                                id(), reader, player))
         );
 
         listener = event -> messages.add("GOT_EVENT" + id() + "{" + event + "}");

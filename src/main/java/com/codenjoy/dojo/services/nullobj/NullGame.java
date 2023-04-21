@@ -72,7 +72,7 @@ public final class NullGame implements Game {
     }
 
     @Override
-    public String getBoardAsString() {
+    public String getBoardAsString(Object... parameters) {
         return StringUtils.EMPTY;
     }
 

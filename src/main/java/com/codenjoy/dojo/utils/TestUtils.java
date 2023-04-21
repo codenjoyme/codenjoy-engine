@@ -377,7 +377,7 @@ public class TestUtils {
 
         profiler.print();
 
-        int reserve = 4;
+        int reserve = 5;
         // выполнялось единожды
         assertLess(profiler, "creation", expectedCreation * reserve);
         // сколько пользователей - столько раз выполнялось

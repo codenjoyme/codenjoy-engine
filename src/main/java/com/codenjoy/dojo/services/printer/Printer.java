@@ -23,11 +23,24 @@ package com.codenjoy.dojo.services.printer;
  */
 
 
+import com.codenjoy.dojo.services.Game;
+
 /**
- * Реализация этого класса овтечает за представление борды в виде строки,
+ * Реализация этого класса отвечает за представление борды в виде строки,
  * которая потом передастся играющему клиенту.
  */
 @FunctionalInterface
 public interface Printer<T> {
+
     T print(Object... parameters);
+
+    /**
+     * @see Game#getBoardAsString(Object...) 
+     * @see Game#sameBoard()
+     */
+    static boolean isScreenOrClient(Object... parameters) {
+        return parameters != null
+                && parameters.length != 0
+                && (Boolean) parameters[0];
+    }
 }

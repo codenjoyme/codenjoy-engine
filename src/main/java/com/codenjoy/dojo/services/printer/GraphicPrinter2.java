@@ -24,13 +24,12 @@ package com.codenjoy.dojo.services.printer;
 
 
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
-import com.codenjoy.dojo.services.printer.BoardReader;
-import com.codenjoy.dojo.services.printer.Printer;
 
 /**
  * Это кастомная версия {@link Printer}
  */
 @FunctionalInterface
 public interface GraphicPrinter2<T, A, P extends GamePlayer> {
-    T print(BoardReader reader, Printer<A> printer, P player);
+
+    T print(BoardReader reader, Printer<A> printer, P player, Object... parameters);
 }

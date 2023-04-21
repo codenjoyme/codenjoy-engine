@@ -129,12 +129,17 @@ public class Single implements Game {
     }
 
     @Override
-    public Object getBoardAsString() {
+    public boolean sameBoard() {
+        return field.sameBoard();
+    }
+
+    @Override
+    public Object getBoardAsString(Object... parameters) {
         if (printer == null) {
             throw new IllegalStateException("No board for this player");
         }
 
-        Object data = printer.print();
+        Object data = printer.print(parameters);
 
         return multiplayerType.postProcessBoard(data, this);
     }

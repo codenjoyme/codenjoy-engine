@@ -27,7 +27,6 @@ import com.codenjoy.dojo.client.Closeable;
 import com.codenjoy.dojo.services.hero.HeroData;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
-import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import org.json.JSONObject;
 
 public interface Game extends Closeable, Progressive {
@@ -69,6 +68,16 @@ public interface Game extends Closeable, Progressive {
     void loadSave(JSONObject save);
 
     /**
+     * @return true - если игра отрисовывается двумя разными состояниями для ws-клиента
+     *         играющего и для прорисовки в браузере для наблюдающего. Это может
+     *         потребоваться, когда мы хотим скрыть какие-то данные от игрока, но при
+     *         этом продемонстрировать их в браузере.
+     */
+    default boolean sameBoard() {
+        return true;
+    }
+
+    /**
      * Board =
      * "******" +
      * "*    *" +
@@ -76,9 +85,16 @@ public interface Game extends Closeable, Progressive {
      * "*    *" +
      * "*    *" +
      * "******";
+     * Board может быть представлена в виде json объекта или любым другим представлением.
+     *
+     * @param parameters Обычно всего не используется, но если Game#sameBoard() = false, то:
+     *                   parameters[0] = true, если нужно получить полное состояние доски
+     *                   для отрисовки в браузере (default значение).
+     *                   parameters[0] = false, если нужно получить состояние доски
+     *                   для игры на ws-клиенте игрока (мы не хотим ему все данные).
      * @return строковое (или {@link JSONObject}) представление квадратной доски.
      */
-    Object getBoardAsString();
+    Object getBoardAsString(Object... parameters);
 
     /**
      * Если вдруг пользователь передумает играть и уйдет,

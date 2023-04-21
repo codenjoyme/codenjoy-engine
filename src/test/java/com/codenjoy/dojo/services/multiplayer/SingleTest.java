@@ -26,6 +26,8 @@ package com.codenjoy.dojo.services.multiplayer;
 import com.codenjoy.dojo.services.Game;
 import com.codenjoy.dojo.services.Joystick;
 import com.codenjoy.dojo.services.hero.HeroData;
+import com.codenjoy.dojo.services.printer.BoardReader;
+import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -167,5 +169,41 @@ public class SingleTest {
 
         // then
         verify(field, never()).remove(player);
+    }
+
+    @Test
+    public void shouldGetBoardAsString() {
+        // given
+        Printer printer = mock(Printer.class);
+        BoardReader boardReader = mock(BoardReader.class);
+        when(factory.getPrinter(any(BoardReader.class), any(GamePlayer.class))).thenReturn(printer);
+        when(printer.print(any())).thenReturn("board");
+        when(field.reader()).thenReturn(boardReader);
+
+        game = new Single(player, factory, MultiplayerType.MULTIPLE);
+        game.on(field);
+
+        // when
+        Object board = game.getBoardAsString(new Object[] { true, 1, "string" });
+
+        // then
+        assertEquals("board", board.toString());
+        verify(printer).print(new Object[] { true, 1, "string" });
+    }
+
+    @Test
+    public void shouldSameBoard() {
+        // given
+        game = new Single(player, factory, MultiplayerType.MULTIPLE);
+        game.on(field);
+
+        when(field.sameBoard()).thenReturn(true);
+
+        // when
+        boolean result = game.sameBoard();
+
+        // then
+        assertEquals(true, result);
+        verify(field).sameBoard();
     }
 }
