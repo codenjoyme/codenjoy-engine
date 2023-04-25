@@ -22,6 +22,8 @@ package com.codenjoy.dojo.services.questionanswer;
  * #L%
  */
 
+import org.apache.commons.lang3.StringUtils;
+
 public class QuestionAnswer {
 
     private String question;
@@ -59,7 +61,7 @@ public class QuestionAnswer {
             this.expected = null;
             return;
         }
-        setValid(answer.equals(expected));
+        setValid(StringUtils.equals(answer, expected));
         if (!valid) {
             this.expected = expected;
         }

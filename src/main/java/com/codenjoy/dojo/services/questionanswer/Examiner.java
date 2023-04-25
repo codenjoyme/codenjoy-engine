@@ -34,6 +34,7 @@ import java.util.List;
 
 public class Examiner {
 
+    public static final String UNANSWERED = "???";
     private List<QuestionAnswers> history;
     private LevelsPool level;
     private Timer timer;
@@ -92,7 +93,7 @@ public class Examiner {
         for (int index = 0; index < questions.size(); index++) {
             String question = questions.get(index);
             String expectedAnswer = expectedAnswers.get(index);
-            String actualAnswer = "???";
+            String actualAnswer = UNANSWERED;
             if (index < actualAnswers.size()) {
                 actualAnswer = actualAnswers.get(index);
             }
