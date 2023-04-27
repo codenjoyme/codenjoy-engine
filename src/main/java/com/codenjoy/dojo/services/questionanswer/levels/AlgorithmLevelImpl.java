@@ -34,15 +34,20 @@ public abstract class AlgorithmLevelImpl extends QuestionAnswerLevelImpl impleme
         if (input.length == 0) {
             questions = getQuestions();
             if (questions.isEmpty()) {
-                questions = new LinkedList<>();
-                for (int index = 1; index <= MAX_QUESTION_FOR_ONE_INT_ARGUMENT; index++) {
-                    questions.add(String.valueOf(index));
-                }
+                questions = prepareQuestions(MAX_QUESTION_FOR_ONE_INT_ARGUMENT);
             }
         } else {
             questions = Arrays.asList(input);
         }
         prepareAnswers();
+    }
+
+    protected List<String> prepareQuestions(int max) {
+        List<String> result = new LinkedList<>();
+        for (int index = 1; index <= max; index++) {
+            result.add(String.valueOf(index));
+        }
+        return result;
     }
 
     private void prepareAnswers() {
