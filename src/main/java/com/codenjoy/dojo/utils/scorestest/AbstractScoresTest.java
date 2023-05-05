@@ -11,14 +11,17 @@ import java.util.Arrays;
 import java.util.function.Function;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
+import static com.codenjoy.dojo.utils.scorestest.AbstractScoresTest.Separators.*;
 import static java.util.stream.Collectors.joining;
 
 public abstract class AbstractScoresTest {
 
-    public static final String SEPARATOR_GIVEN_SCORES = ":";
-    public static final String SEPARATOR_EVENT_PARAMETERS = ",";
-    public static final String SEPARATOR_EVENT_DATA = " > ";
-    public static final String SEPARATOR_TOTAL_SCORES = " = ";
+    public static class Separators {
+        public static final String GIVEN = ":";
+        public static final String PARAMETERS = ",";
+        public static final String SCORES = ">";
+    }
+    public static final String COMMAND_CLEAN = "(CLEAN)";
 
     protected ScoresImpl scores;
     protected SettingsReader settings = settings();
@@ -48,57 +51,62 @@ public abstract class AbstractScoresTest {
                 .collect(joining("\n"));
     }
 
-    private boolean isNumber(String string) {
-        return string.chars().allMatch(Character::isDigit);
-    }
-
     private String sign(int value) {
         return (value >= 0)
                 ? "+" + value
                 : String.valueOf(value);
     }
 
-    private String run(String expected) {
-        if (expected.endsWith(SEPARATOR_GIVEN_SCORES)) {
-            int score = Integer.parseInt(expected.split(SEPARATOR_GIVEN_SCORES)[0]);
+    private String run(String line) {
+        if (line.endsWith(GIVEN)) {
+            int score = Integer.parseInt(line.split(GIVEN)[0]);
             givenScores(score);
-            return expected;
+            return line;
         }
 
-        int score = scores.getScore();
-        String eventName = expected.split(SEPARATOR_EVENT_DATA)[0];
+        int before = scores.getScore();
+        String eventName = line.split(SCORES)[0].trim();
         EventObject event = event(eventName);
         if (event != null) {
             scores.event(event);
         }
-        String result = String.format("%s%s%s%s%s",
-                eventName,
-                SEPARATOR_EVENT_DATA,
-                sign(scores.getScore() - score),
-                SEPARATOR_TOTAL_SCORES,
-                scores.getScore());
 
-        return result;
+        return String.format("%s > %s = %s",
+                eventName,
+                sign(scores.getScore() - before),
+                scores.getScore());
     }
 
-    @SneakyThrows
     private EventObject event(String line) {
-        if (line.equals("<CLEAN>")) {
+        if (line.equals(COMMAND_CLEAN)) {
             scores.clear();
             return null;
         }
-        if (line.contains(SEPARATOR_EVENT_PARAMETERS)) {
-            String name = line.split(SEPARATOR_EVENT_PARAMETERS)[0];
 
-            Enum type = Enum.valueOf(eventTypes(), name);
-            int value = Integer.parseInt(line.split(SEPARATOR_EVENT_PARAMETERS)[1]);
-            return events().getDeclaredConstructor(eventTypes(), int.class)
-                    .newInstance(type, value);
+        if (line.contains(PARAMETERS)) {
+            String name = line.split(PARAMETERS)[0];
+            String value = line.split(PARAMETERS)[1];
+
+            return getEvent(name, value);
         }
 
-        Enum type = Enum.valueOf(eventTypes(), line);
+        return getEvent(line);
+    }
+
+    @SneakyThrows
+    private EventObject getEvent(String name) {
+        Enum type = Enum.valueOf(eventTypes(), name);
+
         return events().getDeclaredConstructor(eventTypes())
                 .newInstance(type);
     }
 
+    @SneakyThrows
+    private EventObject getEvent(String name, String valueString){
+        Enum type = Enum.valueOf(eventTypes(), name);
+        int value = Integer.parseInt(valueString);
+
+        return events().getDeclaredConstructor(eventTypes(), int.class)
+                .newInstance(type, value);
+    }
 }
