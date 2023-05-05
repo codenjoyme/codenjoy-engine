@@ -27,10 +27,16 @@ public abstract class AbstractScoresTest {
     protected SettingsReader settings = settings();
 
     private void givenScores(int score) {
-        scores = new ScoresImpl<>(score, new Calculator<>(scores().apply(settings)));
+        scores = new ScoresImpl<>(score, new Calculator<>(scores(settings)));
     }
 
-    protected abstract Function<SettingsReader, ? extends ScoresMap<?>> scores();
+    @SneakyThrows
+    private ScoresMap<?> scores(SettingsReader settings) {
+        return scores().getDeclaredConstructor(SettingsReader.class)
+                .newInstance(settings);
+    }
+
+    protected abstract Class<? extends ScoresMap<?>> scores();
 
     protected abstract SettingsReader settings();
 
