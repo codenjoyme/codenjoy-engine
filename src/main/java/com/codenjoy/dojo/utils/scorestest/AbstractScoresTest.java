@@ -8,8 +8,6 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
@@ -17,9 +15,10 @@ import static java.util.stream.Collectors.joining;
 
 public abstract class AbstractScoresTest {
 
-    public static final String SEPARATOR_BEFORE_AFTER = " => ";
+    public static final String SEPARATOR_GIVEN_SCORES = ":";
     public static final String SEPARATOR_EVENT_PARAMETERS = ",";
-    public static final String SEPARATOR_EVENTS = " ";
+    public static final String SEPARATOR_EVENT_DATA = " > ";
+    public static final String SEPARATOR_TOTAL_SCORES = " = ";
 
     protected ScoresImpl scores;
     protected SettingsReader settings = settings();
@@ -49,38 +48,6 @@ public abstract class AbstractScoresTest {
                 .collect(joining("\n"));
     }
 
-    private String run(String expected) {
-        String left = expected.split(SEPARATOR_BEFORE_AFTER)[0];
-        String[] parts = left.split(SEPARATOR_EVENTS);
-
-        AtomicInteger score;
-        int fromIndex;
-        if (isNumber(parts[0])) {
-            score = new AtomicInteger(Integer.parseInt(parts[0]));
-            givenScores(score.get());
-            fromIndex = 1;
-        } else {
-            score = new AtomicInteger(scores.getScore());
-            fromIndex = 0;
-        }
-
-        String scoresHistory = Arrays.asList(parts)
-                .subList(fromIndex, parts.length).stream()
-                .map(this::event)
-                .filter(Objects::nonNull)
-                .peek(scores::event)
-                .map(event -> sign(scores.getScore() - score.get()))
-                .peek(it -> score.set(scores.getScore()))
-                .collect(joining(SEPARATOR_EVENTS));
-
-        return String.format("%s%s%s%s%s",
-                left,
-                SEPARATOR_BEFORE_AFTER,
-                scoresHistory,
-                SEPARATOR_BEFORE_AFTER,
-                scores.getScore());
-    }
-
     private boolean isNumber(String string) {
         return string.chars().allMatch(Character::isDigit);
     }
@@ -89,6 +56,29 @@ public abstract class AbstractScoresTest {
         return (value >= 0)
                 ? "+" + value
                 : String.valueOf(value);
+    }
+
+    private String run(String expected) {
+        if (expected.endsWith(SEPARATOR_GIVEN_SCORES)) {
+            int score = Integer.parseInt(expected.split(SEPARATOR_GIVEN_SCORES)[0]);
+            givenScores(score);
+            return expected;
+        }
+
+        int score = scores.getScore();
+        String eventName = expected.split(SEPARATOR_EVENT_DATA)[0];
+        EventObject event = event(eventName);
+        if (event != null) {
+            scores.event(event);
+        }
+        String result = String.format("%s%s%s%s%s",
+                eventName,
+                SEPARATOR_EVENT_DATA,
+                sign(scores.getScore() - score),
+                SEPARATOR_TOTAL_SCORES,
+                scores.getScore());
+
+        return result;
     }
 
     @SneakyThrows
