@@ -8,6 +8,7 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
@@ -20,9 +21,11 @@ public abstract class AbstractScoresTest {
     public static final String SEPARATOR_EVENT_PARAMETERS = ",";
     public static final String SEPARATOR_EVENTS = " ";
 
+    protected ScoresImpl scores;
+    protected SettingsReader settings = settings();
 
-    private ScoresImpl givenScores(int score) {
-        return new ScoresImpl<>(score, new Calculator<>(scores().apply(settings())));
+    private void givenScores(int score) {
+        scores = new ScoresImpl<>(score, new Calculator<>(scores().apply(settings)));
     }
 
     protected abstract Function<SettingsReader, ? extends ScoresMap<?>> scores();
@@ -50,12 +53,21 @@ public abstract class AbstractScoresTest {
         String left = expected.split(SEPARATOR_BEFORE_AFTER)[0];
         String[] parts = left.split(SEPARATOR_EVENTS);
 
-        AtomicInteger score = new AtomicInteger(Integer.parseInt(parts[0]));
-        ScoresImpl scores = givenScores(score.get());
+        AtomicInteger score;
+        int fromIndex;
+        if (isNumber(parts[0])) {
+            score = new AtomicInteger(Integer.parseInt(parts[0]));
+            givenScores(score.get());
+            fromIndex = 1;
+        } else {
+            score = new AtomicInteger(scores.getScore());
+            fromIndex = 0;
+        }
 
         String scoresHistory = Arrays.asList(parts)
-                .subList(1, parts.length).stream()
+                .subList(fromIndex, parts.length).stream()
                 .map(this::event)
+                .filter(Objects::nonNull)
                 .peek(scores::event)
                 .map(event -> sign(scores.getScore() - score.get()))
                 .peek(it -> score.set(scores.getScore()))
@@ -69,6 +81,10 @@ public abstract class AbstractScoresTest {
                 scores.getScore());
     }
 
+    private boolean isNumber(String string) {
+        return string.chars().allMatch(Character::isDigit);
+    }
+
     private String sign(int value) {
         return (value >= 0)
                 ? "+" + value
@@ -77,6 +93,10 @@ public abstract class AbstractScoresTest {
 
     @SneakyThrows
     private EventObject event(String line) {
+        if (line.equals("<CLEAN>")) {
+            scores.clear();
+            return null;
+        }
         if (line.contains(SEPARATOR_EVENT_PARAMETERS)) {
             String name = line.split(SEPARATOR_EVENT_PARAMETERS)[0];
 
