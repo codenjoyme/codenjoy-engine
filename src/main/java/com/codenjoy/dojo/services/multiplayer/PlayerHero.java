@@ -78,7 +78,7 @@ public abstract class PlayerHero<F extends GameField> extends PointImpl implemen
     }
 
     public SettingsReader settings() {
-        return field.settings();
+        return (field != null) ? field.settings() : null;
     }
 
     public abstract boolean isAlive();
