@@ -34,11 +34,11 @@ public abstract class AbstractScoresTest {
 
     protected abstract SettingsReader settings();
 
-    protected abstract Class<? extends EventObject> events();
-
-    protected Class<? extends Enum> eventTypes() {
+    protected Class<? extends EventObject> events() {
         return null;
     }
+
+    protected abstract Class<? extends Enum> eventTypes();
 
     public void assertEvents(String expected) {
         String actual = forAll(expected, this::run);
@@ -66,7 +66,7 @@ public abstract class AbstractScoresTest {
 
         int before = scores.getScore();
         String eventName = line.split(SCORES)[0].trim();
-        EventObject event = event(eventName);
+        Object event = event(eventName);
         if (event != null) {
             scores.event(event);
         }
@@ -77,7 +77,7 @@ public abstract class AbstractScoresTest {
                 scores.getScore());
     }
 
-    private EventObject event(String line) {
+    private Object event(String line) {
         if (line.equals(COMMAND_CLEAN)) {
             scores.clear();
             return null;
@@ -90,20 +90,28 @@ public abstract class AbstractScoresTest {
             return getEvent(name, value);
         }
 
-        return getEvent(line);
+        if (events() != null) {
+            return getEvent(line);
+        }
+
+        return getEventType(line);
     }
 
     @SneakyThrows
     private EventObject getEvent(String name) {
-        Enum type = Enum.valueOf(eventTypes(), name);
+        Enum type = getEventType(name);
 
         return events().getDeclaredConstructor(eventTypes())
                 .newInstance(type);
     }
 
+    private Enum getEventType(String name) {
+        return Enum.valueOf(eventTypes(), name);
+    }
+
     @SneakyThrows
     private EventObject getEvent(String name, String valueString){
-        Enum type = Enum.valueOf(eventTypes(), name);
+        Enum type = getEventType(name);
         int value = Integer.parseInt(valueString);
 
         return events().getDeclaredConstructor(eventTypes(), int.class)
