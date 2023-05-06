@@ -14,6 +14,8 @@ import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static com.codenjoy.dojo.utils.scorestest.AbstractScoresTest.Separators.*;
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
@@ -68,7 +70,7 @@ public abstract class AbstractScoresTest {
 
     private String run(String line) {
         if (line.endsWith(GIVEN)) {
-            int score = Integer.parseInt(line.split(GIVEN)[0]);
+            int score = parseInt(line.split(GIVEN)[0]);
             givenScores(score);
             return line;
         }
@@ -109,17 +111,26 @@ public abstract class AbstractScoresTest {
     private EventObject getEvent(String... params){
         List values = Stream.of(params)
                 .skip(1)
-                .map(Integer::parseInt)
+                .map(value -> isNumber(value) ? parseInt(value) : parseBoolean(value))
                 .collect(toList());
         values.add(0, getEventType(params[0]));
 
         List<Class> classes = Stream.of(params)
                 .skip(1)
-                .map(value -> int.class)
+                .map(value -> isNumber(value) ? int.class : boolean.class) // TODO what about other primitives
                 .collect(toList());
         classes.add(0, eventTypes());
 
         return events().getDeclaredConstructor(classes.toArray(new Class[]{}))
                 .newInstance(values.toArray());
+    }
+
+    private boolean isNumber(String value) {
+        try {
+            parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
