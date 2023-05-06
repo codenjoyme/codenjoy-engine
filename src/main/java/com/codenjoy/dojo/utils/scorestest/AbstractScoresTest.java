@@ -8,11 +8,14 @@ import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.SneakyThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static com.codenjoy.dojo.utils.scorestest.AbstractScoresTest.Separators.*;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
 public abstract class AbstractScoresTest {
 
@@ -89,26 +92,13 @@ public abstract class AbstractScoresTest {
             return null;
         }
 
-        if (line.contains(PARAMETERS)) {
-            String name = line.split(PARAMETERS)[0];
-            String value = line.split(PARAMETERS)[1];
-
-            return getEvent(name, value);
-        }
+        String[] params = line.split(PARAMETERS);
 
         if (events() != null) {
-            return getEvent(line);
+            return getEvent(params);
         }
 
         return getEventType(line);
-    }
-
-    @SneakyThrows
-    private EventObject getEvent(String name) {
-        Enum type = getEventType(name);
-
-        return events().getDeclaredConstructor(eventTypes())
-                .newInstance(type);
     }
 
     private Enum getEventType(String name) {
@@ -116,11 +106,20 @@ public abstract class AbstractScoresTest {
     }
 
     @SneakyThrows
-    private EventObject getEvent(String name, String valueString){
-        Enum type = getEventType(name);
-        int value = Integer.parseInt(valueString);
+    private EventObject getEvent(String... params){
+        List values = Stream.of(params)
+                .skip(1)
+                .map(Integer::parseInt)
+                .collect(toList());
+        values.add(0, getEventType(params[0]));
 
-        return events().getDeclaredConstructor(eventTypes(), int.class)
-                .newInstance(type, value);
+        List<Class> classes = Stream.of(params)
+                .skip(1)
+                .map(value -> int.class)
+                .collect(toList());
+        classes.add(0, eventTypes());
+
+        return events().getDeclaredConstructor(classes.toArray(new Class[]{}))
+                .newInstance(values.toArray());
     }
 }
