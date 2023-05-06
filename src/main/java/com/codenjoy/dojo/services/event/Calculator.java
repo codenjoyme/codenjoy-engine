@@ -65,7 +65,9 @@ public class Calculator<V> {
     public Pair parseEvent(Object input) {
         if (input instanceof EventObject) {
             EventObject event = (EventObject) input;
-            return new Pair(event.type(), event.value());
+
+            return new Pair(event.type(),
+                    event.multiValue() ? event : event.value());
         }
 
         if (input instanceof Enum) {

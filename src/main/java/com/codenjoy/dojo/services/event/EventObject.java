@@ -28,7 +28,11 @@ public interface EventObject<T, V> {
 
     T type();
 
-    default V value() {
+    default boolean multiValue() {
+        return false;
+    }
+
+    default V value() { // TODO remove implementation
         return (V) this;
     }
 
