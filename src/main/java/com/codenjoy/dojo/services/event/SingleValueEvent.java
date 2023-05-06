@@ -22,32 +22,43 @@ package com.codenjoy.dojo.services.event;
  * #L%
  */
 
-import java.util.Objects;
+public class SingleValueEvent<T, V> implements EventObject<T, V> {
 
-public interface EventObject<T, V> {
+    private T type;
+    private V value;
 
-    T type();
-
-    default V value() {
-        return (V) this;
+    public SingleValueEvent(T type) {
+        this.type = type;
+        this.value = null;
     }
 
-    default boolean _equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventObject events = (EventObject) o;
-        return type() == events.type() &&
-                value() == events.value();
+    public SingleValueEvent(T type, V value) {
+        this.type = type;
+        this.value = value;
     }
 
-    default int _hashCode() {
-        return Objects.hash(type());
+    @Override
+    public V value() {
+        return value;
     }
 
-    default String _toString() {
-        if (value() == null) {
-            return type().toString();
-        }
-        return String.format("%s(%s)", type(), value());
+    @Override
+    public T type() {
+        return type;
+    }
+
+    @Override
+    public String toString() {
+        return _toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return _hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return _equals(object);
     }
 }
