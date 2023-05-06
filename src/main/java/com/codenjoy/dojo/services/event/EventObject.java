@@ -43,4 +43,11 @@ public interface EventObject<T, V> {
     default int _hashCode() {
         return Objects.hash(type());
     }
+
+    default String _toString() {
+        if (value() instanceof Integer && (int)value() == 0) {
+            return type().toString();
+        }
+        return String.format("%s(%s)", type(), value());
+    }
 }
