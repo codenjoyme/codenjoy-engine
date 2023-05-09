@@ -23,10 +23,12 @@ import static java.util.stream.Collectors.toList;
 
 public abstract class AbstractScoresTest {
 
+
     public static class Separators {
         public static final String GIVEN = ":";
         public static final String PARAMETERS = ",";
         public static final String SCORES = ">";
+        public static final String BREAK = "\n";
     }
     public static final String COMMAND_CLEAN = "(CLEAN)";
 
@@ -39,11 +41,16 @@ public abstract class AbstractScoresTest {
 
     @SneakyThrows
     private ScoresMap<?> scores(SettingsReader settings) {
-        Constructor<?>[] constructors = Arrays.stream(scores().getDeclaredConstructors())
-                .filter(constructor -> constructor.getParameterCount() == 1
-                        && SettingsReader.class.isAssignableFrom(constructor.getParameterTypes()[0]))
-                .toArray(Constructor<?>[]::new);
+        Constructor<?>[] constructors =
+                Arrays.stream(scores().getDeclaredConstructors())
+                        .filter(AbstractScoresTest::hasOneSettingsParameter)
+                        .toArray(Constructor<?>[]::new);
         return (ScoresMap<?>) constructors[0].newInstance(settings);
+    }
+
+    private static boolean hasOneSettingsParameter(Constructor<?> constructor) {
+        return constructor.getParameterCount() == 1
+                && SettingsReader.class.isAssignableFrom(constructor.getParameterTypes()[0]);
     }
 
     protected abstract Class<? extends ScoresMap> scores();
@@ -62,9 +69,9 @@ public abstract class AbstractScoresTest {
     }
 
     private String forAll(String expected, Function<String, String> lineProcessor) {
-        return Arrays.stream(expected.split("\n"))
+        return Arrays.stream(expected.split(BREAK))
                 .map(lineProcessor)
-                .collect(joining("\n"));
+                .collect(joining(BREAK));
     }
 
     private String sign(int value) {
@@ -114,7 +121,7 @@ public abstract class AbstractScoresTest {
 
     @SneakyThrows
     private EventObject getEvent(String... params){
-        List values = Stream.of(params)
+        List<Object> values = Stream.of(params)
                 .skip(1)
                 .map(this::parse)
                 .collect(toList());
@@ -122,7 +129,7 @@ public abstract class AbstractScoresTest {
 
         List<Class> classes = Stream.of(params)
                 .skip(1)
-                .map(value -> getPrimitiveClass(value))
+                .map(this::getPrimitiveClass)
                 .collect(toList());
         classes.add(0, eventTypes());
 
@@ -155,7 +162,7 @@ public abstract class AbstractScoresTest {
         return parse(value).getClass();
     }
 
-    private Serializable parse(String value) {
+    private Number parse(String value) {
         return NumberUtils.createNumber(value);
     }
 }
