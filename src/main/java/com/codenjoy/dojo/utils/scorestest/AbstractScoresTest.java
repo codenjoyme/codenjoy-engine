@@ -6,7 +6,10 @@ import com.codenjoy.dojo.services.event.ScoresImpl;
 import com.codenjoy.dojo.services.event.ScoresMap;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.SneakyThrows;
+import org.apache.commons.lang3.math.NumberUtils;
 
+import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -14,7 +17,6 @@ import java.util.stream.Stream;
 
 import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static com.codenjoy.dojo.utils.scorestest.AbstractScoresTest.Separators.*;
-import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -37,11 +39,14 @@ public abstract class AbstractScoresTest {
 
     @SneakyThrows
     private ScoresMap<?> scores(SettingsReader settings) {
-        return scores().getDeclaredConstructor(SettingsReader.class)
-                .newInstance(settings);
+        Constructor<?>[] constructors = Arrays.stream(scores().getDeclaredConstructors())
+                .filter(constructor -> constructor.getParameterCount() == 1
+                        && SettingsReader.class.isAssignableFrom(constructor.getParameterTypes()[0]))
+                .toArray(Constructor<?>[]::new);
+        return (ScoresMap<?>) constructors[0].newInstance(settings);
     }
 
-    protected abstract Class<? extends ScoresMap<?>> scores();
+    protected abstract Class<? extends ScoresMap> scores();
 
     protected abstract SettingsReader settings();
 
@@ -111,13 +116,13 @@ public abstract class AbstractScoresTest {
     private EventObject getEvent(String... params){
         List values = Stream.of(params)
                 .skip(1)
-                .map(value -> isNumber(value) ? parseInt(value) : parseBoolean(value))
+                .map(this::parse)
                 .collect(toList());
         values.add(0, getEventType(params[0]));
 
         List<Class> classes = Stream.of(params)
                 .skip(1)
-                .map(value -> isNumber(value) ? int.class : boolean.class) // TODO what about other primitives
+                .map(value -> getPrimitiveClass(value))
                 .collect(toList());
         classes.add(0, eventTypes());
 
@@ -125,12 +130,32 @@ public abstract class AbstractScoresTest {
                 .newInstance(values.toArray());
     }
 
-    private boolean isNumber(String value) {
-        try {
-            parseInt(value);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
+    private Class<? extends Serializable> getPrimitiveClass(String value) {
+        Class clazz = parse(value).getClass();
+        if (clazz.equals(Integer.class)) {
+            return int.class;
         }
+
+        if (clazz.equals(Long.class)) {
+            return long.class;
+        }
+
+        if (clazz.equals(Double.class)) {
+            return double.class;
+        }
+
+        if (clazz.equals(Float.class)) {
+            return float.class;
+        }
+
+        if (clazz.equals(Boolean.class)) {
+            return boolean.class;
+        }
+
+        return parse(value).getClass();
+    }
+
+    private Serializable parse(String value) {
+        return NumberUtils.createNumber(value);
     }
 }
