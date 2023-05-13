@@ -46,20 +46,25 @@ public class ManualGeneratorRunnerTest {
         output.redirect();
         ManualGenerator.READONLY = true;
 
-        // when
-        ManualGeneratorRunner.main(new String[]{
-                "..",
-                "mollymage,namdreab,rawelbbub,sample,sampletext,verland,tetris",
-                "ALL"});
+        try {
+            // when
+            ManualGeneratorRunner.main(new String[]{
+                    "..",
+                    "mollymage,namdreab,rawelbbub,sample,sampletext,verland,tetris",
+                    "ALL"});
 
-        // then
-        String actual = output.toString();
-        output.rollback();
-        if (pathInsideCodingDojo() == null) {
-            skipTestWarning();
-            return;
+            // then
+            String actual = output.toString();
+            output.rollback();
+            if (pathInsideCodingDojo() == null) {
+                skipTestWarning();
+                return;
+            }
+            assertEquals(actual);
+        } finally {
+            // when maven run tests it uses same test class instance for each test
+            ManualGenerator.READONLY = false;
         }
-        assertEquals(actual);
     }
 
     private void assertEquals(String actual) {
