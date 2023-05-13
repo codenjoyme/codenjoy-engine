@@ -63,38 +63,46 @@ public abstract class AlgorithmLevelImpl extends QuestionAnswerLevelImpl impleme
     }
 
     public String get(String input) {
-        if (input.contains(", ")) {
-            String[] inputs = input.split(", ");
-            int[] ints = new int[inputs.length];
-            try {
-                for (int index = 0; index < inputs.length; index++) {
-                    ints[index] = Integer.parseInt(inputs[index]);
-                }
-                return get(ints);
-            } catch (NumberFormatException e) {
-                return get(inputs);
-            }
-        }
-
         try {
-            int number = Integer.parseInt(input);
-            return get(number);
-        } catch (NumberFormatException e) {
-            // do nothing - in this case this method will be overloaded
-            throw new IllegalStateException("You should override one of 'get' methods");
+            if (input.contains(", ")) {
+                String[] inputs = input.split(", ");
+                int[] ints = new int[inputs.length];
+                try {
+                    for (int index = 0; index < inputs.length; index++) {
+                        ints[index] = Integer.parseInt(inputs[index]);
+                    }
+                    return get(ints);
+                } catch (NumberFormatException | IllegalStateException e) {
+                    return get(inputs);
+                }
+            }
+
+            try {
+                int number = Integer.parseInt(input);
+                return get(number);
+            } catch (NumberFormatException e) {
+                throw notImplemented();
+            }
+        } catch (IllegalStateException e) {
+            // we cant throw exception here, because it will break whole system
+            return null;
         }
     }
 
     public String get(int input) {
-        return null;
+        throw notImplemented();
+    }
+
+    private RuntimeException notImplemented() {
+        return new IllegalStateException("You should override one of 'get' methods");
     }
 
     public String get(int... input) {
-        return null;
+        throw notImplemented();
     }
 
     public String get(String... input) {
-        return null;
+        throw notImplemented();
     }
 
 }

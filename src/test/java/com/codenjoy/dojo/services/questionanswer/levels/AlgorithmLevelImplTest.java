@@ -29,7 +29,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -119,18 +118,15 @@ public class AlgorithmLevelImplTest {
         when(level.get(anyString())).thenCallRealMethod();
 
         // when
-        try {
-            level.get("qwe");
-            fail("expected exception");
-        } catch (IllegalStateException e) {
-            // then
-            assertEquals("You should override one of 'get' methods", e.getMessage());
-        }
+        level.get("qwe");
+
+        // then
+        verify(level).get("qwe");
     }
 
-    static class TestAlgorithm extends AlgorithmLevelImpl {
+    static class EmptyAlgorithm extends AlgorithmLevelImpl {
 
-        public TestAlgorithm(String... input) {
+        public EmptyAlgorithm(String... input) {
             super(input);
         }
 
@@ -148,12 +144,39 @@ public class AlgorithmLevelImplTest {
         public int complexity() {
             return 0;
         }
+
+    }
+    static class TestAlgorithm extends EmptyAlgorithm {
+
+        public TestAlgorithm(String... input) {
+            super(input);
+        }
+
+        @Override
+        public String get(int input) {
+            return "" + input;
+        }
+
+    }
+
+    @Test
+    public void shouldConstruct_getIsNotImplemented() {
+        // given when
+        Level level = new EmptyAlgorithm();
+
+        // then
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, " +
+                        "11, 12, 13, 14, 15, 16, 17, 18, 19, " +
+                        "20, 21, 22, 23, 24, 25]",
+                level.getQuestions().toString());
     }
 
     @Test
     public void shouldConstruct_inputIsEmpty_noOverride() {
+        // given when
         Level level = new TestAlgorithm();
 
+        // then
         assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, " +
                 "11, 12, 13, 14, 15, 16, 17, 18, 19, " +
                 "20, 21, 22, 23, 24, 25]",
@@ -162,14 +185,17 @@ public class AlgorithmLevelImplTest {
 
     @Test
     public void shouldGetQuestionAnswers() {
+        // given when
         Level level = getLevel();
 
+        // then
         assertEquals("[question1=answer1, question2=answer2, question3=answer3]",
                 level.getQuestionAnswers().toString());
     }
 
     @Test
     public void shouldConstruct_inputIsEmpty_withOverride() {
+        // given when
         Level level = new TestAlgorithm() {
             @Override
             public List<String> getQuestions() {
@@ -177,12 +203,14 @@ public class AlgorithmLevelImplTest {
             }
         };
 
+        // then
         assertEquals("[1, 2]",
                 level.getQuestions().toString());
     }
 
     @Test
     public void shouldConstruct_inputIsNotEmpty_withOverride() {
+        // given when
         Level level = new TestAlgorithm("1", "2", "3", "4") {
             @Override
             public List<String> getQuestions() {
@@ -190,16 +218,18 @@ public class AlgorithmLevelImplTest {
             }
         };
 
+        // then
         assertEquals("[5, 6]",
                 level.getQuestions().toString());
     }
 
     @Test
     public void shouldConstruct_inputIsNotEmpty_noOverride() {
+        // given when
         Level level = new TestAlgorithm("1", "2", "3", "4");
 
+        // then
         assertEquals("[1, 2, 3, 4]",
                 level.getQuestions().toString());
     }
-
 }
