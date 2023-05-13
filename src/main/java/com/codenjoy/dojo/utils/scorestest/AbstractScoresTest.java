@@ -184,7 +184,11 @@ public abstract class AbstractScoresTest {
         return parse(value).getClass();
     }
 
-    private Number parse(String value) {
-        return NumberUtils.createNumber(value);
+    private Serializable parse(String value) {
+        try {
+            return NumberUtils.createNumber(value);
+        } catch (NumberFormatException e) {
+            return Boolean.parseBoolean(value);
+        }
     }
 }
