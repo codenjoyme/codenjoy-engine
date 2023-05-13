@@ -36,6 +36,7 @@ public class ManualGeneratorRunner {
     private static final String ALL = "all";
     private static List<String> ALL_GAMES = GamesUtils.games();
     private static List<String> ALL_LOCALES = Arrays.asList("en", "ru");
+    private static List<String> ALL_TYPES = Arrays.asList("codenjoy", "dojorena");
 
     private static String base;
     private static String games;
@@ -69,17 +70,31 @@ public class ManualGeneratorRunner {
 
         for (String game : games.split(",")) {
             System.out.println();
-            if (!ALL_GAMES.contains(game)) {
-                PrintUtils.printf("Game not found: '%s'", ERROR, game);
-                continue;
-            }
-
-            for (String language : locales.split(",")) {
-                ManualGenerator generator = new ManualGenerator(game, language, base);
-                generator.generate("codenjoy");
-                generator.generate("dojorena");
-            }
+            PrintUtils.printftab(() -> generate(game),
+                    "Generating elements for game '%s'", INFO, game);
         }
+    }
+
+    private static void generate(String game) {
+        if (!ALL_GAMES.contains(game)) {
+            PrintUtils.printf("Game not found: '%s'", ERROR, game);
+            return;
+        }
+
+        for (String language : locales.split(",")) {
+            PrintUtils.printftab(() -> generate(game, language),
+                    "Language '%s'", INFO, language);
+        }
+    }
+
+    private static void generate(String game, String language) {
+        ManualGenerator generator = new ManualGenerator(game, language, base);
+        ALL_TYPES.forEach(type -> generate(generator, type));
+    }
+
+    private static void generate(ManualGenerator generator, String manualType) {
+        PrintUtils.printftab(() -> generator.generate(manualType),
+                "Type '%s'", INFO, manualType);
     }
 
     private static void printInfo(String source, PrintUtils.Color color) {

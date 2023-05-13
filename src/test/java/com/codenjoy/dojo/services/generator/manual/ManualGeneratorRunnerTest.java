@@ -30,7 +30,7 @@ import org.junit.rules.TestName;
 
 import static com.codenjoy.dojo.utils.SmokeUtils.assertSmokeEquals;
 
-@Slf4j // because logger prints to console some data that we dont need at the assertEquals phase
+@Slf4j // because logger prints to console some data that we don't need at the assertEquals phase
 public class ManualGeneratorRunnerTest {
 
     @Rule

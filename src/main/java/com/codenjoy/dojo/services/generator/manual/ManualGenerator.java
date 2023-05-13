@@ -133,13 +133,11 @@ public class ManualGenerator {
         List<String> result = new ArrayList<>();
         for (String fileName : getManualParts()) {
             fileName = fileName.replace(MANUAL_TYPE, manualType);
-            PrintUtils.printf("Trying to find the file: %s", TEXT, fileName);
-
             String found = lookingFor(fileName);
             if (found != null) {
                 result.add(found);
 
-                PrintUtils.printf("File accepted: %s", INFO, found);
+                PrintUtils.printf("Found part: %s", TEXT, found);
             } else {
                 PrintUtils.printf("File is missing: %s", WARNING, fileName);
             }
@@ -151,11 +149,8 @@ public class ManualGenerator {
         for (String fileMask : getFilePathVariants(fileName)) {
             String path = createPathToFile(fileMask);
             if (new File(path).exists()) {
-                PrintUtils.printf("Found the file: %s", TEXT, path);
                 return path;
             }
-
-            PrintUtils.printf("File not found: %s", TEXT, path);
         }
         return null;
     }
@@ -231,8 +226,8 @@ public class ManualGenerator {
         if (!READONLY) {
             SmokeUtils.saveToFile(new File(path), data);
         }
-        PrintUtils.printf("Manual for [%s] type:[%s] saved:[%s]",
-                SUMMARY,
-                game, manualType, path);
+
+        PrintUtils.printf("Store '%s:%s:%s' in file: '%s'", TEXT,
+                manualType, game, language, path);
     }
 }
