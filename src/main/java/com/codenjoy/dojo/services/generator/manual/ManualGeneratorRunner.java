@@ -24,19 +24,18 @@ package com.codenjoy.dojo.services.generator.manual;
 
 import com.codenjoy.dojo.utils.GamesUtils;
 import com.codenjoy.dojo.utils.PrintUtils;
-import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codenjoy.dojo.utils.PrintUtils.Color.INFO;
+import static com.codenjoy.dojo.services.generator.ElementGeneratorRunner.*;
+import static com.codenjoy.dojo.utils.PrintUtils.Color.*;
 
 public class ManualGeneratorRunner {
 
     private static final String ALL = "all";
-    public static List<String> ALL_GAMES = GamesUtils.games();
-    public static List<String> ALL_LOCALES = Arrays.asList("en", "ru");
+    private static List<String> ALL_GAMES = GamesUtils.games();
+    private static List<String> ALL_LOCALES = Arrays.asList("en", "ru");
 
     private static String base;
     private static String games;
@@ -51,42 +50,45 @@ public class ManualGeneratorRunner {
             base = args[0];
             games = args[1];
             locales = args[2];
-            printInfo("Environment");
+            printInfo("Environment", INFO);
         } else {
             base = "";
             games = ALL;
             locales = ALL;
-            printInfo("Runner");
+            printInfo("Runner", INFO);
         }
-        if (ALL.equalsIgnoreCase(games)) {
-            games = StringUtils.join(ALL_GAMES, ",");
+        games = decodeAll(games, ALL_GAMES);
+        locales = decodeAll(locales, ALL_LOCALES);
+        base = makeAbsolute(base);
+        printInfo("Processed", TEXT);
+
+        if (!gamesSourcesPresent(base)) {
+            pleaseRunInAllProject();
+            return;
         }
-        if (ALL.equalsIgnoreCase(locales)) {
-            locales = StringUtils.join(ALL_LOCALES, ",");
-        }
-        if (!new File(base).isAbsolute()) {
-            base = new File(base).getAbsoluteFile().getPath();
-            PrintUtils.printf("\t   absolute:'%s'",
-                    INFO,
-                    base);
-        }
-        printInfo("Processed parameters");
 
         for (String game : games.split(",")) {
+            System.out.println();
+            if (!ALL_GAMES.contains(game)) {
+                PrintUtils.printf("Game not found: '%s'", ERROR, game);
+                continue;
+            }
+
             for (String language : locales.split(",")) {
-                new CodenjoyManual(game, language, base).generate();
-                new DojorenaManual(game, language, base).generate();
+                ManualGenerator generator = new ManualGenerator(game, language, base);
+                generator.generate("codenjoy");
+                generator.generate("dojorena");
             }
         }
     }
 
-    private static void printInfo(String source) {
+    private static void printInfo(String source, PrintUtils.Color color) {
         PrintUtils.printf(
                 "Got from %s:\n" +
                         "\t 'GAMES':   '%s'\n" +
                         "\t 'LOCALES': '%s'\n" +
                         "\t 'BASE':    '%s'",
-                INFO,
+                color,
                 source,
                 games,
                 locales,

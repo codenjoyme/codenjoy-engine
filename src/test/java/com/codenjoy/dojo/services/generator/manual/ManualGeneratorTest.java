@@ -35,7 +35,7 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-public class GameManualGeneratorTest {
+public class ManualGeneratorTest {
 
     private final String PROPERTIES_FILE = "/games/mollymage/src/main/webapp/resources/mollymage/help/ru/info.properties";
     private final String PROPERTIES_DATA = "key.one=data1\nkey.two=data2\n";
@@ -60,7 +60,7 @@ public class GameManualGeneratorTest {
     private final String DATA4 = "Part4 file from Global Path, Language directory";
 
     private RedirectOutput output = new RedirectOutput();
-    private GameManualGenerator generator;
+    private ManualGenerator generator;
 
     @Before
     public void setup() {
@@ -78,13 +78,8 @@ public class GameManualGeneratorTest {
         output.rollback();
     }
 
-    private GameManualGenerator getGenerator() {
-        return new GameManualGenerator(
-                "mollymage",
-                "ru",
-                BASE,
-                GLOBAL_SOURCES_PATH,
-                GAME_SOURCES_PATH) {
+    private ManualGenerator getGenerator() {
+        return new ManualGenerator("mollymage", "ru", BASE, GLOBAL_SOURCES_PATH, GAME_SOURCES_PATH) {
             @Override
             protected List<String> getManualParts() {
                 return Arrays.asList(
@@ -92,11 +87,6 @@ public class GameManualGeneratorTest {
                         "part2.md",
                         "part3.md",
                         "part4.md");
-            }
-
-            @Override
-            protected String getManualType() {
-                return "codenjoy";
             }
         };
     }
@@ -107,7 +97,7 @@ public class GameManualGeneratorTest {
         generateCorrectManualParts();
 
         // when
-        generator.generate();
+        generator.generate("codenjoy");
 
         // then
         assertEquals("target file should be created",
@@ -137,7 +127,7 @@ public class GameManualGeneratorTest {
         generateManualPartsWithoutOneFile_butPresentThisPartWithOtherLanguage();
 
         // when
-        generator.generate();
+        generator.generate("codenjoy");
 
         // then
         assertEquals("target file should be created: " + generatedManual(),
@@ -167,7 +157,7 @@ public class GameManualGeneratorTest {
         generateManualPartsWithoutOneFile();
 
         // when
-        generator.generate();
+        generator.generate("codenjoy");
 
         // then
         assertEquals("target file should not be created: " + generatedManual(),
