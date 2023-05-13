@@ -28,6 +28,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
+import static com.codenjoy.dojo.services.generator.manual.ManualGeneratorTest.pathInsideCodingDojo;
+import static com.codenjoy.dojo.services.generator.manual.ManualGeneratorTest.skipTestWarning;
 import static com.codenjoy.dojo.utils.SmokeUtils.assertSmokeEquals;
 
 @Slf4j // because logger prints to console some data that we don't need at the assertEquals phase
@@ -53,6 +55,10 @@ public class ManualGeneratorRunnerTest {
         // then
         String actual = output.toString();
         output.rollback();
+        if (pathInsideCodingDojo() == null) {
+            skipTestWarning();
+            return;
+        }
         assertEquals(actual);
     }
 

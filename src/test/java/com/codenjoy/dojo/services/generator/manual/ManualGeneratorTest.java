@@ -33,7 +33,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.Assert.*;
+import static com.codenjoy.dojo.services.generator.ElementGenerator.PROJECT_BASE_FOLDER;
+import static com.codenjoy.dojo.services.generator.ElementGeneratorRunner.pleaseRunInAllProject;
+import static org.junit.Assert.assertEquals;
 
 public class ManualGeneratorTest {
 
@@ -205,5 +207,16 @@ public class ManualGeneratorTest {
 
     private File generatedManual() {
         return new File(BASE + "/games/mollymage/codenjoy-manual-ru.md");
+    }
+
+    public static String pathInsideCodingDojo() {
+        String path = new File(".").getAbsolutePath();
+        return path.contains(PROJECT_BASE_FOLDER) ? path : null;
+    }
+
+    public static void skipTestWarning() {
+        // TODO если java-client запущен без других проектов, то тесты clifford/mollymage не проходят
+        pleaseRunInAllProject();
+        System.out.println("WARNING: Skip test.");
     }
 }
