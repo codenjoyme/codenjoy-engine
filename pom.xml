@@ -42,7 +42,6 @@
         <maven-buildnumber-plugin.version>1.4</maven-buildnumber-plugin.version>
         <maven-scm-jgit.version>1.11.2</maven-scm-jgit.version>
         <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
-        <maven-exec-plugin.version>3.1.0</maven-exec-plugin.version>
 
         <user.resources>src/main/webapp/resources/user</user.resources>
         <engine.libs>${user.resources}/engine-libs.zip</engine.libs>
@@ -69,7 +68,7 @@
                             <execution>
                                 <!-- Плагин отвечает за мутационное тестирование.
                                      Включается для игр ключом -Pmutation -->
-                                <id>[##7]-mutation-testing</id>
+                                <id>[##6]-mutation-testing</id>
                                 <goals>
                                     <goal>mutationCoverage</goal>
                                 </goals>
@@ -224,10 +223,10 @@
                         <!-- Плагин отвечает за очистку папки
                              target перед сборкой -->
                         <id>[##1]-clean-target</id>
-                        <phase>clean</phase>
                         <goals>
                             <goal>clean</goal>
                         </goals>
+                        <phase>clean</phase>
                     </execution>
                     <execution>
                         <id>default-clean</id>
@@ -255,10 +254,10 @@
                         <!-- Плагин добавляет git hash текущего коммита
                              из которого делается сборка -->
                         <id>[##2]-generate-git-commit-hash</id>
-                        <phase>validate</phase>
                         <goals>
                             <goal>create</goal>
                         </goals>
+                        <phase>process-sources</phase>
                     </execution>
                     <execution>
                         <id>default</id>
@@ -368,30 +367,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${maven-exec-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <!-- Плагин отвечает за генерацию
-                             всех мануалов -->
-                        <id>[##6]-generate-elements</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>com.codenjoy.dojo.services.generator.manual.ManualGeneratorRunner</mainClass>
-                            <arguments>
-                                <argument>./</argument>
-                                <argument>clifford,mollymage,namdreab,rawelbbub,sample,sampletext,verland</argument>
-                                <argument>all</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven-dependency-plugin.version}</version>
@@ -399,7 +374,7 @@
                     <execution>
                         <!-- Плагин вытягивает в пропертю
                              com.codenjoy:client-java:jar путь к либе -->
-                        <id>[##8]-write-dependencies-properties</id>
+                        <id>[##7]-write-dependencies-properties</id>
                         <goals>
                             <goal>properties</goal>
                         </goals>
@@ -415,7 +390,7 @@
                     <execution>
                         <!-- Плагин из проперти com.codenjoy:client-java:jar создает
                              две подобные с sources и pom -->
-                        <id>[##9]-run-groovy</id>
+                        <id>[##8]-run-groovy</id>
                         <goals>
                             <goal>execute</goal>
                         </goals>
@@ -442,17 +417,17 @@
                 <version>${maven-jar-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>default-jar</id>
-                        <phase>none</phase>
-                    </execution>
-                    <execution>
                         <!-- Плагин отвечает за сборку jar
                              файла -->
-                        <id>[##10]-make-jar</id>
+                        <id>[##9]-make-jar</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                         <phase>prepare-package</phase>
+                    </execution>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
                     </execution>
                 </executions>
                 <configuration>
@@ -469,7 +444,7 @@
                     <execution>
                         <!-- Плагин добавляет jar с сырцами engine
                              в target -->
-                        <id>[##11]-attach-engine-sources</id>
+                        <id>[##10]-attach-engine-sources</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -489,7 +464,7 @@
                     <execution>
                         <!-- Плагин собирает engine-libs.zip
                              со всеми артефактами -->
-                        <id>[##12]-run-ant</id>
+                        <id>[##11]-run-ant</id>
                         <goals>
                             <goal>run</goal>
                         </goals>
