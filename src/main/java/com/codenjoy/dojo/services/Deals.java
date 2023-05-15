@@ -144,7 +144,9 @@ public class Deals implements Iterable<Deal>, Tickable {
                 });
 
         game.on(field);
-        onField.accept(deal);
+        if (onField != null) {
+            onField.accept(deal);
+        }
         game.newGame();
 
         if (save != null && !save.keySet().isEmpty()) {
