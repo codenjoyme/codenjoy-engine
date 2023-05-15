@@ -62,6 +62,7 @@ public class Deals implements Iterable<Deal>, Tickable {
 
     private Consumer<Deal> onAdd;
     private Consumer<Deal> onRemove;
+    private Consumer<Deal> onField;
     private ReadWriteLock lock = new ReentrantReadWriteLock();
 
     private RoomService roomService;
@@ -78,6 +79,10 @@ public class Deals implements Iterable<Deal>, Tickable {
 
     public void onRemove(Consumer<Deal> consumer) {
         this.onRemove = consumer;
+    }
+
+    public void onField(Consumer<Deal> consumer) {
+        this.onField = consumer;
     }
 
     public void init(ReadWriteLock lock) {
@@ -139,8 +144,9 @@ public class Deals implements Iterable<Deal>, Tickable {
                 });
 
         game.on(field);
-
+        onField.accept(deal);
         game.newGame();
+
         if (save != null && !save.keySet().isEmpty()) {
             game.loadSave(save);
         }
