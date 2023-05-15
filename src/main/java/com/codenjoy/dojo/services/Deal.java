@@ -29,6 +29,7 @@ import com.codenjoy.dojo.services.lock.LockedGame;
 import com.codenjoy.dojo.services.multiplayer.GameField;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.MultiplayerType;
+import com.codenjoy.dojo.services.nullobj.NullChatPost;
 import com.codenjoy.dojo.services.nullobj.NullDeal;
 import com.codenjoy.dojo.services.nullobj.NullGame;
 import com.codenjoy.dojo.services.nullobj.NullPlayer;
@@ -62,6 +63,7 @@ public class Deal implements Tickable {
         this.game = game;
         setRoom(room);
         joystick = new LazyJoystick(game);
+        chat = NullChatPost.INSTANCE;
     }
 
     // only for searching

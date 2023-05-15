@@ -23,6 +23,8 @@ package com.codenjoy.dojo.services;
  */
 
 
+import com.codenjoy.dojo.services.info.Information;
+import com.codenjoy.dojo.services.info.ScoresCollector;
 import com.codenjoy.dojo.services.lock.LockedGame;
 import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.nullobj.NullDeal;
@@ -435,5 +437,18 @@ public class Deals implements Iterable<Deal>, Tickable {
                 .map(Deal::getRoom)
                 .distinct()
                 .collect(toList());
+    }
+
+    public Deal deal(PlayerSave save, String room, String id, String callbackUrl, GameType gameType, long now) {
+        remove(id, Sweeper.on().lastAlone());
+
+        PlayerScores playerScores = gameType.getPlayerScores(save.getScore(), gameType.getSettings());
+        Information listener = new ScoresCollector(id, playerScores);
+
+        Player player = new Player(id, callbackUrl, gameType, playerScores, listener);
+        player.setLastResponse(now);
+        player.setRoom(room);
+
+        return add(player, room, save);
     }
 }
