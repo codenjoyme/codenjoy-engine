@@ -50,7 +50,7 @@ public class DebugService extends Suspendable {
     private final Pattern javaClassWithPackage;
     private List<String> filter;
 
-    public DebugService(boolean active, List<String> filter) {
+    public  DebugService(boolean active, List<String> filter) {
         this.active = active;
         this.filter = filter;
         setDebugEnable(active);
