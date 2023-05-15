@@ -24,14 +24,12 @@ package com.codenjoy.dojo.services.field;
 
 import com.codenjoy.dojo.services.BoardMap;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.utils.LevelUtils;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -87,7 +85,7 @@ public abstract class AbstractLevel implements Level {
         }
         return conversions.entrySet().stream()
                 .flatMap(entry -> find(entry.getValue(), entry.getKey()).stream())
-                .collect(toList());
+                    .collect(toList());
     }
 
     // TODO remove it after migrating all games
@@ -128,5 +126,9 @@ public abstract class AbstractLevel implements Level {
 
     public void resize(int size) {
         map.resize(size);
+    }
+
+    public List<? extends PlayerHero> heroes() {
+        return Arrays.asList();
     }
 }
