@@ -48,6 +48,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static com.codenjoy.dojo.services.Deals.withRoom;
 import static com.codenjoy.dojo.utils.TestUtils.asArray;
 import static com.codenjoy.dojo.utils.TestUtils.collectHeroesData;
 import static java.util.Arrays.asList;
@@ -64,7 +65,6 @@ public abstract class NewAbstractBaseGameTest
     private Deals all;
     private NumbersDice dice;
     private RoomService rooms;
-    private List<Deal> deals;
 
     private List<EventListener> listeners;
     private List<P> players;
@@ -83,7 +83,6 @@ public abstract class NewAbstractBaseGameTest
      */
     public void setup() {
         listeners = new LinkedList<>();
-        deals = new LinkedList<>();
         players = new LinkedList<>();
         games = new LinkedList<>();
         printer = new PrinterFactoryImpl<>();
@@ -98,12 +97,18 @@ public abstract class NewAbstractBaseGameTest
         all.init(lock);
         all.onAdd(deal -> {});
         all.onRemove(deal -> {});
+        all.onListener(listener -> {
+            EventListener result = spy(listener);
+            listeners.add(result);
+            return result;
+        });
 
         dice = new NumbersDice();
 
         room = "room";
         GameType original = spy(gameType());
         when(original.getDice()).thenReturn(dice);
+
         gameType = rooms.create(room, original);
         settings = (S) rooms.settings(room);
         setupSettings(settings);
@@ -145,7 +150,7 @@ public abstract class NewAbstractBaseGameTest
     /**
      * @return Объект Settings с базовыми настройками для тестов.
      */
-    protected abstract void setupSettings(S settings);
+    protected abstract S setupSettings(S settings);
 
     public void dice(Integer... next) {
         if (next.length == 0) return;
@@ -168,21 +173,25 @@ public abstract class NewAbstractBaseGameTest
         beforeCreateField();
 
         all.onField(deal -> {
+            // take care of the hero's initial position
             H hero = heroes.get(index());
             dice.will(hero.getX(), hero.getY());
             // then will call field.newGame(player) and finding place for hero with dice
         });
 
         for (H hero : heroes) {
-            Deal deal = all.deal(PlayerSave.NULL, room, "player" + index(), "callbackUrl", gameType, now);
-            deals.add(deal);
+            all.deal(PlayerSave.NULL, room, "player" + index(), "callbackUrl", gameType, now);
         }
 
         afterCreateField();
     }
 
     private int index() {
-        return deals.size();
+        return deals().size() - 1;
+    }
+
+    private List<Deal> deals() {
+        return all.getAll(withRoom(room));
     }
 
     /**
@@ -284,9 +293,13 @@ public abstract class NewAbstractBaseGameTest
         assertEquals(expected, events().getEvents());
     }
 
-    public void assertScores(String expected) {
+    public void assertScores(boolean skipDefault, String expected) {
         assertEquals(expected,
-                collectHeroesData(players, "scores", true));
+                collectHeroesData(players(), "scores", skipDefault));
+    }
+
+    public void assertScores(String expected) {
+        assertScores(true, expected);
     }
 
     public void assertEquals(String message, Object expected, Object actual) {
@@ -330,7 +343,7 @@ public abstract class NewAbstractBaseGameTest
     }
 
     public Deal deal(int index) {
-        return deals.get(index);
+        return deals().get(index);
     }
 
     public Game game() {
@@ -373,7 +386,9 @@ public abstract class NewAbstractBaseGameTest
     }
 
     protected List<P> players() {
-        return players;
+        return deals().stream()
+                .map(deal -> (P)deal.getGame().getPlayer())
+                .collect(toList());
     }
 
     // other stuff

@@ -23,7 +23,6 @@ package com.codenjoy.dojo.utils.events;
  */
 
 import com.codenjoy.dojo.services.EventListener;
-import com.codenjoy.dojo.utils.core.Testing;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
@@ -58,7 +57,7 @@ public class EventsListenersAssert {
     private String getEvents(EventListener events) {
         String result = tryCatch(
                 () -> {
-                    Testing.Captor captor = (Testing.Captor) ArgumentCaptor.forClass(eventsClass);
+                    ArgumentCaptor captor = ArgumentCaptor.forClass(eventsClass);
                     verify(events, atLeast(1)).event(captor.capture());
                     return captor.getAllValues().toString();
                 },

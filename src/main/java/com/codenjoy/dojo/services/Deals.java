@@ -63,6 +63,7 @@ public class Deals implements Iterable<Deal>, Tickable {
     private Consumer<Deal> onAdd;
     private Consumer<Deal> onRemove;
     private Consumer<Deal> onField;
+    private Function<EventListener, EventListener> onListener;
     private ReadWriteLock lock = new ReentrantReadWriteLock();
 
     private RoomService roomService;
@@ -83,6 +84,10 @@ public class Deals implements Iterable<Deal>, Tickable {
 
     public void onField(Consumer<Deal> consumer) {
         this.onField = consumer;
+    }
+
+    public void onListener(Function<EventListener, EventListener> function) {
+        this.onListener = function;
     }
 
     public void init(ReadWriteLock lock) {
@@ -182,11 +187,17 @@ public class Deals implements Iterable<Deal>, Tickable {
             player.setTeamId(save.getTeamId());
         }
         GameType gameType = player.getGameType();
-        GamePlayer gamePlayer = gameType.createPlayer(player.getInfo(),
+        GamePlayer gamePlayer = gameType.createPlayer(wrap(player.getInfo()),
                 player.getTeamId(), player.getId(), gameType.getSettings());
         return new Single(gamePlayer,
                 gameType.getPrinterFactory(),
                 gameType.getMultiplayerType(gameType.getSettings()));
+    }
+
+    private EventListener wrap(EventListener listener) {
+        return onListener == null
+                ? listener
+                : onListener.apply(listener);
     }
 
     private JSONObject parseSave(PlayerSave save) {
