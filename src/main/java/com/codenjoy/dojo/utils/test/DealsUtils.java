@@ -35,7 +35,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @UtilityClass
-public class TestUtils {
+public class DealsUtils {
 
     public static class Env {
         public Deal deal;

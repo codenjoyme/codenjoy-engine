@@ -159,8 +159,8 @@ public class AbstractDealsTest {
 
         setupChat(deals, deal -> lazyJoysticks.add(deal.getJoystick()));
 
-        TestUtils.Env env =
-                TestUtils.getDeal(
+        DealsUtils.Env env =
+                DealsUtils.getDeal(
                         deals,
                         player,
                         room,
