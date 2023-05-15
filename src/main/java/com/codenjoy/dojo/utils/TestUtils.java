@@ -442,4 +442,16 @@ public class TestUtils {
             testing().assertEquals(expectedPattern, actual);
         }
     }
+
+    public static void assertException(String expected, Runnable runnable) {
+        try {
+            runnable.run();
+            testing().fail("Expected exception");
+        } catch (Throwable throwable) {
+            testing().assertEquals(expected,
+                    throwable.getClass().getSimpleName() +
+                            ": " +
+                            throwable.getMessage());
+        }
+    }
 }
