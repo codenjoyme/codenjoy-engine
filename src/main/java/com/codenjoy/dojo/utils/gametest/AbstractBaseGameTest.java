@@ -218,7 +218,7 @@ public abstract class AbstractBaseGameTest
      * @param index Индекс игрока.
      */
     public void assertF(String expected, int index) {
-        assertEquals(expected, game(index).getBoardAsString());
+        assertEquals(expected, game(index).getBoardAsString(true));
     }
 
     /**
@@ -228,7 +228,7 @@ public abstract class AbstractBaseGameTest
     public void assertA(String expected) {
         assertEquals(expected,
                 EventsListenersAssert.collectAll(games, index -> {
-                    Object actual = game(index).getBoardAsString();
+                    Object actual = game(index).getBoardAsString(true);
                     return String.format("game(%s)\n%s\n", index, actual);
                 }));
     }
@@ -279,7 +279,7 @@ public abstract class AbstractBaseGameTest
     // public getters
 
     public Game game() {
-        return games.get(0);
+        return game(0);
     }
 
     public Game game(int index) {
@@ -287,7 +287,7 @@ public abstract class AbstractBaseGameTest
     }
 
     public EventListener listener() {
-        return listeners.get(0);
+        return listener(0);
     }
 
     public EventListener listener(int index) {
