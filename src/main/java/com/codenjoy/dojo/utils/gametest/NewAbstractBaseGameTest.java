@@ -26,6 +26,7 @@ import com.codenjoy.dojo.games.clifford.Element;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.dice.NumbersDice;
 import com.codenjoy.dojo.services.field.AbstractLevel;
+import com.codenjoy.dojo.services.lock.LockedJoystick;
 import com.codenjoy.dojo.services.multiplayer.FieldService;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Spreader;
@@ -39,7 +40,6 @@ import com.codenjoy.dojo.services.round.RoundPlayerHero;
 import com.codenjoy.dojo.services.settings.AllSettings;
 import com.codenjoy.dojo.utils.events.EventsListenersAssert;
 import com.codenjoy.dojo.utils.smart.SmartAssert;
-import com.codenjoy.dojo.utils.whatsnext.WhatsNextUtils;
 
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -49,11 +49,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.codenjoy.dojo.services.Deals.withRoom;
-import static com.codenjoy.dojo.utils.TestUtils.asArray;
 import static com.codenjoy.dojo.utils.TestUtils.collectHeroesData;
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 public abstract class NewAbstractBaseGameTest
         <P extends RoundGamePlayer,
@@ -67,10 +66,7 @@ public abstract class NewAbstractBaseGameTest
     private RoomService rooms;
 
     private List<EventListener> listeners;
-    private List<P> players;
-    private List<Game> games;
     private PrinterFactory<Element, P> printer;
-    private F field;
     private EventsListenersAssert events;
     private L level;
     private List<H> heroes;
@@ -83,8 +79,6 @@ public abstract class NewAbstractBaseGameTest
      */
     public void setup() {
         listeners = new LinkedList<>();
-        players = new LinkedList<>();
-        games = new LinkedList<>();
         printer = new PrinterFactoryImpl<>();
         events = new EventsListenersAssert(() -> listeners, eventClass());
 
@@ -110,8 +104,7 @@ public abstract class NewAbstractBaseGameTest
         when(original.getDice()).thenReturn(dice);
 
         gameType = rooms.create(room, original);
-        settings = (S) rooms.settings(room);
-        setupSettings(settings);
+        settings = setupSettings((S) rooms.settings(room));
     }
 
     /**
@@ -211,47 +204,6 @@ public abstract class NewAbstractBaseGameTest
         // settings / field post-processing
     }
 
-    protected P givenPlayer(H hero) {
-        P player = newPlayer();
-
-        player.setHero(hero);
-        newGame(player);
-        player.getHero().manual(false);
-
-        return player;
-    }
-
-    private void newGame(P player) {
-        games.add(WhatsNextUtils.newGame(player, printer, field));
-    }
-
-    private P newPlayer() {
-        P player = createPlayer().apply(newEventListener(), settings);
-        players.add(player);
-        return player;
-    }
-
-    private EventListener newEventListener() {
-        EventListener listener = mock(EventListener.class);
-        listeners.add(listener);
-        return listener;
-    }
-
-    /**
-     * Создает Player в заданной координате. Используется в случае,
-     * если мы хотим где-то в тесте после givenFl создать еще одного героя.
-     * @param pt Координата где будет новый герой.
-     * @return Созданный Player.
-     */
-    public P givenPlayer(Point pt) {
-        P player = newPlayer();
-
-        dice(asArray(asList(pt)));
-        newGame(player);
-
-        return player;
-    }
-
     public void tick() {
         all.tick();
     }
@@ -283,7 +235,7 @@ public abstract class NewAbstractBaseGameTest
      */
     public void assertA(String expected) {
         assertEquals(expected,
-                EventsListenersAssert.collectAll(games, index -> {
+                EventsListenersAssert.collectAll(listeners(), index -> {
                     Object actual = game(index).getBoardAsString(true);
                     return String.format("game(%s)\n%s\n", index, actual);
                 }));
@@ -325,7 +277,7 @@ public abstract class NewAbstractBaseGameTest
     }
 
     protected F field() {
-        return field;
+        return (F) deal().getField();
     }
 
     protected L level() {
@@ -354,6 +306,14 @@ public abstract class NewAbstractBaseGameTest
         return deal(index).getGame();
     }
 
+    public Joystick joystick() {
+        return joystick(0);
+    }
+
+    public Joystick joystick(int index) {
+        return ((LockedJoystick) game(index).getJoystick()).getWrapped();
+    }
+
     public EventListener listener() {
         return listener(0);
     }
@@ -368,13 +328,6 @@ public abstract class NewAbstractBaseGameTest
 
     public H hero(int index) {
         return (H) player(index).getHero();
-    }
-
-    protected List<H> heroes() {
-        return players.stream()
-                .map(RoundGamePlayer::getHero)
-                .map(it -> (H)it)
-                .collect(toList());
     }
 
     public P player() {
@@ -392,5 +345,13 @@ public abstract class NewAbstractBaseGameTest
     }
 
     // other stuff
+
+    public void assertHeroDie() {
+        assertEquals(true, game().isGameOver());
+    }
+
+    public void assertHeroAlive() {
+        assertEquals(false, game().isGameOver());
+    }
 
 }
