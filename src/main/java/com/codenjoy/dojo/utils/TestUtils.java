@@ -30,6 +30,7 @@ import com.codenjoy.dojo.profile.Profiler;
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.algs.DeikstraFindWay;
+import com.codenjoy.dojo.services.chat.ChatPost;
 import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
@@ -43,6 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -459,5 +461,18 @@ public class TestUtils {
         GameType game = testing().mock(GameType.class);
         testing().when(game.name()).thenReturn(name);
         return game;
+    }
+
+    public static void setupChat(Deals deals, Consumer<Deal> next) {
+        deals.onAdd(deal -> {
+            setupChat(deal);
+            if (next != null) {
+                next.accept(deal);
+            }
+        });
+    }
+
+    public static void setupChat(Deal deal) {
+        deal.setChat(testing().mock(ChatPost.class));
     }
 }
