@@ -454,4 +454,10 @@ public class TestUtils {
                             throwable.getMessage());
         }
     }
+
+    public static GameType mockGameType(String name) {
+        GameType game = testing().mock(GameType.class);
+        testing().when(game.name()).thenReturn(name);
+        return game;
+    }
 }
