@@ -23,12 +23,12 @@ package com.codenjoy.dojo.utils.smart;
  */
 
 import lombok.SneakyThrows;
+import org.junit.Assert;
+import org.junit.runners.model.MultipleFailureException;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 
 /**
  * Где стоит использовать этот способ проверки?
@@ -53,7 +53,7 @@ public class SmartAssert {
 
     public static void assertEquals(String message, Object expected, Object actual) {
         try {
-            testing().assertEquals(message, expected, actual);
+            Assert.assertEquals(message, expected, actual);
         } catch (AssertionError e) {
             failures.add(e);
         }
@@ -61,7 +61,7 @@ public class SmartAssert {
 
     public static void assertNotEquals(Object expected, Object actual) {
         try {
-            testing().assertNotEquals(expected, actual);
+            Assert.assertNotEquals(expected, actual);
         } catch (AssertionError e) {
             failures.add(e);
         }
@@ -69,7 +69,7 @@ public class SmartAssert {
 
     public static void assertEquals(Object expected, Object actual) {
         try {
-            testing().assertEquals(expected, actual);
+            Assert.assertEquals(expected, actual);
         } catch (AssertionError e) {
             failures.add(e);
         }
@@ -77,7 +77,7 @@ public class SmartAssert {
 
     public static void assertSame(Object object1, Object object2) {
         try {
-            testing().assertSame(object1, object2);
+            Assert.assertSame(object1, object2);
         } catch (AssertionError e) {
             failures.add(e);
         }
@@ -88,7 +88,7 @@ public class SmartAssert {
 
         List<Throwable> errors = new LinkedList<>(list);
         list.clear();
-        throw testing().multipleFailureException(errors);
+        throw new MultipleFailureException(errors);
     }
 
     @SneakyThrows

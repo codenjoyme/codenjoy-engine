@@ -24,6 +24,8 @@ package com.codenjoy.dojo.utils.events;
 
 import com.codenjoy.dojo.services.EventListener;
 import com.codenjoy.dojo.utils.core.Testing;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.Objects;
@@ -31,8 +33,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.joining;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.verify;
 
 public class EventsListenersAssert {
 
@@ -55,12 +58,12 @@ public class EventsListenersAssert {
     private String getEvents(EventListener events) {
         String result = tryCatch(
                 () -> {
-                    Testing.Captor captor = testing().captorForClass(eventsClass);
-                    testing().verify(events, testing().atLeast(1)).event(captor.capture());
+                    Testing.Captor captor = (Testing.Captor) ArgumentCaptor.forClass(eventsClass);
+                    verify(events, atLeast(1)).event(captor.capture());
                     return captor.getAllValues().toString();
                 },
                 "WantedButNotInvoked", () -> "[]");
-        testing().reset(events);
+        Mockito.reset(events);
         return result;
     }
 

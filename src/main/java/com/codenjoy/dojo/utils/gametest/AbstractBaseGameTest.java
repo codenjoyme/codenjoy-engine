@@ -48,9 +48,9 @@ import java.util.function.Function;
 
 import static com.codenjoy.dojo.utils.TestUtils.asArray;
 import static com.codenjoy.dojo.utils.TestUtils.collectHeroesData;
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+import static org.mockito.Mockito.mock;
 
 public abstract class AbstractBaseGameTest
         <P extends RoundGamePlayer,
@@ -176,7 +176,7 @@ public abstract class AbstractBaseGameTest
     }
 
     private EventListener newEventListener() {
-        EventListener listener = testing().mock(EventListener.class);
+        EventListener listener = mock(EventListener.class);
         listeners.add(listener);
         return listener;
     }

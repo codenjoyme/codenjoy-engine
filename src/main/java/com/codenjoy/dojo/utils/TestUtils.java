@@ -52,9 +52,12 @@ import java.util.stream.Collectors;
 import static com.codenjoy.dojo.client.Utils.split;
 import static com.codenjoy.dojo.services.PointImpl.pt;
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @UtilityClass
 public class TestUtils {
@@ -299,7 +302,7 @@ public class TestUtils {
         }
 
         // then
-        testing().assertEquals("[]", split(errors, ", \nSprite"));
+        assertEquals("[]", split(errors, ", \nSprite"));
     }
 
     /**
@@ -392,7 +395,7 @@ public class TestUtils {
 
     private void assertLess(Profiler profiler, String phase, double expected) {
         double actual = profiler.info(phase).getTime();
-        testing().assertEquals(actual + " > " + expected, true, actual < expected);
+        assertEquals(actual + " > " + expected, true, actual < expected);
     }
 
     public static String toString(List<SettingsReader.Key> keys) {
@@ -441,16 +444,16 @@ public class TestUtils {
 
     public static void assertMatch(String expectedPattern, String actual) {
         if (!isMatch(expectedPattern, actual)) {
-            testing().assertEquals(expectedPattern, actual);
+            assertEquals(expectedPattern, actual);
         }
     }
 
     public static void assertException(String expected, Runnable runnable) {
         try {
             runnable.run();
-            testing().fail("Expected exception");
+            fail("Expected exception");
         } catch (Throwable throwable) {
-            testing().assertEquals(expected,
+            assertEquals(expected,
                     throwable.getClass().getSimpleName() +
                             ": " +
                             throwable.getMessage());
@@ -458,8 +461,8 @@ public class TestUtils {
     }
 
     public static GameType mockGameType(String name) {
-        GameType game = testing().mock(GameType.class);
-        testing().when(game.name()).thenReturn(name);
+        GameType game = mock(GameType.class);
+        when(game.name()).thenReturn(name);
         return game;
     }
 
@@ -473,6 +476,6 @@ public class TestUtils {
     }
 
     public static void setupChat(Deal deal) {
-        deal.setChat(testing().mock(ChatPost.class));
+        deal.setChat(mock(ChatPost.class));
     }
 }

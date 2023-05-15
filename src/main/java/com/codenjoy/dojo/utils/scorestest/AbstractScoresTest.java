@@ -37,11 +37,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
 import static com.codenjoy.dojo.utils.scorestest.AbstractScoresTest.Separators.*;
 import static java.lang.Integer.parseInt;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractScoresTest {
 
@@ -87,7 +87,7 @@ public abstract class AbstractScoresTest {
 
     public void assertEvents(String expected) {
         String actual = forAll(expected, this::run);
-        testing().assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     private String forAll(String expected, Function<String, String> lineProcessor) {

@@ -169,12 +169,16 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <!-- Since the utility test methods are declared
+            in the prod code and are used as library -->
+            <!--scope>test</scope-->
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
+            <!-- Since the utility test methods are declared
+            in the prod code and are used as library -->
+            <!--scope>test</scope-->
         </dependency>
         <dependency>
             <groupId>org.easytesting</groupId>

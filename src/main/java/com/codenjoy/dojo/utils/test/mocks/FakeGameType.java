@@ -48,7 +48,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static com.codenjoy.dojo.utils.core.MockitoJunitTesting.testing;
+import static org.mockito.Mockito.spy;
 
 public abstract class FakeGameType extends AbstractGameType<Settings> {
 
@@ -134,7 +134,7 @@ public abstract class FakeGameType extends AbstractGameType<Settings> {
 
     @Override
     public GameField createGame(int levelNumber, Settings settings) {
-        Field field = testing().spy(new Field(settings));
+        Field field = spy(new Field(settings));
         fields.add(field);
         return field;
     }
@@ -227,7 +227,7 @@ public abstract class FakeGameType extends AbstractGameType<Settings> {
 
     @Override
     public GamePlayer createPlayer(EventListener listener, int teamId, String playerId, Settings settings) {
-        return testing().spy(new Player(listener, settings)).inTeam(teamId);
+        return spy(new Player(listener, settings)).inTeam(teamId);
     }
 
     @Override
