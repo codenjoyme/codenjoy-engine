@@ -25,6 +25,7 @@
         <reflections.version>0.9.11</reflections.version> <!-- do not update -->
         <fest-reflect.version>1.4.1</fest-reflect.version>
         <fest-assert.version>1.4</fest-assert.version>
+        <guava.version>30.1-jre</guava.version>
         <!-- end -->
 
         <!-- Testing -->
@@ -159,6 +160,11 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>${reflections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
         <dependency>
