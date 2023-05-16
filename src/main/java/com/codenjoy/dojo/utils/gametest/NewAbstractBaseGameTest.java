@@ -30,7 +30,6 @@ import com.codenjoy.dojo.services.lock.LockedJoystick;
 import com.codenjoy.dojo.services.multiplayer.FieldService;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Spreader;
-import com.codenjoy.dojo.services.multiplayer.TriFunction;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
 import com.codenjoy.dojo.services.room.RoomService;
@@ -45,7 +44,6 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.codenjoy.dojo.services.Deals.withRoom;
@@ -126,19 +124,9 @@ public abstract class NewAbstractBaseGameTest
     protected abstract GameType gameType();
 
     /**
-     * @return Конструктор для создания Field в игре.
-     */
-    protected abstract TriFunction<Dice, L, S, F> createField();
-
-    /**
      * @return Конструктор для создания Level в игре.
      */
     protected abstract Function<String, L> createLevel();
-
-    /**
-     * @return Конструктор для создания Player в игре.
-     */
-    protected abstract BiFunction<EventListener,S,P> createPlayer();
 
     /**
      * @return Объект Settings с базовыми настройками для тестов.
