@@ -335,11 +335,30 @@ public abstract class NewAbstractBaseGameTest
     // other stuff
 
     public void assertHeroDie() {
-        assertEquals(true, game().isGameOver());
+        assertHeroAlive(0, false);
     }
 
     public void assertHeroAlive() {
-        assertEquals(false, game().isGameOver());
+        assertHeroAlive(0, true);
     }
 
+    public void assertHeroAlive(int index, boolean alive) {
+        assertEquals(!alive, game(index).isGameOver());
+    }
+
+    public void assertHeroActive(boolean active) {
+        assertHeroActive(0, active);
+    }
+
+    public void assertHeroActive(int index, boolean active) {
+        assertEquals(active, hero(index).isActive());
+    }
+
+    public void assertHeroStatus(String expected) {
+        assertEquals(expected,
+                "active:\n" +
+                collectHeroesData(players(), "isActive", false) +
+                "\nalive\n" +
+                collectHeroesData(players(), "isAlive", false));
+    }
 }
