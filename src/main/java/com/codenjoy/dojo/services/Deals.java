@@ -298,7 +298,7 @@ public class Deals implements Iterable<Deal>, Tickable {
                     }
 
                     if (type.isDisposable() && game.shouldLeave()) {
-                        reload(deal, Sweeper.on().lastAlone());
+                        reload(deal, Sweeper.on());
                         return;
                     }
 
@@ -387,7 +387,7 @@ public class Deals implements Iterable<Deal>, Tickable {
         LevelProgress progress = deal.levelFromSave();
         if (progress.canChange(level)) {
             progress.change(level);
-            reload(deal, progress.saveTo(new JSONObject()), Sweeper.on().lastAlone());
+            reload(deal, progress.saveTo(new JSONObject()), Sweeper.on());
             deal.fireOnLevelChanged();
             return true;
         } else {
@@ -400,7 +400,7 @@ public class Deals implements Iterable<Deal>, Tickable {
             return false;
         }
         Deal deal = get(id);
-        reload(deal, save, Sweeper.on().lastAlone());
+        reload(deal, save, Sweeper.on());
         deal.fireOnLevelChanged();
         return true;
     }
@@ -410,7 +410,7 @@ public class Deals implements Iterable<Deal>, Tickable {
 
         deal.setTeamId(teamId);
 
-        reload(deal, Sweeper.on().lastAlone());
+        reload(deal, Sweeper.on());
     }
 
     public void changeRoom(String id, String gameName, String newRoom) {
@@ -421,7 +421,7 @@ public class Deals implements Iterable<Deal>, Tickable {
         if (!deal.getPlayer().getGame().equals(gameName)) {
             return;
         }
-        reload(deal, newRoom, null, Sweeper.on().lastAlone());
+        reload(deal, newRoom, null, Sweeper.on());
     }
 
     public Deal get(int index) {
@@ -460,7 +460,7 @@ public class Deals implements Iterable<Deal>, Tickable {
     }
 
     public Deal deal(PlayerSave save, String room, String id, String callbackUrl, GameType gameType, long now) {
-        remove(id, Sweeper.on().lastAlone());
+        remove(id, Sweeper.on());
 
         PlayerScores playerScores = gameType.getPlayerScores(save.getScore(), gameType.getSettings());
         Information listener = new ScoresCollector(id, playerScores);

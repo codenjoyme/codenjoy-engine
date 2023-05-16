@@ -388,7 +388,7 @@ public abstract class NewAbstractBaseGameTest
     }
 
     public void remove(int index) {
-       all.remove(deal(index).getPlayerId(), Sweeper.on().lastAlone());
+       all.remove(deal(index).getPlayerId(), Sweeper.on());
        listeners.remove(index);
     }
 }

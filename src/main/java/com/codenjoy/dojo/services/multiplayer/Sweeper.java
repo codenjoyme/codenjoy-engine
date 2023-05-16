@@ -42,16 +42,17 @@ public class Sweeper {
     /**
      * Любая работа с юзером в комнате (удаление или перезапуск) происходит
      * с перегрузкой оставшихся на том же поле других участников.
-     * Внимание! Критерий отбора кандидатов задается отдельно.
-     * TODO чаще всего используется on().lastAlone() прописать его тут по умолчанию
+     * Критерий отбора кандидатов в формате lastAlone.
+     * @see Sweeper#lastAlone()
      */
     public static Sweeper on() {
-        return new Sweeper(RELOAD_ALONE);
+        return new Sweeper(RELOAD_ALONE).lastAlone();
     }
 
     /**
      * Любая работа с юзером в комнате (удаление или перезапуск) происходит
      * с игнорированием оставшихся на том же поле других участников.
+     * @see Sweeper#noOne()
      */
     public static Sweeper off() {
         return new Sweeper(!RELOAD_ALONE).noOne();

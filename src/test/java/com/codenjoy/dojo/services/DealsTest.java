@@ -710,13 +710,13 @@ public class DealsTest extends AbstractDealsTest {
         assertRooms("{0=[player1, player2, player3]}");
 
         // when
-        deals.remove(player1.getId(), Sweeper.on().lastAlone());
+        deals.remove(player1.getId(), Sweeper.on());
 
         // then
         assertEquals(1, fields.size());
 
         // when
-        deals.remove(player2.getId(), Sweeper.on().lastAlone());
+        deals.remove(player2.getId(), Sweeper.on());
 
         // then
         // still same field for player3, because MULTIPLE is !REMOVE_ALONE
@@ -759,13 +759,13 @@ public class DealsTest extends AbstractDealsTest {
         assertRooms("{0=[player1, player2, player3]}");
 
         // when
-        deals.remove(player1.getId(), Sweeper.on().lastAlone());
+        deals.remove(player1.getId(), Sweeper.on());
 
         // then
         assertEquals(1, fields.size());
 
         // when
-        deals.remove(player2.getId(), Sweeper.on().lastAlone());
+        deals.remove(player2.getId(), Sweeper.on().noOne());
 
         // then
         // new field for player3, because TRIPLE is REMOVE_ALONE
@@ -808,7 +808,7 @@ public class DealsTest extends AbstractDealsTest {
         assertRooms("{0=[player1, player2]}");
 
         // when
-        deals.reload(deals.get("player1"), Sweeper.on().lastAlone());
+        deals.reload(deals.get("player1"), Sweeper.on());
 
         // then
         // created new field for player3
