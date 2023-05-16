@@ -312,8 +312,9 @@ public class Deals implements Iterable<Deal>, Tickable {
         //      но только те, которые не DISPOSABLE и одновременно
         //      недоукомплектованы игроками,
         //      а так же комнаты которых активны
+        // TODO разобраться почему случается что deal.getField() == null при переключении уровней icancode
         active.stream()
-                .filter(deal -> deal.getField() != null) // TODO разобраться почему так случается при переключении уровней icancode
+                .filter(deal -> deal.getField() != null)
                 .map(Deal::getField)
                 .distinct()
                 .filter(spreader::isRoomStaffed)

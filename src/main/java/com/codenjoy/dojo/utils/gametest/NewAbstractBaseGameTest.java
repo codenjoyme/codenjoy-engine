@@ -22,7 +22,6 @@ package com.codenjoy.dojo.utils.gametest;
  * #L%
  */
 
-import com.codenjoy.dojo.games.clifford.Element;
 import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.dice.NumbersDice;
 import com.codenjoy.dojo.services.field.AbstractLevel;
@@ -30,8 +29,7 @@ import com.codenjoy.dojo.services.lock.LockedJoystick;
 import com.codenjoy.dojo.services.multiplayer.FieldService;
 import com.codenjoy.dojo.services.multiplayer.LevelProgress;
 import com.codenjoy.dojo.services.multiplayer.Spreader;
-import com.codenjoy.dojo.services.printer.PrinterFactory;
-import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
+import com.codenjoy.dojo.services.multiplayer.Sweeper;
 import com.codenjoy.dojo.services.room.RoomService;
 import com.codenjoy.dojo.services.round.RoundField;
 import com.codenjoy.dojo.services.round.RoundGamePlayer;
@@ -64,10 +62,8 @@ public abstract class NewAbstractBaseGameTest
     private RoomService rooms;
 
     private List<EventListener> listeners;
-    private PrinterFactory<Element, P> printer;
     private EventsListenersAssert events;
     private L level;
-    private List<H> heroes;
     private S settings;
     private String room;
     private GameType gameType;
@@ -77,7 +73,6 @@ public abstract class NewAbstractBaseGameTest
      */
     public void setup() {
         listeners = new LinkedList<>();
-        printer = new PrinterFactoryImpl<>();
         events = new EventsListenersAssert(() -> listeners, eventClass());
 
         rooms = new RoomService();
@@ -133,6 +128,14 @@ public abstract class NewAbstractBaseGameTest
      */
     protected abstract S setupSettings(S settings);
 
+    /**
+     * @return true - если мы хотим генерировать hero из level map для удобства тестировангия,
+     *         false - если мы хотим генерировать hero только по координатам (ближе к реальности).
+     */
+    protected boolean manualHero() {
+        return false;
+    }
+
     public void dice(Integer... next) {
         if (next.length == 0) return;
         dice.will(next);
@@ -144,27 +147,43 @@ public abstract class NewAbstractBaseGameTest
      * @param maps Карты на основе которых будет сгенерирована игра.
      */
     public void givenFl(String... maps) {
-        long now = Calendar.getInstance().getTimeInMillis();
-
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, maps);
         level = (L) settings.level(levelNumber, dice, createLevel());
-        heroes = (List<H>) level.heroes();
+        List<H> heroes = (List<H>) level.heroes();
 
         beforeCreateField();
 
         all.onField(deal -> {
-            // take care of the hero's initial position
+            if (heroes.isEmpty()) {
+                return;
+            }
             H hero = heroes.get(index());
-            dice.will(hero.getX(), hero.getY());
-            // then will call field.newGame(player) and finding place for hero with dice
+            if (manualHero()) {
+                // get whole hero ant put it on field
+                deal.getGame().getPlayer().setHero(hero);
+                // then will call field.newGame(player) and process hero as is
+            } else {
+                // take care of the hero's initial position
+                dice.will(hero.getX(), hero.getY());
+                // then will call field.newGame(player) and finding place for hero with dice
+            }
         });
 
         for (H hero : heroes) {
-            all.deal(PlayerSave.NULL, room, "player" + index(), "callbackUrl", gameType, now);
+            givenPlayer();
         }
 
+        // disable hero generation from the level for during hero
+        // regeneration on the new field, when player.shouldLeave() = true
+        all.onField(null);
+
         afterCreateField();
+    }
+
+    public void givenPlayer() {
+        long now = Calendar.getInstance().getTimeInMillis();
+        all.deal(PlayerSave.NULL, room, "player" + index(), "callbackUrl", gameType, now);
     }
 
     private int index() {
@@ -318,6 +337,12 @@ public abstract class NewAbstractBaseGameTest
         return (H) player(index).getHero();
     }
 
+    public List<H> heroes() {
+        return players().stream()
+                .map(player -> (H)player.getHero())
+                .collect(toList());
+    }
+
     public P player() {
         return player(0);
     }
@@ -360,5 +385,10 @@ public abstract class NewAbstractBaseGameTest
                 collectHeroesData(players(), "isActive", false) +
                 "\nalive\n" +
                 collectHeroesData(players(), "isAlive", false));
+    }
+
+    public void remove(int index) {
+       all.remove(deal(index).getPlayerId(), Sweeper.on().lastAlone());
+       listeners.remove(index);
     }
 }
