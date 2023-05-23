@@ -765,7 +765,7 @@ public class DealsTest extends AbstractDealsTest {
         assertEquals(1, fields.size());
 
         // when
-        deals.remove(player2.getId(), Sweeper.on().noOne());
+        deals.remove(player2.getId(), Sweeper.on());
 
         // then
         // new field for player3, because TRIPLE is REMOVE_ALONE
