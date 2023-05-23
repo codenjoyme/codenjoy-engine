@@ -36,6 +36,11 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 public class FirstGameType extends FakeGameType {
 
     @Override
+    public boolean isTesting() {
+        return true;
+    }
+
+    @Override
     public Parameter<Integer> getBoardSize(Settings settings) {
         return new SimpleParameter<>(6);
     }

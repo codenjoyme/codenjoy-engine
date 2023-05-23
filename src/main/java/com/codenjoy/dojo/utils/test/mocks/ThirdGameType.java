@@ -36,6 +36,10 @@ import static com.codenjoy.dojo.utils.test.mocks.ThirdGameSettings.Keys.PARAMETE
 
 public class ThirdGameType extends FakeGameType {
 
+    public boolean isTesting() {
+        return true;
+    }
+
     @Override
     public SettingsImpl getSettings() {
         return new ThirdGameSettings();

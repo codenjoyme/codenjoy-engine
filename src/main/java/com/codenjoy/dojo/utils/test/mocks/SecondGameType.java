@@ -36,6 +36,11 @@ import static com.codenjoy.dojo.services.PointImpl.pt;
 public class SecondGameType extends FakeGameType {
 
     @Override
+    public boolean isTesting() {
+        return true;
+    }
+
+    @Override
     public SettingsImpl getSettings() {
         return new SecondGameSettings();
     }

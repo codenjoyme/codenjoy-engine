@@ -143,6 +143,13 @@ public interface GameType<T extends Settings> extends Tickable {
      * {@link PrinterFactory#get(GraphicPrinter)}}
      */
     PrinterFactory getPrinterFactory();
+
+    /**
+     * @return true если игра находится в режиме тестирования и ее не надо включать.
+     */
+    default boolean isTesting() {
+        return false;
+    }
 }
 
 
