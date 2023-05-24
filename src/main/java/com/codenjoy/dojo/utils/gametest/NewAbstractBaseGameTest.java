@@ -26,10 +26,7 @@ import com.codenjoy.dojo.services.*;
 import com.codenjoy.dojo.services.dice.NumbersDice;
 import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.services.lock.LockedJoystick;
-import com.codenjoy.dojo.services.multiplayer.FieldService;
-import com.codenjoy.dojo.services.multiplayer.LevelProgress;
-import com.codenjoy.dojo.services.multiplayer.Spreader;
-import com.codenjoy.dojo.services.multiplayer.Sweeper;
+import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.room.RoomService;
 import com.codenjoy.dojo.services.round.RoundField;
 import com.codenjoy.dojo.services.round.RoundGamePlayer;
@@ -60,13 +57,13 @@ public abstract class NewAbstractBaseGameTest
     private Deals all;
     private NumbersDice dice;
     private RoomService rooms;
-
     private List<EventListener> listeners;
     private EventsListenersAssert events;
     private L level;
     private S settings;
     private String room;
     private GameType gameType;
+    protected boolean manualHero;
 
     /**
      * Метод необходимо аннотировать @Before в наследнике.
@@ -74,7 +71,7 @@ public abstract class NewAbstractBaseGameTest
     public void setup() {
         listeners = new LinkedList<>();
         events = new EventsListenersAssert(() -> listeners, eventClass());
-
+        manualHero = manualHero();
         rooms = new RoomService();
         FieldService fields = new FieldService(0);
         Spreader spreader = new Spreader(fields);
@@ -136,6 +133,19 @@ public abstract class NewAbstractBaseGameTest
         return false;
     }
 
+    /**
+     * После того как проинициализировали героя в @see #givenFl(String...) можно вызвать этот метод,
+     * и следующая регенеерация текущего героя будет не по карте,
+     * а на основе классического поиска рендомного местоположения героя
+     * на карте через dice, который мы в тестах мокаем.
+     */
+    protected void disableManualHero(P player) {
+        H hero = (H) player.getHero();
+        if (hero != null) {
+            hero.manual(false);
+        }
+    }
+
     public void dice(Integer... next) {
         if (next.length == 0) return;
         dice.will(next);
@@ -150,40 +160,75 @@ public abstract class NewAbstractBaseGameTest
         int levelNumber = LevelProgress.levelsStartsFrom1;
         settings.setLevelMaps(levelNumber, maps);
         level = (L) settings.level(levelNumber, dice, createLevel());
-        List<H> heroes = (List<H>) level.heroes();
 
         beforeCreateField();
 
-        all.onField(deal -> {
-            if (heroes.isEmpty()) {
-                return;
-            }
-            H hero = heroes.get(index());
-            if (manualHero()) {
-                // get whole hero ant put it on field
-                deal.getGame().getPlayer().setHero(hero);
-                // then will call field.newGame(player) and process hero as is
-            } else {
-                // take care of the hero's initial position
-                dice.will(hero.getX(), hero.getY());
-                // then will call field.newGame(player) and finding place for hero with dice
-            }
-        });
+        List<H> heroes = (List<H>) level.heroes();
+        setupManualHeroesGeneration(heroes);
 
         for (H hero : heroes) {
             givenPlayer();
         }
 
+        afterManualHeroGeneration();
+
+        // может случиться так, что игроков вовсе нет, а игроки создаются
+        // мануально в givenPlayer(Point) и field появится позже после
+        if (!deals().isEmpty()) {
+            afterCreateField();
+        }
+    }
+
+    private void setupManualHeroesGeneration(List<H> heroes) {
+        all.onField(deal -> {
+            if (heroes.isEmpty()) {
+                return;
+            }
+            H hero = heroes.get(index());
+            if (manualHero) {
+                // get whole hero ant put it on field
+                deal.getGame().getPlayer().setHero(hero);
+                // then will call field.newGame(player) and process hero as is
+            } else {
+                // take care of the hero's initial position
+                dice(hero.getX(), hero.getY());
+                // then will call field.newGame(player) and finding place for hero with dice
+            }
+        });
+    }
+
+    private void enableManualHeroGeneration(Point pt) {
+        all.onField(deal -> {
+            // take care of the hero's initial position
+            dice(pt.getX(), pt.getY());
+            // then will call field.newGame(player) and finding place for hero with dice
+        });
+    }
+
+    private void afterManualHeroGeneration() {
         // disable hero generation from the level for during hero
         // regeneration on the new field, when player.shouldLeave() = true
         all.onField(null);
-
-        afterCreateField();
     }
 
-    public void givenPlayer() {
+    public GamePlayer givenPlayer() {
         long now = Calendar.getInstance().getTimeInMillis();
-        all.deal(PlayerSave.NULL, room, "player" + index(), "callbackUrl", gameType, now);
+        Deal deal = all.deal(PlayerSave.NULL, room, "player" + index(), "callbackUrl", gameType, now);
+        P player = (P) deal.getGame().getPlayer();
+
+        afterCreatePlayer(player);
+
+        return player;
+    }
+
+    public GamePlayer givenPlayer(Point pt) {
+        enableManualHeroGeneration(pt);
+
+        GamePlayer player = givenPlayer();
+
+        afterManualHeroGeneration();
+
+        return player;
     }
 
     private int index() {
@@ -208,6 +253,14 @@ public abstract class NewAbstractBaseGameTest
      * создания Field. Настройки подтюнить или что-то в самой Field.
      */
     protected void afterCreateField() {
+        // settings / field post-processing
+    }
+
+    /**
+     * Метод служит постобработке окружения после
+     * создания Player. Настройки подтюнить или что-то в самом Player.
+     */
+    protected void afterCreatePlayer(P player) {
         // settings / field post-processing
     }
 
@@ -388,7 +441,18 @@ public abstract class NewAbstractBaseGameTest
     }
 
     public void remove(int index) {
-       all.remove(deal(index).getPlayerId(), Sweeper.on());
+       all.remove(deal(index).getPlayerId(), Sweeper.off());
        listeners.remove(index);
+    }
+
+    public void removeAllDied() {
+        for (RoundGamePlayer player : players().toArray(new RoundGamePlayer[0])) {
+            if (player.isAlive()) {
+                continue;
+            }
+
+            int index = players().indexOf(player);
+            remove(index);
+        }
     }
 }
