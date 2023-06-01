@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.field;
 
 import com.codenjoy.dojo.services.BoardMap;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 import com.codenjoy.dojo.services.printer.BoardReader;
 import com.codenjoy.dojo.services.printer.CharElement;
@@ -90,7 +91,7 @@ public abstract class AbstractLevel implements Level {
 
     // TODO remove it after migrating all games
     @Override
-    public BoardReader<Object> reader() {
+    public BoardReader<GamePlayer> reader() {
         return new BoardReader<>() {
             @Override
             public int size() {
@@ -98,7 +99,7 @@ public abstract class AbstractLevel implements Level {
             }
 
             @Override
-            public void addAll(Object player, Consumer<Iterable<? extends Point>> processor) {
+            public void addAll(GamePlayer player, Consumer<Iterable<? extends Point>> processor) {
                AbstractLevel.this.addAll(processor);
             }
         };

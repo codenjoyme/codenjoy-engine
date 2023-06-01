@@ -87,7 +87,7 @@ public class PrinterFactoryTest {
             return result;
         });
 
-        BoardReader reader = new BoardReader<GamePlayer>() {
+        BoardReader<GamePlayer> reader = new BoardReader<>() {
             @Override
             public int size() {
                 return 3;

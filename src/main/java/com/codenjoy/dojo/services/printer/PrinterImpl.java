@@ -24,6 +24,7 @@ package com.codenjoy.dojo.services.printer;
 
 
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.services.annotations.PerformanceOptimized;
 
@@ -37,7 +38,7 @@ class PrinterImpl implements Printer<String> {
     private char[][] field;
     private GamePrinter printer;
 
-    public static <E extends CharElement, P> Printer getPrinter(BoardReader reader, P player) {
+    public static <E extends CharElement, P extends GamePlayer> Printer getPrinter(BoardReader reader, P player) {
         return new PrinterImpl(new GamePrinterImpl<E, P>(reader, player));
     }
 
@@ -76,7 +77,7 @@ class PrinterImpl implements Printer<String> {
         field[printer.size() - 1 - y][x] = ch;
     }
 
-    static class GamePrinterImpl<E extends CharElement, P> implements GamePrinter {
+    static class GamePrinterImpl<E extends CharElement, P extends GamePlayer> implements GamePrinter {
 
         private final BoardReader board;
         private int size;

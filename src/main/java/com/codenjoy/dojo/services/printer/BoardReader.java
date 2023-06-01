@@ -24,13 +24,14 @@ package com.codenjoy.dojo.services.printer;
 
 
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 
 import java.util.function.Consumer;
 
 /**
  * Абстракция над доской для Printer.
  */
-public interface BoardReader<P> {
+public interface BoardReader<P extends GamePlayer> {
 
     int size();
 

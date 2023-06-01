@@ -24,11 +24,12 @@ package com.codenjoy.dojo.services.printer.layeredview;
 
 
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.state.State;
 
 import java.util.function.BiFunction;
 
-public interface LayeredBoardReader {
+public interface LayeredBoardReader<P extends GamePlayer> {
 
     int size();
 
@@ -36,7 +37,7 @@ public interface LayeredBoardReader {
 
     BiFunction<Integer, Integer, State> elements();
 
-    Point viewCenter(Object player);
+    Point viewCenter(P player);
 
     Object[] itemsInSameCell(State item, int layer);
 }

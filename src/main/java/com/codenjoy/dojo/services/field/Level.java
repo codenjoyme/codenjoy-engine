@@ -22,13 +22,14 @@ package com.codenjoy.dojo.services.field;
  * #L%
  */
 
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.BoardReader;
 
 public interface Level {
 
     int size();
 
-    BoardReader<?> reader();
+    BoardReader<? extends GamePlayer> reader();
 
     void saveTo(PointField field);
 }

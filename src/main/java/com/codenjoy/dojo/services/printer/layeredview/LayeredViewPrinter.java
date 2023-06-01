@@ -25,6 +25,7 @@ package com.codenjoy.dojo.services.printer.layeredview;
 
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
+import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.state.State;
 
@@ -33,12 +34,12 @@ import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
-public class LayeredViewPrinter implements Printer<PrinterData> {
+public class LayeredViewPrinter<P extends GamePlayer> implements Printer<PrinterData> {
 
     private static final int BOUND_DEFAULT = 4;
 
-    private Supplier<LayeredBoardReader> getReader;
-    private Supplier<Object> getPlayer;
+    private Supplier<LayeredBoardReader<P>> getReader;
+    private Supplier<P> getPlayer;
 
     private LayeredBoardReader reader;
 
@@ -50,7 +51,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
     private int bound;
     private Boolean needToCenter;
 
-    public LayeredViewPrinter(Supplier<LayeredBoardReader> reader, Supplier<Object> player, int countLayers) {
+    public LayeredViewPrinter(Supplier<LayeredBoardReader<P>> reader, Supplier<P> player, int countLayers) {
         this.getReader = reader;
         this.getPlayer = player;
         this.countLayers = countLayers;
@@ -74,7 +75,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
             needToCenter = bound != 0;
         }
 
-        Object player = this.getPlayer.get();
+        P player = this.getPlayer.get();
 
         centerPositionOnStart(player);
 
@@ -85,7 +86,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
         return result;
     }
 
-    private void fillLayers(Object player, StringBuilder[] builders) {
+    private void fillLayers(P player, StringBuilder[] builders) {
         BiFunction<Integer, Integer, State> elements = reader.elements();
         LengthToXY xy = new LengthToXY(size);
         for (int y = vy + viewSize - 1; y >= vy; --y) {
@@ -120,7 +121,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
         return builders;
     }
 
-    private void centerPositionOnStart(Object player) {
+    private void centerPositionOnStart(P player) {
         Point pivot = reader.viewCenter(player);
         if (needToCenter) {
             needToCenter = false;
@@ -131,7 +132,7 @@ public class LayeredViewPrinter implements Printer<PrinterData> {
         adjustView(size);
     }
 
-    private String makeState(State item, Object player, Object[] elements) {
+    private String makeState(State item, P player, Object[] elements) {
         return (item == null) ? "-" : item.state(player, elements).toString();
     }
 

@@ -143,7 +143,7 @@ public class LayeredViewPrinterTest {
 
         LengthToXY lxy = new LengthToXY(boardSize);
 
-        LayeredBoardReader reader = new LayeredBoardReader() {
+        LayeredBoardReader<GamePlayer> reader = new LayeredBoardReader<>() {
             @Override
             public int size() {
                 return boardSize;
@@ -176,7 +176,7 @@ public class LayeredViewPrinterTest {
             }
 
             @Override
-            public Point viewCenter(Object player) {
+            public Point viewCenter(GamePlayer player) {
                 return viewCenter;
             }
 
@@ -193,7 +193,7 @@ public class LayeredViewPrinterTest {
         };
         GamePlayer player = mock(GamePlayer.class);
 
-        printer = new LayeredViewPrinter(
+        printer = new LayeredViewPrinter<>(
                 () -> reader,
                 () -> player,
                 countLayers);
