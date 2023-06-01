@@ -24,7 +24,6 @@ package com.codenjoy.dojo.services.printer.layeredview;
 
 
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.TriFunction;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.state.State;
@@ -33,7 +32,7 @@ import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
-public class LayeredViewPrinter<P extends GamePlayer> implements Printer<PrinterData> {
+public class LayeredViewPrinter<P extends LayeredGamePlayer> implements Printer<PrinterData> {
 
     private static final int BOUND_DEFAULT = 4;
 

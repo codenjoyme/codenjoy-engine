@@ -25,7 +25,6 @@ package com.codenjoy.dojo.services.printer.layeredview;
 import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.multiplayer.GamePlayer;
 import com.codenjoy.dojo.services.multiplayer.TriFunction;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.state.State;
@@ -142,7 +141,7 @@ public class LayeredViewPrinterTest {
 
         LengthToXY lxy = new LengthToXY(boardSize);
 
-        LayeredBoardReader<GamePlayer> reader = new LayeredBoardReader<>() {
+        LayeredBoardReader<LayeredGamePlayer> reader = new LayeredBoardReader<>() {
             @Override
             public int size() {
                 return boardSize;
@@ -175,7 +174,7 @@ public class LayeredViewPrinterTest {
             }
 
             @Override
-            public Point viewCenter(GamePlayer player) {
+            public Point viewCenter(LayeredGamePlayer player) {
                 return viewCenter;
             }
 
@@ -189,7 +188,7 @@ public class LayeredViewPrinterTest {
                 return new Object[]{inCell};
             }
         };
-        GamePlayer player = mock(GamePlayer.class);
+        LayeredGamePlayer player = mock(LayeredGamePlayer.class);
 
         printer = new LayeredViewPrinter<>(
                 () -> reader,
