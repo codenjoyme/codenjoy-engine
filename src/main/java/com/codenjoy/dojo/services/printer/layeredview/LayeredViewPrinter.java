@@ -23,13 +23,12 @@ package com.codenjoy.dojo.services.printer.layeredview;
  */
 
 
-import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.multiplayer.GamePlayer;
+import com.codenjoy.dojo.services.multiplayer.TriFunction;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.state.State;
 
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
@@ -41,7 +40,7 @@ public class LayeredViewPrinter<P extends GamePlayer> implements Printer<Printer
     private Supplier<LayeredBoardReader<P>> getReader;
     private Supplier<P> getPlayer;
 
-    private LayeredBoardReader reader;
+    private LayeredBoardReader<P> reader;
 
     private int countLayers;
     private int viewSize;
@@ -87,14 +86,11 @@ public class LayeredViewPrinter<P extends GamePlayer> implements Printer<Printer
     }
 
     private void fillLayers(P player, StringBuilder[] builders) {
-        BiFunction<Integer, Integer, State> elements = reader.elements();
-        LengthToXY xy = new LengthToXY(size);
+        TriFunction<Integer, Integer, Integer, State> elements = reader.elements();
         for (int y = vy + viewSize - 1; y >= vy; --y) {
             for (int x = vx; x < vx + viewSize; ++x) {
-                int index = xy.length(x, y);
-
                 for (int layer = 0; layer < countLayers; ++layer) {
-                    State item = elements.apply(index, layer);
+                    State item = elements.apply(x, y, layer);
                     Object[] inSameCell = reader.itemsInSameCell(item, layer);
                     builders[layer].append(makeState(item, player, inSameCell));
                 }
