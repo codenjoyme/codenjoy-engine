@@ -29,21 +29,22 @@ import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 
-import java.util.function.Supplier;
-
-public class LayeredGamePlayer<H extends PlayerHero, F extends GameField> extends GamePlayer<H, F> {
+public abstract class LayeredGamePlayer<H extends PlayerHero, F extends GameField> extends GamePlayer<H, F> {
 
     private Printer<PrinterData> printer;
 
     public LayeredGamePlayer(EventListener listener, SettingsReader settings) {
         super(listener, settings);
+        setupPrinter();
     }
 
-    protected void setupPrinter(int layersCount, Supplier<F> field) {
+    public abstract int layersCount();
+
+    void setupPrinter() {
         printer = new LayeredViewPrinter<>(
-                () -> (LayeredBoardReader) field.get(),
+                () -> (LayeredField) field,
                 () -> this,
-                layersCount);
+                layersCount());
     }
 
     public Printer<PrinterData> getPrinter() {
