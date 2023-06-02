@@ -38,13 +38,10 @@ public abstract class LayeredGamePlayer<H extends PlayerHero, F extends GameFiel
         setupPrinter();
     }
 
-    public abstract int layersCount();
-
     void setupPrinter() {
         printer = new LayeredViewPrinter<>(
                 () -> (LayeredField) field,
-                () -> this,
-                layersCount());
+                () -> this);
     }
 
     public Printer<PrinterData> getPrinter() {

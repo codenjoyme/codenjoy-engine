@@ -36,30 +36,30 @@ public class LayeredViewPrinter<P extends LayeredGamePlayer> implements Printer<
 
     private static final int BOUND_DEFAULT = 4;
 
-    private Supplier<LayeredBoardReader<P>> getReader;
+    private Supplier<LayeredField<P, ?>> getField;
     private Supplier<P> getPlayer;
 
-    private LayeredBoardReader<P> reader;
+    private LayeredField<P, ?> field;
 
-    private int countLayers;
     private int viewSize;
     private int size;
     private int vx;
     private int vy;
     private int bound;
+    private int countLayers;
     private Boolean needToCenter;
 
-    public LayeredViewPrinter(Supplier<LayeredBoardReader<P>> reader, Supplier<P> player, int countLayers) {
-        this.getReader = reader;
+    public LayeredViewPrinter(Supplier<LayeredField<P, ?>> field, Supplier<P> player) {
+        this.getField = field;
         this.getPlayer = player;
-        this.countLayers = countLayers;
     }
 
     @Override
     public PrinterData print(Object... parameters) {
-        reader = this.getReader.get();
-        size = reader.size();
-        viewSize = reader.viewSize();
+        field = getField.get();
+        countLayers = field.countLayers();
+        size = field.size();
+        viewSize = field.viewSize();
 
         if (needToCenter == null) {
             int min = Math.min(size, viewSize);
@@ -85,12 +85,12 @@ public class LayeredViewPrinter<P extends LayeredGamePlayer> implements Printer<
     }
 
     private void fillLayers(P player, StringBuilder[] builders) {
-        TriFunction<Integer, Integer, Integer, State> elements = reader.elements();
+        TriFunction<Integer, Integer, Integer, State> elements = field.elements();
         for (int y = vy + viewSize - 1; y >= vy; --y) {
             for (int x = vx; x < vx + viewSize; ++x) {
                 for (int layer = 0; layer < countLayers; ++layer) {
                     State item = elements.apply(x, y, layer);
-                    Object[] inSameCell = reader.itemsInSameCell(item, layer);
+                    Object[] inSameCell = field.itemsInSameCell(item, layer);
                     builders[layer].append(makeState(item, player, inSameCell));
                 }
             }
@@ -117,7 +117,7 @@ public class LayeredViewPrinter<P extends LayeredGamePlayer> implements Printer<
     }
 
     private void centerPositionOnStart(P player) {
-        Point pivot = reader.viewCenter(player);
+        Point pivot = field.viewCenter(player);
         if (needToCenter) {
             needToCenter = false;
             moveToCenter(pivot);

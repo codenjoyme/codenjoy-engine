@@ -22,12 +22,13 @@ package com.codenjoy.dojo.services.printer.layeredview;
  * #L%
  */
 
-import com.codenjoy.dojo.services.LengthToXY;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
+import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 import com.codenjoy.dojo.services.multiplayer.TriFunction;
 import com.codenjoy.dojo.services.printer.Printer;
 import com.codenjoy.dojo.services.printer.state.State;
+import com.codenjoy.dojo.services.settings.SettingsReader;
 import com.codenjoy.dojo.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -139,9 +140,12 @@ public class LayeredViewPrinterTest {
         heroPosition = pt(13, 14);
         enemyPosition = pt(11, 16);
 
-        LengthToXY lxy = new LengthToXY(boardSize);
+        LayeredField<LayeredGamePlayer, PlayerHero> reader = new LayeredField<>() {
+            @Override
+            public int countLayers() {
+                return countLayers;
+            }
 
-        LayeredBoardReader<LayeredGamePlayer> reader = new LayeredBoardReader<>() {
             @Override
             public int size() {
                 return boardSize;
@@ -187,13 +191,32 @@ public class LayeredViewPrinterTest {
                 }
                 return new Object[]{inCell};
             }
+
+            @Override
+            public void tick() {
+                // do nothing
+            }
+
+            @Override
+            public void newGame(LayeredGamePlayer player) {
+                // do nothing
+            }
+
+            @Override
+            public void remove(LayeredGamePlayer player) {
+                // do nothing
+            }
+
+            @Override
+            public SettingsReader settings() {
+                return null; // do nothing
+            }
         };
         LayeredGamePlayer player = mock(LayeredGamePlayer.class);
 
         printer = new LayeredViewPrinter<>(
                 () -> reader,
-                () -> player,
-                countLayers);
+                () -> player);
     }
 
     @Test
