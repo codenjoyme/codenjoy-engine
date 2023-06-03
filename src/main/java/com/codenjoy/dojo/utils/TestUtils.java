@@ -35,6 +35,7 @@ import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.printer.CharElement;
 import com.codenjoy.dojo.services.printer.PrinterFactory;
 import com.codenjoy.dojo.services.printer.PrinterFactoryImpl;
+import com.codenjoy.dojo.services.room.RoomService;
 import com.codenjoy.dojo.services.settings.Settings;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import lombok.SneakyThrows;
@@ -56,8 +57,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @UtilityClass
 public class TestUtils {
@@ -477,5 +478,13 @@ public class TestUtils {
 
     public static void setupChat(Deal deal) {
         deal.setChat(mock(ChatPost.class));
+    }
+
+    public static void setActive(RoomService roomService, String room, boolean active) {
+        when(roomService.isActive(room)).thenReturn(active);
+        doAnswer(inv -> {
+            Deal deal = inv.getArgument(0);
+            return roomService.isActive(deal.getRoom());
+        }).when(roomService).isRoomActive(any(Deal.class));
     }
 }

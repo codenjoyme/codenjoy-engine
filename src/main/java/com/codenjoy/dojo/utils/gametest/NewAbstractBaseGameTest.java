@@ -76,7 +76,7 @@ public abstract class NewAbstractBaseGameTest
         FieldService fields = new FieldService(0);
         Spreader spreader = new Spreader(fields);
 
-        all = new Deals(spreader, rooms);
+        all = new Deals(spreader);
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
         all.init(lock);
         all.onAdd(deal -> {});
@@ -265,7 +265,7 @@ public abstract class NewAbstractBaseGameTest
     }
 
     public void tick() {
-        all.tick();
+        all.tick(rooms::isRoomActive);
     }
 
     public void ticks(int fromInclusive, int tillExclusive) {

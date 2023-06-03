@@ -22,6 +22,7 @@ package com.codenjoy.dojo.services.room;
  * #L%
  */
 
+import com.codenjoy.dojo.services.Deal;
 import com.codenjoy.dojo.services.GameType;
 import com.codenjoy.dojo.services.RoomGameType;
 import com.codenjoy.dojo.services.settings.Settings;
@@ -228,5 +229,9 @@ public class RoomService {
 
     public void remove(String room) {
         rooms.remove(room);
+    }
+
+    public boolean isRoomActive(Deal deal) {
+        return isActive(deal.getRoom());
     }
 }

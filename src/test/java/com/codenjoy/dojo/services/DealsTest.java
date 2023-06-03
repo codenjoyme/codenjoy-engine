@@ -268,7 +268,7 @@ public class DealsTest extends AbstractDealsTest {
         verifyNoMoreInteractions(joysticks.get(0));
 
         // when
-        deals.tick();
+        tick();
 
         // then
         verify(joysticks.get(0)).right();
@@ -294,12 +294,16 @@ public class DealsTest extends AbstractDealsTest {
         verifyNoMoreInteractions(joysticks.get(2));
 
         // when
-        deals.tick();
+        tick();
 
         // then
         verify(joysticks.get(0)).right();
         verifyNoMoreInteractions(joysticks.get(1)); // because paused
         verify(joysticks.get(2)).down();
+    }
+
+    private void tick() {
+        deals.tick(roomService::isRoomActive);
     }
 
     @Test
@@ -310,7 +314,7 @@ public class DealsTest extends AbstractDealsTest {
         createPlayer("room2", "game2"); // второй игрок к уже существующей room2/game2
 
         // when
-        deals.tick();
+        tick();
 
         // then
         assertEquals(2, gameTypes.size());
@@ -329,7 +333,7 @@ public class DealsTest extends AbstractDealsTest {
         playerIsNotAlive(index);
 
         // when
-        deals.tick();
+        tick();
 
         // then
         verifyNewGameCreated(0);
@@ -359,7 +363,7 @@ public class DealsTest extends AbstractDealsTest {
         playerIsNotAlive(2);
 
         // when
-        deals.tick();
+        tick();
 
         // then
         verifyNewGameCreated(0);
@@ -370,7 +374,7 @@ public class DealsTest extends AbstractDealsTest {
         givenActive("room2", true);
         resetAllFields();
 
-        deals.tick();
+        tick();
 
         // then
         verifyNewGameCreated(0);
@@ -390,7 +394,7 @@ public class DealsTest extends AbstractDealsTest {
         resetAllFields();
 
         // when
-        deals.tick();
+        tick();
 
         // then
         assertEquals(3, fields.size()); // only 3 fields created
@@ -415,7 +419,7 @@ public class DealsTest extends AbstractDealsTest {
         resetAllFields();
 
         // when
-        deals.tick();
+        tick();
 
         // then
         assertEquals(2, fields.size()); // only 2 fields created
@@ -436,7 +440,7 @@ public class DealsTest extends AbstractDealsTest {
         resetAllFields();
 
         // when
-        deals.tick();
+        tick();
 
         // then
         verifyFieldTicked(0);
@@ -447,7 +451,7 @@ public class DealsTest extends AbstractDealsTest {
         givenActive("room2", true);
         resetAllFields();
 
-        deals.tick();
+        tick();
 
         // then
         verifyFieldTicked(0);
@@ -480,7 +484,7 @@ public class DealsTest extends AbstractDealsTest {
         playerIsNotAlive(0);
 
         // when
-        deals.tick();
+        tick();
 
         // then
         verifyNewGameCreated(0);
@@ -501,7 +505,7 @@ public class DealsTest extends AbstractDealsTest {
 
         // when
         // win + gameOver > next level
-        deals.tick();
+        tick();
 
         // then
         String progress1 = "{'current':2,'passed':1,'total':3,'valid':true}";
@@ -515,7 +519,7 @@ public class DealsTest extends AbstractDealsTest {
 
         // when
         // win + gameOver > next (last) level
-        deals.tick();
+        tick();
 
         // then
         String progress2 = "{'current':3,'passed':2,'total':3,'valid':true}";
@@ -529,7 +533,7 @@ public class DealsTest extends AbstractDealsTest {
 
         // when
         // win + gameOver > this is last level - no changes
-        deals.tick();
+        tick();
 
         // then
         assertProgress("player", "{'current':3,'passed':2,'total':3,'valid':true}");
@@ -1238,7 +1242,7 @@ public class DealsTest extends AbstractDealsTest {
 
         // when
         createPlayer("player2", MultiplayerType.TRAINING.apply(3));
-        deals.tick();
+        tick();
 
         // then
         assertProgress("player1", "{'current':3,'passed':2,'total':3,'valid':true}");
@@ -1252,7 +1256,7 @@ public class DealsTest extends AbstractDealsTest {
         createPlayer("player2", MultiplayerType.TRAINING.apply(3));
 
         // when
-        deals.tick();
+        tick();
 
         // then
         assertProgress("player1", "{'current':1,'passed':0,'total':3,'valid':true}");
@@ -1266,7 +1270,7 @@ public class DealsTest extends AbstractDealsTest {
         createPlayer("player2", MultiplayerType.SINGLE);
 
         // when
-        deals.tick();
+        tick();
 
         // then
         assertProgress("player1", "{'current':1,'passed':0,'total':1,'valid':true}");
@@ -1287,7 +1291,7 @@ public class DealsTest extends AbstractDealsTest {
         createPlayer("player2", MultiplayerType.TRAINING.apply(5));
 
         // when
-        deals.tick();
+        tick();
 
         // then
         assertProgress("player1", "{'current':1,'passed':0,'total':3,'valid':true}");
@@ -1310,7 +1314,7 @@ public class DealsTest extends AbstractDealsTest {
 
         // when
         // shouldLeave + gameOver > remove player3 from board and crate on new board
-        deals.tick();
+        tick();
 
         // then
         int newField = fields.size() - 1;
@@ -2135,25 +2139,8 @@ public class DealsTest extends AbstractDealsTest {
         givenActive("room2", false);
 
         // when then
-        assertPlayers("[player1, player2, player5]", deals.getAll(deals.withActive()));
-        assertPlayers("[player1, player2, player5]", deals.active());
-    }
-
-    @Test
-    public void testGetRooms() {
-        // given
-        MultiplayerType type = MultiplayerType.SINGLE;
-        createPlayer("player1", "room1", "game1", type);
-        createPlayer("player2", "room1", "game1", type);
-        createPlayer("player3", "room2", "game2", type); // paused
-        createPlayer("player4", "room2", "game2", type); // paused
-        createPlayer("player5", "room3", "game1", type);
-
-        givenActive("room2", false);
-
-        // when then
-        assertEquals("[room1, room3]", deals.getRooms(ACTIVE).toString());
-        assertEquals("[room1, room2, room3]", deals.getRooms(ALL).toString());
+        assertPlayers("[player1, player2, player5]",
+                deals.getAll(roomService::isRoomActive));
     }
 
     @Test

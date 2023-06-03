@@ -28,7 +28,6 @@ import com.codenjoy.dojo.services.info.ScoresCollector;
 import com.codenjoy.dojo.services.lock.LockedGame;
 import com.codenjoy.dojo.services.multiplayer.*;
 import com.codenjoy.dojo.services.nullobj.NullDeal;
-import com.codenjoy.dojo.services.room.RoomService;
 import com.codenjoy.dojo.utils.Strings;
 import com.google.common.collect.Multimap;
 import lombok.experimental.FieldNameConstants;
@@ -53,7 +52,7 @@ import static java.util.stream.Collectors.toList;
 //      moving from well tested logic by unit tests to
 //      integration. After all, right now even SmokeTest
 //      creates the illusion of workability.
-public class Deals implements Iterable<Deal>, Tickable {
+public class Deals implements Iterable<Deal> {
 
     public static final boolean ALL = true;
     public static final boolean ACTIVE = !ALL;
@@ -66,11 +65,9 @@ public class Deals implements Iterable<Deal>, Tickable {
     private Function<EventListener, EventListener> onListener;
     private ReadWriteLock lock = new ReentrantReadWriteLock();
 
-    private RoomService roomService;
     private Spreader spreader;
 
-    public Deals(Spreader spreader, RoomService roomService) {
-        this.roomService = roomService;
+    public Deals(Spreader spreader) {
         this.spreader = spreader;
     }
 
@@ -253,10 +250,6 @@ public class Deals implements Iterable<Deal>, Tickable {
         return deal -> !ids.contains(deal.getPlayerId());
     }
 
-    public Predicate<Deal> withActive() {
-        return deal -> roomService.isActive(deal.getRoom());
-    }
-
     /**
      * @return Возвращает уникальные (недублирующиеся) GameType в которые сейчас играют.
      */
@@ -273,9 +266,8 @@ public class Deals implements Iterable<Deal>, Tickable {
         return t -> seen.add(keyExtractor.apply(t));
     }
 
-    @Override
-    public void tick() {
-        List<Deal> active = active();
+    public void tick(Predicate<Deal> filter) {
+        List<Deal> active = getAll(filter);
 
         // по всем джойстикам отправили сообщения играм
         active.forEach(Deal::quietTick);
@@ -432,31 +424,12 @@ public class Deals implements Iterable<Deal>, Tickable {
         return all;
     }
 
-    /**
-     * @return Отдает только те игры, для которых комната не находится на паузе
-     */
-    public List<Deal> active() {
-        return getAll(withActive());
-    }
-
     public Stream<Deal> stream() {
         return all.stream();
     }
 
     public Multimap<String, GameRoom> rooms() {
         return spreader.rooms();
-    }
-
-    /**
-     * @param isAll включать все комнаты или только активные
-     * @return Все найденные комнаты для всех играющих
-     */
-    public List<String> getRooms(boolean isAll) {
-        return all.stream()
-                .filter(((Predicate<Deal>) deal -> isAll).or(withActive()))
-                .map(Deal::getRoom)
-                .distinct()
-                .collect(toList());
     }
 
     public Deal deal(PlayerSave save, String room, String id, String callbackUrl, GameType gameType, long now) {
