@@ -59,9 +59,9 @@ public class Deals implements Iterable<Deal> {
 
     private List<Deal> all = new LinkedList<>();
 
-    private Consumer<Deal> onAdd;
-    private Consumer<Deal> onRemove;
-    private Consumer<Deal> onField;
+    private List<Consumer<Deal>> onAdd = new LinkedList<>();
+    private List<Consumer<Deal>> onRemove = new LinkedList<>();
+    private List<Consumer<Deal>> onField = new LinkedList<>();
     private Function<EventListener, EventListener> onListener;
     private ReadWriteLock lock = new ReentrantReadWriteLock();
 
@@ -72,15 +72,15 @@ public class Deals implements Iterable<Deal> {
     }
 
     public void onAdd(Consumer<Deal> consumer) {
-        this.onAdd = consumer;
+        onAdd.add(consumer);
     }
 
     public void onRemove(Consumer<Deal> consumer) {
-        this.onRemove = consumer;
+        onRemove.add(consumer);
     }
 
     public void onField(Consumer<Deal> consumer) {
-        this.onField = consumer;
+        onField.add(consumer);
     }
 
     public void onListener(Function<EventListener, EventListener> function) {
@@ -99,7 +99,8 @@ public class Deals implements Iterable<Deal> {
         removeInRoom(deal, sweeper);
         all.remove(index);
 
-        deal.remove(onRemove);
+        process(deal, onRemove);
+        deal.remove();
         deal.setChat(null);
     }
 
@@ -146,9 +147,7 @@ public class Deals implements Iterable<Deal> {
                 });
 
         game.on(field);
-        if (onField != null) {
-            onField.accept(deal);
-        }
+        process(deal, onField);
         game.newGame();
 
         if (save != null && !save.keySet().isEmpty()) {
@@ -162,14 +161,16 @@ public class Deals implements Iterable<Deal> {
         Game game = new LockedGame(lock).wrap(single);
 
         Deal deal = create(player, room, game);
-        if (onAdd != null) {
-            onAdd.accept(deal);
-        }
+        process(deal, onAdd);
         all.add(deal);
 
         play(deal, parseSave(save));
 
         return deal;
+    }
+
+    private static void process(Deal deal, List<Consumer<Deal>> on) {
+        on.forEach(consumer -> consumer.accept(deal));
     }
 
     /**

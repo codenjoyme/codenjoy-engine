@@ -37,7 +37,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 
@@ -115,10 +114,7 @@ public class Deal implements Tickable {
         return player.hashCode();
     }
 
-    public void remove(Consumer<Deal> onRemove) {
-        if (onRemove != null) {
-            onRemove.accept(this);
-        }
+    public void remove() {
         player.close();
     }
 

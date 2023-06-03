@@ -34,7 +34,6 @@ import org.junit.Test;
 import org.mockito.InOrder;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.function.Consumer;
 
 import static com.codenjoy.dojo.services.multiplayer.GamePlayer.DEFAULT_TEAM_ID;
 import static com.codenjoy.dojo.utils.TestUtils.mockGameType;
@@ -196,16 +195,14 @@ public class DealTest {
     public void testRemove() {
         // given
         boolean[] removed = {false};
-        Consumer<Deal> onRemove = deal -> removed[0] = true;
         Closeable ai = mock(Closeable.class);
         player.setAi(ai);
 
         // when
-        deal.remove(onRemove);
+        deal.remove();
 
         // then
         verify(ai).close();
-        assertEquals(true, removed[0]);
     }
 
     @Test

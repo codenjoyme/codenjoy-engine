@@ -66,7 +66,9 @@ public class AbstractDealsTest {
         fieldService = mock(FieldService.class);
         spreader = new Spreader(fieldService);
         deals = new Deals(spreader);
-        when(fieldSaves.getSave()).thenReturn(null);
+
+        setupChat(deals);
+        deals.onAdd(deal -> lazyJoysticks.add(deal.getJoystick()));
     }
 
     protected Player createPlayer() {
@@ -156,8 +158,6 @@ public class AbstractDealsTest {
         Closeable ai = mock(Closeable.class);
         ais.put(player, ai);
         player.setAi(ai);
-
-        setupChat(deals, deal -> lazyJoysticks.add(deal.getJoystick()));
 
         DealsUtils.Env env =
                 DealsUtils.getDeal(

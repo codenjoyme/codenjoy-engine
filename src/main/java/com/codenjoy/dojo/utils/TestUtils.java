@@ -45,7 +45,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -467,13 +466,8 @@ public class TestUtils {
         return game;
     }
 
-    public static void setupChat(Deals deals, Consumer<Deal> next) {
-        deals.onAdd(deal -> {
-            setupChat(deal);
-            if (next != null) {
-                next.accept(deal);
-            }
-        });
+    public static void setupChat(Deals deals) {
+        deals.onAdd(TestUtils::setupChat);
     }
 
     public static void setupChat(Deal deal) {

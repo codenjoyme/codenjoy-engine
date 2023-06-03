@@ -71,7 +71,7 @@ public class DealsMultiplayerTest {
         Spreader spreader = new Spreader(fieldService);
         RoomService roomService = mock(RoomService.class);
         deals = new Deals(spreader);
-        setupChat(deals, null);
+        setupChat(deals);
 
         // по умолчанию все комнаты активны
         when(roomService.isActive(anyString())).thenReturn(true);
