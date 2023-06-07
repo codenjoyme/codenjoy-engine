@@ -79,8 +79,6 @@ public abstract class NewAbstractBaseGameTest
         all = new Deals(spreader);
         ReentrantReadWriteLock lock = new ReentrantReadWriteLock(true);
         all.init(lock);
-        all.onAdd(deal -> {});
-        all.onRemove(deal -> {});
         all.onListener(listener -> {
             EventListener result = spy(listener);
             listeners.add(result);

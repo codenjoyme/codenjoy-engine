@@ -72,15 +72,23 @@ public class Deals implements Iterable<Deal> {
     }
 
     public void onAdd(Consumer<Deal> consumer) {
-        onAdd.add(consumer);
+        on(onAdd, consumer);
+    }
+
+    private void on(List<Consumer<Deal>> on, Consumer<Deal> consumer) {
+        if (consumer == null) {
+            on.clear();
+        } else {
+            on.add(consumer);
+        }
     }
 
     public void onRemove(Consumer<Deal> consumer) {
-        onRemove.add(consumer);
+        on(onRemove, consumer);
     }
 
     public void onField(Consumer<Deal> consumer) {
-        onField.add(consumer);
+        on(onField, consumer);
     }
 
     public void onListener(Function<EventListener, EventListener> function) {
