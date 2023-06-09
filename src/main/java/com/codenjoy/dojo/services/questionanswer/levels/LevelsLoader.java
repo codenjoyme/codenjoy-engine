@@ -29,6 +29,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -37,18 +38,17 @@ public class LevelsLoader {
     private static List<Class<? extends Level>> classes;
 
     /**
-     * Here Map parameter is passed to init complexity for every level. If Complexity is not passed for Level,
-     * then next max value will be set. This is done for more convenient way to set complexity in one place
-     * and not to do it in every Algorithm class.
+     * Here Map of complexities is passed for more convenient way to set complexity for level in one place
+     * rather than do it in every Algorithm class.
      *
-     * @param complexityToLevel - contains complexity as key and Algorithm class and value.
+     * @param complexities - contains complexity as key and Algorithm class and value.
      */
-    public static List<Level> getAlgorithms(Map<Integer, Class<? extends Level>> complexityToLevel) {
+    public static List<Level> getAlgorithms(Map<Integer, Class<? extends Level>> complexities) {
         List<Class<? extends Level>> classes = loadClasses();
 
         List<Level> result = createLevels(classes);
 
-        initComplexity(result, complexityToLevel);
+        initComplexity(result, complexities);
 
         sortByComplexity(result);
 
@@ -56,22 +56,21 @@ public class LevelsLoader {
     }
 
     private static void initComplexity(List<Level> levels,
-                                       Map<Integer, Class<? extends Level>> complexityToLevel) {
-        int maxComplexity = complexityToLevel.keySet().stream()
+                                       Map<Integer, Class<? extends Level>> complexities) {
+        int max = complexities.keySet().stream()
                 .max(Integer::compareTo)
                 .orElse(0);
 
-        levels.forEach(level -> {
-            final int[] updatedMaxComplexity = { maxComplexity };
-
-            int complexity = complexityToLevel.entrySet().stream()
-                    .filter(entry -> entry.getValue().equals(level.getClass()))
-                    .findFirst()
-                    .map(Map.Entry::getKey)
-                    .orElse(++updatedMaxComplexity[0]);
-
-            level.setComplexity(complexity);
-        });
+        for (Level level : levels) {
+            Optional<Integer> current = Optional.empty();
+            for (Map.Entry<Integer, Class<? extends Level>> entry : complexities.entrySet()) {
+                if (entry.getValue() == level.getClass()) {
+                    current = Optional.of(entry.getKey());
+                    break;
+                }
+            }
+            level.setComplexity(current.orElse(++max));
+        }
     }
 
     private static void sortByComplexity(List<Level> result) {
