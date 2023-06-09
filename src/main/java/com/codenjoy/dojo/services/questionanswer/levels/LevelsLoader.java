@@ -25,10 +25,10 @@ package com.codenjoy.dojo.services.questionanswer.levels;
 
 import com.codenjoy.dojo.utils.ReflectUtils;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -36,22 +36,46 @@ public class LevelsLoader {
 
     private static List<Class<? extends Level>> classes;
 
-    public static List<Level> getAlgorithms() {
-        return getAlgorithmsOrderedByComplexity();
-    }
-
-    public static List<Level> getAlgorithmsOrderedByComplexity() {
+    /**
+     * Here Map parameter is passed to init complexity for every level. If Complexity is not passed for Level,
+     * then next max value will be set. This is done for more convenient way to set complexity in one place
+     * and not to do it in every Algorithm class.
+     *
+     * @param complexityToLevel - contains complexity as key and Algorithm class and value.
+     */
+    public static List<Level> getAlgorithms(Map<Integer, Class<? extends Level>> complexityToLevel) {
         List<Class<? extends Level>> classes = loadClasses();
 
         List<Level> result = createLevels(classes);
+
+        initComplexity(result, complexityToLevel);
 
         sortByComplexity(result);
 
         return result;
     }
 
+    private static void initComplexity(List<Level> levels,
+                                       Map<Integer, Class<? extends Level>> complexityToLevel) {
+        int maxComplexity = complexityToLevel.keySet().stream()
+                .max(Integer::compareTo)
+                .orElse(0);
+
+        levels.forEach(level -> {
+            final int[] updatedMaxComplexity = { maxComplexity };
+
+            int complexity = complexityToLevel.entrySet().stream()
+                    .filter(entry -> entry.getValue().equals(level.getClass()))
+                    .findFirst()
+                    .map(Map.Entry::getKey)
+                    .orElse(++updatedMaxComplexity[0]);
+
+            level.setComplexity(complexity);
+        });
+    }
+
     private static void sortByComplexity(List<Level> result) {
-        Collections.sort(result, Comparator.comparingInt(Level::complexity));
+        result.sort(Comparator.comparingInt(Level::complexity));
     }
 
     private static List<Level> createLevels(List<Class<? extends Level>> classes) {

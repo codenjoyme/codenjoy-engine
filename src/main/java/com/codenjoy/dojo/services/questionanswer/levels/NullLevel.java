@@ -49,6 +49,11 @@ public class NullLevel implements Level {
     }
 
     @Override
+    public void setComplexity(int value) {
+        // should not be reset
+    }
+
+    @Override
     public List<String> description() {
         return Arrays.asList("No more Levels. You win!");
     }

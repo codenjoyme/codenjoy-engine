@@ -61,6 +61,8 @@ public interface Level {
      */
     int complexity();
 
+    void setComplexity(int value);
+
     List<String> description();
 
     default String winCode() {

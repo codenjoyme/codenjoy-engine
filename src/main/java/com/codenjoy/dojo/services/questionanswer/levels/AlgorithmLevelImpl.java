@@ -30,6 +30,8 @@ public abstract class AlgorithmLevelImpl extends QuestionAnswerLevelImpl impleme
 
     public static final int MAX_QUESTION_FOR_ONE_INT_ARGUMENT = 25;
 
+    private int complexity;
+
     public AlgorithmLevelImpl(String... input) {
         if (input.length == 0) {
             questions = getQuestions();
@@ -40,6 +42,16 @@ public abstract class AlgorithmLevelImpl extends QuestionAnswerLevelImpl impleme
             questions = Arrays.asList(input);
         }
         prepareAnswers();
+    }
+
+    @Override
+    public int complexity() {
+        return complexity;
+    }
+
+    @Override
+    public void setComplexity(int complexity) {
+        this.complexity = complexity;
     }
 
     protected List<String> prepareQuestions(int max) {
