@@ -62,13 +62,10 @@ public class LevelsLoader {
                 .orElse(0);
 
         for (Level level : levels) {
-            Optional<Integer> current = Optional.empty();
-            for (Map.Entry<Integer, Class<? extends Level>> entry : complexities.entrySet()) {
-                if (entry.getValue() == level.getClass()) {
-                    current = Optional.of(entry.getKey());
-                    break;
-                }
-            }
+            Optional<Integer> current = complexities.entrySet().stream()
+                    .filter(entry -> entry.getValue().equals(level.getClass()))
+                    .map(Map.Entry::getKey)
+                    .findFirst();
             level.setComplexity(current.orElse(++max));
         }
     }
