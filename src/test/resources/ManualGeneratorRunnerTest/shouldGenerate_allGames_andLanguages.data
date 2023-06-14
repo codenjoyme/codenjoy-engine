@@ -8,495 +8,495 @@
 [mGot from Processed:[0m
 [m	 'GAMES':   'mollymage,namdreab,rawelbbub,sample,sampletext,verland,tetris'[0m
 [m	 'LOCALES': 'en,ru'[0m
-[m	 'BASE':    '<BASE>\games\engine\..'[0m
+[m	 'BASE':    '<BASE>/games/engine/..'[0m
 
 [44;97mGenerating elements for game 'mollymage'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/elements.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:mollymage:en' in file: '<BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/codenjoy-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/elements.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:mollymage:en' in file: '<BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/codenjoy-manual-en.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/elements.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:mollymage:en' in file: '<BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/dojorena-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/elements.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:mollymage:en' in file: '<BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/dojorena-manual-en.md'[0m
 	[44;97mLanguage 'ru'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/elements.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:mollymage:ru' in file: '<BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/codenjoy-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/elements.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:mollymage:ru' in file: '<BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/codenjoy-manual-ru.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/elements.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:mollymage:ru' in file: '<BASE>\games\mollymage\src\main\webapp\resources\mollymage\help/dojorena-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/elements.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:mollymage:ru' in file: '<BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/dojorena-manual-ru.md'[0m
 
 [44;97mGenerating elements for game 'namdreab'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/elements.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:namdreab:en' in file: '<BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/codenjoy-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:namdreab:en' in file: '<BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/codenjoy-manual-en.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/elements.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:namdreab:en' in file: '<BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/dojorena-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:namdreab:en' in file: '<BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/dojorena-manual-en.md'[0m
 	[44;97mLanguage 'ru'[0m
 		[mProperties file not found in either: [0m
 		[m		'classpath:<BASE>/resources/namdreab/help/ru/info.properties'[0m
-		[m		'file:<BASE>\games\namdreab\src\main\webapp\resources\namdreab\help\ru\info.properties'[0m
+		[m		'file:<BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/info.properties'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/elements.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:namdreab:ru' in file: '<BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/codenjoy-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:namdreab:ru' in file: '<BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/codenjoy-manual-ru.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/en/elements.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:namdreab:ru' in file: '<BASE>\games\namdreab\src\main\webapp\resources\namdreab\help/dojorena-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:namdreab:ru' in file: '<BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/dojorena-manual-ru.md'[0m
 
 [44;97mGenerating elements for game 'rawelbbub'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/elements.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:rawelbbub:en' in file: '<BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/codenjoy-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:rawelbbub:en' in file: '<BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/codenjoy-manual-en.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/elements.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:rawelbbub:en' in file: '<BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/dojorena-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:rawelbbub:en' in file: '<BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/dojorena-manual-en.md'[0m
 	[44;97mLanguage 'ru'[0m
 		[mProperties file not found in either: [0m
 		[m		'classpath:<BASE>/resources/rawelbbub/help/ru/info.properties'[0m
-		[m		'file:<BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help\ru\info.properties'[0m
+		[m		'file:<BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/info.properties'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/elements.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:rawelbbub:ru' in file: '<BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/codenjoy-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:rawelbbub:ru' in file: '<BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/codenjoy-manual-ru.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/en/elements.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:rawelbbub:ru' in file: '<BASE>\games\rawelbbub\src\main\webapp\resources\rawelbbub\help/dojorena-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:rawelbbub:ru' in file: '<BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/dojorena-manual-ru.md'[0m
 
 [44;97mGenerating elements for game 'sample'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/elements.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:sample:en' in file: '<BASE>\games\sample\src\main\webapp\resources\sample\help/codenjoy-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/elements.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:sample:en' in file: '<BASE>/games/sample/src/main/webapp/resources/sample/help/codenjoy-manual-en.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/elements.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:sample:en' in file: '<BASE>\games\sample\src\main\webapp\resources\sample\help/dojorena-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/elements.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:sample:en' in file: '<BASE>/games/sample/src/main/webapp/resources/sample/help/dojorena-manual-en.md'[0m
 	[44;97mLanguage 'ru'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/elements.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:sample:ru' in file: '<BASE>\games\sample\src\main\webapp\resources\sample\help/codenjoy-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/elements.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:sample:ru' in file: '<BASE>/games/sample/src/main/webapp/resources/sample/help/codenjoy-manual-ru.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/elements.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sample\src\main\webapp\resources\sample\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:sample:ru' in file: '<BASE>\games\sample\src\main\webapp\resources\sample\help/dojorena-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/elements.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:sample:ru' in file: '<BASE>/games/sample/src/main/webapp/resources/sample/help/dojorena-manual-ru.md'[0m
 
 [44;97mGenerating elements for game 'sampletext'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/message-format.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/elements.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:sampletext:en' in file: '<BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/codenjoy-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/message-format.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:sampletext:en' in file: '<BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/codenjoy-manual-en.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/message-format.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/elements.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:sampletext:en' in file: '<BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/dojorena-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/message-format.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:sampletext:en' in file: '<BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/dojorena-manual-en.md'[0m
 	[44;97mLanguage 'ru'[0m
 		[mProperties file not found in either: [0m
 		[m		'classpath:<BASE>/resources/sampletext/help/ru/info.properties'[0m
-		[m		'file:<BASE>\games\sampletext\src\main\webapp\resources\sampletext\help\ru\info.properties'[0m
+		[m		'file:<BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/info.properties'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/message-format.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/elements.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:sampletext:ru' in file: '<BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/codenjoy-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/message-format.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:sampletext:ru' in file: '<BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/codenjoy-manual-ru.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/message-format.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/en/elements.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:sampletext:ru' in file: '<BASE>\games\sampletext\src\main\webapp\resources\sampletext\help/dojorena-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/message-format.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:sampletext:ru' in file: '<BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/dojorena-manual-ru.md'[0m
 
 [44;97mGenerating elements for game 'verland'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/elements.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:verland:en' in file: '<BASE>\games\verland\src\main\webapp\resources\verland\help/codenjoy-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:verland:en' in file: '<BASE>/games/verland/src/main/webapp/resources/verland/help/codenjoy-manual-en.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/elements.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/what-to-do.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:verland:en' in file: '<BASE>\games\verland\src\main\webapp\resources\verland\help/dojorena-manual-en.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:verland:en' in file: '<BASE>/games/verland/src/main/webapp/resources/verland/help/dojorena-manual-en.md'[0m
 	[44;97mLanguage 'ru'[0m
 		[mProperties file not found in either: [0m
 		[m		'classpath:<BASE>/resources/verland/help/ru/info.properties'[0m
-		[m		'file:<BASE>\games\verland\src\main\webapp\resources\verland\help\ru\info.properties'[0m
+		[m		'file:<BASE>/games/verland/src/main/webapp/resources/verland/help/ru/info.properties'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/elements.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
-			[mStore 'codenjoy:verland:ru' in file: '<BASE>\games\verland\src\main\webapp\resources\verland\help/codenjoy-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mStore 'codenjoy:verland:ru' in file: '<BASE>/games/verland/src/main/webapp/resources/verland/help/codenjoy-manual-ru.md'[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/intro.dojorena.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/en/elements.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/what-to-do.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
-			[mFound part: <BASE>\games\verland\src\main\webapp\resources\verland\help/ru/client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
-			[mStore 'dojorena:verland:ru' in file: '<BASE>\games\verland\src\main\webapp\resources\verland\help/dojorena-manual-ru.md'[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/game-about.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/field.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/faq.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/client-and-api.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mStore 'dojorena:verland:ru' in file: '<BASE>/games/verland/src/main/webapp/resources/verland/help/dojorena-manual-ru.md'[0m
 
 [44;97mGenerating elements for game 'tetris'[0m
 	[44;97mLanguage 'en'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.codenjoy.md[0m
 			[43;97mFile is missing: game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
 			[43;97mFile is missing: field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\tetris\src\main\webapp\resources\tetris\help/en/elements.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
 			[43;97mFile is missing: faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
 			[43;97mFile is missing: client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.codenjoy.md[0m
 			[41;97m[ERROR] Can't find resources for manualType{codenjoy}, game{tetris}, language{en}[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/intro.dojorena.md[0m
 			[43;97mFile is missing: game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/message-format.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/message-format.md[0m
 			[43;97mFile is missing: field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\tetris\src\main\webapp\resources\tetris\help/en/elements.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
 			[43;97mFile is missing: faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/ask-sensei.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
 			[43;97mFile is missing: client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/en/how-to-host-contacts.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/how-to-host-contacts.dojorena.md[0m
 			[41;97m[ERROR] Can't find resources for manualType{dojorena}, game{tetris}, language{en}[0m
 	[44;97mLanguage 'ru'[0m
 		[mProperties file not found in either: [0m
 		[m		'classpath:<BASE>/resources/tetris/help/ru/info.properties'[0m
-		[m		'file:<BASE>\games\tetris\src\main\webapp\resources\tetris\help\ru\info.properties'[0m
+		[m		'file:<BASE>/games/tetris/src/main/webapp/resources/tetris/help/ru/info.properties'[0m
 		[44;97mType 'codenjoy'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.codenjoy.md[0m
 			[43;97mFile is missing: game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.codenjoy.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
 			[43;97mFile is missing: field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\tetris\src\main\webapp\resources\tetris\help/en/elements.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
 			[43;97mFile is missing: faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
 			[43;97mFile is missing: client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.codenjoy.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.codenjoy.md[0m
 			[41;97m[ERROR] Can't find resources for manualType{codenjoy}, game{tetris}, language{ru}[0m
 		[44;97mType 'dojorena'[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/header.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/intro.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/header.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/intro.dojorena.md[0m
 			[43;97mFile is missing: game-about.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-connect.dojorena.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/message-format.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-connect.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/message-format.md[0m
 			[43;97mFile is missing: field.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/board-link.md[0m
-			[mFound part: <BASE>\games\tetris\src\main\webapp\resources\tetris\help/en/elements.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
+			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
 			[43;97mFile is missing: faq.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/ask-sensei.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
 			[43;97mFile is missing: client-and-api.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host.md[0m
-			[mFound part: <BASE>\games\engine\src\main\resources\manuals/ru/how-to-host-contacts.dojorena.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/how-to-host-contacts.dojorena.md[0m
 			[41;97m[ERROR] Can't find resources for manualType{dojorena}, game{tetris}, language{ru}[0m
