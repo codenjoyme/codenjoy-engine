@@ -23,6 +23,7 @@ package com.codenjoy.dojo.services.generator.manual;
  */
 
 import com.codenjoy.dojo.services.properties.GameProperties;
+import com.codenjoy.dojo.utils.FilePathUtils;
 import com.codenjoy.dojo.utils.PrintUtils;
 import com.codenjoy.dojo.utils.SmokeUtils;
 import com.google.common.base.Strings;
@@ -193,7 +194,7 @@ public class ManualGenerator {
     }
 
     private String makeAbsolutePath(String base, String additional) {
-        return new File(base + SLASH + additional).getAbsolutePath() + SLASH;
+        return FilePathUtils.normalize(new File(base + SLASH + additional).getAbsolutePath() + SLASH);
     }
 
     private String makePathToGameFolder() {
