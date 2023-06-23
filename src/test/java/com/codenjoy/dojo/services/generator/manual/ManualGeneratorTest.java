@@ -40,7 +40,7 @@ import static org.junit.Assert.assertEquals;
 public class ManualGeneratorTest {
 
     private final String PROPERTIES_FILE = "/games/mollymage/src/main/webapp/resources/mollymage/help/ru/info.properties";
-    private final String PROPERTIES_DATA = "key.one=data1\nkey.two=data2\n";
+    private final String PROPERTIES_DATA = "key.one=data1\ngame.mollymage.settings.two=data2\nkey.three=data3\ngame.mollymage.settings.four=data4\n";
 
     private final String BASE = "target/generated-test-sources/manual-generator" + new Random().nextInt();
     private final String GLOBAL_SOURCES_PATH = "global/";
@@ -88,7 +88,8 @@ public class ManualGeneratorTest {
                         "part1.md",
                         "part2.md",
                         "part3.md",
-                        "part4.md");
+                        "part4.md",
+                        "settings.md");
             }
         };
     }
@@ -119,6 +120,12 @@ public class ManualGeneratorTest {
                         "Part3 file from Game Path\n" +
                         "\n" +
                         "Part4 file from Global Path, Language directory\n" +
+                        "\n" +
+                        "| Settings name | Action |\n" +
+                        "|---------------|--------|\n" +
+                        "| two | data2 |\n" +
+                        "| four | data4 |\n" +
+                        "\n" +
                         "\n",
                 SmokeUtils.load(file));
     }
@@ -149,6 +156,12 @@ public class ManualGeneratorTest {
                         "Part3 file from Game Path\n" +
                         "\n" +
                         "Part4 file from Global Path, Language directory\n" +
+                        "\n" +
+                        "| Settings name | Action |\n" +
+                        "|---------------|--------|\n" +
+                        "| two | data2 |\n" +
+                        "| four | data4 |\n" +
+                        "\n" +
                         "\n",
                 SmokeUtils.load(file));
     }

@@ -102,6 +102,7 @@ public class ManualGenerator {
                 "board-link.md",
                 "elements.md",
                 "what-to-do.md",
+                "settings.md",
                 "faq.md",
                 "ask-sensei.md",
                 "client-and-api.md",
@@ -117,6 +118,7 @@ public class ManualGenerator {
     public void generate(String manualType) {
         this.manualType = manualType;
         String target = getTargetFile();
+        createSettingsFile(game, properties, language);
 
         List<String> paths = getPreparedManualPartPaths();
 
@@ -230,5 +232,31 @@ public class ManualGenerator {
 
         PrintUtils.printf("Store '%s:%s:%s' in file: '%s'", TEXT,
                 manualType, game, language, path);
+    }
+
+    private void createSettingsFile(String game, Map<String, String> properties, String language) {
+        String settingsFilePath = makePathToGameFolder() + language + SLASH + "settings.md";
+
+        if(properties.isEmpty()) {
+            System.out.println("THE PROPERTIES IS EMPTY");
+            return;
+        }
+        writeSettings(properties, settingsFilePath, game);
+    }
+
+    private void writeSettings(Map<String, String> properties, String filePath, String game) {
+        String prefix = "game.${game}.settings.";
+        prefix = prefix.replace(GAME, game);
+        StringBuilder data = new StringBuilder();
+
+        data.append("| Settings name | Action |\n" + "|---------------|--------|\n");
+        for (Map.Entry<String, String> entry : properties.entrySet()) {
+            if (entry.getKey().contains(prefix)) {
+                data.append("| ").append(entry.getKey().replace(prefix, ""))
+                        .append(" | ").append(entry.getValue()).append(" |\n");
+            }
+        }
+
+        SmokeUtils.saveToFile(new File(filePath), data.toString());
     }
 }
