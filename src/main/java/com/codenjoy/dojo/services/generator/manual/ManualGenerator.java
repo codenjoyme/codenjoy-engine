@@ -251,11 +251,14 @@ public class ManualGenerator {
         prefix = prefix.replace(GAME, game);
         StringBuilder data = new StringBuilder();
 
-        data.append("| Settings name | Action |\n" + "|---------------|--------|\n");
+        data.append("| Action | Settings name |\n" + "|--------|---------------|\n");
         for (Map.Entry<String, String> entry : settings.entrySet()) {
             if (entry.getKey().contains(prefix)) {
-                data.append("| ").append(entry.getKey().replace(prefix, ""))
-                        .append(" | ").append(entry.getValue()).append(" |\n");
+                data.append("| ")
+                    .append(entry.getValue())
+                    .append(" | ")
+                    .append(entry.getKey().replace(prefix, ""))
+                    .append(" |\n");
             }
         }
 

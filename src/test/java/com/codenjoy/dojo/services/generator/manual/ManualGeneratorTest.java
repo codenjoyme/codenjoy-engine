@@ -121,10 +121,10 @@ public class ManualGeneratorTest {
                         "\n" +
                         "Part4 file from Global Path, Language directory\n" +
                         "\n" +
-                        "| Settings name | Action |\n" +
-                        "|---------------|--------|\n" +
-                        "| two | data2 |\n" +
-                        "| four | data4 |\n" +
+                        "| Action | Settings name |\n" +
+                        "|--------|---------------|\n" +
+                        "| data2 | two |\n" +
+                        "| data4 | four |\n" +
                         "\n" +
                         "\n",
                 SmokeUtils.load(file));
@@ -157,10 +157,10 @@ public class ManualGeneratorTest {
                         "\n" +
                         "Part4 file from Global Path, Language directory\n" +
                         "\n" +
-                        "| Settings name | Action |\n" +
-                        "|---------------|--------|\n" +
-                        "| two | data2 |\n" +
-                        "| four | data4 |\n" +
+                        "| Action | Settings name |\n" +
+                        "|--------|---------------|\n" +
+                        "| data2 | two |\n" +
+                        "| data4 | four |\n" +
                         "\n" +
                         "\n",
                 SmokeUtils.load(file));
