@@ -76,7 +76,7 @@ public class ManualGenerator {
     private Map<String, String> loadSettings() {
         GameProperties properties = new GameProperties(false);
         if (!properties.load(base, Locale.forLanguageTag(language), game)) {
-            return new HashMap<>();
+            return new LinkedHashMap<>();
         }
 
         return properties.properties();
