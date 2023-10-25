@@ -105,7 +105,6 @@ public class ManualGenerator {
                 "settings-intro.md",
                 "settings.md",
                 "faq.md",
-                "ask-sensei.md",
                 "client-and-api.md",
                 "api-methods.md",
                 "how-to-host.md",
