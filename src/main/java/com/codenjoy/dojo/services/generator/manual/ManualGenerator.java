@@ -106,6 +106,7 @@ public class ManualGenerator {
                 "faq.md",
                 "ask-sensei.md",
                 "client-and-api.md",
+                "api-methods.md",
                 "how-to-host.md",
                 "how-to-host-contacts.${manualType}.md"
         );
