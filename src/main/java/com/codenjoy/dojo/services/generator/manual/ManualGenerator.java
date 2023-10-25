@@ -102,6 +102,7 @@ public class ManualGenerator {
                 "board-link.md",
                 "elements.md",
                 "what-to-do.md",
+                "settings-intro.md",
                 "settings.md",
                 "faq.md",
                 "ask-sensei.md",

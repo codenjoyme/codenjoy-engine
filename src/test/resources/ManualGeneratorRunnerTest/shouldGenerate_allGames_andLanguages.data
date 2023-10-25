@@ -22,6 +22,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/elements.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/settings.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -40,6 +41,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/elements.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/settings.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -59,6 +61,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/elements.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/settings.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -77,6 +80,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/elements.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/settings.md[0m
 			[mFound part: <BASE>/games/mollymage/src/main/webapp/resources/mollymage/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -98,6 +102,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/settings.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -116,6 +121,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/settings.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -139,6 +145,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/settings.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -158,6 +165,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/elements.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/en/settings.md[0m
 			[mFound part: <BASE>/games/namdreab/src/main/webapp/resources/namdreab/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -179,6 +187,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/settings.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -197,6 +206,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/settings.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -220,6 +230,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/settings.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -239,6 +250,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/elements.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/en/settings.md[0m
 			[mFound part: <BASE>/games/rawelbbub/src/main/webapp/resources/rawelbbub/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -260,6 +272,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/elements.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/settings.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -278,6 +291,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/elements.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/settings.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -297,6 +311,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/elements.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/settings.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -315,6 +330,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/elements.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/settings.md[0m
 			[mFound part: <BASE>/games/sample/src/main/webapp/resources/sample/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -336,6 +352,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/settings.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -354,6 +371,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/settings.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -377,6 +395,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/settings.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -396,6 +415,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/elements.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/en/settings.md[0m
 			[mFound part: <BASE>/games/sampletext/src/main/webapp/resources/sampletext/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -417,6 +437,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/settings.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -435,6 +456,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/settings.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -458,6 +480,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/settings.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -477,6 +500,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/elements.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/en/settings.md[0m
 			[mFound part: <BASE>/games/verland/src/main/webapp/resources/verland/help/ru/faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -498,6 +522,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/settings.md[0m
 			[43;97mFile is missing: faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -516,6 +541,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/settings-intro.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/settings.md[0m
 			[43;97mFile is missing: faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/en/ask-sensei.md[0m
@@ -539,6 +565,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/settings.md[0m
 			[43;97mFile is missing: faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
@@ -558,6 +585,7 @@
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/board-link.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/elements.md[0m
 			[43;97mFile is missing: what-to-do.md[0m
+			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/settings-intro.md[0m
 			[mFound part: <BASE>/games/tetris/src/main/webapp/resources/tetris/help/en/settings.md[0m
 			[43;97mFile is missing: faq.md[0m
 			[mFound part: <BASE>/games/engine/src/main/resources/manuals/ru/ask-sensei.md[0m
