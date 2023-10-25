@@ -237,8 +237,8 @@ public class ManualGenerator {
     private void createSettingsFile(String game, Map<String, String> properties, String language) {
         String settingsFilePath = makePathToGameFolder() + language + SLASH + "settings.md";
 
-        if(properties.isEmpty()) {
-            System.out.println("THE PROPERTIES IS EMPTY");
+        if (properties.isEmpty()) {
+            PrintUtils.printf("The game properties is empty", WARNING);
             return;
         }
         writeSettings(properties, settingsFilePath, game);
