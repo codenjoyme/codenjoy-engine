@@ -58,7 +58,7 @@ public class ManualGenerator {
     private String globalSources;
     private String gameSources;
     private String manualType;
-    private Map<String, String> properties;
+    private Map<String, String> settings;
 
     public ManualGenerator(String game, String language, String base) {
         this(game, language, base, GLOBAL_SOURCES, GAME_SOURCES);
@@ -70,10 +70,10 @@ public class ManualGenerator {
         this.base = getBase(inputBase);
         this.globalSources = globalSources;
         this.gameSources = gameSources;
-        properties = loadInfo();
+        this.settings = loadSettings();
     }
 
-    private Map<String, String> loadInfo() {
+    private Map<String, String> loadSettings() {
         GameProperties properties = new GameProperties(false);
         if (!properties.load(base, Locale.forLanguageTag(language), game)) {
             return new HashMap<>();
@@ -120,7 +120,7 @@ public class ManualGenerator {
     public void generate(String manualType) {
         this.manualType = manualType;
         String target = getTargetFile();
-        createSettingsFile(game, properties, language);
+        createSettingsFile();
 
         List<String> paths = getPreparedManualPartPaths();
 
@@ -180,7 +180,7 @@ public class ManualGenerator {
 
             part = part.replace(GAME, game);
 
-            for (Map.Entry<String, String> entry : properties.entrySet()) {
+            for (Map.Entry<String, String> entry : settings.entrySet()) {
                 String replacement = "${" + entry.getKey() + "}";
                 if (part.contains(replacement)) {
                     part = part.replace(replacement, entry.getValue());
@@ -236,23 +236,23 @@ public class ManualGenerator {
                 manualType, game, language, path);
     }
 
-    private void createSettingsFile(String game, Map<String, String> properties, String language) {
-        String settingsFilePath = makePathToGameFolder() + language + SLASH + "settings.md";
+    private void createSettingsFile() {
+        String filePath = makePathToGameFolder() + language + SLASH + "settings.md";
 
-        if (properties.isEmpty()) {
+        if (settings.isEmpty()) {
             PrintUtils.printf("The game properties is empty", WARNING);
             return;
         }
-        writeSettings(properties, settingsFilePath, game);
+        writeSettings(filePath);
     }
 
-    private void writeSettings(Map<String, String> properties, String filePath, String game) {
+    private void writeSettings(String filePath) {
         String prefix = "game.${game}.settings.";
         prefix = prefix.replace(GAME, game);
         StringBuilder data = new StringBuilder();
 
         data.append("| Settings name | Action |\n" + "|---------------|--------|\n");
-        for (Map.Entry<String, String> entry : properties.entrySet()) {
+        for (Map.Entry<String, String> entry : settings.entrySet()) {
             if (entry.getKey().contains(prefix)) {
                 data.append("| ").append(entry.getKey().replace(prefix, ""))
                         .append(" | ").append(entry.getValue()).append(" |\n");
